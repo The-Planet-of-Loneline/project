@@ -1,0 +1,85 @@
+.b-tag{
+  display: inline-block;
+  width:315px;
+  height:245px;
+  box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+  opacity:1;
+  border-radius:10px;
+  padding: 35px 17px 15px 20px;
+  margin: 9px 7px;
+}
+.tag-container{
+  display: flex;
+  margin-bottom: 7px;
+}
+.spe-tag{
+  height: 34px;
+  width: 88px;
+  line-height: 34px;
+  text-align: center;
+  font-size: 20px;
+  background-color: white;
+  border-radius: 10px;
+  margin-right: 40px;
+}
+.title{
+  font-size: 40px;
+  color: white;
+  text-align: start;
+}
+.time{
+  font-size: 24px;
+  color: white;
+  height: 33px;
+  width: 260px;
+  margin-top: 23px;
+  margin-bottom: 20px;
+}
+.refresh-img{
+  height: 62px;
+  width: 62px;
+  float: right;
+}
+// color-part
+.card-a{
+  $colors:#FF9698;
+  background-color: $colors;
+  .spe-tag{
+    color: $colors;
+  }
+}
+.card-b{
+  $colors:#99D293;
+  background-color: $colors;
+  .spe-tag{
+    color: $colors;
+  }
+}
+.card-c{
+  $colors:#6FBDDF;
+  background-color: $colors;
+  .spe-tag{
+    color: $colors;
+  }
+}
+.card-d{
+  $colors:#F6C17B;
+  background-color: $colors;
+  .spe-tag{
+    color: $colors;
+  }
+}
+.card-e{
+  $colors:#FFAD7D;
+  background-color: $colors;
+  .spe-tag{
+    color: $colors;
+  }
+}
+.card-f{
+  $colors:#F1A4DF;
+  background-color: $colors;
+  .spe-tag{
+    color: $colors;
+  }
+}

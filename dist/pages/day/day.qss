@@ -1,0 +1,16 @@
+.cards-container {
+  margin: 0 auto;
+  width: 730rpx;
+  text-align: start;
+  font-family: PingFang SC;
+  font-weight: 400; }
+
+.share {
+  height: 122rpx;
+  width: 122rpx; }
+
+.share-container {
+  position: absolute;
+  right: 85rpx;
+  bottom: 123rpx; }
+

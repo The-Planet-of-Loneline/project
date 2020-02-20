@@ -1,0 +1,206 @@
+.header{
+  width:750px;
+  height:80px;
+  line-height: 80px;
+  text-align: center;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 1px 6px rgba(0,0,0,0.16);
+  opacity:1;
+  position: sticky;
+  top:0;
+  left:0;
+  z-index:12;
+}
+.back{
+  width:24px;
+  height: 48px;
+  vertical-align: center;
+  position: absolute;
+  top:20px;
+  left: 52px;
+}
+.body-container{
+  margin: 0 50px;
+}
+.user{
+  margin: 48px 0;
+  display: flex;
+  align-items:center;
+}
+.user-img{
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+  background-color: pink;
+}
+.user-info{
+  margin: 0 40px;
+  height: 76px;
+  line-height: 76px;
+}
+.user-name{
+  width:180px;
+  height:50px;
+  font-size:36px;
+  font-family:PingFang SC;
+  font-weight:500;
+  line-height:50px;
+  color:rgba(0,0,0,1);
+  -webkit-text-stroke:1 rgba(112,112,112,1);
+  opacity:1;
+}
+.submit-time{
+  width:94px;
+  height:28px;
+  font-size:20px;
+  font-family:PingFang SC;
+  font-weight:400;
+  line-height:28px;
+  color:rgba(0,0,0,1);
+  -webkit-text-stroke:1 rgba(112,112,112,1);
+  opacity:1;
+  margin-top: 10px;
+}
+.details{
+  min-height:535px;
+  box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+  opacity:1;
+  border-radius:20px;
+  padding: 27px 40px 40px 40px;
+}
+.tag-container{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 7px;
+}
+.spe-tag{
+  height: 40px;
+  min-width: 100px;
+  padding: 0 8px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 24px;
+  background-color: white;
+  border-radius: 10px;
+  margin: 0 26px 10px 0;
+  color:rgba(228,178,39,1);
+}
+.title{
+  font-size: 40px;
+  color: white;
+  text-align: start;
+  width:180px;
+  height:50px;
+  font-family:PingFang SC;
+  font-weight:500;
+  line-height:50px;
+  opacity:1;
+}
+.time{
+  font-size: 24px;
+  color: white;
+  height: 33px;
+  width: 260px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-family:PingFang SC;
+  font-weight:400;
+  line-height:33px;
+  color:rgba(255,255,255,0.8);
+}
+.content{
+  min-height:330px;
+  font-size:24px;
+  font-family:PingFang SC;
+  font-weight:400;
+  line-height:33px;
+  color:rgba(255,255,255,1);
+  background:rgba(0,0,0,0.1);
+  border-radius:20px;
+  padding: 30px;
+}
+.submit-container{
+  margin: 48px 0;
+}
+.submit-require{
+  text-align: center;
+  width:242px;
+  height:64px;
+  line-height: 64px;
+  border-radius: 10px;
+  opacity:1;
+  float: right;
+}
+// color-part
+.card-a{
+  $colors:#FF9698;
+  .details{
+    background-color: $colors;
+    .spe-tag{
+      color: $colors;
+    }
+  }
+  .submit-require{
+    border:5px solid $colors;
+  }
+}
+.card-b{
+  $colors:#99D293;
+  .details{
+    background-color: $colors;
+    .spe-tag{
+      color: $colors;
+    }
+  }
+  .submit-require{
+    border:5px solid $colors;
+  }
+}
+.card-c{
+  $colors:#6FBDDF;
+  .details{
+    background-color: $colors;
+    .spe-tag{
+      color: $colors;
+    }
+  }
+  .submit-require{
+    border:5px solid $colors;
+  }
+}
+.card-d{
+  $colors:#F6C17B;
+  .details{
+    background-color: $colors;
+    .spe-tag{
+      color: $colors;
+    }
+  }
+  .submit-require{
+    border:5px solid $colors;
+  }
+}
+.card-e{
+  $colors:#FFAD7D;
+  .details{
+    background-color: $colors;
+    .spe-tag{
+      color: $colors;
+    }
+  }
+  .submit-require{
+    border:5px solid $colors;
+  }
+}
+.card-f{
+  $colors:#F1A4DF;
+  .details{
+    background-color: $colors;
+    .spe-tag{
+      color: $colors;
+    }
+  }
+  .submit-require{
+    border:5px solid $colors;
+  }
+}

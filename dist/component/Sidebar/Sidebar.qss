@@ -1,0 +1,121 @@
+.shadow-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 88%;
+  height: 100%;
+  overflow: hidden;
+  border-left: 109rpx solid rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.5); }
+
+.body-container {
+  width: 100%;
+  height: 100%;
+  border: none;
+  margin: none;
+  background-color: white; }
+
+.choose-container {
+  min-height: 1080rpx; }
+
+.time-container {
+  padding: 0 20rpx;
+  height: 368rpx;
+  box-shadow: 0 3rpx 6rpx rgba(0, 0, 0, 0.536); }
+
+.close {
+  height: 44rpx;
+  width: 44rpx;
+  margin: 10rpx;
+  float: right; }
+
+.detail-time {
+  height: 40rpx;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 40rpx;
+  color: #939393; }
+
+.downer {
+  display: flex;
+  align-items: center;
+  margin-top: 25rpx; }
+
+.enter {
+  width: 193rpx;
+  height: 53rpx;
+  background: white;
+  border: 1rpx solid #707070;
+  opacity: 1;
+  font-size: 30rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  border-radius: 30rpx;
+  text-align: center; }
+
+.line {
+  width: 96rpx;
+  height: 0;
+  border: 1rpx solid #707070;
+  opacity: 1;
+  margin: 0 35rpx; }
+
+.type-container {
+  padding: 0 20rpx;
+  height: 153rpx;
+  box-shadow: 0 3rpx 6rpx rgba(0, 0, 0, 0.536); }
+
+.detail-container {
+  padding: 0 20rpx;
+  min-height: 154rpx;
+  box-shadow: 0 3rpx 6rpx rgba(0, 0, 0, 0.536); }
+
+.place-container {
+  padding: 0 20rpx;
+  height: 330rpx; }
+
+.header {
+  height: 62rpx;
+  line-height: 62rpx; }
+
+.words {
+  font-size: 32rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: black;
+  opacity: 1; }
+
+.list-extends {
+  width: 610rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+.submit-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center; }
+
+.press {
+  width: 225rpx;
+  height: 72rpx;
+  border-radius: 10rpx;
+  font-size: 32rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 72rpx;
+  color: #292929;
+  border: 1rpx solid #f7d592;
+  opacity: 1; }
+
+.submit-info {
+  background: #f7d592; }
+
+.disable {
+  background: rgba(247, 213, 146, 0.5); }
+
+.reset {
+  background-color: white; }
+

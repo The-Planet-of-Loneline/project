@@ -1,0 +1,18 @@
+.blank-container {
+  text-align: center; }
+
+.sun {
+  width: 687rpx;
+  height: 687rpx;
+  margin-top: 68rpx; }
+
+.blank-word {
+  height: 40rpx;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 40rpx;
+  color: #939393;
+  opacity: 1;
+  margin-top: -128rpx; }
+

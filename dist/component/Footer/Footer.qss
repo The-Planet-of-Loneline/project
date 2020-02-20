@@ -1,0 +1,44 @@
+.footer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  height: 98rpx;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.24);
+  position: fixed;
+  z-index: 10;
+  bottom: 0; }
+
+.word {
+  font-size: 20rpx;
+  font-family: PingFang SC;
+  font-weight: 400; }
+
+.need-on {
+  color: #f9c170; }
+
+.need-off {
+  color: black; }
+
+.my-on {
+  color: #f9c170; }
+
+.my-off {
+  color: black; }
+
+.switch {
+  border: none;
+  margin-bottom: -11rpx;
+  width: 170rpx;
+  height: 170rpx; }
+
+.s-img {
+  width: 44rpx;
+  height: 44rpx; }
+
+.s-logo {
+  text-align: center;
+  width: 80rpx;
+  padding: 10rpx 0; }
+

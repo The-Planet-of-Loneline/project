@@ -1,0 +1,129 @@
+.push-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 14;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+}
+.push{
+  left: 70px;
+  top: 275px;
+  height: 490px;
+  width: 613px;
+  margin: 275px auto auto 70px;
+  background-color: white;
+  border-radius: 20px;
+}
+.header{
+  margin: 11px 18px 0px 25px;
+  height: 62px;
+  line-height: 62px;
+}
+.words{
+  font-size:36px;
+  font-family:PingFang SC;
+  font-weight:500;
+  color:rgba(0,0,0,1);
+}
+.close{
+  height: 44px;
+  width: 44px;
+  margin: 10px;
+  float: right;
+}
+.sub-button{
+  width:199px;
+  height:49px;
+  line-height: 49px;
+  margin: 0 auto;
+  text-align: center;
+  background:rgba(255,255,255,1);
+  border:3px solid rgba(247,212,161,1);
+  opacity:1;
+  border-radius:10px;
+  font-size:24px;
+  font-family:PingFang SC;
+  font-weight:400;
+}
+.able{
+  color:rgba(0,0,0,1);
+}
+.disable{
+  color:rgba(0,0,0,0.5);
+}
+.info-container{
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+.outter-circle{
+  width:30px;
+  height:30px;
+  border:1px solid rgba(248,208,153,1);
+  border-radius:50%;
+  margin-left: 65px;
+  margin-right: 9px;
+  opacity:1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.inner-circle{
+  width:20px;
+  height:20px;
+  background:rgba(248,208,153,1);
+  border:none;
+  border-radius:50%;
+  opacity:1;
+}
+.numb{
+  display: inline-block;
+  width:70px;
+  height:45px;
+  font-size:32px;
+  font-family:PingFang SC;
+  font-weight:400;
+  line-height:45px;
+  color:rgba(0,0,0,1);
+  opacity:1;
+}
+.unfoucs{
+  margin: 0;
+  padding: 0;
+  width: 300px;
+  height: 30px;
+  line-height: 30px;
+  font-size:30px;
+  font-family:PingFang SC;
+  font-weight:500;
+  color:rgba(0,0,0,0.5);
+}
+.info{
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-size:30px;
+  font-family:PingFang SC;
+  font-weight:500;
+  color:rgba(0,0,0,1);
+  width: 300px;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 2px solid black;
+}
+.sentence{
+  width:522px;
+  height:184px;
+  background:rgba(255,255,255,1);
+  border:1px solid rgba(112,112,112,1);
+  opacity:1;
+  margin: 25px auto;
+  padding: 7px 15px;
+  font-size:24px;
+  font-family:PingFang SC;
+  font-weight:400;
+  color:rgba(116,116,116,1);
+}

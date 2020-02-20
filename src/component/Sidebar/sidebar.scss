@@ -1,0 +1,123 @@
+.shadow-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 88%;
+  height: 100%;
+  overflow: hidden;
+  border-left:109px solid rgba($color: #000000, $alpha: 0.5);
+  background-color: rgba(255,255,255,0.5);
+}
+.body-container{
+  width: 100%;
+  height: 100%;
+  border:none;
+  margin: none;
+  background-color: rgba(255,255,255,1);
+  // height: 1218px;
+}
+.choose-container{
+  min-height: 1080px;
+}
+.time-container{
+  padding: 0 20px;
+  height: 368px;
+  box-shadow: 0px 3px 6px rgba($color: #000000, $alpha: 0.536);
+}
+.close{
+  height: 44px;
+  width: 44px;
+  margin: 10px;
+  float: right;
+}
+.detail-time{
+  height:40px;
+  font-size:28px;
+  font-family:PingFang SC;
+  font-weight:400;
+  line-height:40px;
+  color:rgba(147,147,147,1);
+}
+.downer{
+  display: flex;
+  align-items: center;
+  margin-top:25px;
+}
+.enter{
+  width:193px;
+  height:53px;
+  background:rgba(255,255,255,1);
+  border:1px solid rgba(112,112,112,1);
+  opacity:1;
+  font-size:30px;
+  font-family:PingFang SC;
+  font-weight:400;
+  border-radius:30px;
+  text-align: center;
+}
+.line{
+  width:96px;
+  height:0px;
+  border:1px solid rgba(112,112,112,1);
+  opacity:1;
+  margin: 0 35px;
+}
+.type-container{
+  padding: 0 20px;
+  height: 153px;
+  box-shadow: 0px 3px 6px rgba($color: #000000, $alpha: 0.536);
+}
+.detail-container{
+  padding: 0 20px;
+  min-height: 154px;
+  box-shadow: 0px 3px 6px rgba($color: #000000, $alpha: 0.536);
+}
+.place-container{
+  padding: 0 20px;
+  height: 330px;
+}
+.header{
+  height: 62px;
+  line-height: 62px;
+}
+.words{
+  font-size:32px;
+  font-family:PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,1);
+  opacity:1;
+}
+.list-extends{
+  width:610px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.submit-container{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.press{
+  width:225px;
+  height:72px;
+  border-radius:10px;
+  font-size:32px;
+  font-family:PingFang SC;
+  font-weight:400;
+  line-height:72px;
+  color:rgba(41,41,41,1);
+  border:1px solid rgba(247,213,146,1);
+  opacity:1;
+}
+.submit-info{
+  background:rgba(247,213,146,1);
+}
+.disable{
+  background:rgba(247,213,146,0.5);
+}
+
+.reset{
+  background-color: white;
+}
