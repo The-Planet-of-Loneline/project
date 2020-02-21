@@ -10,7 +10,7 @@ export default class Info extends Component {
   }
 
   state = {
-    checked:false,
+    checked:[0,0],
     qq: '',
     tel: '',
     msg: ''
@@ -18,7 +18,7 @@ export default class Info extends Component {
 
   componentWillMount () { }
 
-  componentDidMount () { console.log(this.props.passed) }
+  componentDidMount () { }
 
   componentWillUnmount () { }
 
@@ -53,11 +53,13 @@ export default class Info extends Component {
   }
 
   changeCheck (index) {
-    if (index) {
-      this.setState({ checked:true, qq:'' })
+    let { checked } = this.state
+    if (checked[index]) {
+      checked[index]=0
     } else {
-      this.setState({ checked:false, tel:'' })
+      checked[index]=1
     }
+    this.setState({ checked })
   }
 
   errorDate () {
@@ -75,11 +77,11 @@ export default class Info extends Component {
           </View>
           <View>
             <View className='info-container'>
-              <View className='outter-circle' onClick={this.changeCheck.bind(this,false)}>
-                {checked?null:<View className='inner-circle' />}
+              <View className='outter-circle' onClick={this.changeCheck.bind(this,0)}>
+                {checked[0]===0?null:<View className='inner-circle' />}
               </View>
               <Text className='numb'>QQ:</Text>
-              {checked
+              {checked[0]===0
               ?<View className='unfoucs'>未选定</View>
               :<Input
                 className='info'
@@ -89,11 +91,11 @@ export default class Info extends Component {
               />}
             </View>
             <View className='info-container'>
-              <View className='outter-circle' onClick={this.changeCheck.bind(this,true)}>
-                {checked?<View className='inner-circle' />:null}
+              <View className='outter-circle' onClick={this.changeCheck.bind(this,1)}>
+                {checked[1]?<View className='inner-circle' />:null}
               </View>
               <Text className='numb'>Tel：</Text>
-              {checked
+              {checked[1]
               ?<Input
                 className='info'
                 maxLength='11'
@@ -107,7 +109,7 @@ export default class Info extends Component {
             <Textarea
               className='sentence'
               placeholder='你写下的内容会发送给对方......'
-              maxlength='150' 
+              maxlength='100' 
               value={msg}
               // onClick={this.getInfo.bind(this, 'msg')}
               // onChange={this.getInfo.bind(this, 'msg')}

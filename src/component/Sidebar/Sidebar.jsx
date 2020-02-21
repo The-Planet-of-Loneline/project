@@ -6,33 +6,7 @@ import Tag from '../Tag/Tag'
 
 export default class Sidebar extends Component {
 
-  static defaultProps = {
-    
-  }
-
-  state = {
-    content:{
-      time:['周一','周二','周三','周四','周五','周六','周日',' '],
-      type:['学习','运动','娱乐','其他'],
-      choices:[
-        {
-          details:['自习','看书','上课','其他'],
-          place:['教学楼','图书馆','其他',' ']
-        },
-        {
-          details:['跑步','篮球','足球','羽毛球','乒乓球','网球','其他',' '],
-          place:['佑铭体育馆','高职体育场','乒 羽 中 心','西区篮球场','高职篮球场','学子篮球场','学子网球场','其 他',' ']
-        },
-        {
-          details:['游戏','吃饭','电影','其他'],
-          place:['校内','校外','其他',' ']
-        },
-        {
-          details:[],
-          place:['校内','校外','其他',' ']
-        }
-      ]
-    },
+  static defaultProps = { 
     chosen:{
       time:[0,0,0,0,0,0,0],
       during:['',''],
@@ -40,10 +14,71 @@ export default class Sidebar extends Component {
       choices:[0,0]
     }
   }
-  
-  componentWillMount () { }
 
-  componentDidMount () { console.log(this.props.passed) }
+  constructor () {
+    super()
+    let chosen = this.props.chosen
+    this.state = {
+      content:{
+        time:['周一','周二','周三','周四','周五','周六','周日',' '],
+        type:['学习','运动','娱乐','其他'],
+        choices:[
+          {
+            details:['自习','看书','上课','其他'],
+            place:['教学楼','图书馆','其他',' ']
+          },
+          {
+            details:['跑步','篮球','足球','羽毛球','乒乓球','网球','其他',' '],
+            place:['佑铭体育馆','高职体育场','乒 羽 中 心','西区篮球场','高职篮球场','学子篮球场','学子网球场','其 他',' ']
+          },
+          {
+            details:['游戏','吃饭','电影','其他'],
+            place:['校内','校外','其他',' ']
+          },
+          {
+            details:[],
+            place:['校内','校外','其他',' ']
+          }
+        ]
+      },
+      chosen:chosen
+    }
+  }
+
+  // state = {
+  //   content:{
+  //     time:['周一','周二','周三','周四','周五','周六','周日',' '],
+  //     type:['学习','运动','娱乐','其他'],
+  //     choices:[
+  //       {
+  //         details:['自习','看书','上课','其他'],
+  //         place:['教学楼','图书馆','其他',' ']
+  //       },
+  //       {
+  //         details:['跑步','篮球','足球','羽毛球','乒乓球','网球','其他',' '],
+  //         place:['佑铭体育馆','高职体育场','乒 羽 中 心','西区篮球场','高职篮球场','学子篮球场','学子网球场','其 他',' ']
+  //       },
+  //       {
+  //         details:['游戏','吃饭','电影','其他'],
+  //         place:['校内','校外','其他',' ']
+  //       },
+  //       {
+  //         details:[],
+  //         place:['校内','校外','其他',' ']
+  //       }
+  //     ]
+  //   },
+    // chosen:{
+    //   time:[0,0,0,0,0,0,0],
+    //   during:['',''],
+    //   type:0,
+    //   choices:[0,0]
+    // }
+  // }
+  
+  componentWillMount () { console.log(this.props) }
+
+  componentDidMount () { }
 
   componentWillUnmount () { }
 
@@ -65,7 +100,6 @@ export default class Sidebar extends Component {
                     break
     }
     this.setState({ chosen })
-    console.log({ chosen })
   }
 
   reset () {
@@ -87,7 +121,13 @@ export default class Sidebar extends Component {
   }
 
   changeShow () {
+    this.chosenPass()
     this.props.onChangeShow()
+  }
+
+  chosenPass () {
+    const { chosen } = this.state
+    this.props.onChosenPass(chosen)
   }
 
   handleSubmit () {

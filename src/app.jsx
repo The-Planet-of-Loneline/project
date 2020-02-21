@@ -33,7 +33,7 @@ class App extends Component {
       'pages/Mine/Mine',
       'pages/cardHistory/cardHistory',
       'pages/Info/info',
-      'pages/edit/edit', 
+      'pages/edit/edit'
     ],
     window: {
       backgroundTextStyle: 'light',

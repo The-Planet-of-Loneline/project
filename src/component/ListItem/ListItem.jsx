@@ -33,9 +33,15 @@ export default class ListItem extends Component {
 
   componentDidHide () { }
 
-  toDetail () {
+  toMyDetail () {
     Taro.navigateTo({
       url:`../myDetail/myDetail`
+    })
+  }
+
+  toDetail () {
+    Taro.navigateTo({
+      url:`../cardDetails/cardDetails`
     })
   }
 
@@ -70,7 +76,7 @@ export default class ListItem extends Component {
     switch (mode) {
       // history
       case '1' : {return (
-        <View className='list-item' onClick={this.toDetail}>
+        <View className='list-item' onClick={this.toMyDetail}>
           <View className='tag'>{types[type]}</View>
           <View className='title'>{title}</View>
           <View className='float-con'><View className='time'>{time}</View></View>

@@ -79,7 +79,7 @@ export default class Day extends Component {
   }
 
   toCreateNeeds () {
-    Taro.redirectTo({
+    Taro.navigateTo({
       url: '../share/share'
     })
   }

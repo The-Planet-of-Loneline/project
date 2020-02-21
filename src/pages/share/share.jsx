@@ -15,7 +15,13 @@ export default class Share extends Component {
     show:false,
     title:'',
     content:'',
-    tagChosen:false
+    tagChosen:false,
+    chosen:{
+      time:[0,0,0,0,0,0,0],
+      during:['',''],
+      type:0,
+      choices:[0,0]
+    }
   }
 
   componentWillMount () { }
@@ -32,6 +38,10 @@ export default class Share extends Component {
     Taro.redirectTo({
       url: '../day/day'
     })
+  }
+
+  onChosenPass = (chosen) => {
+    this.setState({ chosen })
   }
 
   changeShow = () => {
@@ -62,6 +72,7 @@ export default class Share extends Component {
 
   render () {
     const { show, title, content } = this.state
+    const { chosen } = this.state
     return (
       <View>
         <View className='header'>
@@ -101,7 +112,14 @@ export default class Share extends Component {
             <Text className='tag-words'>添加标签</Text>
           </View>
         </View>
-        {show?<Sidebar onChangeShow={this.changeShow} onChosen={this.onChosen} passed='true' />:null}
+        {show
+        ?<Sidebar 
+          onChangeShow={this.changeShow}
+          onChosen={this.onChosen}
+          chosen={chosen}
+          onChosenPass={this.onChosenPass}
+        />
+        :null}
         <Footer mode='need' />
       </View>
     )

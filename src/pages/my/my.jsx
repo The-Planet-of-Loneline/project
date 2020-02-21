@@ -48,10 +48,17 @@ export default class My extends Component {
   handleRight () {
     const { draw } = this.state
     const small = draw.small
-    if (draw.show) {
-      this.setState({ draw:{ big:true, show:false, small } })
+    let big = draw.big
+    let show  = draw.show
+    if (small==='0') {
+      big=!big
     } else {
-      this.setState({ draw:{ big:true, show:true, small } })
+      big=true
+    }
+    if (show) {
+      this.setState({ draw:{ big, show:false, small } })
+    } else {
+      this.setState({ draw:{ big, show:true, small } })
     }
   }
 
@@ -87,8 +94,8 @@ export default class My extends Component {
   }
 
   toEdit () {
-    Taro.navigate({
-      url:''
+    Taro.navigateTo({
+      url:`../edit/edit?name=shizhong`
     })
   }
 

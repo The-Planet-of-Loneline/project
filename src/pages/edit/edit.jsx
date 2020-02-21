@@ -1,28 +1,30 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Image,Text, Input } from '@tarojs/components'
-import FooterDay from '../component/FooterDay'
+import { View, Image, Input, Label } from '@tarojs/components'
+import Footer from '../../component/Footer/Footer'
 import './edit.scss'
-import edit from '../img/edit.png'
+import Edit from '../img/edit.png'
 
-export default class day extends Component{
+export default class edit extends Component{
     state={
-        inputValue: this.$router.params.name
+        inputValue: this.$router.params.name,
+        info:{
+            stuid:'2019214***',
+            sex:0,
+            college:'xx学院',
+            grade:'19级',
+        }
     }
+
     onhandleInputChange(e){
         this.setState({
             inputValue:e.target.value
         })
     }
-    handleSubmit() {
-        const name = this.state.inpuValue
-
-        Taro.redirectTo({
-            url: `/pages//?name=${name}`
-        })
-    }
    
     render(){
         const {inputValue} = this.state
+        const {info} = this.state
+        const sexC = ['男', '女']
         return(
             <View>
                 <View className='head'>
@@ -32,18 +34,24 @@ export default class day extends Component{
                 </View>
                     <View className='container'>
                         <View className='card'>
-                            <View className='content'>昵称：<Input className='name' value={inputValue} onInput={this.onhandleInputChange.bind(this)}>HCL2</Input>
-                            <Image src={edit} className='edit' onClick={this.handleSubmit.bind(this)} />
+                            <View className='content'>
+                                昵称：
+                                <Input 
+                                  className='name'
+                                  maxLength='8'
+                                  value={inputValue}
+                                  onInput={this.onhandleInputChange.bind(this)}
+                                  id='1'
+                                />
+                                <Label for='1'><Image src={Edit} className='edit' /></Label>
                             </View>
-                            <View className='content'>学号：2019214***</View>
-                            <View className='content'>性别：男</View>
-                            <View className='content'>学院：xx学院</View>
-                            <View className='content'>年级：19级</View>
-                            
+                            <View className='content'>学号：{info.stuid}</View>
+                            <View className='content'>性别：{sexC[info.sex]}</View>
+                            <View className='content'>学院：{info.college}</View>
+                            <View className='content'>年级：{info.grade}</View>
                         </View>
                     </View>
-                
-                <FooterDay />
+                <Footer mode='need' />
             </View > 
         )
     }

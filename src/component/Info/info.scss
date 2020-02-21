@@ -20,6 +20,7 @@
   margin: 11px 18px 0px 25px;
   height: 62px;
   line-height: 62px;
+  text-align: start;
 }
 .words{
   font-size:36px;
@@ -100,9 +101,11 @@
   font-family:PingFang SC;
   font-weight:500;
   color:rgba(0,0,0,0.5);
+  text-align: start;
 }
 .info{
   display: inline-block;
+  text-align: start;
   margin: 0;
   padding: 0;
   font-size:30px;
@@ -117,6 +120,7 @@
 .sentence{
   width:522px;
   height:184px;
+  text-align: start;
   background:rgba(255,255,255,1);
   border:1px solid rgba(112,112,112,1);
   opacity:1;
