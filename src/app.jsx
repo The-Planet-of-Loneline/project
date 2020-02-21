@@ -26,7 +26,14 @@ class App extends Component {
       'pages/my/my',
       'pages/share/share',
       'pages/myDetail/myDetail',
-      'pages/cardDetails/cardDetails'
+      'pages/cardDetails/cardDetails',
+      'pages/nighthome/nighthome',
+      'pages/writeSecret/writeSecret',
+      'pages/commentNight/comment',
+      'pages/Mine/Mine',
+      'pages/cardHistory/cardHistory',
+      'pages/Info/info',
+      'pages/edit/edit', 
     ],
     window: {
       backgroundTextStyle: 'light',

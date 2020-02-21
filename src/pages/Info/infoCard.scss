@@ -1,0 +1,53 @@
+    .Card {
+        width: 750px;
+        height: 150px;
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .avatar {
+        width: 106px;
+        height: 106px;
+        background: rgba(173, 143, 143, 1);
+        border-radius: 50%;
+        display: inline-block;
+        margin: 22px;
+    }
+    
+    .textContainer {
+        display: inline-block;
+        height: 132px;
+        line-height: 132px;
+        position: relative;
+        top: -50px;
+    }
+    
+    .time {
+        width: 100px;
+        height: 33px;
+        font-size: 25px;
+        font-family: Segoe UI;
+        font-weight: 400;
+        line-height: 33px;
+        color: rgba(196, 199, 203, 1);
+        position: relative;
+        left: 520px;
+        top: -20px;
+    }
+    
+    .text {
+        width: 560px;
+        height: 77px;
+        font-size: 25px;
+        font-family: Segoe UI;
+        font-weight: 400;
+        line-height: 33px;
+        color: rgba(196, 199, 203, 1);
+    }
+    
+    .toCard {
+        width: 47px;
+        height: 47px;
+        position: absolute;
+        top: -25px;
+        right: -45px;
+    }

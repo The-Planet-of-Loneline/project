@@ -1,0 +1,74 @@
+.cardContainer {
+    width: 700px;
+    height: 700px;
+    margin: 86px auto;
+}
+
+.cardOne {
+    width: 661px;
+    height: 651px;
+    background: rgba(90, 125, 139, 0.98);
+    border: 1px solid rgba(109, 107, 107, 0.98);
+    border-radius: 15px;
+    position: absolute;
+    z-index: 3;
+    left: 45px;
+}
+
+.cardTwo {
+    width: 593px;
+    height: 584px;
+    background: rgba(173, 143, 143, 1);
+    border: 1px solid rgba(110, 110, 110, 1);
+    border-radius: 15px;
+    position: absolute;
+    z-index: 2;
+    left: 77px;
+    top: 260px;
+}
+
+.cardThree {
+    width: 486px;
+    height: 479px;
+    background: rgba(124, 159, 154, 0.97);
+    border-radius: 15px;
+    position: absolute;
+    z-index: 1;
+    left: 130px;
+    top: 390px
+}
+
+.avatar {
+    display: inline-block;
+    margin: 20px 10px 10px 45px;
+}
+
+.avatarImg {
+    width: 106px;
+    height: 106px;
+}
+
+.time {
+    height: 24px;
+    font-size: 18px;
+    font-family: Segoe UI;
+    font-weight: 400;
+    line-height: 24px;
+    color: rgba(255, 255, 255, 1);
+    display: inline-block;
+}
+
+.textContainer {
+    text-align: center;
+}
+
+.text {
+    width: 556px;
+    height: 310px;
+    font-size: 28px;
+    font-family: Segoe UI;
+    font-weight: 400;
+    line-height: 37px;
+    color: rgba(255, 255, 255, 1);
+    margin: 0 auto;
+}

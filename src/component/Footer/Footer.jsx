@@ -27,7 +27,7 @@ export default class Footer extends Component {
 
   toNight () {
     Taro.redirectTo({
-      url: ''
+      url: '/pages/nighthome/nighthome'
     })
   }
 

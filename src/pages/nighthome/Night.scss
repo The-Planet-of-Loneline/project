@@ -1,0 +1,41 @@
+page {
+    background-color: #04040F;
+}
+
+.headerCenter {
+    width: 750px;
+    height: 85px;
+    background: rgba(224, 227, 233, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+.headContent {
+    width: 118px;
+    font-size: 30px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    opacity: 1;
+    height: 84px;
+    line-height: 84px;
+}
+
+.headContentTA {
+    width: 118px;
+    height: 84px;
+    line-height: 84px;
+    font-size: 30px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    opacity: 1;
+}
+
+.underline {
+    width: 60px;
+    height: 5px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 15px;
+    margin: 0 auto;
+}
