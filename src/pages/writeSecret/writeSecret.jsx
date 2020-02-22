@@ -130,7 +130,7 @@ export default class WriteSecret extends Component {
         }) 
     }
     handleback(){
-        const text = this.state.inpuValue
+        const text = this.state.inpuValue  
         if (!text){ 
         this.setState({
             inpuValue: '说个秘密吧...'
