@@ -38,18 +38,16 @@ export default class Info extends Component {
   }
 
   handleSubmit () {
+    // submit content
     this.props.onChangeShowSub()
-    console.log(this.state)
   }
 
   enableSubmit () {
-    const { checked, qq, tel } = this.state
-    if (checked) {
-      if (tel !== '') { return true }
-    } else {
-      if (qq !== '') {return true}
+    const { msg } =this.state
+    if (msg!=='') {
+      return true
     }
-    return false
+      return false
   }
 
   changeCheck (index) {
@@ -60,6 +58,12 @@ export default class Info extends Component {
       checked[index]=1
     }
     this.setState({ checked })
+  }
+
+  handleInputChange(e) {
+    this.setState({
+        msg: e.target.value,
+    })
   }
 
   errorDate () {
@@ -111,8 +115,7 @@ export default class Info extends Component {
               placeholder='你写下的内容会发送给对方......'
               maxlength='100' 
               value={msg}
-              // onClick={this.getInfo.bind(this, 'msg')}
-              // onChange={this.getInfo.bind(this, 'msg')}
+              onInput={this.handleInputChange.bind(this)}
             />
           </View>
           <View>

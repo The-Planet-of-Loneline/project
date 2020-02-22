@@ -41,7 +41,7 @@ export default class ListItem extends Component {
 
   toDetail () {
     Taro.navigateTo({
-      url:`../cardDetails/cardDetails`
+      url:`../cardDetails/cardDetails?indexId=3`
     })
   }
 

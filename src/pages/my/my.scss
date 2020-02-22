@@ -1,5 +1,5 @@
 .stick{
-  position: sticky;
+  position: absolute;
   z-index: 12;
   top: 0;
   left: 0;
@@ -142,7 +142,6 @@
   color:rgba(0,0,0,1);
 }
 .need-list{
-  z-index: 9;
   position: absolute;
   top: 0;
   left:0;

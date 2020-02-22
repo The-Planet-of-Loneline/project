@@ -63,6 +63,12 @@ export default class Share extends Component {
     return false
   }
 
+  handleInputChange(e) {
+    this.setState({
+        content: e.target.value,
+    })
+}
+
   render () {
     const { show, title, content } = this.state
     const { chosen } = this.state
@@ -88,14 +94,24 @@ export default class Share extends Component {
             />
           </View>
           <View className='body-container'>
-            <Textarea
+            {/* <Textarea
               placeholder='请在此处输入内容......'
               className='content'
               maxlength='100'
               hidden={show}
               value={content}
-              onChange={this.getInfo.bind(this,'content')}
-            />
+              onInput={this.handleInputChange.bind(this)}
+            /> */}
+            {show
+            ?<View className='fake-text'>{content===''?'请在此处输入内容......':content}</View>
+            :<Textarea
+              placeholder='请在此处输入内容......'
+              className='content'
+              maxlength='100'
+              hidden={show}
+              value={content}
+              onInput={this.handleInputChange.bind(this)}
+            />}
           </View>
         </View> 
         <View className='add-container'>
