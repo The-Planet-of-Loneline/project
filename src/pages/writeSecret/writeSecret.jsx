@@ -101,6 +101,8 @@ export default class WriteSecret extends Component {
         })
     }
     handleInput(){
+        const {inpuValue} = this.state
+        if (inpuValue == '说个秘密吧...')
         this.setState({
             inpuValue:''
         })
@@ -112,7 +114,7 @@ export default class WriteSecret extends Component {
     }
     toSecret() {
         Taro.redirectTo({
-            url: '/pages/index/index'
+            url: '/pages/nighthome/nighthome'
         })
     }
     toMine() {
@@ -128,10 +130,13 @@ export default class WriteSecret extends Component {
         }) 
     }
     handleback(){
+        const text = this.state.inpuValue
+        if (!text){ 
         this.setState({
             inpuValue: '说个秘密吧...'
         })
-    }  
+    } 
+} 
      
 
     config = {
