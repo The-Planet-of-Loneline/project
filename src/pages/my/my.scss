@@ -142,8 +142,26 @@
   color:rgba(0,0,0,1);
 }
 .need-list{
-  padding-top: 25px;
-  padding-bottom: 120px;
+  z-index: 9;
+  position: absolute;
+  top: 0;
+  left:0;
   width: 100%;
+  height: 100%;
   text-align: center;
+  overflow: scroll;
+}
+.blank-top{
+  border:none;
+  margin:none;
+  padding:none;
+  width: 100%;
+  height: 442px;
+}
+.blank-bottom{
+  border:none;
+  margin:none;
+  padding:none;
+  width: 100%;
+  height: 120px;
 }

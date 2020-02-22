@@ -7,7 +7,7 @@ import Tag from '../Tag/Tag'
 export default class Sidebar extends Component {
 
   static defaultProps = { 
-    chosen:{
+    choose:{
       time:[0,0,0,0,0,0,0],
       during:['',''],
       type:0,
@@ -15,9 +15,8 @@ export default class Sidebar extends Component {
     }
   }
 
-  constructor () {
-    super()
-    let chosen = this.props.chosen
+  constructor (props) {
+    super(props)
     this.state = {
       content:{
         time:['周一','周二','周三','周四','周五','周六','周日',' '],
@@ -41,42 +40,12 @@ export default class Sidebar extends Component {
           }
         ]
       },
-      chosen:chosen
+      placeHolder:['起始时间','结束时间'],
+      chosen:this.props.choose
     }
   }
-
-  // state = {
-  //   content:{
-  //     time:['周一','周二','周三','周四','周五','周六','周日',' '],
-  //     type:['学习','运动','娱乐','其他'],
-  //     choices:[
-  //       {
-  //         details:['自习','看书','上课','其他'],
-  //         place:['教学楼','图书馆','其他',' ']
-  //       },
-  //       {
-  //         details:['跑步','篮球','足球','羽毛球','乒乓球','网球','其他',' '],
-  //         place:['佑铭体育馆','高职体育场','乒 羽 中 心','西区篮球场','高职篮球场','学子篮球场','学子网球场','其 他',' ']
-  //       },
-  //       {
-  //         details:['游戏','吃饭','电影','其他'],
-  //         place:['校内','校外','其他',' ']
-  //       },
-  //       {
-  //         details:[],
-  //         place:['校内','校外','其他',' ']
-  //       }
-  //     ]
-  //   },
-    // chosen:{
-    //   time:[0,0,0,0,0,0,0],
-    //   during:['',''],
-    //   type:0,
-    //   choices:[0,0]
-    // }
-  // }
   
-  componentWillMount () { console.log(this.props) }
+  componentWillMount () { }
 
   componentDidMount () { }
 
@@ -135,11 +104,19 @@ export default class Sidebar extends Component {
     this.changeShow()
   }
 
+  sumDay () {
+    const { chosen } = this.state
+    let sum = 0
+    chosen.time.map((single) => {
+      sum+=single
+    })
+    return sum
+  }
+
   enableThis () {
     const { chosen } = this.state
-    if (chosen.time!==[0,0,0,0,0,0,0]
-      && chosen.during[0]!== ''
-      && chosen.during[1]!== ''
+
+    if (this.sumDay()!==0
       && chosen.type!== 0
       && chosen.choices[0]!== 0
       && chosen.choices[1]!== 0
@@ -149,10 +126,30 @@ export default class Sidebar extends Component {
       return false
   }
 
+  changeHolder (touch,which) {
+    let { placeHolder } = this.state
+    if (touch) {
+      if (which) {
+        placeHolder[1]=''
+      } else {
+        placeHolder[1]='结束时间'
+      }
+    } else {
+      if (which) {
+        placeHolder[0]=''
+      } else {
+        placeHolder[0]='起始时间'
+      }
+    }
+    this.setState({ placeHolder })
+  }
+
   render () {
     const { content } = this.state
     const { choices } = this.state.content
     const { chosen } = this.state
+    const { placeHolder } = this.state
+
     return (
       <View className='shadow-container'>
         <View className='body-container'>
@@ -186,6 +183,9 @@ export default class Sidebar extends Component {
                   maxLength='2'
                   value={chosen.during[0]}
                   onChange={this.getTime.bind(this,0)}
+                  placeholder={placeHolder[0]}
+                  onFocus={this.changeHolder.bind(this,false,true)}
+                  onBlur={this.changeHolder.bind(this,false,false)}
                 />
                 <View className='line'></View>
                 <Input
@@ -193,6 +193,9 @@ export default class Sidebar extends Component {
                   maxLength='2'
                   value={chosen.during[1]}
                   onChange={this.getTime.bind(this,1)} 
+                  placeholder={placeHolder[1]}
+                  onFocus={this.changeHolder.bind(this,true,true)}
+                  onBlur={this.changeHolder.bind(this,true,false)}
                 />
               </View>
             </View>

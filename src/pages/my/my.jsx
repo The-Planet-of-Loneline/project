@@ -149,7 +149,9 @@ export default class My extends Component {
             }
         </View>
         <View className='need-list'>
+          <View className='blank-top'></View>
           {this.explainList()}
+          <View className='blank-bottom'></View>
         </View>
         <Footer mode='my' />
       </View>

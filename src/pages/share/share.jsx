@@ -1,9 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Textarea, Input, Button, Image } from '@tarojs/components'
+import { View, Text, Textarea, Input, Button } from '@tarojs/components'
 import './share.scss'
 import Footer from '../../component/Footer/Footer'
 import Sidebar from '../../component/Sidebar/Sidebar'
-import Back from './back.png'
 
 export default class Share extends Component {
 
@@ -33,12 +32,6 @@ export default class Share extends Component {
   componentDidShow () { }
 
   componentDidHide () { }
-
-  backToDay () {
-    Taro.redirectTo({
-      url: '../day/day'
-    })
-  }
 
   onChosenPass = (chosen) => {
     this.setState({ chosen })
@@ -76,7 +69,6 @@ export default class Share extends Component {
     return (
       <View>
         <View className='header'>
-          <Image src={Back} className='back' onClick={this.backToDay} />
           <Button 
             className={this.enableShare()?'share-button able':'share-button disable'} 
             onClick={this.enableShare()?null:this.getInfo.bind(this,'content')}
@@ -116,8 +108,9 @@ export default class Share extends Component {
         ?<Sidebar 
           onChangeShow={this.changeShow}
           onChosen={this.onChosen}
-          chosen={chosen}
+          choose={chosen}
           onChosenPass={this.onChosenPass}
+          pass='kkk'
         />
         :null}
         <Footer mode='need' />
