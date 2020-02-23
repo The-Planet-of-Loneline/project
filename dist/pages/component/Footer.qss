@@ -1,0 +1,45 @@
+.footer {
+  width: 750rpx;
+  height: 98rpx;
+  background: #111724;
+  opacity: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0; }
+
+.imgEmail {
+  width: 80rpx;
+  height: 85rpx; }
+
+.secretContent {
+  width: 46rpx;
+  height: 31rpx;
+  font-size: 23rpx;
+  font-family: Segoe UI;
+  font-weight: 400;
+  position: relative;
+  top: -16rpx;
+  left: 16rpx; }
+
+.imgMoon {
+  width: 160rpx;
+  height: 160rpx;
+  position: relative;
+  top: -20rpx; }
+
+.imgMine {
+  width: 70rpx;
+  height: 70rpx; }
+
+.mineContent {
+  width: 46rpx;
+  height: 31rpx;
+  font-size: 23rpx;
+  font-family: Segoe UI;
+  font-weight: 400;
+  position: relative;
+  top: -9rpx;
+  left: 13rpx; }
+

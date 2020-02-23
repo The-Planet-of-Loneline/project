@@ -31,6 +31,6 @@
                 <view class="content">{{content}}</view>
             </view>
         </view>
-        <footer compid="{{$compid__72}}"></footer>
+        <footer compid="{{$compid__19}}"></footer>
     </view>
 </block>

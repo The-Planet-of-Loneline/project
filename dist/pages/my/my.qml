@@ -1,13 +1,13 @@
 <template name="renderExplainList">
     <block>
         <block qq:if="{{draw.small === '0'}}">
-            <list-item qq:key="$loopState__temp2" qq:for="{{loopArray47}}" qq:for-item="index" qq:for-index="_anonIdx2" compid="{{index.$compid__73}}"></list-item>
+            <list-item qq:key="$loopState__temp2" qq:for="{{loopArray4}}" qq:for-item="index" qq:for-index="_anonIdx2" compid="{{index.$compid__6}}"></list-item>
         </block>
         <block qq:elif="{{draw.small === '1'}}">
-            <list-item qq:key="$loopState__temp4" qq:for="{{loopArray48}}" qq:for-item="index" qq:for-index="_anonIdx4" compid="{{index.$compid__74}}"></list-item>
+            <list-item qq:key="$loopState__temp4" qq:for="{{loopArray5}}" qq:for-item="index" qq:for-index="_anonIdx4" compid="{{index.$compid__7}}"></list-item>
         </block>
         <block qq:elif="{{draw.small === '2'}}">
-            <list-item qq:key="$loopState__temp6" qq:for="{{loopArray49}}" qq:for-item="index" qq:for-index="_anonIdx6" compid="{{index.$compid__75}}"></list-item>
+            <list-item qq:key="$loopState__temp6" qq:for="{{loopArray6}}" qq:for-item="index" qq:for-index="_anonIdx6" compid="{{index.$compid__8}}"></list-item>
         </block>
     </block>
 </template>
@@ -48,8 +48,10 @@
             </block>
         </view>
         <view class="need-list">
+            <view class="blank-top"></view>
             <template is="renderExplainList" data="{{...anonymousState__temp7}}"></template>
+            <view class="blank-bottom"></view>
         </view>
-        <footer compid="{{$compid__76}}"></footer>
+        <footer compid="{{$compid__9}}"></footer>
     </view>
 </block>

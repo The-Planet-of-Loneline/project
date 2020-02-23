@@ -97,7 +97,7 @@ var Footer = (_temp2 = _class = function (_BaseComponent) {
     key: 'toNight',
     value: function toNight() {
       _taroQq2.default.redirectTo({
-        url: ''
+        url: '/pages/nighthome/nighthome'
       });
     }
   }, {

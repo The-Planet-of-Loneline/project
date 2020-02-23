@@ -1,7 +1,7 @@
 <template name="renderModeTrans">
     <block>
         <block qq:if="{{mode === '1'}}">
-            <view class="list-item" bindtap="toDetail">
+            <view class="list-item" bindtap="toMyDetail">
                 <view class="tag">{{types[type]}}</view>
                 <view class="title">{{title}}</view>
                 <view class="float-con">
@@ -42,16 +42,16 @@
 <template name="renderExplainShow">
     <block>
         <block qq:if="{{mode === '2' && show}}">
-            <info-s compid="{{$compid__69}}"></info-s>
+            <info-s compid="{{$compid__10}}"></info-s>
         </block>
         <block qq:elif="{{showD === '0'}}">
             <view></view>
         </block>
         <block qq:elif="{{showD === '1'}}">
-            <info-t compid="{{$compid__70}}"></info-t>
+            <info-t compid="{{$compid__11}}"></info-t>
         </block>
         <block qq:elif="{{showD === '2'}}">
-            <info compid="{{$compid__71}}"></info>
+            <info compid="{{$compid__12}}"></info>
         </block>
     </block>
 </template>

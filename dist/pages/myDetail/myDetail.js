@@ -65,7 +65,7 @@ var myDetail = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = myDetail.__proto__ || Object.getPrototypeOf(myDetail)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__72", "show", "Delete", "anonymousState__temp", "title", "time", "content", "tags"], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = myDetail.__proto__ || Object.getPrototypeOf(myDetail)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__19", "show", "Delete", "anonymousState__temp", "title", "time", "content", "tags"], _this.state = {
       show: false,
       title: '标题',
       time: '2020.2020',
@@ -131,10 +131,10 @@ var myDetail = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__72"),
+      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__19"),
           _genCompid2 = _slicedToArray(_genCompid, 2),
-          $prevCompid__72 = _genCompid2[0],
-          $compid__72 = _genCompid2[1];
+          $prevCompid__19 = _genCompid2[0],
+          $compid__19 = _genCompid2[1];
 
       var _state = this.__state,
           show = _state.show,
@@ -143,13 +143,13 @@ var myDetail = (_temp2 = _class = function (_BaseComponent) {
           content = _state.content;
 
 
-      var anonymousState__temp = this._createTagsExtendsData(__prefix + "fhzzzzzzzz")();
+      var anonymousState__temp = this._createTagsExtendsData(__prefix + "bfzzzzzzzz")();
 
       _taroQq.propsManager.set({
         "mode": "need"
-      }, $compid__72, $prevCompid__72);
+      }, $compid__19, $prevCompid__19);
       Object.assign(this.__state, {
-        $compid__72: $compid__72,
+        $compid__19: $compid__19,
         Delete: _delete2.default,
         anonymousState__temp: anonymousState__temp
       });

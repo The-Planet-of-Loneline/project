@@ -8,14 +8,6 @@
   color: black;
   opacity: 1; }
 
-.back {
-  width: 24rpx;
-  height: 48rpx;
-  vertical-align: center;
-  position: absolute;
-  top: 20rpx;
-  left: 52rpx; }
-
 .share-button {
   position: absolute;
   top: 20rpx;
@@ -50,10 +42,17 @@
   height: 610rpx; }
 
 .content {
-  z-index: 0;
   font-size: 28rpx;
   background-color: #F3F3F3;
   width: 100%; }
+
+.fake-text {
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 40rpx;
+  color: #6e6e6e;
+  opacity: 1; }
 
 .add-container {
   margin: 85rpx 79rpx; }

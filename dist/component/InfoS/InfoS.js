@@ -52,7 +52,7 @@ var Info = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Info.__proto__ || Object.getPrototypeOf(Info)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["Close", "name", "college", "sex", "qq", "grade", "tel", "msg", "passed"], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Info.__proto__ || Object.getPrototypeOf(Info)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["Close", "name", "college", "sex", "qq", "grade", "tel", "msg"], _this.state = {
       name: '这里是昵称',
       college: 'XXX学院',
       sex: '男',
@@ -75,9 +75,7 @@ var Info = (_temp2 = _class = function (_BaseComponent) {
     value: function componentWillMount() {}
   }, {
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log(this.props.passed);
-    }
+    value: function componentDidMount() {}
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {}

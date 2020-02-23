@@ -1,0 +1,66 @@
+.cardContainer {
+  width: 700rpx;
+  height: 700rpx;
+  margin: 86rpx auto; }
+
+.cardOne {
+  width: 661rpx;
+  height: 651rpx;
+  background: rgba(90, 125, 139, 0.98);
+  border: 1rpx solid rgba(109, 107, 107, 0.98);
+  border-radius: 15rpx;
+  position: absolute;
+  z-index: 3;
+  left: 45rpx; }
+
+.cardTwo {
+  width: 593rpx;
+  height: 584rpx;
+  background: #ad8f8f;
+  border: 1rpx solid #6e6e6e;
+  border-radius: 15rpx;
+  position: absolute;
+  z-index: 2;
+  left: 77rpx;
+  top: 260rpx; }
+
+.cardThree {
+  width: 486rpx;
+  height: 479rpx;
+  background: rgba(124, 159, 154, 0.97);
+  border-radius: 15rpx;
+  position: absolute;
+  z-index: 1;
+  left: 130rpx;
+  top: 390rpx; }
+
+.avatar {
+  display: inline-block;
+  margin: 20rpx 10rpx 10rpx 45rpx; }
+
+.avatarImg {
+  width: 106rpx;
+  height: 106rpx; }
+
+.time {
+  height: 24rpx;
+  font-size: 18rpx;
+  font-family: Segoe UI;
+  font-weight: 400;
+  line-height: 24rpx;
+  color: white;
+  display: inline-block; }
+
+.textContainer {
+  text-align: center; }
+
+.text {
+  width: 556rpx;
+  height: 310rpx;
+  font-size: 28rpx;
+  font-family: Segoe UI;
+  font-weight: 400;
+  line-height: 37rpx;
+  color: white;
+  margin: 0 auto; }
+

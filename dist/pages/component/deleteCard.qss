@@ -1,0 +1,45 @@
+.cardContainer {
+  margin: 0 auto; }
+
+.card {
+  width: 472rpx;
+  height: 252rpx;
+  background: #c9ccd5;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  font-family: Segoe UI;
+  font-weight: 400;
+  line-height: 37rpx;
+  color: #050510;
+  text-align: center;
+  position: absolute;
+  left: 132rpx;
+  bottom: 614rpx; }
+
+.cardText {
+  height: 184rpx;
+  line-height: 184rpx;
+  margin-bottom: 1rpx solid black; }
+
+.cancel {
+  display: inline-block;
+  background: #c9ccd5;
+  width: 236rpx;
+  height: 58rpx;
+  font-size: 30rpx;
+  font-family: Segoe UI;
+  font-weight: 400;
+  line-height: 40rpx;
+  color: #050510; }
+
+.confirm {
+  display: inline-block;
+  background: #c9ccd5;
+  width: 236rpx;
+  height: 58rpx;
+  font-size: 30rpx;
+  font-family: Segoe UI;
+  font-weight: 400;
+  line-height: 40rpx;
+  color: #050510; }
+

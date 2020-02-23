@@ -6,13 +6,13 @@
             </view>
             <view>
                 <view class="info-container">
-                    <view class="outter-circle" bindtap="changeCheck" data-e-tap-so="this" data-e-tap-a-a="{{false}}">
-                        <block qq:if="{{!checked}}">
+                    <view class="outter-circle" bindtap="changeCheck" data-e-tap-so="this" data-e-tap-a-a="{{0}}">
+                        <block qq:if="{{!(checked[0] === 0)}}">
                             <view class="inner-circle"></view>
                         </block>
                     </view><text class="numb">QQ:</text>
                     <block>
-                        <block qq:if="{{checked}}">
+                        <block qq:if="{{checked[0] === 0}}">
                             <view class="unfoucs">未选定</view>
                         </block>
                         <block qq:else>
@@ -21,13 +21,13 @@
                     </block>
                 </view>
                 <view class="info-container">
-                    <view class="outter-circle" bindtap="changeCheck" data-e-tap-so="this" data-e-tap-a-a="{{true}}">
-                        <block qq:if="{{checked}}">
+                    <view class="outter-circle" bindtap="changeCheck" data-e-tap-so="this" data-e-tap-a-a="{{1}}">
+                        <block qq:if="{{checked[1]}}">
                             <view class="inner-circle"></view>
                         </block>
                     </view><text class="numb">Tel：</text>
                     <block>
-                        <block qq:if="{{checked}}">
+                        <block qq:if="{{checked[1]}}">
                             <input class="info" maxlength="11" value="{{tel}}" bindchange="getInfo" data-e-change-so="this" data-e-change-a-a="tel" />
                         </block>
                         <block qq:else>
@@ -37,7 +37,7 @@
                 </view>
             </view>
             <view>
-                <textarea class="sentence" placeholder="你写下的内容会发送给对方......" maxlength="150" value="{{msg}}"></textarea>
+                <textarea class="sentence" placeholder="你写下的内容会发送给对方......" maxlength="100" value="{{msg}}" bindinput="handleInputChange" data-e-input-so="this"></textarea>
             </view>
             <view>
                 <button class="{{anonymousState__temp}}" bindtap="anonymousFunc0">提交</button>

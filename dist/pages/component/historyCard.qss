@@ -1,0 +1,23 @@
+.CardContainer {
+  margin: 0 auto; }
+
+.card {
+  margin: 0 auto;
+  width: 661rpx;
+  height: 306rpx;
+  background: #7fa39d;
+  border-radius: 15rpx;
+  z-index: 2;
+  opacity: 1; }
+
+.text {
+  margin: 20rpx auto;
+  padding-top: 20rpx;
+  width: 560rpx;
+  height: 222rpx;
+  font-size: 28rpx;
+  font-family: Segoe UI;
+  font-weight: 400;
+  color: white;
+  opacity: 1; }
+

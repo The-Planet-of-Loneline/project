@@ -69,7 +69,7 @@ var My = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = My.__proto__ || Object.getPrototypeOf(My)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__76", "draw", "UserImage", "Icon", "anonymousState__temp7", "user", "list"], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = My.__proto__ || Object.getPrototypeOf(My)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__9", "draw", "UserImage", "Icon", "anonymousState__temp7", "user", "list"], _this.state = {
       user: {
         userName: '这里是昵称',
         stuNumber: '2019213XXX'
@@ -126,10 +126,17 @@ var My = (_temp2 = _class = function (_BaseComponent) {
       var draw = this.state.draw;
 
       var small = draw.small;
-      if (draw.show) {
-        this.setState({ draw: { big: true, show: false, small: small } });
+      var big = draw.big;
+      var show = draw.show;
+      if (small === '0') {
+        big = !big;
       } else {
-        this.setState({ draw: { big: true, show: true, small: small } });
+        big = true;
+      }
+      if (show) {
+        this.setState({ draw: { big: big, show: false, small: small } });
+      } else {
+        this.setState({ draw: { big: big, show: true, small: small } });
       }
     }
   }, {
@@ -143,9 +150,9 @@ var My = (_temp2 = _class = function (_BaseComponent) {
       var _this2 = this;
 
       return function () {
-        var loopArray49 = void 0;
-        var loopArray48 = void 0;
-        var loopArray47 = void 0;
+        var loopArray6 = void 0;
+        var loopArray5 = void 0;
+        var loopArray4 = void 0;
 
         var _state = _this2.state,
             draw = _state.draw,
@@ -153,65 +160,65 @@ var My = (_temp2 = _class = function (_BaseComponent) {
 
 
         if (draw.small === '0') {
-          loopArray47 = list.history.map(function (index, _anonIdx) {
+          loopArray4 = list.history.map(function (index, _anonIdx) {
             index = {
               $original: (0, _taroQq.internal_get_original)(index)
             };
             var $loopState__temp2 = index.$original + 1;
 
-            var _genCompid = (0, _taroQq.genCompid)(_$uid + 'fjzzzzzzzz' + _anonIdx, true),
+            var _genCompid = (0, _taroQq.genCompid)(_$uid + 'gzzzzzzzzz' + _anonIdx, true),
                 _genCompid2 = _slicedToArray(_genCompid, 2),
-                $prevCompid__73 = _genCompid2[0],
-                $compid__73 = _genCompid2[1];
+                $prevCompid__6 = _genCompid2[0],
+                $compid__6 = _genCompid2[1];
 
             _taroQq.propsManager.set({
               "mode": "1"
-            }, $compid__73, $prevCompid__73);
+            }, $compid__6, $prevCompid__6);
             return {
               $loopState__temp2: $loopState__temp2,
-              $compid__73: $compid__73,
+              $compid__6: $compid__6,
               $original: index.$original
             };
           });
         } else if (draw.small === '1') {
-          loopArray48 = list.respone.map(function (index, _anonIdx3) {
+          loopArray5 = list.respone.map(function (index, _anonIdx3) {
             index = {
               $original: (0, _taroQq.internal_get_original)(index)
             };
             var $loopState__temp4 = index.$original + 1;
 
-            var _genCompid3 = (0, _taroQq.genCompid)(_$uid + 'gazzzzzzzz' + _anonIdx3, true),
+            var _genCompid3 = (0, _taroQq.genCompid)(_$uid + 'hzzzzzzzzz' + _anonIdx3, true),
                 _genCompid4 = _slicedToArray(_genCompid3, 2),
-                $prevCompid__74 = _genCompid4[0],
-                $compid__74 = _genCompid4[1];
+                $prevCompid__7 = _genCompid4[0],
+                $compid__7 = _genCompid4[1];
 
             _taroQq.propsManager.set({
               "mode": "3"
-            }, $compid__74, $prevCompid__74);
+            }, $compid__7, $prevCompid__7);
             return {
               $loopState__temp4: $loopState__temp4,
-              $compid__74: $compid__74,
+              $compid__7: $compid__7,
               $original: index.$original
             };
           });
         } else if (draw.small === '2') {
-          loopArray49 = list.apply.map(function (index, _anonIdx5) {
+          loopArray6 = list.apply.map(function (index, _anonIdx5) {
             index = {
               $original: (0, _taroQq.internal_get_original)(index)
             };
             var $loopState__temp6 = index.$original + 1;
 
-            var _genCompid5 = (0, _taroQq.genCompid)(_$uid + 'gbzzzzzzzz' + _anonIdx5, true),
+            var _genCompid5 = (0, _taroQq.genCompid)(_$uid + 'izzzzzzzzz' + _anonIdx5, true),
                 _genCompid6 = _slicedToArray(_genCompid5, 2),
-                $prevCompid__75 = _genCompid6[0],
-                $compid__75 = _genCompid6[1];
+                $prevCompid__8 = _genCompid6[0],
+                $compid__8 = _genCompid6[1];
 
             _taroQq.propsManager.set({
               "mode": "2"
-            }, $compid__75, $prevCompid__75);
+            }, $compid__8, $prevCompid__8);
             return {
               $loopState__temp6: $loopState__temp6,
-              $compid__75: $compid__75,
+              $compid__8: $compid__8,
               $original: index.$original
             };
           });
@@ -219,9 +226,9 @@ var My = (_temp2 = _class = function (_BaseComponent) {
 
         return {
           list: list,
-          loopArray47: loopArray47,
-          loopArray48: loopArray48,
-          loopArray49: loopArray49,
+          loopArray4: loopArray4,
+          loopArray5: loopArray5,
+          loopArray6: loopArray6,
           draw: draw
         };
       };
@@ -229,8 +236,8 @@ var My = (_temp2 = _class = function (_BaseComponent) {
   }, {
     key: 'toEdit',
     value: function toEdit() {
-      _taroQq2.default.navigate({
-        url: ''
+      _taroQq2.default.navigateTo({
+        url: "../edit/edit?name=shizhong"
       });
     }
   }, {
@@ -242,22 +249,22 @@ var My = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var _genCompid7 = (0, _taroQq.genCompid)(__prefix + "$compid__76"),
+      var _genCompid7 = (0, _taroQq.genCompid)(__prefix + "$compid__9"),
           _genCompid8 = _slicedToArray(_genCompid7, 2),
-          $prevCompid__76 = _genCompid8[0],
-          $compid__76 = _genCompid8[1];
+          $prevCompid__9 = _genCompid8[0],
+          $compid__9 = _genCompid8[1];
 
       var user = this.__state.user;
       var draw = this.__state.draw;
 
 
-      var anonymousState__temp7 = this._createExplainListData(__prefix + "fizzzzzzzz")();
+      var anonymousState__temp7 = this._createExplainListData(__prefix + "fzzzzzzzzz")();
 
       _taroQq.propsManager.set({
         "mode": "my"
-      }, $compid__76, $prevCompid__76);
+      }, $compid__9, $prevCompid__9);
       Object.assign(this.__state, {
-        $compid__76: $compid__76,
+        $compid__9: $compid__9,
         UserImage: _userImage2.default,
         Icon: _icon2.default,
         anonymousState__temp7: anonymousState__temp7

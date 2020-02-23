@@ -1,0 +1,37 @@
+page {
+  background-color: #04040F; }
+
+.headerCenter {
+  width: 750rpx;
+  height: 85rpx;
+  background: rgba(224, 227, 233, 0.1);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center; }
+
+.headContent {
+  width: 118rpx;
+  font-size: 30rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  opacity: 1;
+  height: 84rpx;
+  line-height: 84rpx; }
+
+.headContentTA {
+  width: 118rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+  font-size: 30rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  opacity: 1; }
+
+.underline {
+  width: 60rpx;
+  height: 5rpx;
+  background: white;
+  border-radius: 15rpx;
+  margin: 0 auto; }
+

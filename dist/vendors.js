@@ -6605,6 +6605,17 @@ try {
 
 module.exports = g;
 
+/***/ }),
+
+/***/ "./src/pages/index/index.scss":
+/*!************************************!*\
+  !*** ./src/pages/index/index.scss ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
 /***/ })
 
 }]);

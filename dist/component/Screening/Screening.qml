@@ -6,7 +6,7 @@
         <block qq:elif="{{chosen.which === 1}}">
             <view class="container">
                 <view class="list-extends">
-                    <tag qq:key="$loopState__temp2" qq:for="{{loopArray2}}" qq:for-item="details" qq:for-index="index" compid="{{details.$compid__3}}"></tag>
+                    <tag qq:key="$loopState__temp2" qq:for="{{loopArray1}}" qq:for-item="details" qq:for-index="index" compid="{{details.$compid__3}}"></tag>
                 </view>
                 <view class="reset" bindtap="reset" data-e-tap-so="this" data-e-tap-a-a="type">重置</view>
             </view>
@@ -14,7 +14,7 @@
         <block qq:elif="{{chosen.which === 2}}">
             <view class="container">
                 <view class="list-extends">
-                    <tag qq:key="$loopState__temp6" qq:for="{{loopArray3}}" qq:for-item="time" qq:for-index="index" compid="{{time.$compid__4}}"></tag>
+                    <tag qq:key="$loopState__temp6" qq:for="{{loopArray2}}" qq:for-item="time" qq:for-index="index" compid="{{time.$compid__4}}"></tag>
                 </view>
                 <view class="detail-time">时间区间（1~24整点）</view>
                 <view class="downer">
@@ -28,7 +28,7 @@
         <block qq:elif="{{chosen.which === 3}}">
             <view class="container">
                 <view class="list-extends">
-                    <tag qq:key="$loopState__temp8" qq:for="{{loopArray4}}" qq:for-item="place" qq:for-index="index" compid="{{place.$compid__5}}"></tag>
+                    <tag qq:key="$loopState__temp8" qq:for="{{loopArray3}}" qq:for-item="place" qq:for-index="index" compid="{{place.$compid__5}}"></tag>
                 </view>
                 <view class="reset" bindtap="reset" data-e-tap-so="this" data-e-tap-a-a="place">重置</view>
             </view>

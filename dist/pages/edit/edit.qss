@@ -1,0 +1,54 @@
+.head {
+  width: 750rpx;
+  height: 80rpx;
+  background: white;
+  box-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.16);
+  opacity: 1;
+  text-align: center; }
+
+.headText {
+  font-size: 34rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 48rpx;
+  color: black;
+  opacity: 1; }
+
+.container {
+  margin: 40rpx auto; }
+
+.card {
+  margin: 20rpx auto;
+  width: 656rpx;
+  height: 901rpx;
+  background: white;
+  border: 5rpx solid #f8d099;
+  opacity: 1;
+  border-radius: 30rpx; }
+
+.content {
+  height: 50rpx;
+  font-size: 36rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #4f4d4d;
+  opacity: 1;
+  margin-left: 60rpx;
+  margin-top: 100rpx; }
+
+.name {
+  text-decoration: underline;
+  display: inline-block;
+  width: 200rpx;
+  height: 50rpx;
+  position: relative;
+  top: 10rpx; }
+
+.edit {
+  width: 44rpx;
+  height: 44rpx;
+  opacity: 1;
+  position: relative;
+  top: 10rpx;
+  left: 20rpx; }
+

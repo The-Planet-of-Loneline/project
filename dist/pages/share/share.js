@@ -1,16 +1,5 @@
 (qq["webpackJsonp"] = qq["webpackJsonp"] || []).push([["pages/share/share"],{
 
-/***/ "./src/pages/share/back.png":
-/*!**********************************!*\
-  !*** ./src/pages/share/back.png ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAwCAYAAAALiLqjAAACiklEQVRYhe2Wu2tUURCHf3fO7pnZNe/s7r0zS2yCpbGwDQFRwU5Bm5RqKq20sdPGB9E/QBARBAu1CCimCaJFfCCIrYQEbGIhaWKCMZhkY5GHd297DtjswG2/79w5c2YG6EQn/nckpUp91Hn7SGILkPQEgCQavSQ6RmxzTmzbiW07timgtz8OvaxHSWxxHy627VinAatFgDeOkOi3PJxYf7pKOh4Ox9Bw4u09sbb24WKrKNtlAKUwdldWT0Q/E+vWP7iuoWoT4XAMNhOxd+1psXV4uw7AB8K7awnbC2LdyME3wdldoNYdCEc54exlO1y3IHobQDWQXet2kj0tVMsmsT4EBnoC4VZ1rPcd23p7rdsUUNNAOEBs94htrQ0uOgNk9VA2k7cbhRe65cRmgcFmKNyTt2vEulLI+xf4xkgoHM7bOLEtt6fFFoD6oWA2fHqaWDdzp24R2zyQHg4+OSo2SmLf29IitghunARAwXzi5lVi+5MXoGznAbhgOAA4r2dJdCkvSMS+AnYwigCARzW7RKK/8u0gYXsVU1JGOb1AuZdLrBsJ2xsAlXgS0VtUaA+JZK+Bvr5Ijv5esE3mh4pj3XCSPQJ6BiJJ0gMl0Tv5sejY1p3Xx5EEOxISe5KfA7sj8gHi3YkNObFnxTFJojeBelcsSc2xThea3yqxXokkAICeASc26/IXv/NdRPg2sRu+MeLEPhT+ZAViEwjfKvaiMVwSncsJWiS2BGdnIgl2JMQ237bZsf1GKTuGGJ0XQIJSepzEFgrt/QdYTyHS+k6o2ChVsuXc+2iR2POILQWA1MdIbInY9tI1A6SNeALAwTfPOdG3TvQTvI0jWtnmJahnqAw2AZRjwzvRCeAvVpHOCW0p2yQAAAAASUVORK5CYII="
-
-/***/ }),
-
 /***/ "./src/pages/share/share.jsx":
 /*!***********************************!*\
   !*** ./src/pages/share/share.jsx ***!
@@ -39,10 +28,6 @@ var _taroQq2 = _interopRequireDefault(_taroQq);
 
 __webpack_require__(/*! ./share.scss */ "./src/pages/share/share.scss");
 
-var _back = __webpack_require__(/*! ./back.png */ "./src/pages/share/back.png");
-
-var _back2 = _interopRequireDefault(_back);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -67,11 +52,19 @@ var Share = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Share.__proto__ || Object.getPrototypeOf(Share)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "$compid__13", "$compid__14", "Back", "title", "show", "content", "tagChosen"], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Share.__proto__ || Object.getPrototypeOf(Share)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "$compid__13", "$compid__14", "title", "show", "content", "tagChosen", "chosen"], _this.state = {
       show: false,
       title: '',
       content: '',
-      tagChosen: false
+      tagChosen: false,
+      chosen: {
+        time: [0, 0, 0, 0, 0, 0, 0],
+        during: ['', ''],
+        type: 0,
+        choices: [0, 0]
+      }
+    }, _this.onChosenPass = function (chosen) {
+      _this.setState({ chosen: chosen });
     }, _this.changeShow = function () {
       var show = _this.state.show;
 
@@ -88,36 +81,29 @@ var Share = (_temp2 = _class = function (_BaseComponent) {
   }
 
   _createClass(Share, [{
-    key: '_constructor',
+    key: "_constructor",
     value: function _constructor(props) {
-      _get(Share.prototype.__proto__ || Object.getPrototypeOf(Share.prototype), '_constructor', this).call(this, props);
+      _get(Share.prototype.__proto__ || Object.getPrototypeOf(Share.prototype), "_constructor", this).call(this, props);
 
       this.$$refs = new _taroQq2.default.RefsArray();
     }
   }, {
-    key: 'componentWillMount',
+    key: "componentWillMount",
     value: function componentWillMount() {}
   }, {
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {}
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {}
   }, {
-    key: 'componentDidShow',
+    key: "componentDidShow",
     value: function componentDidShow() {}
   }, {
-    key: 'componentDidHide',
+    key: "componentDidHide",
     value: function componentDidHide() {}
   }, {
-    key: 'backToDay',
-    value: function backToDay() {
-      _taroQq2.default.redirectTo({
-        url: '../day/day'
-      });
-    }
-  }, {
-    key: 'enableShare',
+    key: "enableShare",
     value: function enableShare() {
       var _state = this.state,
           title = _state.title,
@@ -130,7 +116,14 @@ var Share = (_temp2 = _class = function (_BaseComponent) {
       return false;
     }
   }, {
-    key: '_createData',
+    key: "handleInputChange",
+    value: function handleInputChange(e) {
+      this.setState({
+        content: e.target.value
+      });
+    }
+  }, {
+    key: "_createData",
     value: function _createData() {
       this.__state = arguments[0] || this.state || {};
       this.__props = arguments[1] || this.props || {};
@@ -152,13 +145,16 @@ var Share = (_temp2 = _class = function (_BaseComponent) {
           show = _state2.show,
           title = _state2.title,
           content = _state2.content;
+      var chosen = this.__state.chosen;
 
       var anonymousState__temp = this.enableShare() ? 'share-button able' : 'share-button disable';
       this.anonymousFunc0 = this.enableShare() ? null : this.getInfo.bind(this, 'content');
       show && _taroQq.propsManager.set({
         "onChangeShow": this.changeShow,
         "onChosen": this.onChosen,
-        "passed": "true"
+        "choose": chosen,
+        "onChosenPass": this.onChosenPass,
+        "pass": "kkk"
       }, $compid__13, $prevCompid__13);
       _taroQq.propsManager.set({
         "mode": "need"
@@ -166,20 +162,19 @@ var Share = (_temp2 = _class = function (_BaseComponent) {
       Object.assign(this.__state, {
         anonymousState__temp: anonymousState__temp,
         $compid__13: $compid__13,
-        $compid__14: $compid__14,
-        Back: _back2.default
+        $compid__14: $compid__14
       });
       return this.__state;
     }
   }, {
-    key: 'anonymousFunc0',
+    key: "anonymousFunc0",
     value: function anonymousFunc0(e) {
       ;
     }
   }]);
 
   return Share;
-}(_taroQq.Component), _class.$$events = ["backToDay", "anonymousFunc0", "getInfo", "changeShow"], _class.defaultProps = {}, _class.$$componentPath = "pages/share/share", _temp2);
+}(_taroQq.Component), _class.$$events = ["anonymousFunc0", "getInfo", "handleInputChange", "changeShow"], _class.defaultProps = {}, _class.$$componentPath = "pages/share/share", _temp2);
 exports.default = Share;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(Share, true));

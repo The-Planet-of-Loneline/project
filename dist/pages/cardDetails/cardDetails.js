@@ -50,7 +50,7 @@ var CardDetails = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CardDetails.__proto__ || Object.getPrototypeOf(CardDetails)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp2", "$compid__22", "$compid__23", "anonymousState__temp", "show", "userName", "submitTime", "title", "time", "content", "tags"], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CardDetails.__proto__ || Object.getPrototypeOf(CardDetails)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp2", "$compid__20", "$compid__21", "anonymousState__temp", "show", "userName", "submitTime", "title", "time", "content", "tags"], _this.state = {
       show: false,
       userName: '用户名',
       submitTime: '2020.2.8',
@@ -134,15 +134,15 @@ var CardDetails = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__22"),
+      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__20"),
           _genCompid2 = _slicedToArray(_genCompid, 2),
-          $prevCompid__22 = _genCompid2[0],
-          $compid__22 = _genCompid2[1];
+          $prevCompid__20 = _genCompid2[0],
+          $compid__20 = _genCompid2[1];
 
-      var _genCompid3 = (0, _taroQq.genCompid)(__prefix + "$compid__23"),
+      var _genCompid3 = (0, _taroQq.genCompid)(__prefix + "$compid__21"),
           _genCompid4 = _slicedToArray(_genCompid3, 2),
-          $prevCompid__23 = _genCompid4[0],
-          $compid__23 = _genCompid4[1];
+          $prevCompid__21 = _genCompid4[0],
+          $compid__21 = _genCompid4[1];
 
       var _state = this.__state,
           show = _state.show,
@@ -153,21 +153,21 @@ var CardDetails = (_temp2 = _class = function (_BaseComponent) {
           content = _state.content;
 
 
-      var anonymousState__temp = this._createTagsExtendsData(__prefix + "bizzzzzzzz")();
+      var anonymousState__temp = this._createTagsExtendsData(__prefix + "bgzzzzzzzz")();
 
       var anonymousState__temp2 = 'body-container ' + this.changeColor();
       show && _taroQq.propsManager.set({
         "onChangeShowCli": this.changeShow,
         "onChangeShowSub": this.changeShow,
         "passed": "true"
-      }, $compid__22, $prevCompid__22);
+      }, $compid__20, $prevCompid__20);
       _taroQq.propsManager.set({
         "mode": "need"
-      }, $compid__23, $prevCompid__23);
+      }, $compid__21, $prevCompid__21);
       Object.assign(this.__state, {
         anonymousState__temp2: anonymousState__temp2,
-        $compid__22: $compid__22,
-        $compid__23: $compid__23,
+        $compid__20: $compid__20,
+        $compid__21: $compid__21,
         anonymousState__temp: anonymousState__temp
       });
       return this.__state;

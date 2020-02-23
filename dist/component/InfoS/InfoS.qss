@@ -1,5 +1,5 @@
 .push-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 12;
@@ -14,12 +14,14 @@
   width: 613rpx;
   margin: 275rpx auto auto 70rpx;
   background-color: white;
-  border-radius: 20rpx; }
+  border-radius: 20rpx;
+  text-align: start; }
 
 .header {
   margin: 11rpx 18rpx 0 25rpx;
   height: 62rpx;
-  line-height: 62rpx; }
+  line-height: 62rpx;
+  text-align: start; }
 
 .words {
   font-size: 32rpx;
@@ -36,7 +38,8 @@
 
 .fake-table {
   width: 519rpx;
-  margin: 0 auto; }
+  margin: 0 auto;
+  text-align: start; }
 
 .fake-cell {
   display: inline-block;

@@ -31,7 +31,6 @@
 
 .left {
   display: inline-block;
-  border-right: 1rpx solid #707070;
   height: 61rpx;
   width: 49%;
   line-height: 61rpx;

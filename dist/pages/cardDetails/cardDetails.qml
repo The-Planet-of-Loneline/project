@@ -27,8 +27,8 @@
             </view>
         </view>
         <block qq:if="{{show}}">
-            <info compid="{{$compid__60}}"></info>
+            <info compid="{{$compid__20}}"></info>
         </block>
-        <footer compid="{{$compid__61}}"></footer>
+        <footer compid="{{$compid__21}}"></footer>
     </view>
 </block>

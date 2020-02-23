@@ -54,7 +54,7 @@ var Day = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Day.__proto__ || Object.getPrototypeOf(Day)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["loopArray1", "$compid__2", "cards", "Share"], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Day.__proto__ || Object.getPrototypeOf(Day)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["loopArray0", "$compid__2", "cards", "Share"], _this.state = {
       cards: [{
         kind: 1,
         place: 0,
@@ -128,7 +128,7 @@ var Day = (_temp2 = _class = function (_BaseComponent) {
   }, {
     key: 'toCreateNeeds',
     value: function toCreateNeeds() {
-      _taroQq2.default.redirectTo({
+      _taroQq2.default.navigateTo({
         url: '../share/share'
       });
     }
@@ -150,12 +150,12 @@ var Day = (_temp2 = _class = function (_BaseComponent) {
 
       var cards = this.__state.cards;
 
-      var loopArray1 = cards.length ? cards.map(function (detail, index) {
+      var loopArray0 = cards.length ? cards.map(function (detail, index) {
         detail = {
           $original: (0, _taroQq.internal_get_original)(detail)
         };
 
-        var _genCompid3 = (0, _taroQq.genCompid)(__prefix + 'bzzzzzzzzz' + index, true),
+        var _genCompid3 = (0, _taroQq.genCompid)(__prefix + 'azzzzzzzzz' + index, true),
             _genCompid4 = _slicedToArray(_genCompid3, 2),
             $prevCompid__1 = _genCompid4[0],
             $compid__1 = _genCompid4[1];
@@ -174,7 +174,7 @@ var Day = (_temp2 = _class = function (_BaseComponent) {
         "mode": "need"
       }, $compid__2, $prevCompid__2);
       Object.assign(this.__state, {
-        loopArray1: loopArray1,
+        loopArray0: loopArray0,
         $compid__2: $compid__2,
         Share: _share2.default
       });

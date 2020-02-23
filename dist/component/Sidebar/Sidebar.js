@@ -54,31 +54,7 @@ var Sidebar = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp15", "content", "choices", "loopArray8", "loopArray9", "loopArray10", "loopArray11", "Close", "chosen", "passed"], _this.state = {
-      content: {
-        time: ['周一', '周二', '周三', '周四', '周五', '周六', '周日', ' '],
-        type: ['学习', '运动', '娱乐', '其他'],
-        choices: [{
-          details: ['自习', '看书', '上课', '其他'],
-          place: ['教学楼', '图书馆', '其他', ' ']
-        }, {
-          details: ['跑步', '篮球', '足球', '羽毛球', '乒乓球', '网球', '其他', ' '],
-          place: ['佑铭体育馆', '高职体育场', '乒 羽 中 心', '西区篮球场', '高职篮球场', '学子篮球场', '学子网球场', '其 他', ' ']
-        }, {
-          details: ['游戏', '吃饭', '电影', '其他'],
-          place: ['校内', '校外', '其他', ' ']
-        }, {
-          details: [],
-          place: ['校内', '校外', '其他', ' ']
-        }]
-      },
-      chosen: {
-        time: [0, 0, 0, 0, 0, 0, 0],
-        during: ['', ''],
-        type: 0,
-        choices: [0, 0]
-      }
-    }, _this.changeDate = function (part, index) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp15", "content", "choices", "loopArray7", "loopArray8", "loopArray9", "loopArray10", "Close", "chosen", "placeHolder", "choose"], _this.changeDate = function (part, index) {
       var chosen = _this.state.chosen;
 
       switch (part) {
@@ -97,7 +73,6 @@ var Sidebar = (_temp2 = _class = function (_BaseComponent) {
           break;
       }
       _this.setState({ chosen: chosen });
-      console.log({ chosen: chosen });
     }, _this.getTime = function (index, event) {
       var chosen = _this.state.chosen;
 
@@ -111,7 +86,27 @@ var Sidebar = (_temp2 = _class = function (_BaseComponent) {
     key: '_constructor',
     value: function _constructor(props) {
       _get(Sidebar.prototype.__proto__ || Object.getPrototypeOf(Sidebar.prototype), '_constructor', this).call(this, props);
-
+      this.state = {
+        content: {
+          time: ['周一', '周二', '周三', '周四', '周五', '周六', '周日', ' '],
+          type: ['学习', '运动', '娱乐', '其他'],
+          choices: [{
+            details: ['自习', '看书', '上课', '其他'],
+            place: ['教学楼', '图书馆', '其他', ' ']
+          }, {
+            details: ['跑步', '篮球', '足球', '羽毛球', '乒乓球', '网球', '其他', ' '],
+            place: ['佑铭体育馆', '高职体育场', '乒 羽 中 心', '西区篮球场', '高职篮球场', '学子篮球场', '学子网球场', '其 他', ' ']
+          }, {
+            details: ['游戏', '吃饭', '电影', '其他'],
+            place: ['校内', '校外', '其他', ' ']
+          }, {
+            details: [],
+            place: ['校内', '校外', '其他', ' ']
+          }]
+        },
+        placeHolder: ['起始时间', '结束时间'],
+        chosen: this.props.choose
+      };
       this.$$refs = new _taroQq2.default.RefsArray();
     }
   }, {
@@ -119,9 +114,7 @@ var Sidebar = (_temp2 = _class = function (_BaseComponent) {
     value: function componentWillMount() {}
   }, {
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log(this.props.passed);
-    }
+    value: function componentDidMount() {}
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {}
@@ -146,7 +139,15 @@ var Sidebar = (_temp2 = _class = function (_BaseComponent) {
   }, {
     key: 'changeShow',
     value: function changeShow() {
+      this.chosenPass();
       this.props.onChangeShow();
+    }
+  }, {
+    key: 'chosenPass',
+    value: function chosenPass() {
+      var chosen = this.state.chosen;
+
+      this.props.onChosenPass(chosen);
     }
   }, {
     key: 'handleSubmit',
@@ -155,14 +156,46 @@ var Sidebar = (_temp2 = _class = function (_BaseComponent) {
       this.changeShow();
     }
   }, {
+    key: 'sumDay',
+    value: function sumDay() {
+      var chosen = this.state.chosen;
+
+      var sum = 0;
+      chosen.time.map(function (single) {
+        sum += single;
+      });
+      return sum;
+    }
+  }, {
     key: 'enableThis',
     value: function enableThis() {
       var chosen = this.state.chosen;
 
-      if (chosen.time !== [0, 0, 0, 0, 0, 0, 0] && chosen.during[0] !== '' && chosen.during[1] !== '' && chosen.type !== 0 && chosen.choices[0] !== 0 && chosen.choices[1] !== 0) {
+
+      if (this.sumDay() !== 0 && chosen.type !== 0 && chosen.choices[0] !== 0 && chosen.choices[1] !== 0) {
         return true;
       }
       return false;
+    }
+  }, {
+    key: 'changeHolder',
+    value: function changeHolder(touch, which) {
+      var placeHolder = this.state.placeHolder;
+
+      if (touch) {
+        if (which) {
+          placeHolder[1] = '';
+        } else {
+          placeHolder[1] = '结束时间';
+        }
+      } else {
+        if (which) {
+          placeHolder[0] = '';
+        } else {
+          placeHolder[0] = '起始时间';
+        }
+      }
+      this.setState({ placeHolder: placeHolder });
     }
   }, {
     key: '_createData',
@@ -178,16 +211,18 @@ var Sidebar = (_temp2 = _class = function (_BaseComponent) {
       var content = this.__state.content;
       var choices = this.__state.content.choices;
       var chosen = this.__state.chosen;
+      var placeHolder = this.__state.placeHolder;
+
 
       var anonymousState__temp15 = this.enableThis() ? 'press submit-info' : 'press disable';
       this.anonymousFunc0 = this.enableThis() ? this.handleSubmit : null;
-      var loopArray8 = content.time.map(function (time, index) {
+      var loopArray7 = content.time.map(function (time, index) {
         time = {
           $original: (0, _taroQq.internal_get_original)(time)
         };
         var $loopState__temp2 = index + 1;
 
-        var _genCompid = (0, _taroQq.genCompid)(__prefix + 'bczzzzzzzz' + index, true),
+        var _genCompid = (0, _taroQq.genCompid)(__prefix + 'bbzzzzzzzz' + index, true),
             _genCompid2 = _slicedToArray(_genCompid, 2),
             $prevCompid__15 = _genCompid2[0],
             $compid__15 = _genCompid2[1];
@@ -205,14 +240,14 @@ var Sidebar = (_temp2 = _class = function (_BaseComponent) {
           $original: time.$original
         };
       });
-      var loopArray9 = content.type.map(function (type, index) {
+      var loopArray8 = content.type.map(function (type, index) {
         type = {
           $original: (0, _taroQq.internal_get_original)(type)
         };
         var $loopState__temp4 = index + 1;
         var $loopState__temp6 = index + 1;
 
-        var _genCompid3 = (0, _taroQq.genCompid)(__prefix + 'bdzzzzzzzz' + index, true),
+        var _genCompid3 = (0, _taroQq.genCompid)(__prefix + 'bczzzzzzzz' + index, true),
             _genCompid4 = _slicedToArray(_genCompid3, 2),
             $prevCompid__16 = _genCompid4[0],
             $compid__16 = _genCompid4[1];
@@ -231,14 +266,14 @@ var Sidebar = (_temp2 = _class = function (_BaseComponent) {
           $original: type.$original
         };
       });
-      var loopArray10 = chosen.type !== 4 ? choices[chosen.type ? chosen.type - 1 : 0].details.map(function (details, index) {
+      var loopArray9 = chosen.type !== 4 ? choices[chosen.type ? chosen.type - 1 : 0].details.map(function (details, index) {
         details = {
           $original: (0, _taroQq.internal_get_original)(details)
         };
         var $loopState__temp8 = chosen.type !== 4 ? index + 1 : null;
         var $loopState__temp10 = chosen.type !== 4 ? index + 1 : null;
 
-        var _genCompid5 = (0, _taroQq.genCompid)(__prefix + 'bezzzzzzzz' + index, true),
+        var _genCompid5 = (0, _taroQq.genCompid)(__prefix + 'bdzzzzzzzz' + index, true),
             _genCompid6 = _slicedToArray(_genCompid5, 2),
             $prevCompid__17 = _genCompid6[0],
             $compid__17 = _genCompid6[1];
@@ -257,14 +292,14 @@ var Sidebar = (_temp2 = _class = function (_BaseComponent) {
           $original: details.$original
         };
       }) : [];
-      var loopArray11 = choices[chosen.type ? chosen.type - 1 : 0].place.map(function (place, index) {
+      var loopArray10 = choices[chosen.type ? chosen.type - 1 : 0].place.map(function (place, index) {
         place = {
           $original: (0, _taroQq.internal_get_original)(place)
         };
         var $loopState__temp12 = index + 1;
         var $loopState__temp14 = index + 1;
 
-        var _genCompid7 = (0, _taroQq.genCompid)(__prefix + 'bfzzzzzzzz' + index, true),
+        var _genCompid7 = (0, _taroQq.genCompid)(__prefix + 'bezzzzzzzz' + index, true),
             _genCompid8 = _slicedToArray(_genCompid7, 2),
             $prevCompid__18 = _genCompid8[0],
             $compid__18 = _genCompid8[1];
@@ -287,10 +322,10 @@ var Sidebar = (_temp2 = _class = function (_BaseComponent) {
       Object.assign(this.__state, {
         anonymousState__temp15: anonymousState__temp15,
         choices: choices,
+        loopArray7: loopArray7,
         loopArray8: loopArray8,
         loopArray9: loopArray9,
         loopArray10: loopArray10,
-        loopArray11: loopArray11,
         Close: _close2.default
       });
       return this.__state;
@@ -303,7 +338,14 @@ var Sidebar = (_temp2 = _class = function (_BaseComponent) {
   }]);
 
   return Sidebar;
-}(_taroQq.Component), _class.$$events = ["changeShow", "getTime", "anonymousFunc0", "reset"], _class.defaultProps = {}, _class.$$componentPath = "component/Sidebar/Sidebar", _temp2);
+}(_taroQq.Component), _class.$$events = ["changeShow", "getTime", "changeHolder", "anonymousFunc0", "reset"], _class.defaultProps = {
+  choose: {
+    time: [0, 0, 0, 0, 0, 0, 0],
+    during: ['', ''],
+    type: 0,
+    choices: [0, 0]
+  }
+}, _class.$$componentPath = "component/Sidebar/Sidebar", _temp2);
 exports.default = Sidebar;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(Sidebar));

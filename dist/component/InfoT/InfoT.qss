@@ -1,5 +1,5 @@
 .push-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 13;
@@ -19,7 +19,8 @@
 .header {
   margin: 11rpx 18rpx 0 25rpx;
   height: 62rpx;
-  line-height: 62rpx; }
+  line-height: 62rpx;
+  text-align: start; }
 
 .words {
   font-size: 32rpx;
@@ -36,7 +37,8 @@
 
 .fake-table {
   width: 519rpx;
-  margin: 0 auto; }
+  margin: 0 auto;
+  text-align: start; }
 
 .fake-cell {
   display: inline-block;
@@ -61,7 +63,8 @@
   font-size: 24rpx;
   font-family: PingFang SC;
   font-weight: 400;
-  color: #747474; }
+  color: #747474;
+  text-align: start; }
 
 .sub-con {
   width: 522rpx;

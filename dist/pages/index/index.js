@@ -1,16 +1,5 @@
 (qq["webpackJsonp"] = qq["webpackJsonp"] || []).push([["pages/index/index"],{
 
-/***/ "./src/pages/index/delete.png":
-/*!************************************!*\
-  !*** ./src/pages/index/delete.png ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAABBklEQVRYhe3YXQ2DMBSG4VfCJCABB6uESUACEupgc7A5mATqAAnDAThgF4TsZKEpa/lLdr7kuzqkfSD0pqA5dk7AOaGnLbEF0AJ9QlvgshU4FTu23gJrxIYOsBFtxBqrx4jNbOQaDgUPsDtQfbUWm70m5nMqz8DU/Apkv2AL0g9Ualsgn4PNDoCV6GDKA0BlTQhsD4CUtSFwwXCKHdDthGyEoQiBZdzEYk7MrWfDMcYzN+KZqK+qYAUrWMEKVrCCFaxgBStYwQr+D3DP5zK68szHe1/fCz0DL7Q4eO1Ggx87gctYsNkJnMWCYfuvfEvBjilZ/9qqI+FX8CVn+E2W7qx7YM3aeQNeRH8bFDmH+gAAAABJRU5ErkJggg=="
-
-/***/ }),
-
 /***/ "./src/pages/index/index.jsx":
 /*!***********************************!*\
   !*** ./src/pages/index/index.jsx ***!
@@ -37,10 +26,6 @@ var _taroQq = __webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs
 
 var _taroQq2 = _interopRequireDefault(_taroQq);
 
-var _delete = __webpack_require__(/*! ./delete.png */ "./src/pages/index/delete.png");
-
-var _delete2 = _interopRequireDefault(_delete);
-
 __webpack_require__(/*! ./index.scss */ "./src/pages/index/index.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -65,67 +50,42 @@ var Index = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Index.__proto__ || Object.getPrototypeOf(Index)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__38", "show", "Delete", "anonymousState__temp", "title", "time", "content", "tags"], _this.state = {
-      show: false,
-      title: '标题',
-      time: '2020.2020',
-      content: '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
-      tags: ['学习', '看书', '教学楼', '佑铭体育馆']
-    }, _this.config = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Index.__proto__ || Object.getPrototypeOf(Index)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "$compid__0"], _this.config = {
       navigationBarTitleView: '孤独星球'
     }, _this.customComponents = ["Footer"], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Index, [{
-    key: '_constructor',
+    key: "_constructor",
     value: function _constructor(props) {
-      _get(Index.prototype.__proto__ || Object.getPrototypeOf(Index.prototype), '_constructor', this).call(this, props);
+      _get(Index.prototype.__proto__ || Object.getPrototypeOf(Index.prototype), "_constructor", this).call(this, props);
 
       this.$$refs = new _taroQq2.default.RefsArray();
     }
   }, {
-    key: 'componentWillMount',
+    key: "componentWillMount",
     value: function componentWillMount() {}
   }, {
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {}
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {}
   }, {
-    key: 'componentDidShow',
+    key: "componentDidShow",
     value: function componentDidShow() {}
   }, {
-    key: 'componentDidHide',
+    key: "componentDidHide",
     value: function componentDidHide() {}
   }, {
-    key: 'changeShow',
-    value: function changeShow(choice) {
-      this.setState({ show: choice });
-    }
-  }, {
-    key: 'sure',
-    value: function sure() {
-      // delete code
-      _taroQq2.default.navigateBack({
-        delta: 1
+    key: "to",
+    value: function to() {
+      _taroQq2.default.redirectTo({
+        url: '../share/share'
       });
     }
   }, {
-    key: '_createTagsExtendsData',
-    value: function _createTagsExtendsData(_$uid) {
-      var _this2 = this;
-
-      return function () {
-        var tags = _this2.state.tags;
-
-        return {
-          tags: tags
-        };
-      };
-    }
-  }, {
-    key: '_createData',
+    key: "_createData",
     value: function _createData() {
       this.__state = arguments[0] || this.state || {};
       this.__props = arguments[1] || this.props || {};
@@ -133,48 +93,28 @@ var Index = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__38"),
+      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__0"),
           _genCompid2 = _slicedToArray(_genCompid, 2),
-          $prevCompid__38 = _genCompid2[0],
-          $compid__38 = _genCompid2[1];
+          $prevCompid__0 = _genCompid2[0],
+          $compid__0 = _genCompid2[1];
 
-      var _state = this.__state,
-          show = _state.show,
-          title = _state.title,
-          time = _state.time,
-          content = _state.content;
-
-
-      var anonymousState__temp = this._createTagsExtendsData(__prefix + "ddzzzzzzzz")();
-
+      var anonymousState__temp = this.to();
       _taroQq.propsManager.set({
         "mode": "need"
-      }, $compid__38, $prevCompid__38);
+      }, $compid__0, $prevCompid__0);
       Object.assign(this.__state, {
-        $compid__38: $compid__38,
-        Delete: _delete2.default,
-        anonymousState__temp: anonymousState__temp
+        anonymousState__temp: anonymousState__temp,
+        $compid__0: $compid__0
       });
       return this.__state;
     }
   }]);
 
   return Index;
-}(_taroQq.Component), _class.$$events = ["changeShow"], _class.$$componentPath = "pages/index/index", _temp2);
+}(_taroQq.Component), _class.$$events = [], _class.$$componentPath = "pages/index/index", _temp2);
 exports.default = Index;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(Index, true));
-
-/***/ }),
-
-/***/ "./src/pages/index/index.scss":
-/*!************************************!*\
-  !*** ./src/pages/index/index.scss ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ })
 

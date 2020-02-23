@@ -187,9 +187,9 @@ var Screening = (_temp2 = _class = function (_BaseComponent) {
       var _this2 = this;
 
       return function () {
-        var loopArray4 = void 0;
         var loopArray3 = void 0;
         var loopArray2 = void 0;
+        var loopArray1 = void 0;
 
         var chosen = _this2.state.chosen;
         var content = _this2.state.content;
@@ -200,14 +200,14 @@ var Screening = (_temp2 = _class = function (_BaseComponent) {
         if (chosen.which === 0) {
           return null;
         } else if (chosen.which === 1) {
-          loopArray2 = choices[chosen.type ? chosen.type - 1 : 0].details.map(function (details, index) {
+          loopArray1 = choices[chosen.type ? chosen.type - 1 : 0].details.map(function (details, index) {
             details = {
               $original: (0, _taroQq.internal_get_original)(details)
             };
             var $loopState__temp2 = index + 1;
             var $loopState__temp4 = index + 1;
 
-            var _genCompid = (0, _taroQq.genCompid)(_$uid + "dzzzzzzzzz" + index, true),
+            var _genCompid = (0, _taroQq.genCompid)(_$uid + "czzzzzzzzz" + index, true),
                 _genCompid2 = _slicedToArray(_genCompid, 2),
                 $prevCompid__3 = _genCompid2[0],
                 $compid__3 = _genCompid2[1];
@@ -227,13 +227,13 @@ var Screening = (_temp2 = _class = function (_BaseComponent) {
             };
           });
         } else if (chosen.which === 2) {
-          loopArray3 = content.time.map(function (time, index) {
+          loopArray2 = content.time.map(function (time, index) {
             time = {
               $original: (0, _taroQq.internal_get_original)(time)
             };
             var $loopState__temp6 = index + 1;
 
-            var _genCompid3 = (0, _taroQq.genCompid)(_$uid + "ezzzzzzzzz" + index, true),
+            var _genCompid3 = (0, _taroQq.genCompid)(_$uid + "dzzzzzzzzz" + index, true),
                 _genCompid4 = _slicedToArray(_genCompid3, 2),
                 $prevCompid__4 = _genCompid4[0],
                 $compid__4 = _genCompid4[1];
@@ -252,14 +252,14 @@ var Screening = (_temp2 = _class = function (_BaseComponent) {
             };
           });
         } else if (chosen.which === 3) {
-          loopArray4 = choices[chosen.type ? chosen.type - 1 : 0].place.map(function (place, index) {
+          loopArray3 = choices[chosen.type ? chosen.type - 1 : 0].place.map(function (place, index) {
             place = {
               $original: (0, _taroQq.internal_get_original)(place)
             };
             var $loopState__temp8 = index + 1;
             var $loopState__temp10 = index + 1;
 
-            var _genCompid5 = (0, _taroQq.genCompid)(_$uid + "fzzzzzzzzz" + index, true),
+            var _genCompid5 = (0, _taroQq.genCompid)(_$uid + "ezzzzzzzzz" + index, true),
                 _genCompid6 = _slicedToArray(_genCompid5, 2),
                 $prevCompid__5 = _genCompid6[0],
                 $compid__5 = _genCompid6[1];
@@ -283,9 +283,9 @@ var Screening = (_temp2 = _class = function (_BaseComponent) {
         return {
           choices: choices,
           content: content,
+          loopArray1: loopArray1,
           loopArray2: loopArray2,
           loopArray3: loopArray3,
-          loopArray4: loopArray4,
           chosen: chosen,
           placeHolder: placeHolder
         };
@@ -303,7 +303,7 @@ var Screening = (_temp2 = _class = function (_BaseComponent) {
       var chosen = this.__state.chosen;
 
 
-      var anonymousState__temp11 = this._createShowScreenData(__prefix + "czzzzzzzzz")();
+      var anonymousState__temp11 = this._createShowScreenData(__prefix + "bzzzzzzzzz")();
 
       Object.assign(this.__state, {
         anonymousState__temp11: anonymousState__temp11

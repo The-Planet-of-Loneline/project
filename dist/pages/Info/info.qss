@@ -1,0 +1,43 @@
+page {
+  background-color: #04040F; }
+
+.all {
+  background-color: #04040F;
+  height: 100%;
+  width: 750rpx; }
+
+.header {
+  width: 750rpx;
+  height: 85rpx;
+  background: #111724;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0; }
+
+.head {
+  width: 120rpx;
+  font-size: 30rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: white; }
+
+.delete {
+  width: 40rpx;
+  height: 40rpx;
+  position: fixed;
+  right: 35rpx;
+  top: 20rpx; }
+
+.headerSpace {
+  width: 750rpx;
+  height: 85rpx;
+  background: #04040F; }
+
+.footerSpace {
+  width: 750rpx;
+  height: 100rpx;
+  background: #04040F; }
+

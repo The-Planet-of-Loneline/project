@@ -1,0 +1,40 @@
+.replyCard {
+  width: 661rpx;
+  height: 132rpx;
+  background: rgba(224, 227, 233, 0.2);
+  border: 1rpx solid rgba(198, 193, 193, 0.2); }
+
+.avatar {
+  width: 106rpx;
+  height: 106rpx;
+  background: #d5abab;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 15rpx; }
+
+.textContainer {
+  display: inline-block;
+  height: 132rpx;
+  line-height: 132rpx;
+  position: relative;
+  top: -50rpx; }
+
+.time {
+  width: 66rpx;
+  height: 24rpx;
+  font-size: 18rpx;
+  font-family: Segoe UI;
+  font-weight: 400;
+  line-height: 24rpx;
+  color: whitesmoke;
+  margin-bottom: 10rpx; }
+
+.text {
+  width: 361rpx;
+  height: 41rpx;
+  font-size: 25rpx;
+  font-family: Segoe UI;
+  font-weight: 400;
+  line-height: 33rpx;
+  color: white; }
+

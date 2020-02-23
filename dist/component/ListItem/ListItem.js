@@ -102,10 +102,17 @@ var ListItem = (_temp2 = _class = function (_BaseComponent) {
     key: 'componentDidHide',
     value: function componentDidHide() {}
   }, {
+    key: 'toMyDetail',
+    value: function toMyDetail() {
+      _taroQq2.default.navigateTo({
+        url: "../myDetail/myDetail"
+      });
+    }
+  }, {
     key: 'toDetail',
     value: function toDetail() {
       _taroQq2.default.navigateTo({
-        url: "../myDetail/myDetail"
+        url: "../cardDetails/cardDetails?indexId=3"
       });
     }
   }, {
@@ -159,20 +166,20 @@ var ListItem = (_temp2 = _class = function (_BaseComponent) {
       var _this3 = this;
 
       return function () {
-        var _genCompid = (0, _taroQq.genCompid)(_$uid + "$compid__69"),
+        var _genCompid = (0, _taroQq.genCompid)(_$uid + "$compid__10"),
             _genCompid2 = _slicedToArray(_genCompid, 2),
-            $prevCompid__69 = _genCompid2[0],
-            $compid__69 = _genCompid2[1];
+            $prevCompid__10 = _genCompid2[0],
+            $compid__10 = _genCompid2[1];
 
-        var _genCompid3 = (0, _taroQq.genCompid)(_$uid + "$compid__70"),
+        var _genCompid3 = (0, _taroQq.genCompid)(_$uid + "$compid__11"),
             _genCompid4 = _slicedToArray(_genCompid3, 2),
-            $prevCompid__70 = _genCompid4[0],
-            $compid__70 = _genCompid4[1];
+            $prevCompid__11 = _genCompid4[0],
+            $compid__11 = _genCompid4[1];
 
-        var _genCompid5 = (0, _taroQq.genCompid)(_$uid + "$compid__71"),
+        var _genCompid5 = (0, _taroQq.genCompid)(_$uid + "$compid__12"),
             _genCompid6 = _slicedToArray(_genCompid5, 2),
-            $prevCompid__71 = _genCompid6[0],
-            $compid__71 = _genCompid6[1];
+            $prevCompid__12 = _genCompid6[0],
+            $compid__12 = _genCompid6[1];
 
         var mode = _this3.props.mode;
         var _state2 = _this3.state,
@@ -182,7 +189,7 @@ var ListItem = (_temp2 = _class = function (_BaseComponent) {
         if (mode === '2' && show) {
           _taroQq.propsManager.set({
             "onChangeShow": _this3.changeShow
-          }, $compid__69, $prevCompid__69);
+          }, $compid__10, $prevCompid__10);
         }
         if (mode === '3') {
           if (showD === '0') {
@@ -190,18 +197,18 @@ var ListItem = (_temp2 = _class = function (_BaseComponent) {
           } else if (showD === '1') {
             _taroQq.propsManager.set({
               "onChangeShowD": _this3.changeShowD
-            }, $compid__70, $prevCompid__70);
+            }, $compid__11, $prevCompid__11);
           } else if (showD === '2') {
             _taroQq.propsManager.set({
               "onChangeShowCli": _this3.changeShowD.bind(_this3, '1'),
               "onChangeShowSub": _this3.changeShowD.bind(_this3, '0')
-            }, $compid__71, $prevCompid__71);
+            }, $compid__12, $prevCompid__12);
           }
         }
         return {
-          $compid__69: $compid__69,
-          $compid__70: $compid__70,
-          $compid__71: $compid__71,
+          $compid__10: $compid__10,
+          $compid__11: $compid__11,
+          $compid__12: $compid__12,
           mode: mode,
           show: show,
           showD: showD
@@ -217,9 +224,9 @@ var ListItem = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var anonymousState__temp = this._createModeTransData(__prefix + "ffzzzzzzzz")();
+      var anonymousState__temp = this._createModeTransData(__prefix + "jzzzzzzzzz")();
 
-      var anonymousState__temp2 = this._createExplainShowData(__prefix + "fgzzzzzzzz")();
+      var anonymousState__temp2 = this._createExplainShowData(__prefix + "bazzzzzzzz")();
 
       Object.assign(this.__state, {
         anonymousState__temp: anonymousState__temp,
@@ -230,7 +237,7 @@ var ListItem = (_temp2 = _class = function (_BaseComponent) {
   }]);
 
   return ListItem;
-}(_taroQq.Component), _class.$$events = ["toDetail", "eyeCli", "eyeCliTwo"], _class.$$componentPath = "component/ListItem/ListItem", _temp2);
+}(_taroQq.Component), _class.$$events = ["toMyDetail", "toDetail", "eyeCli", "eyeCliTwo"], _class.$$componentPath = "component/ListItem/ListItem", _temp2);
 exports.default = ListItem;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(ListItem));

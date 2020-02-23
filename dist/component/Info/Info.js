@@ -52,8 +52,8 @@ var Info = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Info.__proto__ || Object.getPrototypeOf(Info)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "Close", "checked", "qq", "tel", "msg", "passed"], _this.state = {
-      checked: false,
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Info.__proto__ || Object.getPrototypeOf(Info)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "Close", "checked", "qq", "tel", "msg"], _this.state = {
+      checked: [0, 0],
       qq: '',
       tel: '',
       msg: ''
@@ -77,9 +77,7 @@ var Info = (_temp2 = _class = function (_BaseComponent) {
     value: function componentWillMount() {}
   }, {
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log(this.props.passed);
-    }
+    value: function componentDidMount() {}
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {}
@@ -97,36 +95,37 @@ var Info = (_temp2 = _class = function (_BaseComponent) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit() {
+      // submit content
       this.props.onChangeShowSub();
-      console.log(this.state);
     }
   }, {
     key: 'enableSubmit',
     value: function enableSubmit() {
-      var _state = this.state,
-          checked = _state.checked,
-          qq = _state.qq,
-          tel = _state.tel;
+      var msg = this.state.msg;
 
-      if (checked) {
-        if (tel !== '') {
-          return true;
-        }
-      } else {
-        if (qq !== '') {
-          return true;
-        }
+      if (msg !== '') {
+        return true;
       }
       return false;
     }
   }, {
     key: 'changeCheck',
     value: function changeCheck(index) {
-      if (index) {
-        this.setState({ checked: true, qq: '' });
+      var checked = this.state.checked;
+
+      if (checked[index]) {
+        checked[index] = 0;
       } else {
-        this.setState({ checked: false, tel: '' });
+        checked[index] = 1;
       }
+      this.setState({ checked: checked });
+    }
+  }, {
+    key: 'handleInputChange',
+    value: function handleInputChange(e) {
+      this.setState({
+        msg: e.target.value
+      });
     }
   }, {
     key: 'errorDate',
@@ -142,11 +141,11 @@ var Info = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var _state2 = this.__state,
-          checked = _state2.checked,
-          qq = _state2.qq,
-          tel = _state2.tel,
-          msg = _state2.msg;
+      var _state = this.__state,
+          checked = _state.checked,
+          qq = _state.qq,
+          tel = _state.tel,
+          msg = _state.msg;
 
       var anonymousState__temp = this.enableSubmit() ? 'sub-button able' : 'sub-button disable';
       this.anonymousFunc0 = this.enableSubmit() ? this.handleSubmit : this.errorDate;
@@ -164,7 +163,7 @@ var Info = (_temp2 = _class = function (_BaseComponent) {
   }]);
 
   return Info;
-}(_taroQq.Component), _class.$$events = ["changeShowCli", "changeCheck", "getInfo", "anonymousFunc0"], _class.defaultProps = {}, _class.$$componentPath = "component/Info/Info", _temp2);
+}(_taroQq.Component), _class.$$events = ["changeShowCli", "changeCheck", "getInfo", "handleInputChange", "anonymousFunc0"], _class.defaultProps = {}, _class.$$componentPath = "component/Info/Info", _temp2);
 exports.default = Info;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(Info));
