@@ -15,7 +15,7 @@ export default class ListItem extends Component {
   
   state = {
     type:1,
-    accept:1,
+    accept:0,
     title:'这里是标题',
     time:'2019.2.13',
     usename:'这里是用户名',
@@ -41,7 +41,7 @@ export default class ListItem extends Component {
 
   toDetail () {
     Taro.navigateTo({
-      url:`../cardDetails/cardDetails?indexId=3`
+      url:`../cardDetails/cardDetails?indexId=3&able=disable`
     })
   }
 

@@ -64,7 +64,7 @@ export default class CardDetails extends Component {
 
   render () {
     const { show, userName, submitTime, title, time, content } = this.state
-
+    const able = this.$router.params.able
     return (
       <View>
         <View className='header'>
@@ -87,9 +87,11 @@ export default class CardDetails extends Component {
             <View className='content'>{content}</View>
           </View>
           <View className='submit-container'>
-            <Button className='submit-require' onClick={this.changeShow}>
+            {able==='able'
+            ?<Button className='submit-require' onClick={this.changeShow}>
               提交申请
             </Button>
+            :null}
           </View>
         </View>
         {show?<Info onChangeShowCli={this.changeShow} onChangeShowSub={this.changeShow} passed='true' />:null}

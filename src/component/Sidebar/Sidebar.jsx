@@ -82,11 +82,28 @@ export default class Sidebar extends Component {
     })
   }
 
-  getTime = (index,event) => {
+  onDuring (index) {
     let { chosen } = this.state
-    const time = event.target.value
-    chosen.during[index]=time
-    this.setState({ chosen })
+    if (index===1&&chosen.during[0]!==''&&parseInt(chosen.during[0])>=parseInt(chosen.during[1])) {
+      chosen.during[index]=''
+      this.setState({ chosen })
+    }
+    if (index===0&&chosen.during[1]!==''&&(parseInt(chosen.during[0])>=parseInt(chosen.during[1]))) {
+      chosen.during[index]=''
+      this.setState({ chosen })
+    }
+  }
+
+  ifNum (index,e) {
+    const inpuValue = e.target.value
+    let { chosen } = this.state
+    if (!/\D/.test(inpuValue)&&((parseInt(inpuValue)>0&&parseInt(inpuValue)<=24)||inpuValue==='')) {
+      // 判断是否为1-24
+      chosen.during[index]=inpuValue
+      this.setState({ chosen })
+    } else {
+      return chosen.during[index]
+    }
   }
 
   changeShow () {
@@ -182,7 +199,8 @@ export default class Sidebar extends Component {
                   className='enter'
                   maxLength='2'
                   value={chosen.during[0]}
-                  onChange={this.getTime.bind(this,0)}
+                  onInput={this.ifNum.bind(this,0)}
+                  onChange={this.onDuring.bind(this,0)}
                   placeholder={placeHolder[0]}
                   onFocus={this.changeHolder.bind(this,false,true)}
                   onBlur={this.changeHolder.bind(this,false,false)}
@@ -192,7 +210,8 @@ export default class Sidebar extends Component {
                   className='enter'
                   maxLength='2'
                   value={chosen.during[1]}
-                  onChange={this.getTime.bind(this,1)} 
+                  onInput={this.ifNum.bind(this,1)}
+                  onChange={this.onDuring.bind(this,1)}
                   placeholder={placeHolder[1]}
                   onFocus={this.changeHolder.bind(this,true,true)}
                   onBlur={this.changeHolder.bind(this,true,false)}

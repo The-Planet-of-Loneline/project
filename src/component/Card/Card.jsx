@@ -44,7 +44,7 @@ export default class Card extends Component {
   toCardDetail (index) {
     // color pass index/content pass id
     Taro.navigateTo({
-      url: `../cardDetails/cardDetails?indexId=${index}`
+      url: `../cardDetails/cardDetails?indexId=${index}&able=able`
     })
   }
 

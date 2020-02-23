@@ -19,9 +19,9 @@ export default class My extends Component {
       small:'0'
     },
     list:{
-      history:[1,2,3],
-      apply:[1,2,3],
-      respone:[1,2,3]
+      history:[1,2,3,4,5,6],
+      apply:[1,2,3,4,5,6],
+      respone:[1,2,3,4,5,6]
     }
   }
 
@@ -95,7 +95,7 @@ export default class My extends Component {
 
   toEdit () {
     Taro.navigateTo({
-      url:`../edit/edit?name=shizhong`
+      url:`../edit/edit`
     })
   }
 

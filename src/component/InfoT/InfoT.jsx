@@ -21,7 +21,7 @@ export default class Info extends Component {
 
   componentWillMount () { }
 
-  componentDidMount () { console.log(this.props.passed) }
+  componentDidMount () { }
 
   componentWillUnmount () { }
 
