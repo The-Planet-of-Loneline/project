@@ -9,8 +9,7 @@ import userGray from '../img/userGray.png'
 
 export default class Index extends Component {
 
-  componentWillMount () { 
-    console.log(JSON.stringify(this.$router.params.text))
+  componentWillMount () {
   }
 
   componentDidMount () { }

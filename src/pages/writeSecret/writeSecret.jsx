@@ -178,5 +178,4 @@ export default class WriteSecret extends Component {
         }
     
      
-        
-    }
+ }
