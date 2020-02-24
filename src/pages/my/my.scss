@@ -3,6 +3,7 @@
   z-index: 12;
   top: 0;
   left: 0;
+  width: 100%;
 }
 .user-container{
   height: 329px;
@@ -72,9 +73,11 @@
   width: 100%;
   background-color: white;
   align-items: center;
+  justify-content: center;
 }
 .left-part{
-  width:375px;
+  // width:375px;
+  width:49%;
   height:88px;
   line-height: 88px;
   text-align: center;
@@ -87,7 +90,8 @@
   color:rgba(0,0,0,1);
 }
 .right-part{
-  width:375px;
+  // width:375px;
+  width:49%;
   height:88px;
   line-height: 88px;
   text-align: center;

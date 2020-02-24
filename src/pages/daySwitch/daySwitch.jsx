@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Image } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 import './daySwitch.scss'
 import day from '../img/daySwitch.png'
 import night from '../img/nightSwitch.png'
@@ -7,17 +7,23 @@ import night from '../img/nightSwitch.png'
 
 export default class Footer extends Component {
     componentDidMount(){
+        const to = this.$router.params.to
         setTimeout(() => {
            Taro.redirectTo({
-               url:`/pages/day/day`
+               url:`/pages/${to}/${to}`
            })
-        }, 1000);
+        }, 2500);
     }
    
+
+
     render(){
+        const to = this.$router.params.to
         return(
             <View className='bgcontainer'>
-                <Image src={day} className='bg' />
+                {to==='day'
+                ?<Image src={day} className='bg' />
+                :<Image src={night} className='bg' />}
             </View>
         )
     }

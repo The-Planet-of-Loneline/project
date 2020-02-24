@@ -10,7 +10,7 @@
 .push{
   left: 70px;
   top: 275px;
-  height: 490px;
+  min-height: 490px;
   width: 613px;
   margin: 275px auto auto 70px;
   background-color: white;
@@ -69,7 +69,7 @@
 .sub-con{
   width:522px;
   margin: 0 auto;
-  margin-bottom: 26px;
+  padding-bottom: 25px;
   display: flex;
   justify-content: space-between;
 }

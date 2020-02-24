@@ -22,7 +22,7 @@ export default class Footer extends Component{
       } 
     toDay(){
         Taro.redirectTo({
-            url: `/pages/daySwitch/daySwitch?img = ${true}`
+            url: `/pages/daySwitch/daySwitch?to=day`
         })
     } 
     render(){

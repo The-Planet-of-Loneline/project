@@ -43,7 +43,7 @@ export default class edit extends Component{
                                   onInput={this.onhandleInputChange.bind(this)}
                                   id='1'
                                 />
-                                <Label for='1'><Image src={Edit} className='edit' /></Label>
+                                <Label className='edit-label' for='1' key='1'><Image src={Edit} className='edit' /></Label>
                             </View>
                             <View className='content'>学号：{info.stuid}</View>
                             <View className='content'>性别：{sexC[info.sex]}</View>
