@@ -35,6 +35,7 @@ class App extends Component {
       'pages/cardHistory/cardHistory',
       'pages/Info/info',
       'pages/edit/edit',
+      'pages/daySwitch/daySwitch',
     ],
     window: {
       backgroundTextStyle: 'light',

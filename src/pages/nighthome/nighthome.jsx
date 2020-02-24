@@ -25,7 +25,7 @@ export default class Index extends Component {
   }
   toWrite() {
     Taro.redirectTo({
-      url: '/pages/writeSecret/writeSecret'
+      url: `/pages/writeSecret/writeSecret`
     })
   }
   toMine() {
