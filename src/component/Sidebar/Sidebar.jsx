@@ -41,6 +41,7 @@ export default class Sidebar extends Component {
         ]
       },
       placeHolder:['起始时间','结束时间'],
+      style:'body-container out',
       chosen:this.props.choose
     }
   }
@@ -107,8 +108,10 @@ export default class Sidebar extends Component {
   }
 
   changeShow () {
+    this.flyin()
     this.chosenPass()
-    this.props.onChangeShow()
+    setTimeout(()=>{this.props.onChangeShow()},400)
+    
   }
 
   chosenPass () {
@@ -117,8 +120,10 @@ export default class Sidebar extends Component {
   }
 
   handleSubmit () {
-    this.props.onChosen()
-    this.changeShow()
+    if (this.enableThis()) {
+      this.props.onChosen()
+      this.changeShow()
+    }
   }
 
   sumDay () {
@@ -161,15 +166,19 @@ export default class Sidebar extends Component {
     this.setState({ placeHolder })
   }
 
+  flyin () {
+    this.setState({ style:'body-container in' })
+  }
+
   render () {
     const { content } = this.state
     const { choices } = this.state.content
     const { chosen } = this.state
     const { placeHolder } = this.state
-
+    const { style } = this.state
     return (
       <View className='shadow-container'>
-        <View className='body-container'>
+        <View className={style}>
           <View className='choose-container'>
       {/* ----------------------------------- */}
             <View className='time-container'>
@@ -288,7 +297,7 @@ export default class Sidebar extends Component {
           <View className='submit-container'>
             <Button 
               className={this.enableThis()?'press submit-info':'press disable'} 
-              onClick={this.enableThis()?this.handleSubmit:null}
+              onClick={this.handleSubmit}
             >
               提交
             </Button>

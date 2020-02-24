@@ -1,5 +1,5 @@
 .divide{
-  z-index: 12;
+  z-index: 13;
   position: sticky;
   top:0;
   left: 0;
@@ -96,8 +96,26 @@
   width: 100%;
   background-color: white;
   position: absolute;
-  top: 128px;
   z-index: 12;
+}
+.out{
+  top:128px;
+  animation: flyout 0.3s;
+  -webkit-animation: flyout 0.3s;
+}
+.in{
+  top: -332px;
+  animation: flyin 0.3s;
+  -webkit-animation: flyin 0.3s;
+}
+
+@keyframes flyout {
+  from{ top: -332px; }
+  to { top: 128px; }
+}
+@keyframes flyin {
+  from{ top: 128px; }
+  to { top: -332px; }
 }
 .shadow{
   width: 100%;

@@ -13,14 +13,33 @@
 .body-container{
   position: absolute;
   top:0;
-  right:0;
+  // right: 0;
   width: 88%;
   height: 100%;
   border:none;
   margin: none;
   background-color: rgba(255,255,255,1);
-  // height: 1218px;
 }
+.out{
+  right:0;
+  animation: flyout 0.4s;
+  -webkit-animation: flyout 0.4s;
+}
+.in{
+  right: -88%;
+  animation: flyin 0.3s;
+  -webkit-animation: flyin 0.3s;
+}
+
+@keyframes flyout {
+  from{ right: -88%; }
+  to { right: 0; }
+}
+@keyframes flyin {
+  from{ right: 0; }
+  to { right: -88%; }
+}
+
 .choose-container{
   min-height: 1080px;
 }

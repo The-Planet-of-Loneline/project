@@ -34,6 +34,7 @@ export default class Screening extends Component {
       during:['',''],
       choices:[0,0]
     },
+    style:'container out',
     placeHolder:['起始时间','结束时间']
   }
 
@@ -47,17 +48,32 @@ export default class Screening extends Component {
 
   componentDidHide () { }
 
+  flyin () {
+    this.setState({ style:'container in' })
+  }
+
+  flyout () {
+    this.setState({ style:'container out' })
+  }
+
   changeDate = (part, index) => {
     let { chosen } = this.state
     switch (part) {
       case 'type' : chosen.type=index
+                    this.flyin()
+                  setTimeout(() => {
                     chosen.choices=[0,0]
                     chosen.which=0
+                  }, 300);
                     break
       case 'which': if (chosen.which !== index) {
+                      this.flyout()
                       chosen.which=index
                     } else {
+                      this.flyin()
+                      setTimeout(() => {
                       chosen.which=0
+                      }, 300);                      
                     }
                     break
       case 'time' : chosen.time.splice(index,1,! chosen.time[index])
@@ -67,8 +83,7 @@ export default class Screening extends Component {
       case 'place' : chosen.choices[1]=index
                     break
     }
-
-    this.setState({ chosen })
+    setTimeout(()=>{this.setState({ chosen })},300)
   }
 
   onDuring (index) {
@@ -129,8 +144,11 @@ export default class Screening extends Component {
 
   closeScr () {
     let { chosen } = this.state
-    chosen.which=0
-    this.setState({ chosen })
+    this.flyin ()
+    setTimeout(()=>{
+      chosen.which=0
+      this.setState({ chosen })
+    },300)
   }
 
   showScreen () {
@@ -138,12 +156,13 @@ export default class Screening extends Component {
     const { content } = this.state
     const { choices } = content
     const { placeHolder } = this.state
+    const { style } = this.state
 
     switch (chosen.which) {
       case 0 :{ return null }
       case 1 :{
         return (
-          <View className='container'>
+          <View className={style}>
             <View className='list-extends'>
               {choices[chosen.type?chosen.type-1:0].details.map((details,index) => {
                 return (
@@ -164,7 +183,7 @@ export default class Screening extends Component {
       }
       case 2 :{
         return (
-          <View className='container'>
+          <View className={style}>
             <View className='list-extends'>
               {content.time.map((time,index) => {
                 return (
@@ -211,7 +230,7 @@ export default class Screening extends Component {
       }
       case 3 :{
         return (
-          <View className='container'>
+          <View className={style}>
             <View className='list-extends'>
             {choices[chosen.type?chosen.type-1:0].place.map((place,index) => {
               return (
