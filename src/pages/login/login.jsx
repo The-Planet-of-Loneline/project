@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text,Image, Input } from '@tarojs/components'
+import { View, Text,Image, Input, Button } from '@tarojs/components'
 import bg from '../img/bg.png'
 import './login.scss'
 import view from '../img/view.png'
@@ -32,6 +32,14 @@ export default class login extends Component{
             }) 
         }
     }
+    
+    onHandleLogin(){
+        Taro.redirectTo({
+            url:`/pages/day/day`
+        })
+    }
+    
+
     render(){
         return(
             <View className='container'>
@@ -40,6 +48,7 @@ export default class login extends Component{
                 <Input type='number' placeholder='请输入学号' className='id' Value={idValue} onInput={this.onHandleId.bind(this)}></Input>
                 <Input type={showView ? 'password' : 'text'} placeholder='请输入密码' className='password' value={passwordValue} onInput={this.onHandlePassword.bind(this)}></Input>
                 <Image className='view' src={showView ? view : viewOff} onClick={this.onViewPassword.bind(this)} />
+                <Button className='login' onClick={this.onHandleLogin.bind(this)}>登录</Button>
             </View>
         )
     }

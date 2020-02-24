@@ -7,11 +7,12 @@ import moon from '../img/moon.png'
 import userGray from '../img/userGray.png'
 import userBlue from '../img/userBlue.png'
 
+
 export default class Footer extends Component{
     static defaultProps = {
         colorSecret:'rgba(80, 195, 243, 1)',
         colorMine:'rgba(194, 198, 206, 1)',
-        showImg: true
+        showImg: true,
     }
     toMine(){
         this.props.onToMine()
