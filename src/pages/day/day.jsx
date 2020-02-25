@@ -80,7 +80,7 @@ export default class Day extends Component {
 
   toCreateNeeds () {
     Taro.navigateTo({
-      url: '../share/share'
+      url: '/pages/share/share'
     })
   }
 
@@ -94,7 +94,7 @@ export default class Day extends Component {
               ?cards.map((detail,index) => {
                       return (
                         <Card
-                          key={index}
+                          key={index+1}
                           index={index}
                           detail={detail}
                           onChangeInfo={this.onChangeInfo}

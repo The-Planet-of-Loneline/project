@@ -98,24 +98,42 @@
   position: absolute;
   z-index: 12;
 }
-.out{
+.t-out{
   top:128px;
-  animation: flyout 0.3s;
-  -webkit-animation: flyout 0.3s;
+  animation: t-flyout 0.3s;
+  -webkit-animation: t-flyout 0.3s;
 }
-.in{
+.t-in{
   top: -332px;
-  animation: flyin 0.3s;
-  -webkit-animation: flyin 0.3s;
+  animation: t-flyin 0.3s;
+  -webkit-animation: t-flyin 0.3s;
+}
+.o-out{
+  top:128px;
+  animation: t-flyout 0.3s;
+  -webkit-animation: t-flyout 0.3s;
+}
+.o-in{
+  top: -80px;
+  animation: t-flyin 0.3s;
+  -webkit-animation: t-flyin 0.3s;
 }
 
-@keyframes flyout {
+@keyframes t-flyout {
   from{ top: -332px; }
   to { top: 128px; }
 }
-@keyframes flyin {
+@keyframes t-flyin {
   from{ top: 128px; }
   to { top: -332px; }
+}
+@keyframes o-flyout {
+  from{ top: -80px; }
+  to { top: 128px; }
+}
+@keyframes o-flyin {
+  from{ top: 128px; }
+  to { top: -80px; }
 }
 .shadow{
   width: 100%;

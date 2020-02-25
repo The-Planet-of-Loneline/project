@@ -34,10 +34,10 @@ export default class Card extends Component {
     }
   }
 
-  onChangeInfo (index) {
-    index = this.props.index
+  onChangeInfo (e) {
+    const index = this.props.index
     this.props.onChangeInfo(index)
-    window.event.stopPropagation();
+    e.stopPropagation();
     // e.nativeEvent.stopImmediatePropagation();
   }
 
