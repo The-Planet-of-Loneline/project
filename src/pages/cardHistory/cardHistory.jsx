@@ -37,6 +37,7 @@ export default class CardHistory extends Component {
 
     render() {
         let { showDeleteModel } = this.state
+        let number = this.$router.params.number 
         return (
             <View className='all'>
                 <View className='header'>
@@ -44,7 +45,7 @@ export default class CardHistory extends Component {
                 </View>
                 {showDeleteModel ? <DeleteCard onCloseDelete={this.CloseDelete.bind(this)} /> : null}
                 <Image src={Delete} className='delete' onClick={this.delete.bind(this)} />
-                <SecretCard /> 
+                <SecretCard num={number} /> 
                 <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false} onToSecret={this.toSecret.bind(this)} />
             </View>
             //头部结束

@@ -45,10 +45,10 @@ export default class Index extends Component {
                    <View className='headerSpace'></View>
                 <Image src={notification} className='notification' onClick={this.toImfo} />
                    <View className='CardContainer'>
-                   <HistoryCard />
-                   <HistoryCard />
-                   <HistoryCard />
-                   <HistoryCard />
+                   <HistoryCard num={0} />
+                   <HistoryCard num={1} />
+                   <HistoryCard num={2} />
+                   <HistoryCard num={3} />
             </View>
             <View className='footerSpace'></View> 
                 <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false}  onToSecret={this.toSecret.bind(this)} />
