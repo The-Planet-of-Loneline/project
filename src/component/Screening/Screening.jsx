@@ -34,7 +34,8 @@ export default class Screening extends Component {
       during:['',''],
       choices:[0,0]
     },
-    style:'container out',
+    tStyle:'container t-out',
+    oStyle:'container o-out',
     placeHolder:['起始时间','结束时间']
   }
 
@@ -49,11 +50,17 @@ export default class Screening extends Component {
   componentDidHide () { }
 
   flyin () {
-    this.setState({ style:'container in' })
+    this.setState({ 
+      oStyle:'container o-in',
+      tStyle:'container t-in'
+     })
   }
 
   flyout () {
-    this.setState({ style:'container out' })
+    this.setState({ 
+      oStyle:'container o-out',
+      tStyle:'container t-out'
+     })
   }
 
   changeDate = (part, index) => {
@@ -156,13 +163,14 @@ export default class Screening extends Component {
     const { content } = this.state
     const { choices } = content
     const { placeHolder } = this.state
-    const { style } = this.state
+    const { oStyle } = this.state
+    const { tStyle } = this.state
 
     switch (chosen.which) {
       case 0 :{ return null }
       case 1 :{
         return (
-          <View className={style}>
+          <View className={oStyle}>
             <View className='list-extends'>
               {choices[chosen.type?chosen.type-1:0].details.map((details,index) => {
                 return (
@@ -183,7 +191,7 @@ export default class Screening extends Component {
       }
       case 2 :{
         return (
-          <View className={style}>
+          <View className={tStyle}>
             <View className='list-extends'>
               {content.time.map((time,index) => {
                 return (
@@ -230,7 +238,7 @@ export default class Screening extends Component {
       }
       case 3 :{
         return (
-          <View className={style}>
+          <View className={oStyle}>
             <View className='list-extends'>
             {choices[chosen.type?chosen.type-1:0].place.map((place,index) => {
               return (

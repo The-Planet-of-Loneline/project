@@ -12,7 +12,7 @@ export default class Footer extends Component {
            Taro.redirectTo({
                url:`/pages/${to}/${to}`
            })
-        }, 2500);
+        }, 1500);
     }
    
 
