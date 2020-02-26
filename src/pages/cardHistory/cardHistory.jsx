@@ -45,7 +45,7 @@ export default class CardHistory extends Component {
                 </View>
                 {showDeleteModel ? <DeleteCard onCloseDelete={this.CloseDelete.bind(this)} /> : null}
                 <Image src={Delete} className='delete' onClick={this.delete.bind(this)} />
-                <SecretCard num={number} /> 
+                <SecretCard num={number} showComment={false} /> 
                 <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false} onToSecret={this.toSecret.bind(this)} />
             </View>
             //头部结束

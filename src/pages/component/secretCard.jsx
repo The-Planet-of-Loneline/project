@@ -7,7 +7,8 @@ import comment from '../img/comment.png'
 export default class SecretCard extends Component {
     static defaultProps = {
         textValue: '你好呀',
-        num: 0,
+        num: '0',
+        showComment: true,
     }
 
     componentWillMount() { }
@@ -22,6 +23,7 @@ export default class SecretCard extends Component {
 
     config = {
         navigationBarTitleText: '孤独星球'
+    
     }
 
     render() {
@@ -42,7 +44,7 @@ export default class SecretCard extends Component {
         <View className='text'>{this.props.textValue}</View>
                    <View className='allReplies'>全部回复</View>
                    <View className='commentButton'>
-                       <Image src={comment} className='comment' />
+                       {this.props.showComment ? <Image src={comment} className='comment' /> : null}
                    </View>
                    <View className='replyContainer'>
                       <ReplyCard />
