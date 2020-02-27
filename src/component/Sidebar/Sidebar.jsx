@@ -73,6 +73,7 @@ export default class Sidebar extends Component {
   }
 
   reset () {
+    this.props.onChosen(false)
     this.setState({
       chosen:{
         time:[0,0,0,0,0,0,0],
@@ -121,7 +122,7 @@ export default class Sidebar extends Component {
 
   handleSubmit () {
     if (this.enableThis()) {
-      this.props.onChosen()
+      this.props.onChosen(true)
       this.changeShow()
     }
   }
