@@ -133,7 +133,7 @@ export default class WriteSecret extends Component {
         const text = this.state.inpuValue 
         if (!text){ 
         this.setState({
-            inpuValue: '说个秘密吧...'
+            inpuValue: '说个秘密吧...',
         })
     } 
 } 

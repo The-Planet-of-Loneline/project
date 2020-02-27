@@ -30,12 +30,12 @@ class App extends Component {
       'pages/cardDetails/cardDetails',
       'pages/nighthome/nighthome',
       'pages/writeSecret/writeSecret',
-      'pages/commentNight/comment',
       'pages/Mine/Mine',
       'pages/cardHistory/cardHistory',
       'pages/Info/info',
       'pages/edit/edit',
       'pages/daySwitch/daySwitch',
+      'pages/commentNight/comment',
     ],
     window: {
       backgroundTextStyle: 'light',

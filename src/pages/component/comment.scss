@@ -1,7 +1,34 @@
 .comment {
-    display: inline-block;
+    width: 618px;
+    height: 71px;
+    background: rgba(236, 239, 240, 1);
+    border-radius: 17px;
+    font-size: 30px;
+    font-family: Roboto;
+    font-weight: 500;
+    line-height: 71px;
+    color: rgba(55, 71, 79, 0.6);
+    padding-left: 20px;
+    position: absolute;
+    bottom: 580px;
 }
 
 .commentButton {
-    display: inline-block;
+    width: 110px;
+    height: 71px;
+    padding: 0;
+    text-align: center;
+    background: rgba(236, 239, 240, 1);
+    border-radius: 17px;
+    font-size: 30px;
+    font-family: Roboto;
+    line-height: 71px;
+    color: rgba(55, 71, 79, 0.6);
+    position: absolute;
+    bottom: 580px;
+    right: 0;
+}
+
+.inputContainer {
+    height: 100%;
 }
