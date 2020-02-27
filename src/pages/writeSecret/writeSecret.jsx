@@ -136,6 +136,9 @@ export default class WriteSecret extends Component {
             inpuValue: '说个秘密吧...',
         })
     } 
+}
+handleLine(){
+    
 } 
      
     config = {
@@ -158,7 +161,7 @@ export default class WriteSecret extends Component {
                     </View>
                 </View>
                 <View className='writeContainer' style={cardStyle}>
-                    <Textarea  className='write' value={this.state.inpuValue} onInput={this.handleInputChange.bind(this)} onFocus={this.handleInput.bind(this)} onBlur={this.handleback.bind(this)} ></Textarea>
+                    <Textarea className='write' value={this.state.inpuValue} onInput={this.handleInputChange.bind(this)} onFocus={this.handleInput.bind(this)} onBlur={this.handleback.bind(this)} showConfirmBar={false}></Textarea>
                     <Image src={Color}  className='color' />
                     <Button className='post' onClick={inpuValue => this.handleSubmit(inpuValue)}>发表</Button>
                 </View>

@@ -5,6 +5,9 @@ import arrow from  '../img/arrow_right.png'
 
 
 export default class InfoCard extends Component{
+    Info(){
+        this.props.onInfo();
+    }
     render(){
         return(
             <View className='Card'>
@@ -12,7 +15,7 @@ export default class InfoCard extends Component{
                 <View className='textContainer'>
                     <View className='time'>now</View>
                     <View className='text'>hello!</View>
-                 <Image src={arrow} className='toCard' /> 
+                 <Image src={arrow} className='toCard'onClick={this.Info.bind(this)}  /> 
                 </View>
             </View>
         )

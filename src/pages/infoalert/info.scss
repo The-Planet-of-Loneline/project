@@ -5,7 +5,7 @@ page {
 .all {
     background-color: #04040F;
     height: 100%;
-    width: 100%;
+    width: 750px;
 }
 
 .header {
@@ -16,12 +16,11 @@ page {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    top: 0;
 }
 
 .head {
     width: 120px;
+    height: 42px;
     font-size: 30px;
     font-family: PingFang SC;
     font-weight: 400;
@@ -39,11 +38,11 @@ page {
 .headerSpace {
     width: 750px;
     height: 85px;
-    background: #04040F
+    background: rgba(17, 23, 36, 1);
 }
 
 .footerSpace {
     width: 750px;
     height: 100px;
-    background: #04040F;
+    background: rgba(17, 23, 36, 1);
 }
