@@ -20,7 +20,7 @@ export default class WriteSecret extends Component {
             show4: false,
             show5: false,
             show6: false,
-            line: 0,
+           
         }
     }
 
@@ -110,13 +110,12 @@ export default class WriteSecret extends Component {
         })
     }
     handleChange(){
-        let { line } = this.state
-        if(line > 5){
+      
         let  value  = this.state.inpuValue
         inpuValue = value
         this.setState({
             inpuValue
-        })}
+        })
     }
     handleInputChange(e) {
         let {value} = e.target
@@ -155,14 +154,7 @@ export default class WriteSecret extends Component {
         })
     } 
 }
-handleLine(){
-    let {line} = this.state
-        this.setState({
-            line: line + 1,
-        })
-        let value = this.state.inpuValue
-     
-} 
+
      
     config = {
         navigationBarTitleText: '孤独星球'
@@ -170,10 +162,8 @@ handleLine(){
 
     render() {
         let {bgcolor} = this.state 
-        let { line } = this.state
-        if (line <= 5){
-            var Value  = this.state.inpuValue 
-        }
+        let Value  = this.state.inpuValue 
+        
         const cardStyle={
             backgroundColor:bgcolor
         }
