@@ -20,6 +20,7 @@ export default class WriteSecret extends Component {
             show4: false,
             show5: false,
             show6: false,
+            line: 0,
         }
     }
 
@@ -101,17 +102,34 @@ export default class WriteSecret extends Component {
         })
     }
     handleInput(){
-        const {inpuValue} = this.state
+        let {inpuValue} = this.state
+        
         if (inpuValue == '说个秘密吧...')
         this.setState({
             inpuValue:''
         })
     }
-    handleInputChange(e) {
+    handleChange(){
+        let { line } = this.state
+        if(line > 5){
+        let  value  = this.state.inpuValue
+        inpuValue = value
         this.setState({
-            inpuValue: e.target.value,
-        })
+            inpuValue
+        })}
     }
+    handleInputChange(e) {
+        let {value} = e.target
+        let { line } = this.state
+        let {inpuValue} = this.state
+        inpuValue = value
+        if (line <= 5){
+        this.setState({
+            inpuValue
+        })
+        }
+    }
+    
     toSecret() {
         Taro.redirectTo({
             url: '/pages/nighthome/nighthome'
@@ -138,7 +156,12 @@ export default class WriteSecret extends Component {
     } 
 }
 handleLine(){
-    
+    let {line} = this.state
+        this.setState({
+            line: line + 1,
+        })
+        let value = this.state.inpuValue
+     
 } 
      
     config = {
@@ -146,8 +169,11 @@ handleLine(){
     }
 
     render() {
-        let {bgcolor} = this.state
-
+        let {bgcolor} = this.state 
+        let { line } = this.state
+        if (line <= 5){
+            var Value  = this.state.inpuValue 
+        }
         const cardStyle={
             backgroundColor:bgcolor
         }
@@ -161,7 +187,15 @@ handleLine(){
                     </View>
                 </View>
                 <View className='writeContainer' style={cardStyle}>
-                    <Textarea className='write' value={this.state.inpuValue} onInput={this.handleInputChange.bind(this)} onFocus={this.handleInput.bind(this)} onBlur={this.handleback.bind(this)} showConfirmBar={false}></Textarea>
+                    <Textarea 
+                    className='write' 
+                    value={Value} 
+                    onInput={this.handleInputChange.bind(this)} 
+                    onFocus={this.handleInput.bind(this)}
+                    onBlur={this.handleback.bind(this)} 
+                    showConfirmBar={false}
+                    onLineChange={this.handleLine.bind(this)}
+                    ></Textarea>
                     <Image src={Color}  className='color' />
                     <Button className='post' onClick={inpuValue => this.handleSubmit(inpuValue)}>发表</Button>
                 </View>
