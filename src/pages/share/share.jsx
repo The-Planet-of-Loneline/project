@@ -50,8 +50,8 @@ export default class Share extends Component {
     this.setState({ [name]:event.target.value })
   }
 
-  onChosen = () => {
-    this.setState({ tagChosen:true })
+  onChosen = (choose) => {
+    this.setState({ tagChosen:choose })
   }
 
   enableShare () {
@@ -77,7 +77,7 @@ export default class Share extends Component {
         <View className='header'>
           <Button 
             className={this.enableShare()?'share-button able':'share-button disable'} 
-            onClick={this.enableShare()?null:this.getInfo.bind(this,'content')}
+            // onClick={}
           >
             发表
           </Button>
@@ -90,18 +90,11 @@ export default class Share extends Component {
               className='title'
               maxlength='10'
               value={title}
-              onChange={this.getInfo.bind(this,'title')}
+              // onChange={this.getInfo.bind(this,'title')}
+              onInput={this.getInfo.bind(this,'title')}
             />
           </View>
           <View className='body-container'>
-            {/* <Textarea
-              placeholder='请在此处输入内容......'
-              className='content'
-              maxlength='100'
-              hidden={show}
-              value={content}
-              onInput={this.handleInputChange.bind(this)}
-            /> */}
             {show
             ?<View className='fake-text'>{content===''?'请在此处输入内容......':content}</View>
             :<Textarea
@@ -123,7 +116,7 @@ export default class Share extends Component {
         {show
         ?<Sidebar 
           onChangeShow={this.changeShow}
-          onChosen={this.onChosen}
+          onChosen={this.onChosen.bind(this)}
           choose={chosen}
           onChosenPass={this.onChosenPass}
           pass='kkk'
