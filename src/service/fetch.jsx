@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro';
 
 // Fetch(url, data).then((res) => { console.log(res) })
-const preHttp = '';
+const preHttp = 'http://47.97.74.180:9090/lonely_planet/v1/';
 const Fetch = (url, data = {}, method = 'GET') => {
   const header = {
     'content-type': 'application/json',

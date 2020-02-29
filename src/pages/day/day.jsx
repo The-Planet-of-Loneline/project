@@ -6,6 +6,7 @@ import Card from './Card/Card'
 import Blank from './Blank/Blank'
 import Screening from './Screening/Screening'
 import Share from './share.png'
+import Fetch from '../../service/fetch'
 
 export default class Day extends Component {
 
@@ -55,7 +56,18 @@ export default class Day extends Component {
     ]
   }
 
-  componentWillMount () { }
+  componentWillMount () {
+    Fetch(
+      'login/',
+      {
+        'pwd':'',
+        'sid':''
+      },
+       'POST'
+       ).then(data => {
+        console.log(data)
+    })
+   }
 
   componentDidMount () { }
 

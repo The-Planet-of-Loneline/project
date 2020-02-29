@@ -3,18 +3,40 @@ import { View, Image } from '@tarojs/components'
 import Footer from '../../component/Footer/Footer'
 import Delete from './delete.png'
 import './mydetail.scss'
+import Fetch from '../../service/fetch'
 
 export default class myDetail extends Component {
 
   state={
     show:false,
-    title:'标题',
-    time:'2020.2020',
-    content:'一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
-    tags:['学习', '看书', '教学楼','佑铭体育馆'],
+    content: {
+      content: '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
+      date: '2020.02.29',
+      place: '教学楼',
+      post_time: 'string',
+      require_people_num: 0,
+      sender_nick_name: "string",
+      sender_portrait: 0,
+      tag: '看书',
+      time_end: 0,
+      time_from: 0,
+      title: '标题',
+      type: '学习'
+    }
   }
 
-  componentWillMount () { }
+  componentWillMount () {
+    // Fetch(
+    //   `requirement/view/{requirement_id}/`,
+    //   {},
+    //   'GET'
+    // ).then(data => {
+    //   switch (data.msg) {
+    //     case 'success' :this.setState
+    //     case '不见啦' :
+    //   }
+    // })
+  }
 
   componentDidMount () { }
 
@@ -30,22 +52,18 @@ export default class myDetail extends Component {
 
   sure () {
     // delete code
+    Fetch(
+      `requirement/{requirement_id}/`,
+      {},
+      'DELETE'
+    )
     Taro.navigateBack({
       delta: 1
     })
   }
 
-  tagsExtends () {
-    const { tags } = this.state
-    return (
-      tags.map((tag, index) => {
-        return <View key={index} className='spe-tag'>{tag}</View>
-      })
-    )
-  }
-
   render () {
-    const { show, title, time, content } = this.state
+    const { show, content } = this.state
     return (
       <View>
         {show
@@ -65,14 +83,16 @@ export default class myDetail extends Component {
         </View>      
         <View className='body-container'>
           <View className='info'>
-            <View className='title'>{title}</View>
-            <View className='time'>{time}</View>
+            <View className='title'>{content.title}</View>
+            <View className='time'>{content.date}</View>
           </View>
           <View className='details'>
             <View className='tag-container'>
-              {this.tagsExtends()}
+              <View className='spe-tag'>{content.type}</View>
+              <View className='spe-tag'>{content.tag}</View>
+              <View className='spe-tag'>{content.place}</View>
             </View>
-            <View className='content'>{content}</View>
+            <View className='content'>{content.content}</View>
           </View>
         </View>
         <Footer mode='need' />

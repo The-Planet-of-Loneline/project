@@ -10,12 +10,20 @@ export default class CardDetails extends Component {
 
   state={
     show:false,
-    userName:'用户名',
-    submitTime:'2020.2.8',
-    title:'标题',
-    time:'2020.2020',
-    content:'一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
-    tags:['学习', '看书', '教学楼','佑铭体育馆'],
+    content: {
+      content: '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
+      date: '2020.02.29',
+      place: '教学楼',
+      post_time: '2020.02.29',
+      require_people_num: 0,
+      sender_nick_name: 'shi-zhong',
+      sender_portrait: 0,
+      tag: '看书',
+      time_end: 0,
+      time_from: 0,
+      title: '标题',
+      type: '学习'
+    }
   }
 
   componentWillMount () { }
@@ -40,15 +48,6 @@ export default class CardDetails extends Component {
     }
   }
 
-  tagsExtends () {
-    const { tags } = this.state
-    return (
-      tags.map((tag, index) => {
-        return <View key={index} className='spe-tag'>{tag}</View>
-      })
-    )
-  }
-
   changeShow = () => {
     const { show } =this.state
     if (show) {
@@ -63,7 +62,7 @@ export default class CardDetails extends Component {
   }
 
   render () {
-    const { show, userName, submitTime, title, time, content } = this.state
+    const { show, content } = this.state
     const able = this.$router.params.able
     return (
       <View>
@@ -74,17 +73,19 @@ export default class CardDetails extends Component {
           <View className='user'>
             <View className='user-img'></View>
             <View className='user-info'>
-              <View className='user-name'>{userName}</View>
-              <View className='submit-time'>{submitTime}</View>
+              <View className='user-name'>{content.sender_nick_name}</View>
+              <View className='submit-time'>{content.post_time}</View>
             </View>
           </View>
           <View className='details'>
             <View className='tag-container'>
-              {this.tagsExtends()}
+              <View className='spe-tag'>{content.type}</View>
+              <View className='spe-tag'>{content.tag}</View>
+              <View className='spe-tag'>{content.place}</View>
             </View>
-            <View className='title'>{title}</View>
-            <View className='time'>时间:{time}</View>
-            <View className='content'>{content}</View>
+            <View className='title'>{content.title}</View>
+            <View className='time'>时间:{content.date}</View>
+            <View className='content'>{content.content}</View>
           </View>
           <View className='submit-container'>
             {able==='able'
