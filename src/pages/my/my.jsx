@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
-import ListItem from '../../component/ListItem/ListItem'
+import ListItem from './ListItem/ListItem'
 import Footer from '../../component/Footer/Footer'
 import UserImage from './userImage.png'
 import Icon from './icon.png'

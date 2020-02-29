@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Input } from '@tarojs/components'
-import Tag from '../../component/Tag/Tag'
+import Tag from '../../../component/Tag/Tag'
 import './screening.scss'
 
 export default class Screening extends Component {

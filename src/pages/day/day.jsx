@@ -2,9 +2,9 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import './day.scss'
 import Footer from '../../component/Footer/Footer'
-import Card from '../../component/Card/Card'
-import Blank from '../../component/Blank/Blank'
-import Screening from '../../component/Screening/Screening'
+import Card from './Card/Card'
+import Blank from './Blank/Blank'
+import Screening from './Screening/Screening'
 import Share from './share.png'
 
 export default class Day extends Component {
@@ -57,7 +57,7 @@ export default class Day extends Component {
 
   componentWillMount () { }
 
-  componentDidMount () { console.log(this.state) }
+  componentDidMount () { }
 
   componentWillUnmount () { }
 

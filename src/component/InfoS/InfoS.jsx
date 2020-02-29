@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import './infoS.scss'
-import Close from './imgs/close.png'
+import Close from '../../assets/png/close.png'
 
 export default class Info extends Component {
 

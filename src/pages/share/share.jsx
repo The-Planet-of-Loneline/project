@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Textarea, Input, Button } from '@tarojs/components'
 import './share.scss'
 import Footer from '../../component/Footer/Footer'
-import Sidebar from '../../component/Sidebar/Sidebar'
+import Sidebar from './Sidebar/Sidebar'
 
 export default class Share extends Component {
 

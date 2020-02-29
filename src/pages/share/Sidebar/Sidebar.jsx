@@ -1,8 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Button, Text, Image, Input } from '@tarojs/components'
 import './sidebar.scss'
-import Close from './imgs/close.png'
-import Tag from '../Tag/Tag'
+import Close from '../../../assets/png/close.png'
+import Tag from '../../../component/Tag/Tag'
 
 export default class Sidebar extends Component {
 
