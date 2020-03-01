@@ -119,14 +119,12 @@ export default class WriteSecret extends Component {
     }
     handleInputChange(e) {
         let {value} = e.target
-        let { line } = this.state
         let {inpuValue} = this.state
-        inpuValue = value
-        if (line <= 5){
+        inpuValue = value 
         this.setState({
             inpuValue
         })
-        }
+        
     }
     
     toSecret() {
@@ -154,7 +152,7 @@ export default class WriteSecret extends Component {
         })
     } 
 }
-
+apply
      
     config = {
         navigationBarTitleText: '孤独星球'
@@ -185,6 +183,7 @@ export default class WriteSecret extends Component {
                     onBlur={this.handleback.bind(this)} 
                     showConfirmBar={false}
                     onLineChange={this.handleLine.bind(this)}
+                    maxlength={75}
                     ></Textarea>
                     <Image src={Color}  className='color' />
                     <Button className='post' onClick={inpuValue => this.handleSubmit(inpuValue)}>发表</Button>

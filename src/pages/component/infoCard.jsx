@@ -12,10 +12,10 @@ export default class InfoCard extends Component{
         return(
             <View className='Card'>
                 <View className='avatar'></View>
-                <View className='textContainer'>
+                <View className='textContainer' onClick={this.Info.bind(this)} >
                     <View className='time'>now</View>
                     <View className='text'>hello!</View>
-                 <Image src={arrow} className='toCard'onClick={this.Info.bind(this)}  /> 
+                 <Image src={arrow} className='toCard' /> 
                 </View>
             </View>
         )

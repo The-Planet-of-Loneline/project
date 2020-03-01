@@ -27,7 +27,11 @@ const Fetch = (url, data = {}, method = 'GET') => {
       case 400:
         throw new Error('没有权限访问');
       case 401:
-        throw new Error('未授权');
+        if (res.data) {
+          return res.data;
+        } else {
+          return res.code;
+        }
       case 404:
         throw new Error('not found');
       case 500:

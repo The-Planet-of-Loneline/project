@@ -23,6 +23,11 @@ export default class Comment extends Component {
         this.props.onCloseInput()
         }
     }
+    handleCloseComment(){
+        if (this.state.inpuValue == '' || this.state.inpuValue == '说点什么吧...') {
+       this.props.onCloseInput()
+        }
+    }
 
     render() {
         return (
@@ -31,7 +36,8 @@ export default class Comment extends Component {
                     <Input value={this.state.inpuValue} 
                     className='comment' 
                     onFocus={this.handleInput.bind(this)} 
-                    onInput={this.handleInputChange.bind(this)} 
+                    onInput={this.handleInputChange.bind(this)}
+                    onBlur={this.handleCloseComment.bind(this)} 
                     maxLength={35}
                     ></Input>
                     <Button className='commentButton' onClick={this.handleClose.bind(this)}>确定</Button>
