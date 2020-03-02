@@ -42,8 +42,7 @@ export default class login extends Component{
                 sid:id,
                 pwd:password
             },
-            'POST').then(res => {
-               
+            'POST').then(res => { 
                 switch(res.msg){
                     case "success": 
                         Taro.setStorage({

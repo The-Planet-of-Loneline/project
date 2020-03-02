@@ -5,6 +5,7 @@ import Footer from '../component/Footer'
 import './writeSecret.scss'
 import Color from '../img/color.png'
 import check from '../img/checked.png'
+import Fetch from '../../service/fetch'
 
 export default class WriteSecret extends Component {
 
@@ -112,17 +113,13 @@ export default class WriteSecret extends Component {
     handleChange(){
       
         let  value  = this.state.inpuValue
-        inpuValue = value
         this.setState({
-            inpuValue
+            inpuValue:value
         })
     }
-    handleInputChange(e) {
-        let {value} = e.target
-        let {inpuValue} = this.state
-        inpuValue = value 
+    handleInputChange(e) { 
         this.setState({
-            inpuValue
+            inpuValue:e.target.value
         })
         
     }
@@ -137,13 +134,37 @@ export default class WriteSecret extends Component {
             url: '/pages/Mine/Mine'
         })
     }
-    handleSubmit(){
+    onhandleSubmit(){
       const text = this.state.inpuValue 
-       
-        Taro.redirectTo({
-            url:`/pages/nighthome/nighthome?text=${text}`
-        }) 
+      const {bgcolor} = this.state
+        if (text && text != '说个秘密吧...'){ 
+      Fetch('secret/create/',
+        {
+            colour:bgcolor,
+            content:text,
+            sendTime:''
+        },
+        'POST').then(res => {
+            console.log(res)
+            switch(res.message){
+                case 'Success':
+                    Taro.redirectTo({
+                        url: `/pages/nighthome/nighthome?text=${text}`
+                    })
+                    Taro.setStorage({
+                        key:'secretId',
+                        data:res.secretId
+                    }) 
+                    break;
+            }
+        })
+    }else{
+        Taro.showToast({
+            icon:'none',
+            title:'不能发送空白秘密'
+        })
     }
+}
     handleback(){
         const text = this.state.inpuValue 
         if (!text){ 
@@ -152,7 +173,6 @@ export default class WriteSecret extends Component {
         })
     } 
 }
-apply
      
     config = {
         navigationBarTitleText: '孤独星球'
@@ -182,11 +202,10 @@ apply
                     onFocus={this.handleInput.bind(this)}
                     onBlur={this.handleback.bind(this)} 
                     showConfirmBar={false}
-                    onLineChange={this.handleLine.bind(this)}
                     maxlength={75}
                     ></Textarea>
                     <Image src={Color}  className='color' />
-                    <Button className='post' onClick={inpuValue => this.handleSubmit(inpuValue)}>发表</Button>
+                    <Button className='post' onClick={this.onhandleSubmit.bind(this)}>发表</Button>
                 </View>
                 <View className='colorContainer'>
                    
@@ -203,5 +222,4 @@ apply
         )
         }
     
-     
  }

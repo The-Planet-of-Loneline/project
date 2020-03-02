@@ -57,16 +57,6 @@ export default class Day extends Component {
   }
 
   componentWillMount () {
-    Fetch(
-      'login/',
-      {
-        'pwd':'',
-        'sid':''
-      },
-       'POST'
-       ).then(data => {
-        console.log(data)
-    })
    }
 
   componentDidMount () { }
