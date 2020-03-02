@@ -42,7 +42,8 @@ export default class login extends Component{
                 sid:id,
                 pwd:password
             },
-            'POST').then(res => { 
+            'POST').then(res => {
+               
                 switch(res.msg){
                     case "success": 
                         Taro.setStorage({
@@ -84,7 +85,7 @@ export default class login extends Component{
     super(){
         Taro.setStorage({
             key: 'token',
-            data: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODMxNjM5MTIsImlhdCI6MTU4MzE2MDMxMiwidWlkIjoiMjAxOTIxMzc5OCJ9.hr0PmoGC0Y_tlhpgNjhATBUcg3uepzeBMKrWOhrCy-U',
+            data: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODMxNzM2NjYsImlhdCI6MTU4MzE3MDA2NiwidWlkIjoiMjAxOTIxMzc5OCJ9.aNUAynjjfm_HAtVWp1vcQTyOfMIOc0GMMGpHYEfabLQ',
         })
         Taro.showToast({
             icon: 'none',

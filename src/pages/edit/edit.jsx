@@ -7,13 +7,31 @@ import Fetch from '../../service/fetch'
 
 export default class edit extends Component{
     state={
-        inputValue: 'DEFAULT',
+        inputValue: '',
         info:{
-            stuid:'2019214***',
-            sex:0,
-            college:'xx学院',
-            grade:'19级',
+            stuid:'',
+            sex:'',
+            college:'',
+            grade:'',
         }
+    }
+
+    componentWillMount(){
+        Fetch(
+            'user/info/',
+            {},
+            'GET'
+        ).then(data => {
+            this.setState({
+                inputValue: data.nickname,
+                info: {
+                    stuid: data.sid,
+                    sex: data.gender,
+                    college: data.college,
+                    grade: data.grade
+                }
+            })
+        })
     }
 
     componentWillUnmount(){
@@ -37,7 +55,6 @@ export default class edit extends Component{
     render(){
         const {inputValue} = this.state
         const {info} = this.state
-        const sexC = ['男', '女']
         return(
             <View>
                 <View className='head'>
@@ -59,7 +76,7 @@ export default class edit extends Component{
                                 <Label className='edit-label' for='1' key='1'><Image src={Edit} className='edit' /></Label>
                             </View>
                             <View className='content'>学号：{info.stuid}</View>
-                            <View className='content'>性别：{sexC[info.sex]}</View>
+                            <View className='content'>性别：{info.sex}</View>
                             <View className='content'>学院：{info.college}</View>
                             <View className='content'>年级：{info.grade}</View>
                         </View>

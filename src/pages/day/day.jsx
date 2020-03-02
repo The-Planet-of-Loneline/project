@@ -52,8 +52,6 @@ export default class Day extends Component {
   }
 
   componentWillMount () {
-<<<<<<< HEAD
-=======
     Fetch(
       'requirement/square/',
       {
@@ -85,7 +83,6 @@ export default class Day extends Component {
     //   "msg": "string",
     //   "num": 0
     // }
->>>>>>> e3f4529e417134e6a697382fc32f8345349a3ad4
    }
 
   componentDidMount () { }

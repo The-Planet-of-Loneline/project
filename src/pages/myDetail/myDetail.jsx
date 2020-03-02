@@ -11,12 +11,11 @@ export default class myDetail extends Component {
     show:false,
     content: {
       content: '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
-      date: '2020.02.29',
+      date: '周一 周三 周日',
       place: '教学楼',
-      post_time: 'string',
-      require_people_num: 0,
-      sender_nick_name: "string",
-      sender_portrait: 0,
+      post_time: '2020.02.29',
+      sender_nick_name: 'shi-zhong',
+      sender_portrait: 4,
       tag: '看书',
       time_end: 0,
       time_from: 0,
@@ -24,18 +23,16 @@ export default class myDetail extends Component {
       type: '学习'
     }
   }
-
+ 
   componentWillMount () {
-    // Fetch(
-    //   `requirement/view/{requirement_id}/`,
-    //   {},
-    //   'GET'
-    // ).then(data => {
-    //   switch (data.msg) {
-    //     case 'success' :this.setState
-    //     case '不见啦' :
-    //   }
-    // })
+    const requirement_id = parseInt(this.$router.params.req_id)
+    Fetch(
+      `requirement/view/${requirement_id}/`,
+      {},
+      'GET'
+    ).then(data =>{
+      this.setState({ content: data.content })
+    })
   }
 
   componentDidMount () { }
@@ -52,8 +49,9 @@ export default class myDetail extends Component {
 
   sure () {
     // delete code
+    const requirement_id = parseInt(this.$router.params.req_id)
     Fetch(
-      `requirement/{requirement_id}/`,
+      `requirement/${requirement_id}/`,
       {},
       'DELETE'
     )
@@ -84,7 +82,7 @@ export default class myDetail extends Component {
         <View className='body-container'>
           <View className='info'>
             <View className='title'>{content.title}</View>
-            <View className='time'>{content.date}</View>
+            <View className='time'>{content.post_time}</View>
           </View>
           <View className='details'>
             <View className='tag-container'>

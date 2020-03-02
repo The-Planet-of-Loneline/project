@@ -4,12 +4,14 @@ import ListItem from './ListItem/ListItem'
 import Footer from '../../component/Footer/Footer'
 import UserImg from '../../component/UserImg/UserImg'
 import Icon from './icon.png'
+import Fetch from '../../service/fetch'
 import './my.scss'
 
 export default class My extends Component {
 
   state = {
     user:{
+      userimg:0,
       userName:'这里是昵称',
       stuNumber:'2019213XXX',
     },
@@ -25,13 +27,53 @@ export default class My extends Component {
     }
   }
 
-  componentWillMount () { }
+  // {
+  //   "college": "string",
+  //   "gender": "string",
+  //   "grade": "string",
+  //   "msg": "string",
+  //   "nickname": "string",
+  //   "portrait": 0,
+  //   "sid": "string"
+  // }
+
+  componentWillMount () {
+    Fetch(
+      'user/info/',
+      {},
+      'GET'
+    ).then(data => {
+      this.setState({
+        user: {
+          userimg: data.portrait,
+          userName: data.nickname,
+          stuNumber: data.sid,
+        }
+      })
+    })
+   }
 
   componentDidMount () { }
 
   componentWillUnmount () { }
 
-  componentDidShow () { }
+  componentDidShow(){
+    setTimeout(() => {
+      Fetch(
+        'user/info/',
+        {},
+        'GET'
+      ).then(data => {
+        this.setState({
+          user: {
+            userimg: data.portrait,
+            userName: data.nickname,
+            stuNumber: data.sid,
+          }
+        })
+    })
+    },200)
+  }
 
   componentDidHide () { }
 
@@ -109,7 +151,7 @@ export default class My extends Component {
           <View className='user-container'>
             <View className='color-part'>
               <View className='user-info'>
-                <UserImg userimg='1' size='size-my' />
+                <UserImg userimg={user.userimg} size='size-my' />
                 <View className='user-info-two'>
                   <View className='user-name'>{user.userName}</View>
                   <View className='stu-number'>学号：{user.stuNumber}</View>

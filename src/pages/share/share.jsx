@@ -35,19 +35,16 @@ export default class Share extends Component {
   componentDidHide () { }
 
   // {
-  //  ! "contact_way": "string",
-  //  ! "contact_way_type": "string",
-  //   "content": "string",
-  //   "date": 0,
-  //   "place": 0,
-  //  ! "post_time": "string",
-  //  ! "require_people_num": 0,
-  //  ! "requirement_id": 0,
-  //   "tag": 0,
-  //   "time_end": 0,
-  //   "time_from": 0,
-  //   "title": "string",
-  //   "type": 0
+    // "content": "string",
+    // "date": 0,
+    // "place": 0,
+    // "post_time": "string",
+    // "requirement_id": 0,
+    // "tag": 0,
+    // "time_end": 0,
+    // "time_from": 0,
+    // "title": "string",
+    // "type": 0
   // }
 
   deal () {
@@ -70,13 +67,15 @@ export default class Share extends Component {
 
     let info = {
       content: content,
-      title: title,
       date: date,
-      type: chosen.type,
       place: chosen.choices[1],
+      post_time:'',
+      requirement_id:0,
       tag: chosen.choices[0],
       time_from: parseInt(time_from),
-      time_end: parseInt(time_end)
+      time_end: parseInt(time_end),
+      title: title,
+      type: chosen.type
     }
     console.log('share',info)
     return info
