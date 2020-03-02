@@ -49,6 +49,43 @@ export default class Screening extends Component {
 
   componentDidHide () { }
 
+  // 向外传递 转换好的 chosen
+  passScr () {
+    const { chosen } = this.state
+    
+    // during 处理
+    let time_from=chosen.during[0]
+    let time_end=chosen.during[1]
+    if (time_from===''){ time_from='1' }
+    if (time_end===''){ time_end='24' }
+    // 星期处理
+    let date = ''
+    for (let i=6; i>=0; i--) {
+      if (chosen.time[i]){
+        date=date+'1'
+      } else {
+        date=date+'0'
+      }
+    }
+    date='1'+date
+
+    const info = {
+      page: '',
+      limit: '',
+      type: chosen.type,
+      tag: chosen.choices[0],
+      place: chosen.choices[1],
+      time_from: parseInt(time_from),
+      time_end: parseInt(time_end),
+      date: date
+    }
+
+    console.log('screening',info)
+
+    this.props.onScrInfo(info)
+  }
+
+  // 动画函数
   flyin () {
     this.setState({ 
       oStyle:'container o-in',
@@ -68,16 +105,18 @@ export default class Screening extends Component {
     switch (part) {
       case 'type' : chosen.type=index
                     this.flyin()
-                  setTimeout(() => {
-                    chosen.choices=[0,0]
-                    chosen.which=0
-                  }, 300);
+                    this.passScr()
+                    setTimeout(() => {
+                      chosen.choices=[0,0]
+                      chosen.which=0
+                    }, 300);
                     break
       case 'which': if (chosen.which !== index) {
                       this.flyout()
                       chosen.which=index
                     } else {
                       this.flyin()
+                      this.passScr()
                       setTimeout(() => {
                       chosen.which=0
                       }, 300);                      
@@ -93,6 +132,7 @@ export default class Screening extends Component {
     setTimeout(()=>{this.setState({ chosen })},300)
   }
 
+  // 数据处理函数
   onDuring (index) {
     let { chosen } = this.state
     if (index===1&&chosen.during[0]!==''&&parseInt(chosen.during[0])>=parseInt(chosen.during[1])) {
@@ -152,6 +192,7 @@ export default class Screening extends Component {
   closeScr () {
     let { chosen } = this.state
     this.flyin ()
+    this.passScr()
     setTimeout(()=>{
       chosen.which=0
       this.setState({ chosen })

@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
 import ListItem from './ListItem/ListItem'
 import Footer from '../../component/Footer/Footer'
-import UserImage from './userImage.png'
+import UserImg from '../../component/UserImg/UserImg'
 import Icon from './icon.png'
 import './my.scss'
 
@@ -109,7 +109,7 @@ export default class My extends Component {
           <View className='user-container'>
             <View className='color-part'>
               <View className='user-info'>
-                <Image src={UserImage} className='user-image' />
+                <UserImg userimg='1' size='size-my' />
                 <View className='user-info-two'>
                   <View className='user-name'>{user.userName}</View>
                   <View className='stu-number'>学号：{user.stuNumber}</View>
