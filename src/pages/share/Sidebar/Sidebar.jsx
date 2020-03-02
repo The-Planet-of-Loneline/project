@@ -141,12 +141,17 @@ export default class Sidebar extends Component {
 
     if (this.sumDay()!==0
       && chosen.type!== 0
+      && chosen.type!== 4
       && chosen.choices[0]!== 0
       && chosen.choices[1]!== 0
       ) {
       return true
     }
-      return false
+    if (this.sumDay()!==0
+      && chosen.type=== 4
+      && chosen.choices[1]!== 0
+      ){ return true }
+    return false
   }
 
   changeHolder (touch,which) {

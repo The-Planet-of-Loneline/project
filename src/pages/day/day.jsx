@@ -16,57 +16,73 @@ export default class Day extends Component {
 
 // state存储卡片数据
   state={
-    cards:[
+    content:[
       {
-        kind:1,
-        place:0,
-        title:"标题",
-        time:"周一 2：00-4：00"
+        date: '周一 2：00-4：00',
+        place: '1',
+        requirement_id: 0,
+        tag: '1',
+        title: '标题1'
       },
       {
-        kind:2,
-        place:0,
-        title:"卡片二",
-        time:"周四 2：00-4：00"
+        date: '周一 2：00-4：00',
+        place: '教学楼2',
+        requirement_id: 0,
+        tag: '学习2',
+        title: '标题2'
       },
       {
-        kind:3,
-        place:0,
-        title:"第三号",
-        time:"周三 2：00-4：00"
-      },
-      {
-        kind:4,
-        place:0,
-        title:"JOJO",
-        time:"周六 2：00-4：00"
-      },
-      {
-        kind:3,
-        place:0,
-        title:"STAND",
-        time:"周日 2：00-4：00"
-      },
-      {
-        kind:2,
-        place:0,
-        title:"王者荣耀",
-        time:"周五 2：00-4：00"
+        date: '周一 2：00-4：00',
+        place: '教学楼3',
+        requirement_id: 0,
+        tag: '学习3',
+        title: '标题3'
       }
-    ]
+    ],
+    chosen:{
+      date: "10000000",
+      limit: "6",
+      page: "1",
+      place: 0,
+      tag: 0,
+      time_end: 24,
+      time_from: 1,
+      type: 1
+    }
   }
 
   componentWillMount () {
     Fetch(
-      'login/',
+      'requirement/square/',
       {
-        'pwd':'',
-        'sid':''
+        date: "10000000",
+        limit: "6",
+        page: "1",
+        place: 0,
+        tag: 0,
+        time_end: 24,
+        time_from: 1,
+        type: 1
       },
-       'POST'
-       ).then(data => {
-        console.log(data)
+       'GET'
+      ).then(data => {
+        const content = data.content
+        this.setState({ content })
     })
+
+    // {
+    //   "content": [
+    //     {
+    //       "date": "string",
+    //       "place": "string",
+    //       "requirement_id": 0,
+    //       "tag": "string",
+    //       "title": "string"
+    //     }
+    //   ],
+    //   "msg": "string",
+    //   "num": 0
+    // }
    }
 
   componentDidMount () { }
@@ -77,17 +93,34 @@ export default class Day extends Component {
 
   componentDidHide () { }
 
+  scrinfo = (info) => {
+    this.setState({ chosen: info })
+    info.limit='6'
+    info.page='1'
+    Fetch(
+      'requirement/square/',
+      info,
+      'GET'
+    ).then(data =>{
+      const content = data.content
+      this.setState({ content })
+    })
+  }
+
   onChangeInfo = (index) => {
-    let info=this.state.cards
-    info.splice(index,1,
-        {
-          kind:1,
-          place:0,
-          title:"changed",
-          time:"周一 2：00-4：00"
-        }
-      )
-      this.setState({ cards:info })
+    let { chosen } = this.state
+    let info=this.state.content
+    chosen.limit='1'
+    chosen.page='1'
+    Fetch(
+      'requirement/square/',
+      chosen,
+      'GET'
+      ).then(data => {
+        const content = data.content[0]
+        info.splice(index,1,content)
+        this.setState({ content:info })
+    })
   }
 
   toCreateNeeds () {
@@ -97,13 +130,15 @@ export default class Day extends Component {
   }
 
   render () {
-    const { cards } =this.state
+    const { content } =this.state
     return (
       <View>
-        <Screening />
+        <Screening 
+          onScrInfo={this.scrinfo.bind(this)}
+        />
         <View className='cards-container'>
-            { cards.length
-              ?cards.map((detail,index) => {
+            { content.length
+              ?content.map((detail,index) => {
                       return (
                         <Card
                           key={index+1}

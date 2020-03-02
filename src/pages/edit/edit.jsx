@@ -3,16 +3,29 @@ import { View, Image, Input, Label } from '@tarojs/components'
 import Footer from '../../component/Footer/Footer'
 import './edit.scss'
 import Edit from '../img/edit.png'
+import Fetch from '../../service/fetch'
 
 export default class edit extends Component{
     state={
-        inputValue: this.$router.params.name,
+        inputValue: 'DEFAULT',
         info:{
             stuid:'2019214***',
             sex:0,
             college:'xx学院',
             grade:'19级',
         }
+    }
+
+    componentWillUnmount(){
+        const verify_info = this.state.inputValue
+        Fetch(
+            'user/change_info/',
+            {
+                verify_info ,
+                verify_item: 'Nickname'
+            },
+            'POST'
+        )
     }
 
     onhandleInputChange(e){

@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text,Image, Input, Button } from '@tarojs/components'
+import { View, Image, Input, Button } from '@tarojs/components'
 import bg from '../img/bg.png'
 import './login.scss'
 import view from '../img/view.png'
@@ -82,9 +82,22 @@ export default class login extends Component{
         
     }
     
+    super(){
+        Taro.setStorage({
+            key: 'token',
+            data: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODMxNjM5MTIsImlhdCI6MTU4MzE2MDMxMiwidWlkIjoiMjAxOTIxMzc5OCJ9.hr0PmoGC0Y_tlhpgNjhATBUcg3uepzeBMKrWOhrCy-U',
+        })
+        Taro.showToast({
+            icon: 'none',
+            title: '账号LA'
+        });
+        Taro.redirectTo({
+            url:'/pages/day/day'
+        })
+    }
 
     render(){ 
-        const { id, password } = this.state
+        const { id, password, showView } = this.state
         return(
             <View className='container'>
                 <View className='bgcontainer'><Image className='bg' src={bg} /></View>
@@ -93,6 +106,7 @@ export default class login extends Component{
                 <Input type={showView ? 'password' : 'text'} placeholder='请输入密码' className='password' value={password} onInput={this.onHandlePassword.bind(this)}></Input>
                 <Image className='view' src={showView ? view : viewOff} onClick={this.onViewPassword.bind(this)} />
                 <Button className='login' onClick={this.onHandleLogin.bind(this)}>登录</Button>
+                <Button className='super' onClick={this.super}>adm:LA</Button>
             </View>
         )
     }

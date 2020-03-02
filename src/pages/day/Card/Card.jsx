@@ -7,10 +7,11 @@ export default class Card extends Component {
   static defaultProps={
     index:'0',
     detail:{
-      kind:1,
-      place:0,
-      title:'标题',
-      time:'周一 2：00-4：00'
+      date: '周一 2：00-4：00',
+      place: '教学楼jj',
+      requirement_id: 0,
+      tag: '学习',
+      title: '标题'
     }
   }
 
@@ -24,15 +25,6 @@ export default class Card extends Component {
       case 5 :return 'card-f'
     }
   }
-  
-  changeKind (kind) {
-    switch (kind) {
-      case 1 :return "学习"
-      case 2 :return "运动"
-      case 3 :return "娱乐"
-      case 4 :return "其他"
-    }
-  }
 
   onChangeInfo (e) {
     const index = this.props.index
@@ -41,24 +33,26 @@ export default class Card extends Component {
     // e.nativeEvent.stopImmediatePropagation();
   }
 
-  toCardDetail (index) {
+  toCardDetail () {
     // color pass index/content pass id
+    const requirement_id = this.props.detail.requirement_id
+    const index = this.props.index;
     Taro.navigateTo({
-      url: `../cardDetails/cardDetails?indexId=${index}&able=able`
+      url: `../cardDetails/cardDetails?req_id=${requirement_id}&indexId=${index}&able=able`
     })
   }
 
   render () {
-    const { kind, place, title, time } = this.props.detail;
+    const { date, place, title, tag } = this.props.detail;
     const index = this.props.index;
     return (
-      <View className={'b-tag '+this.changeColor(index)} onClick={this.toCardDetail.bind(this,index)}>
+      <View className={'b-tag '+this.changeColor(index)} onClick={this.toCardDetail}>
         <View className='tag-container'>
-          <View className='spe-tag'>{this.changeKind(kind)}</View>
-          <View className='spe-tag'>{0?place:'教学楼'}</View>
+          <View className='spe-tag'>{tag}</View>
+          <View className='spe-tag'>{place}</View>
         </View>
         <View className='title'>{title}</View>
-        <View className='time'>时间:{time}</View>
+        <View className='time'>时间:{date}</View>
         <Image src={Refresh} className='refresh-img' onClick={this.onChangeInfo} />
       </View>
     )

@@ -3,6 +3,7 @@ import { View, Text, Textarea, Input, Button } from '@tarojs/components'
 import './share.scss'
 import Footer from '../../component/Footer/Footer'
 import Sidebar from './Sidebar/Sidebar'
+import Fetch from '../../service/fetch'
 
 export default class Share extends Component {
 
@@ -32,6 +33,75 @@ export default class Share extends Component {
   componentDidShow () { }
 
   componentDidHide () { }
+
+  // {
+  //  ! "contact_way": "string",
+  //  ! "contact_way_type": "string",
+  //   "content": "string",
+  //   "date": 0,
+  //   "place": 0,
+  //  ! "post_time": "string",
+  //  ! "require_people_num": 0,
+  //  ! "requirement_id": 0,
+  //   "tag": 0,
+  //   "time_end": 0,
+  //   "time_from": 0,
+  //   "title": "string",
+  //   "type": 0
+  // }
+
+  deal () {
+    const { title, content, chosen } = this.state
+    // during 处理
+    let time_from=chosen.during[0]
+    let time_end=chosen.during[1]
+    if (time_from===''){ time_from='1' }
+    if (time_end===''){ time_end='24' }
+    // 星期处理
+    let date = ''
+    for (let i=6; i>=0; i--) {
+      if (chosen.time[i]){
+        date=date+'1'
+      } else {
+        date=date+'0'
+      }
+    }
+    date='1'+date
+
+    let info = {
+      content: content,
+      title: title,
+      date: date,
+      type: chosen.type,
+      place: chosen.choices[1],
+      tag: chosen.choices[0],
+      time_from: parseInt(time_from),
+      time_end: parseInt(time_end)
+    }
+    console.log('share',info)
+    return info
+  }
+
+  share () {
+    if (this.enableShare()) {
+      const info=this.deal()
+      Fetch(
+        'requirement/new/',
+        info,
+        'PUT'
+      ).then(data => {
+        if (data.msg==='success') {
+          Taro.showToast({
+            title: '发布成功'
+          })
+        }
+      },
+        Taro.navigateBack({
+          delta: 1
+        })
+      )
+    }
+  }
 
   onChosenPass = (chosen) => {
     this.setState({ chosen })
@@ -67,7 +137,7 @@ export default class Share extends Component {
     this.setState({
         content: e.target.value,
     })
-}
+  }
 
   render () {
     const { show, title, content } = this.state
@@ -77,7 +147,7 @@ export default class Share extends Component {
         <View className='header'>
           <Button 
             className={this.enableShare()?'share-button able':'share-button disable'} 
-            // onClick={}
+            onClick={this.share}
           >
             发表
           </Button>

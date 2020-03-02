@@ -1,8 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
 import './cardDetails.scss'
+import UserImg from '../../component/UserImg/UserImg'
 import Footer from '../../component/Footer/Footer'
 import Info from '../../component/Info/Info'
+import Fetch from '../../service/fetch'
 
 export default class CardDetails extends Component {
 
@@ -12,12 +14,11 @@ export default class CardDetails extends Component {
     show:false,
     content: {
       content: '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
-      date: '2020.02.29',
+      date: '周一 周三 周日',
       place: '教学楼',
       post_time: '2020.02.29',
-      require_people_num: 0,
       sender_nick_name: 'shi-zhong',
-      sender_portrait: 0,
+      sender_portrait: 4,
       tag: '看书',
       time_end: 0,
       time_from: 0,
@@ -26,7 +27,16 @@ export default class CardDetails extends Component {
     }
   }
 
-  componentWillMount () { }
+  componentWillMount () {
+    const requirement_id = parseInt(this.$router.params.req_id)
+    Fetch(
+      `requirement/view/${requirement_id}/`,
+      {},
+      'GET'
+    ).then(data =>{
+      this.setState({ content: data.content })
+    })
+   }
 
   componentDidMount () { }
 
@@ -71,7 +81,10 @@ export default class CardDetails extends Component {
         </View>
         <View className={'body-container '+this.changeColor()}>
           <View className='user'>
-            <View className='user-img'></View>
+            <UserImg 
+              uerimg={content.sender_portrait}
+              size='size-detail'
+            />
             <View className='user-info'>
               <View className='user-name'>{content.sender_nick_name}</View>
               <View className='submit-time'>{content.post_time}</View>
@@ -84,7 +97,7 @@ export default class CardDetails extends Component {
               <View className='spe-tag'>{content.place}</View>
             </View>
             <View className='title'>{content.title}</View>
-            <View className='time'>时间:{content.date}</View>
+            <View className='time'>{'时间:'+content.date+' '+content.time_from+'：00—'+content.time_end+'：00'}</View>
             <View className='content'>{content.content}</View>
           </View>
           <View className='submit-container'>

@@ -27,12 +27,6 @@
   display: flex;
   align-items:center;
 }
-.user-img{
-  height: 140px;
-  width: 140px;
-  border-radius: 50%;
-  background-color: pink;
-}
 .user-info{
   margin: 0 40px;
   height: 76px;
@@ -100,7 +94,8 @@
   font-size: 24px;
   color: white;
   height: 33px;
-  width: 260px;
+  width: 100%;
+  // width: 260px;
   margin-top: 10px;
   margin-bottom: 20px;
   font-family:PingFang SC;
