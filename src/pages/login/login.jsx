@@ -43,9 +43,7 @@ export default class login extends Component{
                 pwd:password
             },
             'POST').then(res => {
-               
-                switch(res.msg){
-                    case "success": 
+               if (res.msg=='success'){
                         Taro.setStorage({
                             key:'sid',
                             data: id
@@ -58,18 +56,18 @@ export default class login extends Component{
                             key: 'token',
                             data: res.token,
                         }) 
-                       
+                        Taro.showToast({
+                       icon: 'none',
+                       title: '登录成功'
+                   }) 
                         Taro.redirectTo({
                              url: `/pages/day/day`
                          }) 
-                            
-                        break;
-                    default:
-                        Taro.showToast({
-                            icon:'none',
-                            title:'账号或密码错误'
-                        })
-                        break;
+                }else{
+                    Taro.showToast({
+                        icon: 'none',
+                        title: '账号或密码错误'
+                    })
                 }
             })
         }

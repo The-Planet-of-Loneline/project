@@ -142,14 +142,13 @@ export default class WriteSecret extends Component {
         {
             colour:bgcolor,
             content:text,
-            sendTime:''
         },
         'POST').then(res => {
             console.log(res)
             switch(res.message){
                 case 'Success':
                     Taro.redirectTo({
-                        url: `/pages/nighthome/nighthome?text=${text}`
+                        url: `/pages/nighthome/nighthome`
                     })
                     Taro.setStorage({
                         key:'secretId',

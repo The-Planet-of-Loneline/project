@@ -3,11 +3,27 @@ import { View, Text, Image} from '@tarojs/components'
 import '../nighthome/NightCard.scss'
 import avatar from '../img/avatar.png'
 import upgrade from '../img/upgrade.png'
+import Fetch from '../../service/fetch'
+import img0 from '../../assets/user_img/img0.png'
+import img1 from '../../assets/user_img/img1.png'
+import img2 from '../../assets/user_img/img2.png'
+import img3 from '../../assets/user_img/img3.png'
+import img4 from '../../assets/user_img/img4.png'
+import img5 from '../../assets/user_img/img5.png'
+import img6 from '../../assets/user_img/img6.png'
+import img7 from '../../assets/user_img/img7.png'
+import img8 from '../../assets/user_img/img8.png'
+import img9 from '../../assets/user_img/img9.png'
 
 export default class NightCard extends Component{
     static defaultProps ={
-        textValue: '你好呀',
+        textValue: '',
         num: 0,
+        color:'',
+        sendTime:''
+    }
+    state={
+        name:'',
     }
    
     componentWillMount() { }
@@ -24,6 +40,9 @@ export default class NightCard extends Component{
         Taro.navigateTo({
             url:`/pages/commentNight/comment?text=${this.props.textValue}`
         })
+    }
+    upgrade(){
+       this.props.onupdate()
     }
 
     render(){
@@ -53,19 +72,43 @@ export default class NightCard extends Component{
             background: colorTwo
         }
         const backgroundColorOne = {
-            background: colorOne
+            background: this.props.color
         }
         const backgroundColorThree = {
             background: colorThree
         }
+        switch (num) {
+            case 0:this.setState({name:{img0}}) 
+                break;
+            case 1: this.setState({ name: { img1 } }) 
+                break; 
+            case 2: this.setState({ name: { img2 } })  
+                break;
+            case 3: this.setState({ name: { img3 } }) 
+                break;
+            case 4: this.setState({ name: { img4 } }) 
+                break;
+            case 5: this.setState({ name: { img5 } }) 
+                break;
+            case 6: this.setState({ name: { img6 } }) 
+                break;
+            case 7: this.setState({ name: { img7 } }) 
+                break; 
+            case 8: this.setState({ name: { img8 } }) 
+                break;
+            case 9: this.setState({ name: { img9 } }) 
+                break;
+            
+            
+            }
         return(
             <View className='cardContainer'>
                <View className='cardOne' onClick={this.toComment} style={backgroundColorOne}>
                   <View className='avatarTime'>
                     <View className='avatar'>
-                        <Image src={avatar} className='avatarImg' />
+                        <Image src={this.state.name} className='avatarImg' />
                     </View>
-                    <Text className='time'>2min ago</Text>    
+        <Text className='time'>{this.props.sendTime}</Text>    
                   </View>
                   <View className='textContainer'>
                     <View className='text'>
@@ -73,7 +116,7 @@ export default class NightCard extends Component{
                     </View>
                   </View> 
                </View>
-                <Image src={upgrade} className='upgrade' />
+                <Image src={upgrade} className='upgrade' onClick={this.upgrade.bind(this)} />
                 <View className='cardTwo' style={backgroundColorTwo}></View>
                 <View className='cardThree' style={backgroundColorThree}></View>
             </View>
