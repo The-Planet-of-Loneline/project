@@ -121,7 +121,12 @@ export default class ListItem extends Component {
       switch (showD) {
         case '0' : {return null}
         case '1' : {return (<InfoT onChangeShowD={this.changeShowD} />)}
-        case '2' : {return (<Info onChangeShowCli={this.changeShowD.bind(this,'1')} onChangeShowSub={this.changeShowD.bind(this,'0')} />)}
+        case '2' : {return (
+        <Info
+          onChangeShowCli={this.changeShowD.bind(this,'1')} 
+          onChangeShowSub={this.changeShowD.bind(this,'0')}
+          from='puter'
+        />)}
       }
     }
   }

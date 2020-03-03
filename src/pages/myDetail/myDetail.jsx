@@ -31,7 +31,32 @@ export default class myDetail extends Component {
       {},
       'GET'
     ).then(data =>{
-      this.setState({ content: data.content })
+      if (data.msg==='success') {
+        this.setState({ content: data.content })
+      } else if (data.msg==='不见啦'){
+        this.setState({
+          content: {
+            content: '该需求已被删除, 历史列表未刷新',
+            date: '周八',
+            place: '',
+            post_time: '2020.4.31',
+            sender_nick_name: 'NOT FOUND',
+            sender_portrait: 0,
+            tag: '修仙',
+            time_end: -24,
+            time_from: -1,
+            title: 'DELETED',
+            type: '修仙'
+          }
+        })
+      } else if (data.msg==='Fail.') {
+        Taro.showToast({
+          title: '服务器错误'
+        })
+        Taro.navigateBack({
+          delta: 1
+        })
+      } 
     })
   }
 
@@ -54,9 +79,20 @@ export default class myDetail extends Component {
       `requirement/${requirement_id}/`,
       {},
       'DELETE'
-    )
-    Taro.navigateBack({
-      delta: 1
+    ).then(data => {
+      if (data.msg === 'success') {
+        Taro.showToast({
+          title: '删除成功'
+        })
+        Taro.navigateBack({
+          delta: 1
+        })
+      } else if (data.msg === 'Fail.') {
+        this.setState({ show:false })
+        Taro.showToast({
+          title: '服务器错误'
+        })
+      }
     })
   }
 

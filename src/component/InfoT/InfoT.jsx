@@ -2,6 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import './infoT.scss'
 import Close from '../../assets/png/close.png'
+import Fetch from '../../service/fetch'
 
 export default class Info extends Component {
 
@@ -41,8 +42,33 @@ export default class Info extends Component {
 
   reject () {
     // reject function
+    const application_id = this.props.req_id
+    Fetch(
+      `application/solve/${application_id}/?status=3`,
+      {
+        contact_way: ['无','无'],
+        content: "拒绝"
+      },
+      'PUT'
+    ).then(data => {
+      if (data.msg==='success') {
+        Taro.showToast({
+          title:'已拒绝'
+        })
+      } else if (data.msg==='需求已经被删除了!') {
+        Taro.showToast({
+          title:'您已删除'
+        })
+      } else if (data.msg==='已经处理过了!') {
+        Taro.showToast({
+          title:'已处理'
+        })
+      } else if (data.msg==='Fail.')
+        Taro.showToast({
+          title:'服务器错误'
+        })
+    })
     this.props.onChangeShowD('0')
-
   }
 
   render () {

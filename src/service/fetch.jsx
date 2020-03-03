@@ -35,7 +35,12 @@ const Fetch = (url, data = {}, method = 'GET') => {
       case 404:
         throw new Error('not found');
       case 500:
-        throw new Error('服务器错误');
+        if (res.data) {
+          return res.data;
+        } else {
+          return res.code;
+        }
+        // throw new Error('服务器错误');
     }
   });
 };

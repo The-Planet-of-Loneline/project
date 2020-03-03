@@ -34,19 +34,6 @@ export default class Share extends Component {
 
   componentDidHide () { }
 
-  // {
-    // "content": "string",
-    // "date": 0,
-    // "place": 0,
-    // "post_time": "string",
-    // "requirement_id": 0,
-    // "tag": 0,
-    // "time_end": 0,
-    // "time_from": 0,
-    // "title": "string",
-    // "type": 0
-  // }
-
   deal () {
     const { title, content, chosen } = this.state
     // during 处理
@@ -67,7 +54,7 @@ export default class Share extends Component {
 
     let info = {
       content: content,
-      date: date,
+      date: parseInt(date),
       place: chosen.choices[1],
       post_time:'',
       requirement_id:0,
@@ -93,11 +80,22 @@ export default class Share extends Component {
           Taro.showToast({
             title: '发布成功'
           })
+          Taro.navigateBack({
+            delta: 1
+          })
+        } else if (data.msg==='requirement already exist') {
+          Taro.showToast({
+            title: '需求已存在'
+          })
+          Taro.navigateBack({
+            delta: 1
+          })
+        } else if (data.msg==='Fail.') {
+          Taro.showToast({
+            title: '服务器错误'
+          })
         }
       },
-        Taro.navigateBack({
-          delta: 1
-        })
       )
     }
   }

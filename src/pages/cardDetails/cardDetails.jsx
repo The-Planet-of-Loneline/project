@@ -34,7 +34,32 @@ export default class CardDetails extends Component {
       {},
       'GET'
     ).then(data =>{
-      this.setState({ content: data.content })
+      if (data.msg === 'success') {
+        this.setState({ content: data.content })
+      } else if (data.msg === '不见啦') {
+        this.setState({
+          content: {
+            content: '该需求已被删除',
+            date: '周八',
+            place: '',
+            post_time: '2020.4.31',
+            sender_nick_name: 'NOT FOUND',
+            sender_portrait: 0,
+            tag: '修仙',
+            time_end: -24,
+            time_from: -1,
+            title: 'DELETED',
+            type: '修仙'
+          }
+        }) 
+      } else if (data.msg==='Fail.') {
+        Taro.showToast({
+          title: '服务器错误'
+        })
+        Taro.navigateBack({
+          delta: 1
+        })
+      }
     })
    }
 
@@ -74,6 +99,7 @@ export default class CardDetails extends Component {
   render () {
     const { show, content } = this.state
     const able = this.$router.params.able
+    const passed_id = this.$router.params.req_id
     return (
       <View>
         <View className='header'>
@@ -82,7 +108,7 @@ export default class CardDetails extends Component {
         <View className={'body-container '+this.changeColor()}>
           <View className='user'>
             <UserImg 
-              uerimg={content.sender_portrait}
+              userimg={content.sender_portrait}
               size='size-detail'
             />
             <View className='user-info'>
@@ -108,7 +134,14 @@ export default class CardDetails extends Component {
             :null}
           </View>
         </View>
-        {show?<Info onChangeShowCli={this.changeShow} onChangeShowSub={this.changeShow} passed='true' />:null}
+        {show
+        ?<Info
+          onChangeShowCli={this.changeShow}
+          onChangeShowSub={this.changeShow}
+          passed_id={passed_id}
+          from='applicant'
+        />
+        :null}
         <Footer mode='need' />
       </View>
     )
