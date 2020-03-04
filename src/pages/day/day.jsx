@@ -16,73 +16,32 @@ export default class Day extends Component {
 
 // state存储卡片数据
   state={
-    content:[
-      {
-        date: '周一 2：00-4：00',
-        place: '1',
-        requirement_id: 0,
-        tag: '1',
-        title: '标题1'
-      },
-      {
-        date: '周一 2：00-4：00',
-        place: '教学楼2',
-        requirement_id: 0,
-        tag: '学习2',
-        title: '标题2'
-      },
-      {
-        date: '周一 2：00-4：00',
-        place: '教学楼3',
-        requirement_id: 0,
-        tag: '学习3',
-        title: '标题3'
-      }
-    ],
-    chosen:{
-      date: "10000000",
-      limit: "6",
-      page: "1",
-      place: 0,
-      tag: 0,
-      time_end: 24,
-      time_from: 1,
-      type: 1
-    }
+    content:[],
+    page:0,
+    chosen:'type=1'
   }
 
   componentWillMount () {
     Fetch(
-      'requirement/square/',
-      {
-        date: "10000000",
-        limit: "6",
-        page: "1",
-        place: 0,
-        tag: 0,
-        time_end: 24,
-        time_from: 1,
-        type: 1
-      },
-       'GET'
+      `requirement/square/?limit=6&page=0&type=1`,
+      {},
+      'GET'
       ).then(data => {
-        const content = data.content
-        this.setState({ content })
+        if (data.msg==='get result successful'){
+          const content = data.content
+          this.setState({ content })
+          if (parseInt(data.num)<6) {
+            this.setState({ page:0 })
+          } else {
+            this.setState({ page:6 })
+          }
+        } else if (data.msg==='Fail.') {
+          Taro.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          })
+        }    
     })
-
-    // {
-    //   "content": [
-    //     {
-    //       "date": "string",
-    //       "place": "string",
-    //       "requirement_id": 0,
-    //       "tag": "string",
-    //       "title": "string"
-    //     }
-    //   ],
-    //   "msg": "string",
-    //   "num": 0
-    // }
    }
 
   componentDidMount () { }
@@ -94,32 +53,59 @@ export default class Day extends Component {
   componentDidHide () { }
 
   scrinfo = (info) => {
+    const { chosen } = this.state
+    if (chosen!==info) {
+      Fetch(
+        `requirement/square/?limit=6&page=0&${info}`,
+        {},
+        'GET'
+      ).then(data => {
+        if (data.msg==='get result successful'){
+          const content = data.content
+          this.setState({ content })
+          if (parseInt(data.num)<6) {
+            this.setState({ page:0 })
+          } else {
+            this.setState({ page:6 })
+          }
+        } else if (data.msg==='none') {
+          this.setState({ content:[] })
+        } else if (data.msg==='Fail.') {
+          Taro.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          })
+        }       
+      })
+    }
     this.setState({ chosen: info })
-    info.limit='6'
-    info.page='1'
-    Fetch(
-      'requirement/square/',
-      info,
-      'GET'
-    ).then(data =>{
-      const content = data.content
-      this.setState({ content })
-    })
   }
 
   onChangeInfo = (index) => {
     let { chosen } = this.state
-    let info=this.state.content
-    chosen.limit='1'
-    chosen.page='1'
+    const { page } = this.state
+    let info=this.state.content 
     Fetch(
-      'requirement/square/',
-      chosen,
+      `requirement/square/?limit=1&page=${page}&${chosen}`,
+      {},
       'GET'
       ).then(data => {
-        const content = data.content[0]
-        info.splice(index,1,content)
-        this.setState({ content:info })
+        if (data.msg==='get result successful') {
+          const content = data.content[0]
+          info.splice(index,1,content)
+          this.setState({ content:info, page:page+1 })
+        } else if (data.msg==='none') {
+          Taro.showToast({
+            title: '让我们重新开始=W=',
+            icon: 'none'
+          })
+          this.setState({ page: 0 })
+        } else {
+          Taro.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          }) 
+        }
     })
   }
 

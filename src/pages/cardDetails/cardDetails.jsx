@@ -30,7 +30,7 @@ export default class CardDetails extends Component {
   componentWillMount () {
     const requirement_id = parseInt(this.$router.params.req_id)
     Fetch(
-      `requirement/view/${requirement_id}/`,
+      `requirement/view/:${requirement_id}/`,
       {},
       'GET'
     ).then(data =>{
@@ -38,6 +38,7 @@ export default class CardDetails extends Component {
         this.setState({ content: data.content })
       } else if (data.msg === '不见啦') {
         this.setState({
+          show:false,
           content: {
             content: '该需求已被删除',
             date: '周八',

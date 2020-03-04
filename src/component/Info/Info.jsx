@@ -84,13 +84,13 @@ export default class Info extends Component {
       ).then(data => {
         if (data.msg==='success') {
           Taro.showToast({
-            title:'已接受'
+            title:'发送成功'
           })
         } else if (data.msg==='不能申请自己的需求') {
           Taro.showToast({
             title:'我与我'
           })
-        } else if (data.msg==='已经处理过了!') {
+        } else if (data.msg==='已经申请过了!') {
           Taro.showToast({
             title:'已处理'
           })

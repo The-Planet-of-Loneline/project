@@ -10,10 +10,13 @@ import './my.scss'
 export default class My extends Component {
 
   state = {
+    userName:'这里是昵称',
     user:{
       userimg:0,
-      userName:'这里是昵称',
       stuNumber:'2019213XXX',
+      sex: '秀吉',
+      college: '计算机学院',
+      grade: '19'
     },
     draw:{
       big:false,
@@ -44,11 +47,18 @@ export default class My extends Component {
       'GET'
     ).then(data => {
       this.setState({
+        userName: data.nickname,
         user: {
           userimg: data.portrait,
-          userName: data.nickname,
           stuNumber: data.sid,
+          sex: data.gender,
+          college: data.college,
+          grade: data.grade
         }
+      })
+      Taro.setStorage({
+        key: 'Nickname',
+        data: data.nickname
       })
     })
    }
@@ -58,21 +68,8 @@ export default class My extends Component {
   componentWillUnmount () { }
 
   componentDidShow(){
-    setTimeout(() => {
-      Fetch(
-        'user/info/',
-        {},
-        'GET'
-      ).then(data => {
-        this.setState({
-          user: {
-            userimg: data.portrait,
-            userName: data.nickname,
-            stuNumber: data.sid,
-          }
-        })
-    })
-    },200)
+    const userName = Taro.getStorageSync('Nickname')
+    this.setState({ userName })
   }
 
   componentDidHide () { }
@@ -136,12 +133,14 @@ export default class My extends Component {
   }
 
   toEdit () {
+    const { user } = this.state
     Taro.navigateTo({
-      url:`../edit/edit`
+      url:`../edit/edit?stuid=${user.stuNumber}&sex=${user.sex}&college=${user.college}&grade=${user.grade}`
     })
   }
 
   render () {
+    const { userName } = this.state
     const { user } = this.state
     const { draw } = this.state
     return (
@@ -153,7 +152,7 @@ export default class My extends Component {
               <View className='user-info'>
                 <UserImg userimg={user.userimg} size='size-my' />
                 <View className='user-info-two'>
-                  <View className='user-name'>{user.userName}</View>
+                  <View className='user-name'>{userName}</View>
                   <View className='stu-number'>学号：{user.stuNumber}</View>
                 </View>
                 <View className='edit'>

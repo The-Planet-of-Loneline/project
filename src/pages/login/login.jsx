@@ -11,7 +11,19 @@ export default class login extends Component{
         showView: true,
         id: '',
         password: ''
-}
+    }
+
+    componentWillMount () {
+        const id = Taro.getStorageSync('sid')
+        const password = Taro.getStorageSync('pwd')
+        if (id) {
+            this.setState({ id })
+        }
+        if (password) {
+            this.setState({ password })
+        }
+    }
+
     onHandleId(e){
         this.setState({
             id:e.target.value
@@ -68,6 +80,7 @@ export default class login extends Component{
                         icon: 'none',
                         title: '账号或密码错误'
                     })
+                    this.setState({ password: '' })
                 }
             })
         }
@@ -78,20 +91,6 @@ export default class login extends Component{
             });
         }
         
-    }
-    
-    super(){
-        Taro.setStorage({
-            key: 'token',
-            data: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODMxNzM2NjYsImlhdCI6MTU4MzE3MDA2NiwidWlkIjoiMjAxOTIxMzc5OCJ9.aNUAynjjfm_HAtVWp1vcQTyOfMIOc0GMMGpHYEfabLQ',
-        })
-        Taro.showToast({
-            icon: 'none',
-            title: '账号LA'
-        });
-        Taro.redirectTo({
-            url:'/pages/day/day'
-        })
     }
 
     render(){ 
@@ -104,7 +103,6 @@ export default class login extends Component{
                 <Input type={showView ? 'password' : 'text'} placeholder='请输入密码' className='password' value={password} onInput={this.onHandlePassword.bind(this)}></Input>
                 <Image className='view' src={showView ? view : viewOff} onClick={this.onViewPassword.bind(this)} />
                 <Button className='login' onClick={this.onHandleLogin.bind(this)}>登录</Button>
-                <Button className='super' onClick={this.super}>adm:LA</Button>
             </View>
         )
     }

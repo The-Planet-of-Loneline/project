@@ -17,33 +17,37 @@ export default class edit extends Component{
     }
 
     componentWillMount(){
-        Fetch(
-            'user/info/',
-            {},
-            'GET'
-        ).then(data => {
-            this.setState({
-                inputValue: data.nickname,
-                info: {
-                    stuid: data.sid,
-                    sex: data.gender,
-                    college: data.college,
-                    grade: data.grade
-                }
-            })
+        const { stuid, sex, college, grade } = this.$router.params
+        const nickname = Taro.getStorageSync('Nickname')
+        this.setState({
+            inputValue: nickname,
+            info: {
+                stuid,
+                sex,
+                college,
+                grade
+            }
         })
+        
     }
 
     componentWillUnmount(){
         const verify_info = this.state.inputValue
-        Fetch(
-            'user/change_info/',
-            {
-                verify_info ,
-                verify_item: 'Nickname'
-            },
-            'POST'
-        )
+        const nickname = Taro.getStorageSync('Nickname')
+        if (verify_info !== nickname) {
+            Fetch(
+                'user/change_info/',
+                {
+                    verify_info ,
+                    verify_item: 'Nickname'
+                },
+                'POST'
+            )
+            Taro.setStorage({
+                key: 'Nickname',
+                data: verify_info
+            })
+        }
     }
 
     onhandleInputChange(e){

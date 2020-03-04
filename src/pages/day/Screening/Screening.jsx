@@ -52,12 +52,19 @@ export default class Screening extends Component {
   // 向外传递 转换好的 chosen
   passScr () {
     const { chosen } = this.state
-    
+    console.log(chosen)
+    let query = ''
+    query+=`type=${chosen.type}`
+    console.log(query)
+    if (chosen.choices[0]) { query+=`&tag=${chosen.choices[0]}` }
+    console.log(chosen.choices[0],query)
+    if (chosen.choices[1]) { query+=`&place=${chosen.choices[1]}` }
+    console.log(chosen.choices[1],query)
     // during 处理
-    let time_from=chosen.during[0]
-    let time_end=chosen.during[1]
-    if (time_from===''){ time_from='1' }
-    if (time_end===''){ time_end='24' }
+    if (chosen.during[0]){ query+=`&time_from=${chosen.during[0]}` }
+    console.log(chosen.during[0],query)
+    if (chosen.during[1]){ query+=`&time_end=${chosen.during[1]}` }
+    console.log(chosen.during[1],query)
     // 星期处理
     let date = ''
     for (let i=6; i>=0; i--) {
@@ -68,21 +75,11 @@ export default class Screening extends Component {
       }
     }
     date='1'+date
-
-    const info = {
-      page: '',
-      limit: '',
-      type: chosen.type,
-      tag: chosen.choices[0],
-      place: chosen.choices[1],
-      time_from: parseInt(time_from),
-      time_end: parseInt(time_end),
-      date: date
+    if (date!=='10000000') {
+      query+=`&date=${date}`
     }
-
-    console.log('screening',info)
-
-    this.props.onScrInfo(info)
+    console.log(date,query)
+    this.props.onScrInfo(query)
   }
 
   // 动画函数
