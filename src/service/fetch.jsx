@@ -6,8 +6,8 @@ const Fetch = (url, data = {}, method = 'GET') => {
   const header = {
     'content-type': 'application/json',
     token: Taro.getStorageSync('token')
-    // token:
-    //   ''
+     //token:
+       //'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODMzMDU4NDUsImlhdCI6MTU4MzMwMjI0NSwidWlkIjoiMjAxOTIxNDI3MSJ9.EJ0NC0uNfqxk7otWmB9JlpSdUkN-3MaIIkATSc0T1sE'
     // token:
     //   ''
   };

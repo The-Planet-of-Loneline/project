@@ -4,12 +4,28 @@ import Footer from '../component/Footer'
 import notification from '../img/notification.png'
 import HistoryCard from '../component/historyCard'
 import './Mine.scss'
-import emailGray from '../img/emailGray.png'
-import userBlue from '../img/userBlue.png'
+import Fetch from '../../service/fetch'
 
 export default class Index extends Component {
+    state = {
+        history:[{
+            text:'',
+            time:'',
+            color:'',
+            Debunkid:''
+        }]
+    }
 
-    componentWillMount() { }
+    componentWillMount() {
+        Fetch('secret/history/0',
+        {},
+        'GET').then(res => {
+            console.log(res.history)
+            this.setState({
+                history:[...this.state.history,res.history]
+            })
+        })
+     }
 
     componentDidMount() {}
 
@@ -37,6 +53,8 @@ export default class Index extends Component {
     }
 
     render() {
+        let {history} = this.state
+        let {text,time,Debunkid,color}=this.state.history
         return (
             <View className='all'>
                <View className='header'>
@@ -45,10 +63,10 @@ export default class Index extends Component {
                    <View className='headerSpace'></View>
                 <Image src={notification} className='notification' onClick={this.toImfo} />
                    <View className='CardContainer'>
-                   <HistoryCard num={0} />
-                    <HistoryCard num={1} />
-                    <HistoryCard num={2} />
-                    <HistoryCard num={3} />
+                   {history.map(()=>{
+                       return <HistoryCard  textValue={text} sendTime={time} key={Debunkid} bgcolor={color} />
+                   })}
+                   
             </View>
             <View className='footerSpace'></View> 
                 <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false}  onToSecret={this.toSecret.bind(this)} />

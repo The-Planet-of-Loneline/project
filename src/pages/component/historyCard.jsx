@@ -4,26 +4,22 @@ import '../Mine/card.scss'
 
 export default class HistoryCard extends Component{
     static defaultProps = {
-        num : 0,
+        textValue:'',
+        sendTime:'',
+        bgcolor:''
     }
     componentWillMount(){}
    
     toCard(){
-        let {num} =this.props
+      let {bgcolor,sendTime,textValue} = this.props 
         Taro.navigateTo({
-            url:`/pages/cardHistory/cardHistory?number=${num}`
+            url:`/pages/cardHistory/cardHistory?color=${bgcolor}&&time=${sendTime}&&text=${textValue}`
         })
     }
 
     render(){
-        let color = 'rgba(127, 163, 157, 1)'
-        let {num} = this.props
-        switch (num) {
-            case 0:  color = 'rgba(127, 163, 157, 1)'; break; 
-            case 1:  color = 'rgba(132, 120, 145, 1)'; break;
-            case 2:  color = 'rgba(177, 146, 146, 1)'; break;
-            case 3:  color ='rgba(90, 125, 139, 1)'; break;
-        }
+        let color = this.props.bgcolor
+        
         const backgroundColor = {
             background: color
         }
@@ -32,7 +28,7 @@ export default class HistoryCard extends Component{
                 <View className='card' 
                 onClick={this.toCard}
                 style={backgroundColor}>
-                    <View className='text'>你好呀</View>
+                    <View className='text'>{this.props.textValue}</View>
                 </View>
             </View>
         )

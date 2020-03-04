@@ -1,7 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image} from '@tarojs/components'
 import '../nighthome/NightCard.scss'
-import avatar from '../img/avatar.png'
 import upgrade from '../img/upgrade.png'
 import Fetch from '../../service/fetch'
 import img0 from '../../assets/user_img/img0.png'
@@ -38,7 +37,7 @@ export default class NightCard extends Component{
     
     toComment(){
         Taro.navigateTo({
-            url:`/pages/commentNight/comment?text=${this.props.textValue}`
+            url:`/pages/commentNight/comment?text=${this.props.textValue}&&color=${this.props.color}&&time=${this.props.sendTime}`
         })
     }
     upgrade(){
