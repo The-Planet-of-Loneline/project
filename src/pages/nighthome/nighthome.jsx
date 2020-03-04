@@ -20,11 +20,10 @@ export default class Index extends Component {
     Fetch('secret/square/',
     {},
     'GET').then(res => {
-      console.log(res.secrets)
       this.setState({
-        text:res.secrets.Content,
-        bgcolor:res.secrets.Colour,
-        time:res.secrets.SendTime,
+        text:res.secret.Content,
+        bgcolor:res.secret.Colour,
+        time:res.secret.SendTime,
         num:res.number
       })
     })
@@ -55,11 +54,10 @@ export default class Index extends Component {
    Fetch('secret/square/',
      {},
      'GET').then(res => {
-       console.log(res.secrets)
        this.setState({
-         text: res.secrets.Content,
-         bgcolor: res.secrets.Colour,
-         time: res.secrets.SendTime,
+         text: res.secret.Content,
+         bgcolor: res.secret.Colour,
+         time: res.secret.SendTime,
          num:res.number
        })
      })

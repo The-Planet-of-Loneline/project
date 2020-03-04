@@ -17,7 +17,7 @@ import img9 from '../../assets/user_img/img9.png'
 export default class NightCard extends Component{
     static defaultProps ={
         textValue: '',
-        num: 0,
+        number: 0,
         color:'',
         sendTime:''
     }
@@ -48,8 +48,8 @@ export default class NightCard extends Component{
         let colorOne = 'rgba(127, 163, 157, 1)'
         let colorTwo = 'rgba(132, 120, 145, 1)'
         let colorThree = 'rgba(177, 146, 146, 1)'
-        let { num } = this.props
-        switch (num) {
+        let { number } = this.props
+        switch (number) {
             case 0: colorOne = 'rgba(127, 163, 157, 1)'
                 colorTwo = 'rgba(177, 146, 146, 1)'
                 colorThree = 'rgba(90, 125, 139, 1)'
@@ -76,26 +76,26 @@ export default class NightCard extends Component{
         const backgroundColorThree = {
             background: colorThree
         }
-        switch (num) {
-            case 0:this.setState({name:{img0}}) 
+        switch (number) {
+            case 0:this.setState({name:img0}) 
                 break;
-            case 1: this.setState({ name: { img1 } }) 
+            case 1: this.setState({ name:  img1  }) 
                 break; 
-            case 2: this.setState({ name: { img2 } })  
+            case 2: this.setState({ name:  img2  })  
                 break;
-            case 3: this.setState({ name: { img3 } }) 
+            case 3: this.setState({ name:  img3  }) 
                 break;
-            case 4: this.setState({ name: { img4 } }) 
+            case 4: this.setState({ name:  img4  }) 
                 break;
-            case 5: this.setState({ name: { img5 } }) 
+            case 5: this.setState({ name:  img5  }) 
                 break;
-            case 6: this.setState({ name: { img6 } }) 
+            case 6: this.setState({ name:  img6  }) 
                 break;
-            case 7: this.setState({ name: { img7 } }) 
+            case 7: this.setState({ name:  img7  }) 
                 break; 
-            case 8: this.setState({ name: { img8 } }) 
+            case 8: this.setState({ name:  img8  }) 
                 break;
-            case 9: this.setState({ name: { img9 } }) 
+            case 9: this.setState({ name:  img9  }) 
                 break;
             
             
@@ -107,7 +107,7 @@ export default class NightCard extends Component{
                     <View className='avatar'>
                         <Image src={this.state.name} className='avatarImg' />
                     </View>
-        <Text className='time'>{this.props.sendTime}</Text>    
+                    <Text className='time'>{this.props.sendTime}</Text>    
                   </View>
                   <View className='textContainer'>
                     <View className='text'>

@@ -7,23 +7,21 @@ import './Mine.scss'
 import Fetch from '../../service/fetch'
 
 export default class Index extends Component {
-    state = {
-        history:[{
-            text:'',
-            time:'',
-            color:'',
-            Debunkid:''
-        }]
+    constructor(props){
+        super(props)
+        this.state={
+            history: [{}
+            ], 
+        }
     }
-
     componentWillMount() {
-        Fetch('secret/history/0',
+        Fetch('secret/history/',
         {},
         'GET').then(res => {
             console.log(res.history)
             this.setState({
-                history:[...this.state.history,res.history]
-            })
+                history:res.history
+            },()=>{console.log(this.state.history)})
         })
      }
 
@@ -51,10 +49,7 @@ export default class Index extends Component {
     config = {
         navigationBarTitleText: '孤独星球'
     }
-
     render() {
-        let {history} = this.state
-        let {text,time,Debunkid,color}=this.state.history
         return (
             <View className='all'>
                <View className='header'>
@@ -63,8 +58,11 @@ export default class Index extends Component {
                    <View className='headerSpace'></View>
                 <Image src={notification} className='notification' onClick={this.toImfo} />
                    <View className='CardContainer'>
-                   {history.map(()=>{
-                       return <HistoryCard  textValue={text} sendTime={time} key={Debunkid} bgcolor={color} />
+                   {this.state.history.map((history)=>{
+                       return <HistoryCard textValue={history.Content} 
+                       sendTime={history.SendTime} 
+                       key={history.Debunkid} 
+                       bgcolor={history.Colour} />
                    })}
                    
             </View>

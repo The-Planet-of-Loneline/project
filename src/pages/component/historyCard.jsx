@@ -4,7 +4,7 @@ import '../Mine/card.scss'
 
 export default class HistoryCard extends Component{
     static defaultProps = {
-        textValue:'',
+        textValue:'111',
         sendTime:'',
         bgcolor:''
     }
