@@ -3,13 +3,23 @@ import { View, Text, Image } from '@tarojs/components'
 import Footer from '../component/Footer'
 import './info.scss'
 import InofoCard from '../component/infoCard'
+import Fetch from '../../service/fetch'
 
 export default class CardHistory extends Component {
-    toInfo() {
-        Taro.navigateTo({
-            url: '/pages/infoalert/infoalert'
+    state = {
+        comment:[{}],
+    }
+    componentWillMount(){
+        Fetch('remind/night/remindbox/view/',
+        {},
+        'GET').then(res => {
+            console.log(res)
+            this.setState({
+                comment:res.commentdata,
+            })
         })
     }
+   
     toSecret() {
         Taro.redirectTo({
             url: '/pages/nighthome/nighthome'
@@ -30,7 +40,12 @@ export default class CardHistory extends Component {
                 </View>
                 <View className='headerSpace'></View>  
                 <View className='cardContainer'>
-                <InofoCard onInfo={this.toInfo.bind(this)} />
+                    {this.state.comment.map((comment,index) => {
+                        return  <InofoCard  time={comment.CommentTime}
+                        text ={comment.Comment}
+                        key={index}
+                        sid={comment.SecretId}  />
+                    })}
                 </View>
                 <View className='footerSpace'></View>  
                 <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false} onToSecret={this.toSecret.bind(this)} />

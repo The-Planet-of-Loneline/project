@@ -11,7 +11,7 @@ import img6 from '../../assets/user_img/img6.png'
 import img7 from '../../assets/user_img/img7.png'
 import img8 from '../../assets/user_img/img8.png'
 import img9 from '../../assets/user_img/img9.png'
-import upgrade from '../img/upgrade.png'
+
 
 export default class NightCard extends Component{
     static defaultProps ={
@@ -39,9 +39,6 @@ export default class NightCard extends Component{
         Taro.navigateTo({
             url:`/pages/commentNight/comment?text=${this.props.textValue}&&color=${this.props.color}&&Debunkid=${this.props.Debunkid}`
         })
-    }
-    upgrade(){
-       this.props.onupdate()
     }
 
     render(){
@@ -90,7 +87,7 @@ export default class NightCard extends Component{
                     </View>
                   </View> 
                </View>
-                <Image src={upgrade} className='upgrade' onClick={this.upgrade.bind(this)} />
+            
             </View>
         )
     }

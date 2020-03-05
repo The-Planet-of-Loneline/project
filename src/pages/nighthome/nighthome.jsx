@@ -1,11 +1,11 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text,Image } from '@tarojs/components'
 import Head from '../component/Head'
 import Footer from '../component/Footer'
 import NightCard from '../component/NightCard'
 import './nighthome.scss'
-import userGray from '../img/userGray.png'
 import Fetch from '../../service/fetch'
+import upgrade from '../img/upgrade.png'
 
 
 export default class Index extends Component {
@@ -72,6 +72,7 @@ export default class Index extends Component {
      <View className='all'>
         <Head colorTA='rgba(242, 245, 251, 1)' colorWrite='rgba(185, 189, 203, 1)' onToWrite={this.toWrite.bind(this)} />
        <NightCard textValue={text} color={bgcolor}  sendTime={time} onupdate={this.update.bind(this)} number={num}  Debunkid={debunkid} />
+        <Image src={upgrade} className='upgrade' onClick={this.update.bind(this)} />
        <Footer onToMine={this.toMine.bind(this)} /> 
      </View>
      //头部结束
