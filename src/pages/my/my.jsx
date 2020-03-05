@@ -1,9 +1,9 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
-import ListItem from './ListItem/ListItem'
 import Footer from '../../component/Footer/Footer'
 import UserImg from '../../component/UserImg/UserImg'
 import Icon from './icon.png'
+import List from './List/List'
 import Fetch from '../../service/fetch'
 import './my.scss'
 
@@ -22,23 +22,8 @@ export default class My extends Component {
       big:false,
       show:false,
       small:'0'
-    },
-    list:{
-      history:[1,2,3,4,5,6],
-      apply:[1,2,3,4,5,6],
-      respone:[1,2,3,4,5,6]
     }
   }
-
-  // {
-  //   "college": "string",
-  //   "gender": "string",
-  //   "grade": "string",
-  //   "msg": "string",
-  //   "nickname": "string",
-  //   "portrait": 0,
-  //   "sid": "string"
-  // }
 
   componentWillMount () {
     Fetch(
@@ -105,33 +90,6 @@ export default class My extends Component {
     this.setState({ draw:{ big:true, show:false, small:index } })
   }
 
-  explainList () {
-    const { draw, list } = this.state
-    switch (draw.small){
-      case '0' : {   
-        return (list.history.map((index) => {
-          return (
-            <ListItem key={index+1} mode='1' />
-          )
-        }))
-      }
-      case '1' : {
-        return (list.respone.map((index) => {
-          return (
-            <ListItem key={index+1} mode='3' />
-          )
-        }))
-      }
-      case '2' : {
-        return (list.apply.map((index) => {
-          return (
-            <ListItem key={index+1} mode='2' />
-          )
-        }))
-      }
-    }
-  }
-
   toEdit () {
     const { user } = this.state
     Taro.navigateTo({
@@ -191,8 +149,7 @@ export default class My extends Component {
         </View>
         <View className='need-list'>
           <View className='blank-top'></View>
-          {this.explainList()}
-          <View className='blank-bottom'></View>
+          <List mode={draw.small} />
         </View>
         <Footer mode='my' />
       </View>

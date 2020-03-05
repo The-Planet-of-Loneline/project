@@ -7,17 +7,15 @@ import Fetch from '../../service/fetch'
 export default class Info extends Component {
 
   static defaultProps = {
-
-  }
-
-  state = {
-    name:'这里是昵称',
-    college:'XXX学院',
-    sex:'男',
-    qq:'吴',
-    grade:'19级',
-    tel:'12345678910',
-    msg: '需求(demand) 是指人们在某一特定的时期内在各种可能的价格下愿意并且能够购买某个具体商品的数量。'
+    pass: {
+      name:'这里是昵称',
+      college:'XXX学院',
+      sex:'男',
+      qq:'吴',
+      grade:'19级',
+      tel:'12345678910',
+      msg: '需求(demand) 是指人们在某一特定的时期内在各种可能的价格下愿意并且能够购买某个具体商品的数量。'
+    }
   }
 
   componentWillMount () { }
@@ -72,7 +70,7 @@ export default class Info extends Component {
   }
 
   render () {
-    const { name, college, sex, qq, grade, tel, msg } =this.state
+    const { name, college, sex, qq, grade, tel, msg } =this.props.pass
     return (
       <View className='push-container'>
         <View className='push'>

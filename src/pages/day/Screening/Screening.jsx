@@ -50,35 +50,30 @@ export default class Screening extends Component {
   componentDidHide () { }
 
   // 向外传递 转换好的 chosen
-  passScr () {
+  passScr (from='else') {
     const { chosen } = this.state
-    console.log(chosen)
     let query = ''
     query+=`type=${chosen.type}`
-    console.log(query)
-    if (chosen.choices[0]) { query+=`&tag=${chosen.choices[0]}` }
-    console.log(chosen.choices[0],query)
-    if (chosen.choices[1]) { query+=`&place=${chosen.choices[1]}` }
-    console.log(chosen.choices[1],query)
-    // during 处理
-    if (chosen.during[0]){ query+=`&time_from=${chosen.during[0]}` }
-    console.log(chosen.during[0],query)
-    if (chosen.during[1]){ query+=`&time_end=${chosen.during[1]}` }
-    console.log(chosen.during[1],query)
-    // 星期处理
-    let date = ''
-    for (let i=6; i>=0; i--) {
-      if (chosen.time[i]){
-        date=date+'1'
-      } else {
-        date=date+'0'
+    if (from !== 'type') {
+      if (chosen.choices[0]) { query+=`&tag=${chosen.choices[0]}` }
+      if (chosen.choices[1]) { query+=`&place=${chosen.choices[1]}` }
+      // during 处理
+      if (chosen.during[0]){ query+=`&time_from=${chosen.during[0]}` }
+      if (chosen.during[1]){ query+=`&time_end=${chosen.during[1]}` }
+      // 星期处理
+      let date = ''
+      for (let i=6; i>=0; i--) {
+        if (chosen.time[i]){
+          date=date+'1'
+        } else {
+          date=date+'0'
+        }
+      }
+      date='1'+date
+      if (date!=='10000000') {
+        query+=`&date=${date}`
       }
     }
-    date='1'+date
-    if (date!=='10000000') {
-      query+=`&date=${date}`
-    }
-    console.log(date,query)
     this.props.onScrInfo(query)
   }
 
@@ -101,12 +96,14 @@ export default class Screening extends Component {
     let { chosen } = this.state
     switch (part) {
       case 'type' : chosen.type=index
-                    this.flyin()
-                    this.passScr()
-                    setTimeout(() => {
+                    chosen.which?this.flyin():null
+                    this.passScr('type')
+                    setTimeout(()=>{
                       chosen.choices=[0,0]
                       chosen.which=0
-                    }, 300);
+                      chosen.time=[0,0,0,0,0,0,0]
+                      chosen.during=['','']
+                    },300)
                     break
       case 'which': if (chosen.which !== index) {
                       this.flyout()
@@ -114,9 +111,10 @@ export default class Screening extends Component {
                     } else {
                       this.flyin()
                       this.passScr()
-                      setTimeout(() => {
-                      chosen.which=0
-                      }, 300);                      
+                      setTimeout(()=>{
+                        chosen.choices=[0,0]
+                        chosen.which=0
+                      },300)
                     }
                     break
       case 'time' : chosen.time.splice(index,1,! chosen.time[index])

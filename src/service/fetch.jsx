@@ -6,10 +6,6 @@ const Fetch = (url, data = {}, method = 'GET') => {
   const header = {
     'content-type': 'application/json',
     token: Taro.getStorageSync('token')
-     //token:
-       //'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODMzMDU4NDUsImlhdCI6MTU4MzMwMjI0NSwidWlkIjoiMjAxOTIxNDI3MSJ9.EJ0NC0uNfqxk7otWmB9JlpSdUkN-3MaIIkATSc0T1sE'
-    // token:
-    //   ''
   };
   return Taro.request({
     url: preHttp + url,
@@ -27,6 +23,24 @@ const Fetch = (url, data = {}, method = 'GET') => {
       case 400:
         throw new Error('没有权限访问');
       case 401:
+        const id = Taro.getStorageSync('sid')
+        const password = Taro.getStorageSync('pwd')
+        if ( id&&password ) {
+          Taro.request({
+            url: 'http://47.97.74.180:9090/lonely_planet/v1/login/',
+            data: {
+              sid:id,
+              pwd:password
+            },
+            method:'POST',
+            header:{'content-type': 'application/json'}
+          }).then( back => {
+            Taro.setStorage({
+              key: 'token',
+              data: back.data.token,
+            })
+          })
+        }
         if (res.data) {
           return res.data;
         } else {

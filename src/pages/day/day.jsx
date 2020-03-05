@@ -18,6 +18,7 @@ export default class Day extends Component {
   state={
     content:[],
     page:0,
+    disable:false,
     chosen:'type=1'
   }
 
@@ -31,7 +32,7 @@ export default class Day extends Component {
           const content = data.content
           this.setState({ content })
           if (parseInt(data.num)<6) {
-            this.setState({ page:0 })
+            this.setState({ page:0, disable:true })
           } else {
             this.setState({ page:6 })
           }
@@ -64,7 +65,7 @@ export default class Day extends Component {
           const content = data.content
           this.setState({ content })
           if (parseInt(data.num)<6) {
-            this.setState({ page:0 })
+            this.setState({ page:0, disable:true })
           } else {
             this.setState({ page:6 })
           }
@@ -83,30 +84,32 @@ export default class Day extends Component {
 
   onChangeInfo = (index) => {
     let { chosen } = this.state
-    const { page } = this.state
+    const { page, disable } = this.state
     let info=this.state.content 
-    Fetch(
-      `requirement/square/?limit=1&page=${page}&${chosen}`,
-      {},
-      'GET'
-      ).then(data => {
-        if (data.msg==='get result successful') {
-          const content = data.content[0]
-          info.splice(index,1,content)
-          this.setState({ content:info, page:page+1 })
-        } else if (data.msg==='none') {
-          Taro.showToast({
-            title: '让我们重新开始=W=',
-            icon: 'none'
-          })
-          this.setState({ page: 0 })
-        } else {
-          Taro.showToast({
-            title: '服务器错误',
-            icon: 'none'
-          }) 
-        }
-    })
+    if (!disable) {
+      Fetch(
+        `requirement/square/?limit=1&page=${page}&${chosen}`,
+        {},
+        'GET'
+        ).then(data => {
+          if (data.msg==='get result successful') {
+            const content = data.content[0]
+            info.splice(index,1,content)
+            this.setState({ content:info, page:page+1 })
+          } else if (data.msg==='none') {
+            Taro.showToast({
+              title: '让我们重新开始=W=',
+              icon: 'none'
+            })
+            this.setState({ page: 0 })
+          } else {
+            Taro.showToast({
+              title: '服务器错误',
+              icon: 'none'
+            }) 
+          }
+      })
+    }
   }
 
   toCreateNeeds () {
