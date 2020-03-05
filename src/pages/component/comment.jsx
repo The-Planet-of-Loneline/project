@@ -2,9 +2,13 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image, Button, Input } from '@tarojs/components'
 import Dialog from './Dialog'
 import './comment.scss'
+import Fetch from '../../service/fetch'
 
 
 export default class Comment extends Component {
+    static defaultProps = {
+        Debunkid: 0,
+    }
     state = {
         inpuValue: '说点什么吧...',
     } 
@@ -21,6 +25,14 @@ export default class Comment extends Component {
     handleClose(){
         if (this.state.inpuValue != '' && this.state.inpuValue != '说点什么吧...'){
         this.props.onCloseInput()
+            Fetch(`comment/create/?secretId=${this.props.Debunkid}`,
+            {
+                comment:this.state.inpuValue
+            },
+            'POST').then(res => {
+                console.log(res)
+                
+            })
         }
     }
     handleCloseComment(){

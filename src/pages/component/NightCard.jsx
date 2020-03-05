@@ -1,8 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image} from '@tarojs/components'
 import '../nighthome/NightCard.scss'
-import upgrade from '../img/upgrade.png'
-import Fetch from '../../service/fetch'
 import img0 from '../../assets/user_img/img0.png'
 import img1 from '../../assets/user_img/img1.png'
 import img2 from '../../assets/user_img/img2.png'
@@ -13,13 +11,15 @@ import img6 from '../../assets/user_img/img6.png'
 import img7 from '../../assets/user_img/img7.png'
 import img8 from '../../assets/user_img/img8.png'
 import img9 from '../../assets/user_img/img9.png'
+import upgrade from '../img/upgrade.png'
 
 export default class NightCard extends Component{
     static defaultProps ={
         textValue: '',
         number: 0,
         color:'',
-        sendTime:''
+        sendTime:'',
+        Debunkid: 0,
     }
     state={
         name:'',
@@ -37,7 +37,7 @@ export default class NightCard extends Component{
     
     toComment(){
         Taro.navigateTo({
-            url:`/pages/commentNight/comment?text=${this.props.textValue}&&color=${this.props.color}&&time=${this.props.sendTime}`
+            url:`/pages/commentNight/comment?text=${this.props.textValue}&&color=${this.props.color}&&Debunkid=${this.props.Debunkid}`
         })
     }
     upgrade(){
@@ -45,37 +45,12 @@ export default class NightCard extends Component{
     }
 
     render(){
-        let colorOne = 'rgba(127, 163, 157, 1)'
-        let colorTwo = 'rgba(132, 120, 145, 1)'
-        let colorThree = 'rgba(177, 146, 146, 1)'
+      
         let { number } = this.props
-        switch (number) {
-            case 0: colorOne = 'rgba(127, 163, 157, 1)'
-                colorTwo = 'rgba(177, 146, 146, 1)'
-                colorThree = 'rgba(90, 125, 139, 1)'
-            break;
-            case 1: colorOne = 'rgba(132, 120, 145, 1)'
-                colorTwo = 'rgba(90, 125, 139, 1)'
-                colorThree = 'rgba(127, 163, 157, 1)' 
-            break;
-            case 2: colorOne = 'rgba(177, 146, 146, 1)' 
-                colorTwo = 'rgba(127, 163, 157, 1)'
-                colorThree = 'rgba(132, 120, 145, 1)' 
-            break;
-            case 3: colorOne = 'rgba(90, 125, 139, 1)'
-                colorTwo = 'rgba(132, 120, 145, 1)'
-                colorThree = 'rgba(177, 146, 146, 1)' 
-            break;
-        }
-        const backgroundColorTwo = {
-            background: colorTwo
-        }
         const backgroundColorOne = {
             background: this.props.color
         }
-        const backgroundColorThree = {
-            background: colorThree
-        }
+      
         switch (number) {
             case 0:this.setState({name:img0}) 
                 break;
@@ -116,8 +91,6 @@ export default class NightCard extends Component{
                   </View> 
                </View>
                 <Image src={upgrade} className='upgrade' onClick={this.upgrade.bind(this)} />
-                <View className='cardTwo' style={backgroundColorTwo}></View>
-                <View className='cardThree' style={backgroundColorThree}></View>
             </View>
         )
     }

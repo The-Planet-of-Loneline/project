@@ -14,17 +14,19 @@ export default class Index extends Component {
     bgcolor:'',
     time:'',
     num: 0,
+    debunkid: 0,
   }
 
   componentWillMount () {
-    Fetch('secret/square/',
+    Fetch(`secret/square/`,
     {},
-    'GET').then(res => {
+    'GET').then(res => { 
       this.setState({
         text:res.secret.Content,
         bgcolor:res.secret.Colour,
         time:res.secret.SendTime,
-        num:res.number
+        num:res.number,
+        debunkid:res.secret.Debunkid
       })
     })
   }
@@ -58,17 +60,18 @@ export default class Index extends Component {
          text: res.secret.Content,
          bgcolor: res.secret.Colour,
          time: res.secret.SendTime,
-         num:res.number
+         num:res.number,
+         debunkid: res.secret.Debunkid
        })
      })
  } 
 
   render () {
-    let {text, bgcolor,time,num} = this.state
+    let {text, bgcolor,time,num,debunkid} = this.state
     return (
      <View className='all'>
         <Head colorTA='rgba(242, 245, 251, 1)' colorWrite='rgba(185, 189, 203, 1)' onToWrite={this.toWrite.bind(this)} />
-       <NightCard textValue={text} color={bgcolor} sendTime={time} onupdate={this.update.bind(this)} number={num}  />
+       <NightCard textValue={text} color={bgcolor}  sendTime={time} onupdate={this.update.bind(this)} number={num}  Debunkid={debunkid} />
        <Footer onToMine={this.toMine.bind(this)} /> 
      </View>
      //头部结束

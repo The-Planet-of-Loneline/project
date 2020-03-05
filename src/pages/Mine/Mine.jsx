@@ -10,18 +10,16 @@ export default class Index extends Component {
     constructor(props){
         super(props)
         this.state={
-            history: [{}
-            ], 
+            history: [], 
         }
     }
     componentWillMount() {
         Fetch('secret/history/',
         {},
         'GET').then(res => {
-            console.log(res.history)
             this.setState({
                 history:res.history
-            },()=>{console.log(this.state.history)})
+            })
         })
      }
 
@@ -62,7 +60,8 @@ export default class Index extends Component {
                        return <HistoryCard textValue={history.Content} 
                        sendTime={history.SendTime} 
                        key={history.Debunkid} 
-                       bgcolor={history.Colour} />
+                       bgcolor={history.Colour} 
+                       Debunkid={history.Debunkid} />
                    })}
                    
             </View>

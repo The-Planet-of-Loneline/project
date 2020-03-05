@@ -37,15 +37,15 @@ export default class CardHistory extends Component {
 
     render() {
         let { showDeleteModel } = this.state
-        let {color ,time,text} = this.$router.params 
+        let {color ,time,text,Debunkid} = this.$router.params 
         return (
             <View className='all'>
                 <View className='header'>
                     <View className='head'>历史记录</View>
                 </View>
-                {showDeleteModel ? <DeleteCard onCloseDelete={this.CloseDelete.bind(this)} /> : null}
+                {showDeleteModel ? <DeleteCard onCloseDelete={this.CloseDelete.bind(this)} Debunkid={Debunkid} /> : null}
                 <Image src={Delete} className='delete' onClick={this.delete.bind(this)} />
-                <SecretCard textValue={text} showComment={false} color={color} time={time} /> 
+                <SecretCard textValue={text} showComment={false} color={color} time={time} Debunkid={Debunkid} /> 
                 <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false} onToSecret={this.toSecret.bind(this)} />
             </View>
             //头部结束

@@ -6,14 +6,15 @@ export default class HistoryCard extends Component{
     static defaultProps = {
         textValue:'111',
         sendTime:'',
-        bgcolor:''
+        bgcolor:'',
+        Debunkid: 0,
     }
     componentWillMount(){}
    
     toCard(){
       let {bgcolor,sendTime,textValue} = this.props 
         Taro.navigateTo({
-            url:`/pages/cardHistory/cardHistory?color=${bgcolor}&&time=${sendTime}&&text=${textValue}`
+            url:`/pages/cardHistory/cardHistory?color=${bgcolor}&&time=${sendTime}&&text=${textValue}&&Debunkid=${this.props.Debunkid}`
         })
     }
 

@@ -10,7 +10,7 @@ export default class Comment extends Component {
         textValue: '你好呀'
     }
 
-    componentWillMount() { console.log(JSON.stringify(this.$router.params.text)) }
+    componentWillMount() { }
 
     componentDidMount() { }
 
@@ -38,7 +38,7 @@ export default class Comment extends Component {
         return (
             <View className='all'>
                 <Head colorTA='rgba(242, 245, 251, 1)' onToWrite={this.toWrite.bind(this)}  />
-                <SecretCard textValue={this.$router.params.text} color={this.$router.params.color} time={this.$router.params.time} />
+                <SecretCard textValue={this.$router.params.text} color={this.$router.params.color} time={this.$router.params.time} Debunkid={this.$router.params.Debunkid} />
                 <Footer onToMine={this.toMine.bind(this)} />
             </View>
             

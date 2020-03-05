@@ -15,29 +15,6 @@
     left: 45px;
 }
 
-.cardTwo {
-    width: 593px;
-    height: 584px;
-    background: rgba(173, 143, 143, 1);
-    border: 1px solid rgba(110, 110, 110, 1);
-    border-radius: 15px;
-    position: absolute;
-    z-index: 2;
-    left: 77px;
-    top: 260px;
-}
-
-.cardThree {
-    width: 486px;
-    height: 479px;
-    background: rgba(124, 159, 154, 0.97);
-    border-radius: 15px;
-    position: absolute;
-    z-index: 1;
-    left: 130px;
-    top: 390px
-}
-
 .avatar {
     display: inline-block;
     margin: 20px 10px 10px 45px;
@@ -79,6 +56,6 @@
     margin-top: 100px;
     margin-left: 550px;
     position: absolute;
-    z-index: 4;
+    z-index: 3;
     top: 600px;
 }
