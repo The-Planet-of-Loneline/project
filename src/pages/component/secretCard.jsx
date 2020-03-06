@@ -18,10 +18,11 @@ export default class SecretCard extends Component {
     state = {
         showInput: false,
         comment:[{}],
+        page: 1,
     }
 
     componentWillMount() {
-        Fetch(`comment/history/:secret_id?secretId=${this.props.Debunkid}&&page=${0}`,
+        Fetch(`comment/history/:secret_id?secretId=${this.props.Debunkid}&&page=${this.state.page}`,
         {},
         'GET').then(res => {
             this.setState({
@@ -52,7 +53,26 @@ export default class SecretCard extends Component {
             showInput:false,
         })
     }
+    onPullDownRefresh() {
 
+    }
+    onReachBottom() {
+        let { page } = this.state
+        if (this.state.comment.length % 3 == 0) {
+            this.setState({
+                page: page + 1
+            }, () => {
+                console.log(page)
+                    Fetch(`comment/history/:secret_id?secretId=${this.props.Debunkid}&&page=${this.state.page}`,
+                    {},
+                    'GET').then(res => {
+                        this.setState({
+                            comment: this.state.comment.concat(res.history)
+                        })
+                    })
+            })
+        }
+    }
     render() {
         let {color} = this.props
         const backgroundColor = {

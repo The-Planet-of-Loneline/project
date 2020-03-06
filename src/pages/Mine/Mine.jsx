@@ -10,11 +10,12 @@ export default class Index extends Component {
     constructor(props){
         super(props)
         this.state={
-            history: [], 
+            history: [],
+            page: 1, 
         }
     }
     componentWillMount() {
-        Fetch('secret/history/',
+        Fetch(`secret/history?page=${this.state.page}`,
         {},
         'GET').then(res => {
             this.setState({
@@ -43,9 +44,28 @@ export default class Index extends Component {
          })
              
     } 
-
+    onPullDownRefresh(){
+        let { page } = this.state
+        if (this.state.history.length % 4 == 0) {
+            this.setState({
+                page: page + 1
+            }, () => {
+                Fetch(`secret/history?page=${this.state.page}`,
+                    {},
+                    'GET').then(res => {
+                        this.setState({
+                            history: this.state.history.concat(res.history)
+                        })
+                    })
+            })
+        } 
+    }
+    onReachBottom(){
+    }
+    
     config = {
-        navigationBarTitleText: '孤独星球'
+        navigationBarTitleText: '孤独星球',
+        enablePullDownRefresh: true,
     }
     render() {
         return (
