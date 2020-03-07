@@ -13,24 +13,24 @@ export default class CardDetails extends Component {
   state={
     show:false,
     content: {
-      content: '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
-      date: '周一 周三 周日',
-      place: '教学楼',
-      post_time: '2020.02.29',
-      sender_nick_name: 'shi-zhong',
+      content: '',
+      date: '',
+      place: '',
+      post_time: '',
+      sender_nick_name: '',
       sender_portrait: 4,
-      tag: '看书',
+      tag: '',
       time_end: 0,
       time_from: 0,
-      title: '标题',
-      type: '学习'
+      title: '',
+      type: ''
     }
   }
 
   componentWillMount () {
     const requirement_id = parseInt(this.$router.params.req_id)
     Fetch(
-      `requirement/view/:${requirement_id}/`,
+      `requirement/view/${requirement_id}/`,
       {},
       'GET'
     ).then(data =>{
@@ -42,7 +42,7 @@ export default class CardDetails extends Component {
           content: {
             content: '该需求已被删除',
             date: '周八',
-            place: '',
+            place: '极乐净土',
             post_time: '2020.4.31',
             sender_nick_name: 'NOT FOUND',
             sender_portrait: 0,
@@ -120,7 +120,7 @@ export default class CardDetails extends Component {
           <View className='details'>
             <View className='tag-container'>
               <View className='spe-tag'>{content.type}</View>
-              <View className='spe-tag'>{content.tag}</View>
+              {content.tag!==''?<View className='spe-tag'>{content.tag}</View>:null}
               <View className='spe-tag'>{content.place}</View>
             </View>
             <View className='title'>{content.title}</View>

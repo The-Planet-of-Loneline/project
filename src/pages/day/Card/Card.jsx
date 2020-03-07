@@ -48,7 +48,7 @@ export default class Card extends Component {
     return (
       <View className={'b-tag '+this.changeColor(index)} onClick={this.toCardDetail}>
         <View className='tag-container'>
-          <View className='spe-tag'>{tag}</View>
+          {tag!==''?<View className='spe-tag'>{tag}</View>:null}
           <View className='spe-tag'>{place}</View>
         </View>
         <View className='title'>{title}</View>

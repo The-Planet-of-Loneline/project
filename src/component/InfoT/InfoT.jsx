@@ -4,7 +4,7 @@ import './infoT.scss'
 import Close from '../../assets/png/close.png'
 import Fetch from '../../service/fetch'
 
-export default class Info extends Component {
+export default class InfoT extends Component {
 
   static defaultProps = {
     pass: {
@@ -42,7 +42,7 @@ export default class Info extends Component {
     // reject function
     const application_id = this.props.req_id
     Fetch(
-      `application/solve/${application_id}/?status=3`,
+      `application/${application_id}/?status=3`,
       {
         contact_way: ['无','无'],
         content: "拒绝"
@@ -53,6 +53,7 @@ export default class Info extends Component {
         Taro.showToast({
           title:'已拒绝'
         })
+        this.props.onChangeCheck(2)
       } else if (data.msg==='需求已经被删除了!') {
         Taro.showToast({
           title:'您已删除'
@@ -68,15 +69,19 @@ export default class Info extends Component {
     })
     this.props.onChangeShowD('0')
   }
+ 
+  handleTouchMove (e) {
+    e.stopPropagation()
+  }
 
   render () {
-    const { name, college, sex, qq, grade, tel, msg } =this.props.pass
+    const { able, name, college, sex, qq, grade, tel, msg } =this.props
     return (
-      <View className='push-container'>
+      <View className='push-container' onTouchMove={this.handleTouchMove}>
         <View className='push'>
           <View className='header'>
             <Text className='words'>个人资料&amp;联系方式</Text>
-            <Image src={Close} className='close' onClick={this.changeShow.bind(this)} />
+            <Image src={Close} className='close' onClick={this.changeShow} />
           </View>
           <View className='fake-table'>
             <View className='fake-cell'>昵称：{name}</View>
@@ -87,12 +92,14 @@ export default class Info extends Component {
             <View className='fake-cell'>Tel：{tel}</View>
           </View>
           <View>
-            <View className='sentence'>{msg}</View>
+            <View className={able?'sentence type-t':'sentence type-s'}>{msg}</View>
           </View>
-          <View className='sub-con'>
+          {able
+          ?<View className='sub-con'>
             <View className='sub-button' onClick={this.agree}>同意</View>
             <View className='sub-button' onClick={this.reject}>拒绝</View>
           </View>
+          :null}
         </View>
       </View>
     )

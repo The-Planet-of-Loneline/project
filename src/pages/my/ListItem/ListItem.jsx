@@ -1,27 +1,22 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import Info from '../../../component/Info/Info'
-import InfoS from '../../../component/InfoS/InfoS'
 import InfoT from '../../../component/InfoT/InfoT'
 import Eye from './imgs/eye.png'
-import UserImage from './imgs/UserImage.png'
+import Accept from './imgs/accept.png'
+import Refuse from './imgs/refuse.png'
+import UserImg from '../../../component/UserImg/UserImg'
 import './listItem.scss'
 
 export default class ListItem extends Component {
-  constructor(props){
-    super(props)
-    
-  }
   
   state = {
-    title:'这里是标题',
-    time:'2019.2.13',
-    usename:'这里是用户名',
-    show:false,
-    showD:'0'
+    // checked 0/1 accept/2 refuse
+    checked:0,
+    showD:'0',
   }
 
-  componentWillMount () { }
+  componentWillMount () {}
 
   componentDidMount () { }
 
@@ -32,26 +27,18 @@ export default class ListItem extends Component {
   componentDidHide () { }
 
   toMyDetail () {
-    const requirements_id = this.props.info.requirements_id
+    const requirement_id = this.props.info.requirement_id
     Taro.navigateTo({
-      url:`../myDetail/myDetail?req_id=${requirements_id}`
+      url:`../myDetail/myDetail?req_id=${requirement_id}`
     })
   }
 
   toDetail () {
-    const requirements_id = this.props.info.requirements_id
+    const requirement_id = this.props.info.requirement_id
+    console.log('list',requirement_id)
     Taro.navigateTo({
-      url:`../cardDetails/cardDetails?indexId=${requirements_id}&able=disable`
+      url:`../cardDetails/cardDetails?indexId=3&able=disable&req_id=${requirement_id}`
     })
-  }
-
-  changeShow = () => {
-    const { show } =this.state
-    if (show) {
-      this.setState({ show:false })
-    } else {
-      this.setState({ show:true })
-    }
   }
 
   changeShowD = (index) => {
@@ -59,31 +46,52 @@ export default class ListItem extends Component {
   }
 
   eyeCli (e) {
-    this.changeShow()
-    e.stopPropagation();
-  }
-
-  eyeCliTwo (e) {
     this.changeShowD('1')
-    e.stopPropagation();
+    e.stopPropagation()
   }
 
-  modeTrans () {
-    const { mode, info } = this.props
-    const { title, time, usename } = this.state
-    const accepts = ['接受了你的申请','拒绝了你的申请']
-    switch (mode) {
-      // history
-      case '1' : {return (
-        <View className='list-item' onClick={this.toMyDetail}>
+  changeCheck = (check) => {
+    this.setState({ checked: check })
+  }
+
+  render () {
+     const { mode, info } = this.props
+     const { checked, showD } = this.state
+     const accepts = ['接受了你的申请','拒绝了你的申请']
+
+    return (
+      <View>
+        {/* history */}
+        {mode==='0'
+        ?<View className='list-item' onClick={this.toMyDetail}>
           <View className='tag'>{info.tag}</View>
           <View className='title'>{info.title}</View>
           <View className='float-con'><View className='time'>{info.post_time}</View></View>
         </View>
-      )}
-      // response
-      case '2' : {return(
-        <View className='list-item' onClick={this.toDetail}>
+        :null}
+        {/* apply */}
+        {mode==='1'
+        ?<View className='list-item' onClick={this.toDetail}>
+          <View className='float-con'><View className='time'>{info.send_time}</View></View>
+          <View className='user-info'>
+            <UserImg  size='size-apply' userimg={info.portrait} />
+            <View className='user-name'>{info.sender_nickname}</View>
+            <Image src={Eye} className='eye-two' onClick={this.eyeCli} />
+          </View>
+          <View className='check'>
+            <View className='title-thr'>{info.title}</View>
+            {!info.red_point
+            ?<Image src={Accept} className='accept' />
+            :null}
+            {info.red_point&&checked
+            ?<Image src={checked-1?Refuse:Accept} className={checked-1?'refuse':'accept'} />
+            :null}
+          </View>
+        </View>
+        :null}
+        {/* response */}
+        {mode==='2'
+        ?<View className='list-item' onClick={this.toDetail}>
           <View className='float-con'><View className='time'>{info.confirm_time}</View></View>
           <View className='msg-con'>
             <Text className='name'>{info.nick_name}</Text>
@@ -91,77 +99,49 @@ export default class ListItem extends Component {
           </View>
           <View className='tit-con'>
             <View className='title-two'>{info.title}</View>
-            {info.status-2?<Image src={Eye} className='eye' onClick={this.eyeCli} />:0}
+            {info.status===2?<Image src={Eye} className='eye' onClick={this.eyeCli} />:null}
           </View>
         </View>
-      )}
-      // aplly
-      case '3' : {return(
-        <View className='list-item' onClick={this.toDetail}>
-          <View className='float-con'><View className='time'>{time}</View></View>
-          <View className='user-info'>
-            <Image src={UserImage} className='image-s' />
-            <View className='user-name'>{usename}</View>
-            <Image src={Eye} className='eye-two' onClick={this.eyeCliTwo} />
-          </View>
-          <View className='title'>{title}</View>
-        </View>
-      )}
-    }
-  }
-
-// S name:'这里是昵称',
-// college:'XXX学院',
-// sex:'男',
-// qq:'吴',
-// grade:'19级',
-// tel:'12345678910',
-// msg: '需求(demand) 
-
-  explainShow () {
-    const { mode, info } = this.props
-    const { show, showD } = this.state
-    if (mode==='2'&&show) {
-      const pass = {
-        name: info.nick_name,
-        college: info.college,
-        sex: info.gender,
-        qq: info.contact_way[0],
-        grade: info.grade,
-        tel: info.contact_way[1],
-        msg: info.content
-      }
-      return (<InfoS onChangeShow={this.changeShow} pass={pass} />)
-    }
-    if (mode==='3') {
-      switch (showD) {
-        case '0' : {return null}
-        case '1' : {
-          const pass = {
-            name: info.sender_nickname,
-            college: info.college,
-            sex: info.gender,
-            qq: info.contact_way[0],
-            grade: info.grade,
-            tel: info.contact_way[1],
-            msg: info.content
-          }
-          return (<InfoT onChangeShowD={this.changeShowD} pass={pass} />)}
-        case '2' : {return (
-        <Info
+        :null}
+        {/* 回复提醒 */}
+        {(mode==='2'&&showD==='1')
+        ?<InfoT
+          onChangeShowD={this.changeShowD.bind(this)}
+          able={false}
+          name={info.nick_name}
+          college={info.college}
+          sex={info.gender}
+          qq={info.contact_way[0]}
+          grade={info.grade}
+          tel={info.contact_way[1]}
+          msg={info.content}
+        />
+        :null}
+        {/* 申请提醒切换 */}
+        {(mode==='1'&&showD==='1')
+        ?<InfoT
+          onChangeShowD={this.changeShowD.bind(this)}
+          onChangeCheck={this.changeCheck.bind(this)}
+          req_id={info.application_id}
+          able={info.red_point&&!checked}
+          name={info.sender_nickname}
+          college={info.college}
+          sex={info.gender}
+          qq={info.contact_way[0]}
+          grade={info.grade}
+          tel={info.contact_way[1]}
+          msg={info.content}
+        />
+        :null}
+        {(mode==='1'&&showD==='2')
+        ?<Info
           onChangeShowCli={this.changeShowD.bind(this,'1')} 
           onChangeShowSub={this.changeShowD.bind(this,'0')}
+          onChangeCheck={this.changeCheck}
+          passed_id={info.application_id}
           from='puter'
-        />)}
-      }
-    }
-  }
-
-  render () {
-    return (
-      <View>
-        {this.modeTrans()}
-        {this.explainShow()}
+        />
+        :null}
       </View>
     )
   }

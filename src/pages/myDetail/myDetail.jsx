@@ -38,7 +38,7 @@ export default class myDetail extends Component {
           content: {
             content: '该需求已被删除, 历史列表未刷新',
             date: '周八',
-            place: '',
+            place: '极乐净土',
             post_time: '2020.4.31',
             sender_nick_name: 'NOT FOUND',
             sender_portrait: 0,
@@ -74,7 +74,7 @@ export default class myDetail extends Component {
 
   sure () {
     // delete code
-    const requirement_id = parseInt(this.$router.params.req_id)
+    const requirement_id = this.$router.params.req_id
     Fetch(
       `requirement/${requirement_id}/`,
       {},
@@ -83,6 +83,10 @@ export default class myDetail extends Component {
       if (data.msg === 'success') {
         Taro.showToast({
           title: '删除成功'
+        })
+        Taro.setStorage({
+          key:'delete_if',
+          data: true
         })
         Taro.navigateBack({
           delta: 1
@@ -94,6 +98,7 @@ export default class myDetail extends Component {
         })
       }
     })
+    this.setState({ show: false })
   }
 
   render () {
@@ -123,7 +128,7 @@ export default class myDetail extends Component {
           <View className='details'>
             <View className='tag-container'>
               <View className='spe-tag'>{content.type}</View>
-              <View className='spe-tag'>{content.tag}</View>
+              {content.tag!==''?<View className='spe-tag'>{content.tag}</View>:null}
               <View className='spe-tag'>{content.place}</View>
             </View>
             <View className='content'>{content.content}</View>

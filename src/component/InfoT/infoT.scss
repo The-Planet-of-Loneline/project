@@ -54,7 +54,6 @@
 }
 .sentence{
   width:522px;
-  height:165px;
   background:rgba(255,255,255,1);
   border:1px solid rgba(112,112,112,1);
   opacity:1;
@@ -65,6 +64,12 @@
   font-weight:400;
   color:rgba(116,116,116,1);
   text-align: start;
+}
+.type-t{
+  height:165px;
+}
+.type-s{
+  height:210px;
 }
 .sub-con{
   width:522px;

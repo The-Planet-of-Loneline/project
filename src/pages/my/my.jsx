@@ -3,7 +3,7 @@ import { View, Image, Text } from '@tarojs/components'
 import Footer from '../../component/Footer/Footer'
 import UserImg from '../../component/UserImg/UserImg'
 import Icon from './icon.png'
-import List from './List/List'
+import ListItem from './ListItem/ListItem'
 import Fetch from '../../service/fetch'
 import './my.scss'
 
@@ -22,10 +22,22 @@ export default class My extends Component {
       big:false,
       show:false,
       small:'0'
-    }
+    },
+    history:[],
+    apply:[],
+    respone:[],
+    blank_msg:['快去发布需求吧！','看来没人鸟你呢！','没人关注你呢！'],
+    // history_bottom apply_ bottom reply_bottom
+    bottom:[false,false,false],
+    page:[1,1,1]
   }
 
   componentWillMount () {
+    let bottom = [false,false,false]
+    Taro.setStorage({
+      key: 'delete_if',
+      data: false
+    })
     Fetch(
       'user/info/',
       {},
@@ -46,6 +58,55 @@ export default class My extends Component {
         data: data.nickname
       })
     })
+    // 历史发布
+    Fetch(
+      'requirement/history/?limit=6&page=0',
+      {},
+      'GET'
+    ).then(data => {
+      if (data.msg==='success'){
+        if (data.num) { this.setState({ history: data.history }) }
+        if (data.num<3&&data.num) { bottom[0] = true }
+      } else if (data.msg==='Fail.') {
+        Taro.showToast({
+          title: '服务器错误',
+          icon: 'none'
+        })
+      }
+    })
+    // 申请提醒
+    Fetch(
+      'application/todo/?limit=6&page=0',
+      {},
+      'GET'
+    ).then(data => {
+      if (data.msg==='success'){
+        if (data.num) { this.setState({ apply: data.applications }) }
+        if (data.num<6&&data.num) { bottom[1] = true }
+      } else if (data.msg==='Fail.') {
+        Taro.showToast({
+          title: '服务器错误',
+          icon: 'none'
+        })
+      }
+    })
+    // 回复提醒
+    Fetch(
+      'remind/day/remindbox/?limit=6&page=0',
+      {},
+      'GET'
+    ).then(data => {
+      if (data.msg==='success'){
+        if (data.num) { this.setState({ respone: data.content}) }
+        if (data.num<6&&data.num) { bottom[2] = true }
+      } else if (data.msg==='Fail.') {
+        Taro.showToast({
+          title: '服务器错误',
+          icon: 'none'
+        })
+      }
+    })
+    this.setState({ bottom })
    }
 
   componentDidMount () { }
@@ -54,10 +115,116 @@ export default class My extends Component {
 
   componentDidShow(){
     const userName = Taro.getStorageSync('Nickname')
+    const delete_if = Taro.getStorageSync('delete_if')
+    let { bottom } = this.state
     this.setState({ userName })
+    if (delete_if) {
+      bottom[0]=false
+      Fetch(
+        'requirement/history/?limit=6&page=0',
+        {},
+        'GET'
+      ).then(data => {
+        if (data.msg==='success'){
+          if (data.num) { this.setState({ history: data.history }) }
+          if (data.num<3&&data.num) { bottom[0] = true }
+        } else if (data.msg==='Fail.') {
+          Taro.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          })
+        }
+      })
+    }
   }
 
   componentDidHide () { }
+
+  config = {
+    onReachBottomDistance: 130
+  }
+
+  onReachBottom(){
+    const { bottom, draw } = this.state
+
+    switch (draw.small) {
+      case '0' :if (!bottom[0]) {
+        this.pullList('requirement/history/','0')
+      }
+        break
+      case '1' :if (!bottom[1]) {
+        this.pullList('application/todo/','1')
+      }
+        break
+      case '2' :if (!bottom[2]) {
+        this.pullList('remind/day/remindbox/','2')
+      }
+        break
+    }
+  }
+
+  pullList (url,index) {
+    const { history, apply, respone } = this.state
+    let { page, bottom } = this.state
+    Fetch(
+      `${url}?limit=6&page=${page[index]}`,
+      {},
+      'GET'
+    ).then(data => {
+      if (data.msg==='success') {
+        if (data.num===3) { 
+          page[index]++
+        } else {
+          bottom[index]=true
+          this.setState({ bottom })
+        }
+        if (data.num) {
+          switch (index) {
+            case '0':this.setState({ history: history.concat(data.history), page})
+            break
+            case '1':this.setState({ apply: apply.concat(data.applications), page })
+            break
+            case '2':this.setState({ respone: respone.concat(data.content), page })
+            break
+          }
+        }
+      } else if (data.msg==='Fail.') {
+        Taro.showToast({
+          title: '服务器错误',
+          icon: 'none'
+        })
+      }
+    })
+  }
+
+  explainList (mode) {
+    const { history, respone, apply } = this.state
+    switch (mode){
+      case '0' : {
+        return history 
+      }
+      case '1' : {
+        return apply
+      }
+      case '2' : {
+        return respone
+      }
+    }
+  }
+
+  decideLength (mode) {
+    const { history, respone, apply } = this.state
+    let length = 0
+    switch (mode) {
+      case '0' : length = history.length
+      break
+      case '1' : length = apply.length
+      break
+      case '2' : length = respone.length
+      break
+    }
+    return length
+  }
 
   handleLeft () {
     this.setState({
@@ -97,14 +264,16 @@ export default class My extends Component {
     })
   }
 
+  handleTouchMove (e) {
+    e.stopPropagation()
+  }
+
   render () {
-    const { userName } = this.state
-    const { user } = this.state
-    const { draw } = this.state
+    const { userName, user, draw, blank_msg, bottom } = this.state
     return (
       <View>
-        {draw.show?<View className='shadow'></View>:null}
-        <View className='stick'>
+        {draw.show?<View className='shadow' onTouchMove={this.handleTouchMove}></View>:null}
+        <View className='stick' onTouchMove={this.handleTouchMove}>
           <View className='user-container'>
             <View className='color-part'>
               <View className='user-info'>
@@ -147,10 +316,15 @@ export default class My extends Component {
           :null
             }
         </View>
-        <View className='need-list'>
-          <View className='blank-top'></View>
-          <List mode={draw.small} />
-        </View>
+        <View className='blank-top'></View>
+          {this.decideLength(draw.small)
+          ?this.explainList(draw.small).map((info, index) => {
+            return (<ListItem key={index+1} mode={draw.small} info={info} />)
+          })
+          :<View className='blank'>{blank_msg[draw.small]}</View>
+          }
+          {bottom[draw.small]?<View className='reach-bottom'>----没见过底线啊----</View>:null}
+        <View className='blank-bottom'></View>
         <Footer mode='my' />
       </View>
     )

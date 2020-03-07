@@ -55,7 +55,7 @@ export default class Info extends Component {
     const info = this.proinfo()
     if (from==='puter') {
       Fetch(
-        `application/solve/${passed_id}/?status=2`,
+        `application/${passed_id}/?status=2`,
         info,
         'PUT'
       ).then(data => {
@@ -63,6 +63,13 @@ export default class Info extends Component {
           Taro.showToast({
             title:'已接受'
           })
+          // 更新 red point
+          Fetch(
+            `application/done/:${passed_id}/`,
+            {},
+            'POST'
+          )
+          this.props.onChangeCheck(1)
         } else if (data.msg==='需求已经被删除了!') {
           Taro.showToast({
             title:'您已删除'
@@ -150,10 +157,14 @@ export default class Info extends Component {
     })
   }
 
+  handleTouchMove (e) {
+    e.stopPropagation()
+  }
+
   render () {
     const { checked, qq, tel, msg } =this.state
     return (
-      <View className='push-container'>
+      <View className='push-container' onTouchMove={this.handleTouchMove}>
         <View className='push'>
           <View className='header'>
             <Text className='words'>编辑联系方式</Text>
