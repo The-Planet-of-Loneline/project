@@ -54,7 +54,13 @@ export default class SecretCard extends Component {
         })
     }
     onPullDownRefresh() {
-
+        Fetch(`comment/history/:secret_id?secretId=${this.props.Debunkid}&&page=${1}`,
+            {},
+            'GET').then(res => {
+                this.setState({
+                    comment: res.history
+                })
+            })
     }
     ReachBottom() {
         let { page } = this.state
@@ -62,7 +68,6 @@ export default class SecretCard extends Component {
             this.setState({
                 page: page + 1
             }, () => {
-                console.log(page)
                     Fetch(`comment/history/:secret_id?secretId=${this.props.Debunkid}&&page=${this.state.page}`,
                     {},
                     'GET').then(res => {

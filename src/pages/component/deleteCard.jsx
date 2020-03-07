@@ -16,8 +16,7 @@ export default class DeleteCard extends Component {
         Fetch(`secret/delete/:secret_id?secretId=${this.props.Debunkid}`,
         {},
         'DELETE').then(res => {
-            console.log(res)
-            Taro.redirectTo({
+              Taro.redirectTo({
                 url:'/pages/Mine/Mine'
             })
         })
