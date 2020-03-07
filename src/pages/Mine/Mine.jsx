@@ -45,7 +45,8 @@ export default class Index extends Component {
              
     } 
     onPullDownRefresh(){
-        let { page } = this.state
+    }
+    onReachBottom(){
         if (this.state.history.length % 4 == 0) {
             this.setState({
                 page: page + 1
@@ -58,9 +59,7 @@ export default class Index extends Component {
                         })
                     })
             })
-        } 
-    }
-    onReachBottom(){
+        }
     }
     
     config = {

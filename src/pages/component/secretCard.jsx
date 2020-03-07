@@ -56,7 +56,7 @@ export default class SecretCard extends Component {
     onPullDownRefresh() {
 
     }
-    onReachBottom() {
+    ReachBottom() {
         let { page } = this.state
         if (this.state.comment.length % 3 == 0) {
             this.setState({
@@ -86,7 +86,7 @@ export default class SecretCard extends Component {
                    <View className='commentButton'>
                        {this.props.showComment ? <Image src={commentimg} className='comment' onClick={this.onShowInput.bind(this)} /> : null}
                    </View>
-                   <View className='replyContainer'>
+                   <View className='replyContainer' onTouchMove={this.ReachBottom.bind(this)}>
                       {this.state.comment.map((comment)=>{
                           return <ReplyCard 
                           time={comment.CommentTime}
