@@ -49,7 +49,7 @@ export default class Index extends Component {
     onReachBottom(){
         if (this.state.history.length % 4 == 0) {
             this.setState({
-                page: page + 1
+                page: this.state.page + 1
             }, () => {
                 Fetch(`secret/history?page=${this.state.page}`,
                     {},
@@ -64,7 +64,6 @@ export default class Index extends Component {
     
     config = {
         navigationBarTitleText: '孤独星球',
-        enablePullDownRefresh: true,
     }
     render() {
         return (

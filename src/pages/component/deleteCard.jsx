@@ -13,12 +13,17 @@ export default class DeleteCard extends Component {
         this.props.onCloseDelete();
     }
     handleDelete(){
-        Fetch(`secret/delete/:secret_id?secretId=${this.props.Debunkid}`,
+        Fetch(`secret/delete/secret_id?secretId=${this.props.Debunkid}`,
         {},
         'DELETE').then(res => {
-              Taro.redirectTo({
-                url:'/pages/Mine/Mine'
-            })
+        Taro.showToast({
+            title: '删除成功',
+            icon: 'none'
+        })
+            this.props.onCloseDelete() 
+            Taro.redirectTo({
+                url:`/pages/Mine/Mine`
+            }) 
         })
     }
 
