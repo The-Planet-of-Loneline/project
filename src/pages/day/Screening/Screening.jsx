@@ -170,13 +170,13 @@ export default class Screening extends Component {
     let { placeHolder } = this.state
     if (touch) {
       if (which) {
-        placeHolder[1]=''
+        placeHolder[1]=' '
       } else {
         placeHolder[1]='结束时间'
       }
     } else {
       if (which) {
-        placeHolder[0]=''
+        placeHolder[0]=' '
       } else {
         placeHolder[0]='起始时间'
       }
@@ -195,12 +195,8 @@ export default class Screening extends Component {
   }
 
   showScreen () {
-    const { chosen } = this.state
-    const { content } = this.state
+    const { chosen, tStyle, oStyle, content, placeHolder } = this.state
     const { choices } = content
-    const { placeHolder } = this.state
-    const { oStyle } = this.state
-    const { tStyle } = this.state
 
     switch (chosen.which) {
       case 0 :{ return null }
@@ -250,6 +246,7 @@ export default class Screening extends Component {
                 className='enter'
                 maxLength='2'
                 placeholder={placeHolder[0]}
+                placeholderClass='place-enter'
                 value={chosen.during[0]}
                 onInput={this.ifNum.bind(this,0)}
                 onChange={this.onDuring.bind(this,0)}
@@ -261,6 +258,7 @@ export default class Screening extends Component {
                 className='enter'
                 maxLength='2'
                 placeholder={placeHolder[1]}
+                placeholderClass='place-enter'
                 value={chosen.during[1]}
                 onInput={this.ifNum.bind(this,1)}
                 onChange={this.onDuring.bind(this,1)}
@@ -296,40 +294,46 @@ export default class Screening extends Component {
     }
   }
 
+  handleTouchMove(e){
+    e.stopPropagation()
+  }
+
   render () {
     const { chosen } = this.state
     return (
-      <View>
-        <View className='divide'>
-          <View 
-            className={chosen.type === 1?'s-tag chosen':'s-tag'} 
-            onClick={this.changeDate.bind(this,'type',1)}
-          >
-            学习
+      <View onTouchMove={this.handleTouchMove}>
+        <View className='divide-con'>
+          <View className='divide shadow-box'>
+            <View 
+              className={chosen.type === 1?'s-tag chosen':'s-tag'} 
+              onClick={this.changeDate.bind(this,'type',1)}
+            >
+              学习
+            </View>
+            <View 
+              className={chosen.type === 2?'s-tag chosen':'s-tag'}
+              onClick={this.changeDate.bind(this,'type',2)}
+            >
+              运动
+            </View>
+            <View 
+              className={chosen.type === 3?'s-tag chosen':'s-tag'}
+              onClick={this.changeDate.bind(this,'type',3)}
+            >
+              娱乐
+            </View>
+            <View
+              className={chosen.type === 4?'s-tag chosen':'s-tag'}
+              onClick={this.changeDate.bind(this,'type',4)}
+            >
+              其他
+            </View>
           </View>
-          <View 
-            className={chosen.type === 2?'s-tag chosen':'s-tag'}
-            onClick={this.changeDate.bind(this,'type',2)}
-          >
-            运动
+          <View className='divide'>
+            {chosen.type !==4?<View className='ss-tag' onClick={this.changeDate.bind(this,'which',1)}>类别 <Text className='s-tri'>▼</Text></View>:null}
+            <View className='ss-tag' onClick={this.changeDate.bind(this,'which',2)}>时间 <Text className='s-tri'>▼</Text></View>
+            <View className='ss-tag' onClick={this.changeDate.bind(this,'which',3)}>地点 <Text className='s-tri'>▼</Text></View>
           </View>
-          <View 
-            className={chosen.type === 3?'s-tag chosen':'s-tag'}
-            onClick={this.changeDate.bind(this,'type',3)}
-          >
-            娱乐
-          </View>
-          <View
-            className={chosen.type === 4?'s-tag chosen':'s-tag'}
-            onClick={this.changeDate.bind(this,'type',4)}
-          >
-            其他
-          </View>
-        </View>
-        <View className='divide'>
-          {chosen.type !==4?<View className='ss-tag' onClick={this.changeDate.bind(this,'which',1)}>类别 <Text className='s-tri'>▼</Text></View>:null}
-          <View className='ss-tag' onClick={this.changeDate.bind(this,'which',2)}>时间 <Text className='s-tri'>▼</Text></View>
-          <View className='ss-tag' onClick={this.changeDate.bind(this,'which',3)}>地点 <Text className='s-tri'>▼</Text></View>
         </View>
         {this.showScreen()}
         {chosen.which?<View className='shadow' onClick={this.closeScr}></View>:null}

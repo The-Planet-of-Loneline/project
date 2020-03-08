@@ -15,7 +15,8 @@ export default class Info extends Component {
     checked:[0,0],
     qq: '',
     tel: '',
-    msg: ''
+    msg: '',
+    placeHolder:['请输入QQ','请输入手机号']
   }
 
   componentWillMount () { }
@@ -33,10 +34,20 @@ export default class Info extends Component {
   }
 
   getInfo = (kind, event) => {
-    let details = this.state
+    let { qq, tel } = this.state
     const info = event.target.value
-    details[kind]=info
-    this.setState(details)
+    if (!/\D/.test(info)||info==='') {
+      if (kind==='qq') {
+        this.setState({ qq: info })
+      } else {
+        this.setState({ tel: info })
+      }
+    } else {
+      if (kind==='qq') {
+        return qq
+      }
+      return tel
+    }
   }
 
   proinfo(){
@@ -161,8 +172,26 @@ export default class Info extends Component {
     e.stopPropagation()
   }
 
+  changeHolder (touch,which) {
+    let { placeHolder } = this.state
+    if (touch) {
+      if (which) {
+        placeHolder[1]=' '
+      } else {
+        placeHolder[1]='请输入手机号'
+      }
+    } else {
+      if (which) {
+        placeHolder[0]=' '
+      } else {
+        placeHolder[0]='请输入QQ'
+      }
+    }
+    this.setState({ placeHolder })
+  }
+
   render () {
-    const { checked, qq, tel, msg } =this.state
+    const { checked, qq, tel, msg, placeHolder } =this.state
     return (
       <View className='push-container' onTouchMove={this.handleTouchMove}>
         <View className='push'>
@@ -180,9 +209,13 @@ export default class Info extends Component {
               ?<View className='unfoucs'>未选定</View>
               :<Input
                 className='info'
+                placeholder={placeHolder[0]}
+                placeholderClass='place-info'
                 maxLength='11'
                 value={qq}
-                onChange={this.getInfo.bind(this, 'qq')} 
+                onInput={this.getInfo.bind(this, 'qq')}
+                onFocus={this.changeHolder.bind(this,false,true)}
+                onBlur={this.changeHolder.bind(this,false,false)}
               />}
             </View>
             <View className='info-container'>
@@ -193,9 +226,13 @@ export default class Info extends Component {
               {checked[1]
               ?<Input
                 className='info'
+                placeholder={placeHolder[1]}
+                placeholderClass='place-info'
                 maxLength='11'
                 value={tel}
-                onChange={this.getInfo.bind(this, 'tel')}
+                onInput={this.getInfo.bind(this, 'tel')}
+                onFocus={this.changeHolder.bind(this,true,true)}
+                onBlur={this.changeHolder.bind(this,true,false)}
               />
               :<View className='unfoucs'>未选定</View>}
             </View>

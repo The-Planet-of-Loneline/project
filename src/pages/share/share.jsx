@@ -153,7 +153,8 @@ export default class Share extends Component {
         <View>
           <View className='title-container'>
             <Input
-              placeholder='输入标题（0~10字)'
+              placeholder='输入标题(0~10字)'
+              placeholderClass='place-title'
               className='title'
               maxlength='10'
               value={title}
@@ -166,6 +167,7 @@ export default class Share extends Component {
             ?<View className='fake-text'>{content===''?'请在此处输入内容......':content}</View>
             :<Textarea
               placeholder='请在此处输入内容......'
+              placeholderClass='place-content'
               className='content'
               maxlength='100'
               hidden={show}

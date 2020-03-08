@@ -158,13 +158,13 @@ export default class Sidebar extends Component {
     let { placeHolder } = this.state
     if (touch) {
       if (which) {
-        placeHolder[1]=''
+        placeHolder[1]=' '
       } else {
         placeHolder[1]='结束时间'
       }
     } else {
       if (which) {
-        placeHolder[0]=''
+        placeHolder[0]=' '
       } else {
         placeHolder[0]='起始时间'
       }
@@ -216,6 +216,7 @@ export default class Sidebar extends Component {
                   value={chosen.during[0]}
                   onInput={this.ifNum.bind(this,0)} 
                   placeholder={placeHolder[0]}
+                  placeholderClass='place-enter'
                   onFocus={this.changeHolder.bind(this,false,true)}
                   onBlur={this.changeHolder.bind(this,false,false)}
                 />
@@ -227,6 +228,7 @@ export default class Sidebar extends Component {
                   onInput={this.ifNum.bind(this,1)}
                   onChange={this.onDuring.bind(this,1)}
                   placeholder={placeHolder[1]}
+                  placeholderClass='place-enter'
                   onFocus={this.changeHolder.bind(this,true,true)}
                   onBlur={this.changeHolder.bind(this,true,false)}
                 />
