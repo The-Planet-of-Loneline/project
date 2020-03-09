@@ -16,38 +16,43 @@ export default class Day extends Component {
     
   }
 
-// state存储卡片数据
-  state={
-    content:[0,0,0,0,0,0],
-    page:0,
-    disable:false,
-    chosen:'type=1',
-    enrefresh:'0',
-    scroll_Y:95,
+  constructor () {
+    super()
+    const res=Taro.getSystemInfoSync()
+    this.state={
+      heightStyle:`height: ${res.windowHeight-70}px`,
+      content:[0,0,0,0,0,0],
+      page:0,
+      disable:false,
+      chosen:'type=1',
+      enrefresh:'0',
+      scroll_Y:100,
+    } 
   }
 
-  // componentWillMount () {
-    // Fetch(
-    //   `requirement/square/?limit=6&page=0&type=1`,
-    //   {},
-    //   'GET'
-    //   ).then(data => {
-    //     if (data.msg==='get result successful'){
-    //       const content = data.content
-    //       this.setState({ content })
-    //       if (parseInt(data.num)<6) {
-    //         this.setState({ page:0, disable:true })
-    //       } else {
-    //         this.setState({ page:6 })
-    //       }
-    //     } else if (data.msg==='Fail.') {
-    //       Taro.showToast({
-    //         title: '服务器错误',
-    //         icon: 'none'
-    //       })
-    //     }    
-    // })
-  //  }
+  componentWillMount () {
+    Fetch(
+      `requirement/square/?limit=6&page=0&type=1`,
+      {},
+      'GET'
+      ).then(data => {
+        if (data.msg==='get result successful'){
+          this.setState({ content: data.content })
+          if (data.num<6) {
+            this.setState({ page:0, disable:true })
+          } else {
+            this.setState({ page:1 })
+          }
+        } else if (data.msg==='Fail.') {
+          Taro.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          })
+        }    
+    })
+   }
+
+
 
   componentDidMount () { }
 
@@ -66,12 +71,11 @@ export default class Day extends Component {
         'GET'
       ).then(data => {
         if (data.msg==='get result successful'){
-          const content = data.content
-          this.setState({ content })
-          if (parseInt(data.num)<6) {
-            this.setState({ page:0, disable:true })
+          this.setState({ content: data.content })
+          if (data.num<6) {
+            this.setState({ page:0, disable: true })
           } else {
-            this.setState({ page:6 })
+            this.setState({ page:1, disable: false })
           }
         } else if (data.msg==='none') {
           this.setState({ content:[] })
@@ -87,8 +91,7 @@ export default class Day extends Component {
   }
 
   onChangeInfo = (index) => {
-    let { chosen } = this.state
-    const { page, disable } = this.state
+    const { page, disable, chosen } = this.state
     let info=this.state.content 
     if (!disable) {
       Fetch(
@@ -122,60 +125,82 @@ export default class Day extends Component {
     })
   }
 
+
+  // 触摸结束后判断刷新图标状态，ready则释放刷新
   handleTouchEnd(){
     const { enrefresh } = this.state
     if (enrefresh==='1') {
       this.setState({ enrefresh: '2' },() => {
-        // Fetch(
-        //   `requirement/square/?limit=6&page=0&type=1`,
-        //   {},
-        //   'GET'
-        //   ).then(data => {
-        //     if (data.msg==='get result successful'){
-        //       const content = data.content
-        //       this.setState({ content })
-        //       if (parseInt(data.num)<6) {
-        //         this.setState({ page:0, disable:true })
-        //       } else {
-        //         this.setState({ page:6 })
-        //       }
-        //     } else if (data.msg==='Fail.') {
-        //       Taro.showToast({
-        //         title: '服务器错误',
-        //         icon: 'none'
-        //       })
-        //     }    
-        // })
+        this.letRefresh()
         setTimeout(()=> {
-          this.setState({ scroll_Y: 94, enrefresh:'0' })
+          this.setState({ scroll_Y: 95, enrefresh:'0' })
         },1500)
       })
     } else {
-      this.setState({ scroll_Y: 94 },()=>{
-        console.log(this.state.scroll_Y)
-      })
+      this.setState({ scroll_Y: 95 })
     }
-    console.log('touch end')
+  }
+
+  letRefresh(){
+    const { chosen, page } = this.state
+    Fetch(
+      `requirement/square/?limit=6&page=${page}&${chosen}`,
+      {},
+      'GET'
+      ).then(data => {
+        if (data.msg==='get result successful') {
+          if (data.num===6) {
+            if (page===0) {
+              this.setState({ content: data.content, page: 1, disable: false })
+            } else {
+              this.setState({ content: data.content, page: page+6 })
+            }
+          } else {
+            this.setState({ content: data.consten, page: 0 })
+          }
+        } else if (data.msg==='none'){
+          Fetch(
+            `requirement/square/?limit=6&page=0&${chosen}`,
+            {},
+            'GET'
+          ).then(res => {
+            if (res.msg==='get result successful'){
+              this.setState({ content: res.content })
+              if (res.num<6) {
+                this.setState({ page:0 })
+              } else {
+                this.setState({ page:1 })
+              }
+            } else if (res.msg==='none') {
+              this.setState({ content:[] })
+            } else if (res.msg==='Fail.') {
+              Taro.showToast({
+                title: '服务器错误',
+                icon: 'none'
+              })
+            }       
+          })
+        }else {
+          Taro.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          }) 
+        }
+    })
   }
 
   updataScroll(e){
-    // this.setState({ right_scroll_Y: e.detail.scrollTop })
+    console.log(e.detail.scrollTop)
     if (e.detail.scrollTop<=10) {
-      this.setState({ enrefresh: '1' })
+      this.setState({ scroll_Y:100, enrefresh: '1' })
     } else {
-      this.setState({ enrefresh: '0' })
+      this.setState({ scroll_Y:100, enrefresh: '0' })
     }
-    console.log('scroll ed')
   }
   
-  toScrollTop() {
-    const { scroll_Y } = this.state
-    console.log('1')
-    return scroll_Y
-  }
 
   render () {
-    const { content, enrefresh } =this.state
+    const { content, enrefresh, scroll_Y, heightStyle } =this.state
     return (
       <View>
         <ScrollView
@@ -183,13 +208,14 @@ export default class Day extends Component {
           onTouchEnd={this.handleTouchEnd}
           scrollWithAnimation
           onScroll={this.updataScroll}
-          scrollTop={this.toScrollTop()}
+          scrollTop={scroll_Y}
           scrollY
+          style={heightStyle}
         >
           <View className='refresh-con'>
             <Refresh enable={enrefresh} />
           </View>
-          <View className='cards-container' id='con'>
+          <View className='cards-container' style={heightStyle} >
           { content.length
             ?content.map((detail,index) => {
                     return (
