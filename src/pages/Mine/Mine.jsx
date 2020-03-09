@@ -47,7 +47,7 @@ export default class Index extends Component {
     onPullDownRefresh(){
     }
     onReachBottom(){
-        if (this.state.history.length % 4 == 0) {
+        if (this.state.history.length % 5 == 0) {
             this.setState({
                 page: this.state.page + 1
             }, () => {
@@ -73,7 +73,7 @@ export default class Index extends Component {
                    </View>
                    <View className='headerSpace'></View>
                 <Image src={notification} className='notification' onClick={this.toImfo} />
-                   <View className='CardContainer'>
+                <ScrollView className='CardContainer'>
                    {this.state.history.map((history)=>{
                        return <HistoryCard textValue={history.Content} 
                        sendTime={history.SendTime} 
@@ -81,8 +81,8 @@ export default class Index extends Component {
                        bgcolor={history.Colour} 
                        Debunkid={history.Debunkid} />
                    })}
-                   
-            </View>
+                    <View className='none' >--没有更多啦!--</View> 
+                </ScrollView>
             <View className='footerSpace'></View> 
                 <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false}  onToSecret={this.toSecret.bind(this)} />
             </View>

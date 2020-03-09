@@ -5,6 +5,7 @@ import './info.scss'
 import SecretCard from '../component/secretCard'
 import DeleteCard from '../component/deleteCard'
 
+
 export default class Infoalert extends Component {
 
     state = {

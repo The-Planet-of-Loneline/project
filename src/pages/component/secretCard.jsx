@@ -64,7 +64,7 @@ export default class SecretCard extends Component {
     }
     ReachBottom() {
         let { page } = this.state
-        if (this.state.comment.length % 3 == 0) {
+        if (this.state.comment.length % 5 == 0) {
             this.setState({
                 page: page + 1
             }, () => {
@@ -91,7 +91,7 @@ export default class SecretCard extends Component {
                    <View className='commentButton'>
                        {this.props.showComment ? <Image src={commentimg} className='comment' onClick={this.onShowInput.bind(this)} /> : null}
                    </View>
-                   <View className='replyContainer' onTouchMove={this.ReachBottom.bind(this)}>
+                    <ScrollView className='replyContainer' onScrollToLower={this.ReachBottom.bind(this)} scollY={true} scollX={true}>
                       {this.state.comment.map((comment)=>{
                           return <ReplyCard 
                           time={comment.CommentTime}
@@ -99,7 +99,9 @@ export default class SecretCard extends Component {
                           num = {comment.CommentId} 
                           key = {comment.CommentId} /> 
                       })}
-                   </View>
+                      <View className='none' >--没有更多啦！--</View>
+                      
+                   </ScrollView>
                </View>
                 {this.state.showInput ? <Comment onCloseInput={this.onCloseInput.bind(this)} Debunkid={this.props.Debunkid} /> : null} 
             </View>

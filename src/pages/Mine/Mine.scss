@@ -13,6 +13,7 @@ page {
     justify-content: center;
     align-items: center;
     position: fixed;
+    z-index: 4;
     top: 0;
 }
 
@@ -23,6 +24,7 @@ page {
     font-family: PingFang SC;
     font-weight: 400;
     color: rgba(255, 255, 255, 1);
+    position: fixed;
 }
 
 .notification {
@@ -30,6 +32,7 @@ page {
     height: 40px;
     position: fixed;
     right: 35px;
+    z-index: 4;
     top: 20px;
 }
 
@@ -43,4 +46,13 @@ page {
     width: 750px;
     height: 120px;
     background: #04040F;
+}
+
+.none {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 25px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(245, 245, 245, 1);
 }
