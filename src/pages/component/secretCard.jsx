@@ -96,7 +96,7 @@ export default class SecretCard extends Component {
                           return <ReplyCard 
                           time={comment.CommentTime}
                           text={comment.Comment} 
-                          num = {comment.CommentId} 
+                          num = {comment.Num} 
                           key = {comment.CommentId} /> 
                       })}
                       <View className='none' >--没有更多啦！--</View>

@@ -20,17 +20,18 @@ export default class InfoCard extends Component{
         text:'',
         sid:'',
         number: 0,
+        text:''
     }
     state = {
         name:''
     }
     Info(){
         Taro.navigateTo({
-            url: `/pages/infoalert/infoalert?Debunkid=${this.props.sid}`
+            url: `/pages/infoalert/infoalert?Debunkid=${this.props.sid}&&Text=${this.props.text}`
         })
     }
     render(){
-        switch (this.props.sid % 10) {
+        switch (this.props.number) {
             case 0: this.setState({ name: img0 })
                 break;
             case 1: this.setState({ name: img1 })

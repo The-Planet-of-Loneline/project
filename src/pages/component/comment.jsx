@@ -11,6 +11,7 @@ export default class Comment extends Component {
     }
     state = {
         inpuValue: '说点什么吧...',
+        history:[]
     } 
     handleInputChange(e) {
         this.setState({
@@ -33,6 +34,15 @@ export default class Comment extends Component {
                 console.log(res)
                 
             })
+            Fetch(`secret/view/:secret_id?secretId=${this.props.Debunkid}`,
+                {}, 'GET').then(res => {
+                    this.setState({ history: res.secret },
+                        ()=>{
+                            Taro.redirectTo({
+                                url: `/pages/commentNight/comment?text=${this.state.history.Content}&&color=${this.state.history.Colour}&&Debunkid=${this.state.history.Debunkid}`
+                            })
+                        })
+                })
         }
     }
     handleCloseComment(){

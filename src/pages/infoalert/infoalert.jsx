@@ -25,16 +25,15 @@ export default class Infoalert extends Component {
         })
 
     }
-
     render() {
         let { showDeleteModel } = this.state
-        let {Debunkid}= this.$router.params
+        let {Debunkid,Text}= this.$router.params
         return (
             <View className='all'>
                 <View className='header'>
                     <View className='head'>消息通知</View>
                 </View>
-                <SecretCard Debunkid={Debunkid} showComment={false} />
+                <SecretCard Debunkid={Debunkid} showComment={false} textValue={Text} />
                 <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false} onToSecret={this.toSecret.bind(this)} />
             </View>
             //头部结束

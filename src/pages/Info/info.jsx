@@ -8,6 +8,7 @@ import Fetch from '../../service/fetch'
 export default class CardHistory extends Component {
     state = {
         comment:[],
+        history:[],
     }
     componentWillMount(){
         Fetch('remind/night/remindbox/view/',
@@ -17,6 +18,10 @@ export default class CardHistory extends Component {
             this.setState({
                 comment:res.commentdata,
             })
+        })
+        Fetch(`secret/view/:secret_id?secretId=${this.state.comment.SecretId}`,
+        {},'GET').then(res => {
+            this.setState({history:res.secret})
         })
     }
    
@@ -44,7 +49,9 @@ export default class CardHistory extends Component {
                         return  <InofoCard  time={comment.CommentTime}
                         text ={comment.Comment}
                         key={index}
-                        sid={comment.SecretId}  />
+                        sid={comment.SecretId}
+                        number={comment.Num} 
+                        text={this.state.history.Content} />
                     })}
                 </View>
                 <View className='footerSpace'></View>  

@@ -23,7 +23,7 @@ export default class ReplyCard extends Component{
         name:''
     }
     render(){
-        switch (this.props.num % 10) {
+        switch (this.props.num) {
             case 0: this.setState({ name: img0 })
                 break;
             case 1: this.setState({ name: img1 })
