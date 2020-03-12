@@ -51,7 +51,7 @@ export default class CardHistory extends Component {
                         key={index}
                         sid={comment.SecretId}
                         number={comment.Num} 
-                        text={this.state.history.Content} />
+                        text2={this.state.history.Content} />
                     })}
                 </View>
                 <View className='footerSpace'></View>  

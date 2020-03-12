@@ -103,12 +103,10 @@ export default class WriteSecret extends Component {
         })
     }
     handleInput(){
-        let {inpuValue} = this.state
-        
-        if (inpuValue == '说个秘密吧...')
-        this.setState({
+        if (this.state.inpuValue == '说个秘密吧...'){
+            this.setState({
             inpuValue:''
-        })
+        })}
     }
     handleChange(){
       
@@ -202,6 +200,7 @@ export default class WriteSecret extends Component {
                     onBlur={this.handleback.bind(this)} 
                     showConfirmBar={false}
                     maxlength={75}
+                    autoFocus={true}
                     ></Textarea>
                     <Image src={Color}  className='color' />
                     <Button className='post' onClick={this.onhandleSubmit.bind(this)}>发表</Button>

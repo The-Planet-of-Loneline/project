@@ -20,14 +20,14 @@ export default class InfoCard extends Component{
         text:'',
         sid:'',
         number: 0,
-        text:''
+        text2:''
     }
     state = {
         name:''
     }
     Info(){
         Taro.navigateTo({
-            url: `/pages/infoalert/infoalert?Debunkid=${this.props.sid}&&Text=${this.props.text}`
+            url: `/pages/infoalert/infoalert?Debunkid=${this.props.sid}&&Text=${this.props.text2}`
         })
     }
     render(){

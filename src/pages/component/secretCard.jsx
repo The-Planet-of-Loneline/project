@@ -17,7 +17,7 @@ export default class SecretCard extends Component {
     }
     state = {
         showInput: false,
-        comment:[{}],
+        comment:[],
         page: 1,
     }
 
@@ -40,8 +40,7 @@ export default class SecretCard extends Component {
     componentDidHide() { }
 
     config = {
-        navigationBarTitleText: '孤独星球'
-    
+        navigationBarTitleText: '孤独星球',    
     }
     onShowInput(){
         this.setState({
@@ -91,17 +90,18 @@ export default class SecretCard extends Component {
                    <View className='commentButton'>
                        {this.props.showComment ? <Image src={commentimg} className='comment' onClick={this.onShowInput.bind(this)} /> : null}
                    </View>
-                    <ScrollView className='replyContainer' onScrollToLower={this.ReachBottom.bind(this)} scollY={true} scollX={true}>
-                      {this.state.comment.map((comment)=>{
+                    <View className='replyContainer' onTouchMove={this.ReachBottom.bind(this)}>
+                      {this.state.comment ?
+                      this.state.comment.map((comment)=>{
                           return <ReplyCard 
                           time={comment.CommentTime}
                           text={comment.Comment} 
                           num = {comment.Num} 
                           key = {comment.CommentId} /> 
-                      })}
+                      }): null}
                       <View className='none' >--没有更多啦！--</View>
                       
-                   </ScrollView>
+                   </View>
                </View>
                 {this.state.showInput ? <Comment onCloseInput={this.onCloseInput.bind(this)} Debunkid={this.props.Debunkid} /> : null} 
             </View>
