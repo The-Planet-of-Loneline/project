@@ -12,6 +12,7 @@ import img6 from '../../assets/user_img/img6.png'
 import img7 from '../../assets/user_img/img7.png'
 import img8 from '../../assets/user_img/img8.png'
 import img9 from '../../assets/user_img/img9.png'
+import Fetch from '../../service/fetch'
 
 
 export default class InfoCard extends Component{
@@ -20,14 +21,20 @@ export default class InfoCard extends Component{
         text:'',
         sid:'',
         number: 0,
-        text2:''
     }
     state = {
-        name:''
+        name:'',
+        history:[]
+    }
+    componentWillMount(){
+        Fetch(`secret/view/:secret_id?secretId=${this.props.sid}`,
+            {}, 'GET').then(res => {
+                this.setState({ history: res.secret })
+            }) 
     }
     Info(){
         Taro.navigateTo({
-            url: `/pages/infoalert/infoalert?Debunkid=${this.props.sid}&&Text=${this.props.text2}`
+            url: `/pages/infoalert/infoalert?Debunkid=${this.props.sid}&&Text=${this.state.history.Content}&&color=${this.state.history.Colour}`
         })
     }
     render(){
