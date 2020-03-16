@@ -24,6 +24,15 @@ export default class login extends Component{
         }
     }
 
+    componentDidMount () {
+        console.log("	___          ___________    ___     ___     ___________ ")
+        console.log("	\  \         \   _____  \   \  \    \  \    \  ________\ ")
+        console.log("	 \  \         \  \    \  \   \  \\\  \  \    \  \________ ")
+        console.log(" 	  \  \         \  \    \  \   \  \ \\ \  \    \   _______\ ")
+        console.log("	   \  \______	\  \____\  \   \  \  \\\  \    \  \________ ")
+        console.log("	    \________\   \__________\   \__\    \__\    \__________\ ")
+    }
+
     onHandleId(e){
         this.setState({
             id:e.target.value
