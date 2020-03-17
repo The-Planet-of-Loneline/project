@@ -21,7 +21,7 @@ export default class Day extends Component {
     const res=Taro.getSystemInfoSync()
     this.state={
       heightStyle:`height: ${res.windowHeight-70}px`,
-      content:[0,0,0,0,0,0],
+      content:[],
       page:0,
       disable:false,
       chosen:'type=1',
@@ -156,7 +156,7 @@ export default class Day extends Component {
               this.setState({ content: data.content, page: page+6 })
             }
           } else {
-            this.setState({ content: data.consten, page: 0 })
+            this.setState({ content: data.content, page: 0 })
           }
         } else if (data.msg==='none'){
           Fetch(

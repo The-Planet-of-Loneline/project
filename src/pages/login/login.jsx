@@ -25,12 +25,13 @@ export default class login extends Component{
     }
 
     componentDidMount () {
-        console.log("	___          ___________    ___     ___     ___________ ")
-        console.log("	\  \         \   _____  \   \  \    \  \    \  ________\ ")
-        console.log("	 \  \         \  \    \  \   \  \\\  \  \    \  \________ ")
-        console.log(" 	  \  \         \  \    \  \   \  \ \\ \  \    \   _______\ ")
-        console.log("	   \  \______	\  \____\  \   \  \  \\\  \    \  \________ ")
-        console.log("	    \________\   \__________\   \__\    \__\    \__________\ ")
+        console.log("%c	___          ___________    ___     ___     ___________ ",'color:#39b54a')
+        console.log("%c	\\  \\         \\   _____  \\   \\  \\    \\  \\    \\  ________\\ ",'color:#39b54a')
+        console.log("%c	 \\  \\         \\  \\    \\  \\   \\  \\\\\\  \\  \\    \\  \\________ ",'color:#39b54a')
+        console.log("%c 	  \\  \\         \\  \\    \\  \\   \\  \\ \\\\ \\  \\    \\   _______\\ ",'color:#39b54a')
+        console.log("%c	   \\  \\______	\\  \\____\\  \\   \\  \\  \\\\\\  \\    \\  \\________ ",'color:#39b54a')
+        console.log("%c	    \\________\\   \\__________\\   \\__\\    \\__\\    \\__________\\ ",'color:#39b54a')
+	console.log('%c木%c犀%c团%c队%c1%c9%c级%c制%c作','color:#e54d42','color:#f37b1d','color:#fbbd08','color:#8dc63f','color:#39b54a','color:#1cbbb4','color:#0081ff','color:#6739b6','color:#9c26b0')
     }
 
     onHandleId(e){

@@ -76,7 +76,7 @@ export default class Info extends Component {
           })
           // 更新 red point
           Fetch(
-            `application/done/:${passed_id}/`,
+            `application/done/${passed_id}/`,
             {},
             'POST'
           )

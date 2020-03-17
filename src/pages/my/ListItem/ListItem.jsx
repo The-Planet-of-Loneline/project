@@ -6,6 +6,7 @@ import Eye from './imgs/eye.png'
 import Accept from './imgs/accept.png'
 import Refuse from './imgs/refuse.png'
 import UserImg from '../../../component/UserImg/UserImg'
+import Fetch from '../../../service/fetch'
 import './listItem.scss'
 
 export default class ListItem extends Component {
@@ -34,8 +35,8 @@ export default class ListItem extends Component {
   }
 
   toDetail () {
-    const requirement_id = this.props.info.requirement_id
-    console.log('list',requirement_id)
+    const { requirement_id } = this.props.info
+    this.redPointChange()
     Taro.navigateTo({
       url:`../cardDetails/cardDetails?indexId=3&able=disable&req_id=${requirement_id}`
     })
@@ -45,13 +46,41 @@ export default class ListItem extends Component {
     this.setState({ showD:index })
   }
 
+  redPointChange () {
+    const { red_point, application_id } = this.props.info
+    const { mode } = this.props
+    const { checked } = this.state
+    if (mode==='2'&&red_point&&!checked) {
+      Fetch(
+        `remind/day/remindbox/done/${application_id}/`,
+        {},
+        'POST'
+      ).then( data =>{
+        if (data.msg==='success') {
+          this.setState({ checked: 1 })
+        } else {
+          console.log('bad request')
+        }
+      })
+    }
+  }
+
   eyeCli (e) {
     this.changeShowD('1')
+    this.redPointChange()
     e.stopPropagation()
   }
 
   changeCheck = (check) => {
     this.setState({ checked: check })
+  }
+
+  handleRedPoint(e){
+    const { info } = this.props
+    if (info.status-2) {
+      this.redPointChange()
+    }
+    e.stopPropagation()
   }
 
   render () {
@@ -92,6 +121,7 @@ export default class ListItem extends Component {
         {/* response */}
         {mode==='2'
         ?<View className='list-item' onClick={this.toDetail}>
+          {info.red_point&&!checked?<View className='red_point' onClick={this.handleRedPoint}></View>:null}
           <View className='float-con'><View className='time'>{info.confirm_time}</View></View>
           <View className='msg-con'>
             <Text className='name'>{info.nick_name}</Text>
