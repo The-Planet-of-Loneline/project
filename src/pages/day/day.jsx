@@ -20,7 +20,11 @@ export default class Day extends Component {
     super()
     const res=Taro.getSystemInfoSync()
     this.state={
-      heightStyle:`height: ${res.windowHeight-70}px`,
+      heightStyle:`height: ${res.windowHeight-80}px`,
+      sharePosition:{
+        top: '80%',
+        left: '80%'
+      },
       content:[],
       page:0,
       disable:false,
@@ -197,10 +201,26 @@ export default class Day extends Component {
       this.setState({ scroll_Y:100, enrefresh: '0' })
     }
   }
+// 140px,
+  handleShareMove(e){
+    const totalHeight=Taro.getSystemInfoSync().windowHeight
+    const totalWidth=Taro.getSystemInfoSync().windowWidth
+    const pageX = e.touches[0].pageX
+    const pageY = e.touches[0].pageY
+
+    if (pageX>35&&(totalWidth-pageX)>35&&pageY>30&&(totalHeight-pageY)>85) {
+      this.setState({
+        sharePosition:{
+          top: pageY+'px',
+          left: pageX+'px'
+        }
+      })
+    }
+  }
   
 
   render () {
-    const { content, enrefresh, scroll_Y, heightStyle } =this.state
+    const { content, enrefresh, scroll_Y, heightStyle, sharePosition } =this.state
     return (
       <View>
         <ScrollView
@@ -236,7 +256,11 @@ export default class Day extends Component {
       
 
         <Footer mode='need' />
-        <View className='share-container'>
+        <View 
+          className='share-container'
+          onTouchMove={this.handleShareMove.bind(this)}
+          style={sharePosition}
+        >
           <Image src={Share} className='share' onClick={this.toCreateNeeds} />
         </View>
       </View>

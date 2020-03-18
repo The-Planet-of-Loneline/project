@@ -51,7 +51,7 @@ export default class Card extends Component {
           {tag!==''?<View className='spe-tag'>{tag}</View>:null}
           <View className='spe-tag'>{place}</View>
         </View>
-        <View className='title'>{title+'bugbugbgu有bug'}</View>
+        <View className='title'>{title}</View>
         <View className='time'>时间:{date}</View>
         <Image src={Refresh} className='refresh-img' onClick={this.onChangeInfo} />
       </View>

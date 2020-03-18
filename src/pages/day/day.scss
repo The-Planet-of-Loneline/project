@@ -12,8 +12,12 @@
 }
 .share-container{
   position: absolute;
-  right: 85px;
-  bottom: 123px;
+  height: 122px;
+  width: 122px;
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  // right: 85px;
+  // bottom: 123px;
 }
 //--------------------------
 .refresh-con{
