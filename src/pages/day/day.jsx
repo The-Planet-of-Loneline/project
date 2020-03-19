@@ -194,7 +194,6 @@ export default class Day extends Component {
   }
 
   updataScroll(e){
-    console.log(e.detail.scrollTop)
     if (e.detail.scrollTop<=10) {
       this.setState({ scroll_Y:100, enrefresh: '1' })
     } else {
@@ -205,17 +204,22 @@ export default class Day extends Component {
   handleShareMove(e){
     const totalHeight=Taro.getSystemInfoSync().windowHeight
     const totalWidth=Taro.getSystemInfoSync().windowWidth
-    const pageX = e.touches[0].pageX
-    const pageY = e.touches[0].pageY
+    const { sharePosition } = this.state
+    let left = sharePosition.left
+    let top = sharePosition.top
 
-    if (pageX>35&&(totalWidth-pageX)>35&&pageY>30&&(totalHeight-pageY)>85) {
-      this.setState({
-        sharePosition:{
-          top: pageY+'px',
-          left: pageX+'px'
-        }
-      })
+    if (e.touches[0].pageX>35&&(totalWidth-e.touches[0].pageX)>35) {
+      left = e.touches[0].pageX + 'px'
     }
+    if (e.touches[0].pageY>105&&(totalHeight-e.touches[0].pageY)>85) {
+      top = e.touches[0].pageY +'px'
+    }
+    this.setState({
+      sharePosition:{
+        top,
+        left
+      }
+    })
   }
   
 
