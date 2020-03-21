@@ -10,7 +10,8 @@ export default class login extends Component{
     state={
         showView: true,
         id: '',
-        password: ''
+        password: '',
+        loading: false
     }
 
     componentWillMount () {
@@ -58,6 +59,7 @@ export default class login extends Component{
     
     onHandleLogin(){
         const {id,password} = this.state
+        this.setState({ loading: true})
         if(id && password){
             Fetch('login/',
             {
@@ -65,26 +67,27 @@ export default class login extends Component{
                 pwd:password
             },
             'POST').then(res => {
-               if (res.msg=='success'){
-                        Taro.setStorage({
-                            key:'sid',
-                            data: id
-                        });
-                        Taro.setStorage({
-                            key: 'pwd',
-                            data: password
-                        });
-                        Taro.setStorage({
-                            key: 'token',
-                            data: res.token,
-                        }) 
-                        Taro.showToast({
-                       icon: 'none',
-                       title: '登录成功'
+                this.setState({ loading: false})
+                if (res.msg=='success'){
+                    Taro.setStorage({
+                        key:'sid',
+                        data: id
+                    });
+                    Taro.setStorage({
+                        key: 'pwd',
+                        data: password
+                    });
+                    Taro.setStorage({
+                        key: 'token',
+                        data: res.token,
+                    }) 
+                    Taro.showToast({
+                        icon: 'none',
+                        title: '登录成功'
                    }) 
-                        Taro.redirectTo({
-                             url: `/pages/day/day`
-                         }) 
+                    Taro.redirectTo({
+                        url: `/pages/day/day`
+                    }) 
                 }else{
                     Taro.showToast({
                         icon: 'none',
@@ -104,14 +107,15 @@ export default class login extends Component{
     }
 
     render(){ 
-        const { id, password, showView } = this.state
+        const { id, password, showView, loading } = this.state
         return(
             <View className='container'>
+                {loading&&<View className='loading'></View>}
                 <View className='bgcontainer'><Image className='bg' src={bg} /></View>
                 <View className='greeting'>欢迎登陆孤独星球</View>
                 <Input type='number' placeholder='请输入学号' className='id' value={id} onInput={this.onHandleId.bind(this)}></Input>
                 {showView ? <Input type='password' placeholder='请输入密码' className='password' value={password} onInput={this.onHandlePassword.bind(this)}></Input>
-                :<Input type='text' placeholder='请输入密码' className='password' value={password} onInput={this.onHandlePassword.bind(this)}></Input>}}
+                :<Input type='text' placeholder='请输入密码' className='password' value={password} onInput={this.onHandlePassword.bind(this)}></Input>}
                 <Image className='view' src={showView ? view : viewOff} onClick={this.onViewPassword.bind(this)} />
                 <Button className='login' onClick={this.onHandleLogin.bind(this)}>登录</Button>
             </View>
