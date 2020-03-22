@@ -27,7 +27,7 @@ export default class InfoCard extends Component{
         history:[]
     }
     componentWillMount(){
-        Fetch(`secret/view/:secret_id?secretId=${this.props.sid}`,
+        Fetch(`secret/view/:secret_id/?secretId=${this.props.sid}`,
             {}, 'GET').then(res => {
                 this.setState({ history: res.secret })
             }) 
