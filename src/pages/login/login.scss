@@ -83,7 +83,6 @@
     top: 640px;
     left: 283px;
 }
-
 .super{
     width: 184px;
     height: 68px;
@@ -98,4 +97,23 @@
     position: absolute;
     top: 720px;
     left: 283px;
+}
+
+// loading animate
+
+.loading{
+    position: absolute;
+    margin: 10px;
+    right: 0;
+    border: 7px solid rgb(107, 151, 192); 
+    border-bottom-color: rgba(0,0,0,0);
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    animation: span-c 1s linear infinite;
+    -webkit-animation: span-c 1s linear infinite;
+}
+  
+@keyframes span-c {
+100% {transform: rotate(1turn);}
 }

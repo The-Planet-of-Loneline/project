@@ -26,7 +26,7 @@ export default class My extends Component {
     history:[],
     apply:[],
     respone:[],
-    blank_msg:['快去发布需求吧！','看来没人鸟你呢！','没人关注你呢！'],
+    blank_msg:['快去发布需求吧！','看来没人鸟你呢~','没人关注你呢！'],
     // history_bottom apply_ bottom reply_bottom
     bottom:[false,false,false],
     page:[1,1,1]
@@ -120,6 +120,8 @@ export default class My extends Component {
     this.setState({ userName })
     if (delete_if) {
       bottom[0]=false
+      bottom[1]=false
+      // 重新申请历史记录
       Fetch(
         'requirement/history/?limit=6&page=0',
         {},
@@ -128,6 +130,22 @@ export default class My extends Component {
         if (data.msg==='success'){
           if (data.num) { this.setState({ history: data.history }) }
           if (data.num<3&&data.num) { bottom[0] = true }
+        } else if (data.msg==='Fail.') {
+          Taro.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          })
+        }
+      })
+      // 重新申请   申请提醒
+      Fetch(
+        'application/todo/?limit=6&page=0',
+        {},
+        'GET'
+      ).then(data => {
+        if (data.msg==='success'){
+          if (data.num) { this.setState({ apply: data.applications }) }
+          if (data.num<6&&data.num) { bottom[1] = true }
         } else if (data.msg==='Fail.') {
           Taro.showToast({
             title: '服务器错误',
