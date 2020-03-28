@@ -7,7 +7,7 @@ import Fetch from '../../service/fetch'
 
 export default class CardHistory extends Component {
     state = {
-        comment:[],
+        comment:[{}],
     }
     componentWillMount(){
         Fetch('remind/night/remindbox/view/',

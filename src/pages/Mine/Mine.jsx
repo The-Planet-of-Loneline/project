@@ -10,7 +10,7 @@ export default class Index extends Component {
     constructor(props){
         super(props)
         this.state={
-            history: [],
+            history: [{}],
             page: 1, 
         }
     }
