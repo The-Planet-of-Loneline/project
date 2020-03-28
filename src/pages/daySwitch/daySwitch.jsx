@@ -9,7 +9,7 @@ export default class Footer extends Component {
     componentDidMount(){
         const to = this.$router.params.to
         setTimeout(() => {
-           Taro.redirectTo({
+           Taro.reLaunch({
                url:`/pages/${to}/${to}`
            })
         }, 1500);
