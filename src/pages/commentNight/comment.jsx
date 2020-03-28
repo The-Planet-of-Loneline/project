@@ -24,12 +24,12 @@ export default class Comment extends Component {
         navigationBarTitleText: '孤独星球'
     }
     toWrite() {
-        Taro.redirectTo({
+        Taro.reLaunch({
             url: '/pages/writeSecret/writeSecret'
         })
     }
     toMine() {
-        Taro.redirectTo({
+        Taro.reLaunch({
             url: '/pages/Mine/Mine'
         })
     }

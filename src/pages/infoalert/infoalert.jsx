@@ -20,7 +20,7 @@ export default class Infoalert extends Component {
   
   
     toSecret() {
-        Taro.redirectTo({
+        Taro.reLaunch({
             url: '/pages/nighthome/nighthome'
         })
 

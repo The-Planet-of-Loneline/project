@@ -29,7 +29,7 @@ export default class CardHistory extends Component {
         }) 
     }
     toSecret() {
-        Taro.redirectTo({
+        Taro.reLaunch({
             url: '/pages/nighthome/nighthome'
         })
 
