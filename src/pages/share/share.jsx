@@ -16,6 +16,7 @@ export default class Share extends Component {
     title:'',
     content:'',
     tagChosen:false,
+    loading: false,
     chosen:{
       time:[0,0,0,0,0,0,0],
       during:['',''],
@@ -69,7 +70,9 @@ export default class Share extends Component {
   }
 
   share () {
-    if (this.enableShare()) {
+    const { loading } = this.state
+    if (this.enableShare()&&!loading) {
+      this.setState({ loading: true})
       const info=this.deal()
       Fetch(
         'requirement/new/',
@@ -83,6 +86,7 @@ export default class Share extends Component {
           Taro.navigateBack({
             delta: 1
           })
+          this.setState({ loading: false})
         } else if (data.msg==='requirement already exist') {
           Taro.showToast({
             title: '需求已存在'
@@ -90,10 +94,12 @@ export default class Share extends Component {
           Taro.navigateBack({
             delta: 1
           })
+          this.setState({ loading: false})
         } else if (data.msg==='Fail.') {
           Taro.showToast({
             title: '服务器错误'
           })
+          this.setState({ loading: false})
         }
       },
       )
@@ -137,13 +143,14 @@ export default class Share extends Component {
   }
 
   render () {
-    const { show, title, content } = this.state
+    const { show, title, content, loading } = this.state
     const { chosen } = this.state
     return (
       <View>
         <View className='header'>
+          {loading&&<View className='loading'></View>}
           <Button 
-            className={this.enableShare()?'share-button able':'share-button disable'} 
+            className={this.enableShare()&&!loading?'share-button able':'share-button disable'} 
             onClick={this.share}
           >
             发表

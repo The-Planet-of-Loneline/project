@@ -143,7 +143,7 @@ export default class CardDetails extends Component {
           from='applicant'
         />
         :null}
-        <Footer mode='need' />
+        <Footer mode={able==='able'?'need':'my'} />
       </View>
     )
   }

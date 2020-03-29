@@ -112,6 +112,7 @@
     width: 30px;
     animation: span-c 1s linear infinite;
     -webkit-animation: span-c 1s linear infinite;
+    z-index: 3;
 }
   
 @keyframes span-c {

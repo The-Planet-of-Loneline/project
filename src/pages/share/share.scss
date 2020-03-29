@@ -90,3 +90,19 @@
   color:rgba(110,110,110,1);
   opacity:1;
 }
+.loading{
+  position: absolute;
+  top: 25px;
+  right: 155px;
+  border: 7px solid rgb(255, 149, 0); 
+  border-bottom-color: rgba(0,0,0,0);
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  animation: span-c 1s linear infinite;
+  -webkit-animation: span-c 1s linear infinite;
+}
+
+@keyframes span-c {
+100% {transform: rotate(1turn)}
+}

@@ -16,7 +16,8 @@ export default class Info extends Component {
     qq: '',
     tel: '',
     msg: '',
-    placeHolder:['请输入QQ','请输入手机号']
+    placeHolder:['请输入QQ','请输入手机号'],
+    loading: false
   }
 
   componentWillMount () { }
@@ -63,13 +64,15 @@ export default class Info extends Component {
     // submit content
     const passed_id = this.props.passed_id
     const from = this.props.from
+    let { loading } = this.state
     const info = this.proinfo()
-    if (from==='puter') {
+    this.setState({ loading: true })
+    if (from==='puter'&&!loading) {
       Fetch(
         `application/${passed_id}/?status=2`,
         info,
         'PUT'
-      ).then(data => {
+      ).then(data => { 
         if (data.msg==='success') {
           Taro.showToast({
             title:'已接受'
@@ -80,21 +83,25 @@ export default class Info extends Component {
             {},
             'POST'
           )
+          this.setState({ loading: false })
           this.props.onChangeCheck(1)
         } else if (data.msg==='需求已经被删除了!') {
           Taro.showToast({
             title:'您已删除'
           })
+          this.setState({ loading: false })
         } else if (data.msg==='已经处理过了!') {
           Taro.showToast({
             title:'已处理'
           })
+          this.setState({ loading: false })
         } else if (data.msg==='Fail.')
           Taro.showToast({
             title:'服务器错误'
           })
-      })
-    } else if (from==='applicant') {
+          this.setState({ loading: false })
+        })
+    } else if (from==='applicant'&&!loading) {
       Fetch(
         `requirement/application/${passed_id}/`,
         info,
@@ -104,19 +111,23 @@ export default class Info extends Component {
           Taro.showToast({
             title:'发送成功'
           })
+          this.setState({ loading: false })
         } else if (data.msg==='不能申请自己的需求') {
           Taro.showToast({
             title:'我与我'
           })
+          this.setState({ loading: false })
         } else if (data.msg==='已经申请过了!') {
           Taro.showToast({
             title:'已处理'
           })
+          this.setState({ loading: false })
         } else if (data.msg==='Fail.')
           Taro.showToast({
             title:'服务器错误'
           })
-      })
+          this.setState({ loading: false })
+        })
     }
     this.props.onChangeShowSub()
   }
@@ -191,7 +202,7 @@ export default class Info extends Component {
   }
 
   render () {
-    const { checked, qq, tel, msg, placeHolder } =this.state
+    const { checked, qq, tel, msg, placeHolder, loading } =this.state
     return (
       <View className='push-container' onTouchMove={this.handleTouchMove}>
         <View className='push'>
@@ -249,9 +260,9 @@ export default class Info extends Component {
           <View>
             <Button 
               className={this.enableSubmit()?'sub-button able':'sub-button disable'} 
-              onClick={this.enableSubmit()?this.handleSubmit:this.errorDate}
+              onClick={this.enableSubmit()&&!loading?this.handleSubmit:this.errorDate}
             >
-              提交
+              {loading?<View className='loading'></View>:'提交'}
             </Button>
           </View>
         </View>

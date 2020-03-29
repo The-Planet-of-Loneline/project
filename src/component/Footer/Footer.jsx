@@ -26,21 +26,21 @@ export default class Footer extends Component {
   componentDidHide () { }
 
   toNight () {
-    Taro.redirectTo({
+    Taro.reLaunch({
       url: '/pages/daySwitch/daySwitch?to=nighthome'
     })
   }
 
   toMy () {
     if (this.props.mode==='my') { return undefined }
-    Taro.redirectTo({
+    Taro.reLaunch({
       url:'../my/my'
     })
   }
 
   toNeed () {
     if (this.props.mode==='need') { return undefined }
-    Taro.redirectTo({
+    Taro.reLaunch({
       url:'../day/day'
     })
   }

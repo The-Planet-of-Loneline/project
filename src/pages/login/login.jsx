@@ -32,7 +32,7 @@ export default class login extends Component{
         console.log("%c 	  \\  \\         \\  \\    \\  \\   \\  \\ \\\\ \\  \\    \\   _______\\ ",'color:#39b54a')
         console.log("%c	   \\  \\______	\\  \\____\\  \\   \\  \\  \\\\\\  \\    \\  \\________ ",'color:#39b54a')
         console.log("%c	    \\________\\   \\__________\\   \\__\\    \\__\\    \\__________\\ ",'color:#39b54a')
-	console.log('%c木%c犀%c团%c队%c1%c9%c级%c制%c作','color:#e54d42','color:#f37b1d','color:#fbbd08','color:#8dc63f','color:#39b54a','color:#1cbbb4','color:#0081ff','color:#6739b6','color:#9c26b0')
+	    console.log('%c木%c犀%c团%c队%c1%c9%c级%c制%c作','color:#e54d42','color:#f37b1d','color:#fbbd08','color:#8dc63f','color:#39b54a','color:#1cbbb4','color:#0081ff','color:#6739b6','color:#9c26b0')
     }
 
     onHandleId(e){
@@ -58,16 +58,15 @@ export default class login extends Component{
     }
     
     onHandleLogin(){
-        const {id,password} = this.state
-        this.setState({ loading: true})
-        if(id && password){
+        const {id,password,loading} = this.state
+        if(id && password && !loading){
+            this.setState({ loading: true})
             Fetch('login/',
             {
                 sid:id,
                 pwd:password
             },
             'POST').then(res => {
-                this.setState({ loading: false})
                 if (res.msg=='success'){
                     Taro.setStorage({
                         key:'sid',
@@ -93,7 +92,7 @@ export default class login extends Component{
                         icon: 'none',
                         title: '账号或密码错误'
                     })
-                    this.setState({ password: '' })
+                    this.setState({ password: '', loading: false })
                 }
             })
         }
@@ -102,8 +101,7 @@ export default class login extends Component{
                 icon: 'none',
                 title: '账号或密码不能为空'
             });
-        }
-        
+        }       
     }
 
     render(){ 

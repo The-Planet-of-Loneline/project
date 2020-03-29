@@ -57,14 +57,14 @@ export default class Day extends Component {
    }
 
 
-
   componentDidMount () { }
 
   componentWillUnmount () { }
 
   componentDidShow () { }
 
-  componentDidHide () { }
+  componentDidHide () {this.setState({ scroll_Y: 95 })
+  }
 
   scrinfo = (info) => {
     const { chosen } = this.state

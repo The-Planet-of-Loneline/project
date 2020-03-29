@@ -9,6 +9,7 @@ export default class myDetail extends Component {
 
   state={
     show:false,
+    loading: false,
     content: {
       content: '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
       date: '周一 周三 周日',
@@ -75,34 +76,39 @@ export default class myDetail extends Component {
   sure () {
     // delete code
     const requirement_id = this.$router.params.req_id
-    Fetch(
-      `requirement/${requirement_id}/`,
-      {},
-      'DELETE'
-    ).then(data => {
-      if (data.msg === 'success') {
-        Taro.showToast({
-          title: '删除成功'
-        })
-        Taro.setStorage({
-          key:'delete_if',
-          data: true
-        })
-        Taro.navigateBack({
-          delta: 1
-        })
-      } else if (data.msg === 'Fail.') {
-        this.setState({ show:false })
-        Taro.showToast({
-          title: '服务器错误'
-        })
-      }
-    })
+    const {loading} = this.state
+    if (!loading) {
+      this.setState({ loading: true})
+      Fetch(
+        `requirement/${requirement_id}/`,
+        {},
+        'DELETE'
+      ).then(data => {
+        if (data.msg === 'success') {
+          this.setState({ show:false })
+          Taro.showToast({
+            title: '删除成功'
+          })
+          Taro.setStorage({
+            key:'delete_if',
+            data: true
+          })
+          Taro.navigateBack({
+            delta: 1
+          })
+        } else if (data.msg === 'Fail.') {
+          this.setState({ show:false })
+          Taro.showToast({
+            title: '服务器错误'
+          })
+        }
+      })
+    }
     this.setState({ show: false })
   }
 
   render () {
-    const { show, content } = this.state
+    const { show, content, loading } = this.state
     return (
       <View>
         {show
@@ -118,6 +124,7 @@ export default class myDetail extends Component {
       :null}
         <View className='header'>
           需求详情
+          {loading&&<View className='loading'></View>}
           <Image src={Delete} className='delete' onClick={this.changeShow.bind(this,true)} />
         </View>      
         <View className='body-container'>
@@ -134,7 +141,7 @@ export default class myDetail extends Component {
             <View className='content'>{content.content}</View>
           </View>
         </View>
-        <Footer mode='need' />
+        <Footer mode='my' />
       </View>
     )
   }
