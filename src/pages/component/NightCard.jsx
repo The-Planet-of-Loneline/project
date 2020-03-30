@@ -68,9 +68,7 @@ export default class NightCard extends Component{
             case 8: this.setState({ name:  img8  }) 
                 break;
             case 9: this.setState({ name:  img9  }) 
-                break;
-            
-            
+                break; 
             }
         return(
             <View className='cardContainer'>
@@ -83,7 +81,7 @@ export default class NightCard extends Component{
                   </View>
                   <View className='textContainer'>
                     <View className='text'>
-                        {this.props.textValue}
+                       <Text> {this.props.textValue}</Text>
                     </View>
                   </View> 
                </View>
