@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import { View, Image, Text } from '@tarojs/components'
 import Footer from '../../component/Footer/Footer'
 import Delete from './delete.png'
 import './mydetail.scss'
@@ -138,7 +138,7 @@ export default class myDetail extends Component {
               {content.tag!==''?<View className='spe-tag'>{content.tag}</View>:null}
               <View className='spe-tag'>{content.place}</View>
             </View>
-            <View className='content'>{content.content}</View>
+            <View className='content'><Text>{content.content}</Text></View>
           </View>
         </View>
         <Footer mode='my' />

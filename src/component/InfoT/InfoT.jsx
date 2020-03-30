@@ -92,7 +92,7 @@ export default class InfoT extends Component {
             <View className='fake-cell right'>Tel：{tel}</View>
           </View>
           <View>
-            <View className={able?'sentence type-t':'sentence type-s'}>{msg}</View>
+            <View className={able?'sentence type-t':'sentence type-s'}><Text>{msg}</Text></View>
           </View>
           {able
           ?<View className='sub-con'>

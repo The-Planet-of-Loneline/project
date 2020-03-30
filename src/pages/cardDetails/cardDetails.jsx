@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Button } from '@tarojs/components'
+import { View, Button, Text } from '@tarojs/components'
 import './cardDetails.scss'
 import UserImg from '../../component/UserImg/UserImg'
 import Footer from '../../component/Footer/Footer'
@@ -125,7 +125,7 @@ export default class CardDetails extends Component {
             </View>
             <View className='title'>{content.title}</View>
             <View className='time'>{'时间:'+content.date+' '+content.time_from+'：00—'+content.time_end+'：00'}</View>
-            <View className='content'>{content.content}</View>
+            <View className='content'><Text>{content.content}</Text></View>
           </View>
           <View className='submit-container'>
             {able==='able'
