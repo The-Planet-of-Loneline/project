@@ -5,12 +5,10 @@
         </view>
         <view class="headerSpace"></view>
         <image src="{{notification}}" class="notification" bindtap="toImfo"></image>
-        <view class="CardContainer">
-            <history-card></history-card>
-            <history-card></history-card>
-            <history-card></history-card>
-            <history-card></history-card>
-        </view>
+        <scroll-view class="CardContainer">
+            <history-card qq:key="Debunkid" qq:for="{{loopArray9}}" qq:for-item="history" qq:for-index="_anonIdx2" compid="{{history.$compid__29}}"></history-card>
+            <view class="none">--没有更多啦!--</view>
+        </scroll-view>
         <view class="footerSpace"></view>
         <footer compid="{{$compid__30}}"></footer>
     </view>

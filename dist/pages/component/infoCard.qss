@@ -16,10 +16,10 @@
   height: 132rpx;
   line-height: 132rpx;
   position: relative;
-  top: -50rpx; }
+  top: -50rpx;
+  z-index: 0; }
 
 .time {
-  width: 100rpx;
   height: 33rpx;
   font-size: 25rpx;
   font-family: Segoe UI;
@@ -27,8 +27,9 @@
   line-height: 33rpx;
   color: #c4c7cb;
   position: relative;
-  left: 520rpx;
-  top: -20rpx; }
+  left: 350rpx;
+  top: -20rpx;
+  z-index: 0; }
 
 .text {
   width: 560rpx;

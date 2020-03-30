@@ -28,19 +28,13 @@
   display: flex;
   align-items: center; }
 
-.user-img {
-  height: 140rpx;
-  width: 140rpx;
-  border-radius: 50%;
-  background-color: pink; }
-
 .user-info {
   margin: 0 40rpx;
   height: 76rpx;
   line-height: 76rpx; }
 
 .user-name {
-  width: 180rpx;
+  width: 300rpx;
   height: 50rpx;
   font-size: 36rpx;
   font-family: PingFang SC;
@@ -51,7 +45,7 @@
   opacity: 1; }
 
 .submit-time {
-  width: 94rpx;
+  width: 300rpx;
   height: 28rpx;
   font-size: 20rpx;
   font-family: PingFang SC;
@@ -90,7 +84,6 @@
   font-size: 40rpx;
   color: white;
   text-align: start;
-  width: 180rpx;
   height: 50rpx;
   font-family: PingFang SC;
   font-weight: 500;
@@ -100,8 +93,8 @@
 .time {
   font-size: 24rpx;
   color: white;
-  height: 33rpx;
-  width: 260rpx;
+  min-height: 33rpx;
+  width: 100%;
   margin-top: 10rpx;
   margin-bottom: 20rpx;
   font-family: PingFang SC;
@@ -118,7 +111,8 @@
   color: white;
   background: rgba(0, 0, 0, 0.1);
   border-radius: 20rpx;
-  padding: 30rpx; }
+  padding: 30rpx;
+  word-break: break-all; }
 
 .submit-container {
   margin: 48rpx 0; }

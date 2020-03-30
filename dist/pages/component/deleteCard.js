@@ -26,6 +26,10 @@ var _taroQq2 = _interopRequireDefault(_taroQq);
 
 __webpack_require__(/*! ./deleteCard.scss */ "./src/pages/component/deleteCard.scss");
 
+var _fetch = __webpack_require__(/*! ../../service/fetch */ "./src/service/fetch.jsx");
+
+var _fetch2 = _interopRequireDefault(_fetch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -48,23 +52,39 @@ var DeleteCard = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DeleteCard.__proto__ || Object.getPrototypeOf(DeleteCard)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = [], _this.customComponents = ["Dialog"], _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DeleteCard.__proto__ || Object.getPrototypeOf(DeleteCard)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["Debunkid"], _this.customComponents = ["Dialog"], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(DeleteCard, [{
-    key: "_constructor",
+    key: '_constructor',
     value: function _constructor(props) {
-      _get(DeleteCard.prototype.__proto__ || Object.getPrototypeOf(DeleteCard.prototype), "_constructor", this).call(this, props);
+      _get(DeleteCard.prototype.__proto__ || Object.getPrototypeOf(DeleteCard.prototype), '_constructor', this).call(this, props);
 
       this.$$refs = new _taroQq2.default.RefsArray();
     }
   }, {
-    key: "cancel",
+    key: 'cancel',
     value: function cancel() {
       this.props.onCloseDelete();
     }
   }, {
-    key: "_createData",
+    key: 'handleDelete',
+    value: function handleDelete() {
+      var _this2 = this;
+
+      (0, _fetch2.default)("secret/delete/:secret_id/?secretId=" + this.props.Debunkid, {}, 'DELETE').then(function (res) {
+        _taroQq2.default.showToast({
+          title: '删除成功',
+          icon: 'none'
+        });
+        _this2.props.onCloseDelete();
+        _taroQq2.default.reLaunch({
+          url: "/pages/Mine/Mine"
+        });
+      });
+    }
+  }, {
+    key: '_createData',
     value: function _createData() {
       this.__state = arguments[0] || this.state || {};
       this.__props = arguments[1] || this.props || {};
@@ -77,7 +97,9 @@ var DeleteCard = (_temp2 = _class = function (_BaseComponent) {
   }]);
 
   return DeleteCard;
-}(_taroQq.Component), _class.$$events = ["cancel"], _class.$$componentPath = "pages/component/deleteCard", _temp2);
+}(_taroQq.Component), _class.$$events = ["cancel", "handleDelete"], _class.defaultProps = {
+  Debunkid: 0
+}, _class.$$componentPath = "pages/component/deleteCard", _temp2);
 exports.default = DeleteCard;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(DeleteCard));

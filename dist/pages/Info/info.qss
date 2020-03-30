@@ -4,7 +4,7 @@ page {
 .all {
   background-color: #04040F;
   height: 100%;
-  width: 750rpx; }
+  width: 100%; }
 
 .header {
   width: 750rpx;
@@ -15,7 +15,8 @@ page {
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 0; }
+  top: 0;
+  z-index: 1; }
 
 .head {
   width: 120rpx;

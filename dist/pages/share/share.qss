@@ -24,17 +24,22 @@
   color: rgba(249, 193, 112, 0.5); }
 
 .able {
-  color: #f9c170; }
+  color: #ff9500; }
 
 .title {
   height: 45rpx;
-  font-size: 32rpx;
-  font-family: PingFang SC;
-  font-weight: 400;
   line-height: 45rpx;
   color: #6e6e6e;
   opacity: 1;
-  margin: 28rpx 30rpx; }
+  margin: 28rpx 30rpx;
+  font-size: 32rpx;
+  font-family: PingFang SC;
+  font-weight: 400; }
+
+.place-title {
+  font-size: 32rpx;
+  font-family: PingFang SC;
+  font-weight: 400; }
 
 .body-container {
   padding: 22rpx 30rpx;
@@ -42,9 +47,12 @@
   height: 610rpx; }
 
 .content {
-  font-size: 28rpx;
   background-color: #F3F3F3;
+  font-size: 28rpx;
   width: 100%; }
+
+.place-content {
+  font-size: 28rpx; }
 
 .fake-text {
   font-size: 28rpx;
@@ -81,4 +89,26 @@
   font-weight: 400;
   color: #6e6e6e;
   opacity: 1; }
+
+.loading {
+  position: absolute;
+  top: 25rpx;
+  right: 155rpx;
+  border: 7rpx solid #ff9500;
+  border-bottom-color: rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  height: 25rpx;
+  width: 25rpx;
+  animation: span-c 1s linear infinite;
+  -webkit-animation: span-c 1s linear infinite; }
+
+@-webkit-keyframes span-c {
+  100% {
+    -webkit-transform: rotate(1turn);
+            transform: rotate(1turn); } }
+
+@keyframes span-c {
+  100% {
+    -webkit-transform: rotate(1turn);
+            transform: rotate(1turn); } }
 

@@ -32,6 +32,10 @@ var _share = __webpack_require__(/*! ./share.png */ "./src/pages/day/share.png")
 
 var _share2 = _interopRequireDefault(_share);
 
+var _fetch = __webpack_require__(/*! ../../service/fetch */ "./src/service/fetch.jsx");
+
+var _fetch2 = _interopRequireDefault(_fetch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -54,68 +58,103 @@ var Day = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Day.__proto__ || Object.getPrototypeOf(Day)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["loopArray0", "$compid__2", "cards", "Share"], _this.state = {
-      cards: [{
-        kind: 1,
-        place: 0,
-        title: "标题",
-        time: "周一 2：00-4：00"
-      }, {
-        kind: 2,
-        place: 0,
-        title: "卡片二",
-        time: "周四 2：00-4：00"
-      }, {
-        kind: 3,
-        place: 0,
-        title: "第三号",
-        time: "周三 2：00-4：00"
-      }, {
-        kind: 4,
-        place: 0,
-        title: "JOJO",
-        time: "周六 2：00-4：00"
-      }, {
-        kind: 3,
-        place: 0,
-        title: "STAND",
-        time: "周日 2：00-4：00"
-      }, {
-        kind: 2,
-        place: 0,
-        title: "王者荣耀",
-        time: "周五 2：00-4：00"
-      }]
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Day.__proto__ || Object.getPrototypeOf(Day)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "anonymousState__temp2", "anonymousState__temp6", "loopArray0", "$compid__1", "$compid__2", "$compid__3", "scroll_Y", "content", "Share", "heightStyle", "sharePosition", "page", "disable", "chosen", "enrefresh"], _this.scrinfo = function (info) {
+      var chosen = _this.state.chosen;
+
+      if (chosen !== info) {
+        (0, _fetch2.default)("requirement/square/?limit=6&page=0&" + info, {}, 'GET').then(function (data) {
+          if (data.msg === 'get result successful') {
+            _this.setState({ content: data.content });
+            if (data.num < 6) {
+              _this.setState({ page: 0, disable: true });
+            } else {
+              _this.setState({ page: 1, disable: false });
+            }
+          } else if (data.msg === 'none') {
+            _this.setState({ content: [] });
+          } else if (data.msg === 'Fail.') {
+            _taroQq2.default.showToast({
+              title: '服务器错误',
+              icon: 'none'
+            });
+          }
+        });
+      }
+      _this.setState({ chosen: info });
     }, _this.onChangeInfo = function (index) {
-      var info = _this.state.cards;
-      info.splice(index, 1, {
-        kind: 1,
-        place: 0,
-        title: "changed",
-        time: "周一 2：00-4：00"
-      });
-      _this.setState({ cards: info });
-    }, _this.customComponents = ["Screening", "Card", "Blank", "Footer"], _temp), _possibleConstructorReturn(_this, _ret);
+      var _this$state = _this.state,
+          page = _this$state.page,
+          disable = _this$state.disable,
+          chosen = _this$state.chosen;
+
+      var info = _this.state.content;
+      if (!disable) {
+        (0, _fetch2.default)("requirement/square/?limit=1&page=" + page + "&" + chosen, {}, 'GET').then(function (data) {
+          if (data.msg === 'get result successful') {
+            var content = data.content[0];
+            info.splice(index, 1, content);
+            _this.setState({ content: info, page: page + 1 });
+          } else if (data.msg === 'none') {
+            _taroQq2.default.showToast({
+              title: '让我们重新开始=W=',
+              icon: 'none'
+            });
+            _this.setState({ page: 0 });
+          } else {
+            _taroQq2.default.showToast({
+              title: '服务器错误',
+              icon: 'none'
+            });
+          }
+        });
+      }
+    }, _this.customComponents = ["Refresh", "Card", "Blank", "Footer", "Screening"], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Day, [{
     key: '_constructor',
-    value: function _constructor(props) {
-      _get(Day.prototype.__proto__ || Object.getPrototypeOf(Day.prototype), '_constructor', this).call(this, props);
-
+    value: function _constructor() {
+      _get(Day.prototype.__proto__ || Object.getPrototypeOf(Day.prototype), '_constructor', this).call(this);
+      var res = _taroQq2.default.getSystemInfoSync();
+      this.state = {
+        heightStyle: "height: " + (res.windowHeight - 80) + "px",
+        sharePosition: {
+          top: '80%',
+          left: '80%'
+        },
+        content: [],
+        page: 0,
+        disable: false,
+        chosen: 'type=1',
+        enrefresh: '0',
+        scroll_Y: 100
+      };
       this.$$refs = new _taroQq2.default.RefsArray();
     }
-
-    // state存储卡片数据
-
   }, {
     key: 'componentWillMount',
-    value: function componentWillMount() {}
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      (0, _fetch2.default)("requirement/square/?limit=6&page=0&type=1", {}, 'GET').then(function (data) {
+        if (data.msg === 'get result successful') {
+          _this2.setState({ content: data.content });
+          if (data.num < 6) {
+            _this2.setState({ page: 0, disable: true });
+          } else {
+            _this2.setState({ page: 1 });
+          }
+        } else if (data.msg === 'Fail.') {
+          _taroQq2.default.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          });
+        }
+      });
+    }
   }, {
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log(this.state);
-    }
+    value: function componentDidMount() {}
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {}
@@ -124,18 +163,121 @@ var Day = (_temp2 = _class = function (_BaseComponent) {
     value: function componentDidShow() {}
   }, {
     key: 'componentDidHide',
-    value: function componentDidHide() {}
+    value: function componentDidHide() {
+      this.setState({ scroll_Y: 95 });
+    }
   }, {
     key: 'toCreateNeeds',
     value: function toCreateNeeds() {
       _taroQq2.default.navigateTo({
-        url: '../share/share'
+        url: '/pages/share/share'
+      });
+    }
+
+    // 触摸结束后判断刷新图标状态，ready则释放刷新
+
+  }, {
+    key: 'handleTouchEnd',
+    value: function handleTouchEnd() {
+      var _this3 = this;
+
+      var enrefresh = this.state.enrefresh;
+
+      if (enrefresh === '1') {
+        this.setState({ enrefresh: '2' }, function () {
+          _this3.letRefresh();
+          setTimeout(function () {
+            _this3.setState({ scroll_Y: 95, enrefresh: '0' });
+          }, 1500);
+        });
+      } else {
+        this.setState({ scroll_Y: 95 });
+      }
+    }
+  }, {
+    key: 'letRefresh',
+    value: function letRefresh() {
+      var _this4 = this;
+
+      var _state = this.state,
+          chosen = _state.chosen,
+          page = _state.page;
+
+      (0, _fetch2.default)("requirement/square/?limit=6&page=" + page + "&" + chosen, {}, 'GET').then(function (data) {
+        if (data.msg === 'get result successful') {
+          if (data.num === 6) {
+            if (page === 0) {
+              _this4.setState({ content: data.content, page: 1, disable: false });
+            } else {
+              _this4.setState({ content: data.content, page: page + 6 });
+            }
+          } else {
+            _this4.setState({ content: data.content, page: 0 });
+          }
+        } else if (data.msg === 'none') {
+          (0, _fetch2.default)("requirement/square/?limit=6&page=0&" + chosen, {}, 'GET').then(function (res) {
+            if (res.msg === 'get result successful') {
+              _this4.setState({ content: res.content });
+              if (res.num < 6) {
+                _this4.setState({ page: 0 });
+              } else {
+                _this4.setState({ page: 1 });
+              }
+            } else if (res.msg === 'none') {
+              _this4.setState({ content: [] });
+            } else if (res.msg === 'Fail.') {
+              _taroQq2.default.showToast({
+                title: '服务器错误',
+                icon: 'none'
+              });
+            }
+          });
+        } else {
+          _taroQq2.default.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          });
+        }
+      });
+    }
+  }, {
+    key: 'updataScroll',
+    value: function updataScroll(e) {
+      if (e.detail.scrollTop <= 10) {
+        this.setState({ scroll_Y: 100, enrefresh: '1' });
+      } else {
+        this.setState({ scroll_Y: 100, enrefresh: '0' });
+      }
+    }
+    // 140px,
+
+  }, {
+    key: 'handleShareMove',
+    value: function handleShareMove(e) {
+      var totalHeight = _taroQq2.default.getSystemInfoSync().windowHeight;
+      var totalWidth = _taroQq2.default.getSystemInfoSync().windowWidth;
+      var sharePosition = this.state.sharePosition;
+
+      var left = sharePosition.left;
+      var top = sharePosition.top;
+
+      if (e.touches[0].pageX > 35 && totalWidth - e.touches[0].pageX > 35) {
+        left = e.touches[0].pageX + 'px';
+      }
+      if (e.touches[0].pageY > 105 && totalHeight - e.touches[0].pageY > 85) {
+        top = e.touches[0].pageY + 'px';
+      }
+      this.setState({
+        sharePosition: {
+          top: top,
+          left: left
+        }
       });
     }
   }, {
     key: '_createData',
     value: function _createData() {
-      var _this2 = this;
+      var _this5 = this;
 
       this.__state = arguments[0] || this.state || {};
       this.__props = arguments[1] || this.props || {};
@@ -143,39 +285,70 @@ var Day = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__2"),
+      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__1"),
           _genCompid2 = _slicedToArray(_genCompid, 2),
-          $prevCompid__2 = _genCompid2[0],
-          $compid__2 = _genCompid2[1];
+          $prevCompid__1 = _genCompid2[0],
+          $compid__1 = _genCompid2[1];
 
-      var cards = this.__state.cards;
+      var _genCompid3 = (0, _taroQq.genCompid)(__prefix + "$compid__2"),
+          _genCompid4 = _slicedToArray(_genCompid3, 2),
+          $prevCompid__2 = _genCompid4[0],
+          $compid__2 = _genCompid4[1];
 
-      var loopArray0 = cards.length ? cards.map(function (detail, index) {
+      var _genCompid5 = (0, _taroQq.genCompid)(__prefix + "$compid__3"),
+          _genCompid6 = _slicedToArray(_genCompid5, 2),
+          $prevCompid__3 = _genCompid6[0],
+          $compid__3 = _genCompid6[1];
+
+      var _state2 = this.__state,
+          content = _state2.content,
+          enrefresh = _state2.enrefresh,
+          scroll_Y = _state2.scroll_Y,
+          heightStyle = _state2.heightStyle,
+          sharePosition = _state2.sharePosition;
+
+      var anonymousState__temp = (0, _taroQq.internal_inline_style)(heightStyle);
+      var anonymousState__temp2 = (0, _taroQq.internal_inline_style)(heightStyle);
+      var anonymousState__temp6 = (0, _taroQq.internal_inline_style)(sharePosition);
+      var loopArray0 = content.length ? content.map(function (detail, index) {
         detail = {
           $original: (0, _taroQq.internal_get_original)(detail)
         };
+        var $loopState__temp4 = content.length ? index + 1 : null;
 
-        var _genCompid3 = (0, _taroQq.genCompid)(__prefix + 'azzzzzzzzz' + index, true),
-            _genCompid4 = _slicedToArray(_genCompid3, 2),
-            $prevCompid__1 = _genCompid4[0],
-            $compid__1 = _genCompid4[1];
+        var _genCompid7 = (0, _taroQq.genCompid)(__prefix + 'azzzzzzzzz' + index, true),
+            _genCompid8 = _slicedToArray(_genCompid7, 2),
+            $prevCompid__0 = _genCompid8[0],
+            $compid__0 = _genCompid8[1];
 
         _taroQq.propsManager.set({
           "index": index,
           "detail": detail.$original,
-          "onChangeInfo": _this2.onChangeInfo
-        }, $compid__1, $prevCompid__1);
+          "onChangeInfo": _this5.onChangeInfo
+        }, $compid__0, $prevCompid__0);
         return {
-          $compid__1: $compid__1,
+          $loopState__temp4: $loopState__temp4,
+          $compid__0: $compid__0,
           $original: detail.$original
         };
       }) : [];
       _taroQq.propsManager.set({
-        "mode": "need"
+        "onScrInfo": this.scrinfo.bind(this)
+      }, $compid__1, $prevCompid__1);
+      _taroQq.propsManager.set({
+        "enable": enrefresh
       }, $compid__2, $prevCompid__2);
+      _taroQq.propsManager.set({
+        "mode": "need"
+      }, $compid__3, $prevCompid__3);
       Object.assign(this.__state, {
+        anonymousState__temp: anonymousState__temp,
+        anonymousState__temp2: anonymousState__temp2,
+        anonymousState__temp6: anonymousState__temp6,
         loopArray0: loopArray0,
+        $compid__1: $compid__1,
         $compid__2: $compid__2,
+        $compid__3: $compid__3,
         Share: _share2.default
       });
       return this.__state;
@@ -183,7 +356,7 @@ var Day = (_temp2 = _class = function (_BaseComponent) {
   }]);
 
   return Day;
-}(_taroQq.Component), _class.$$events = ["toCreateNeeds"], _class.defaultProps = {}, _class.$$componentPath = "pages/day/day", _temp2);
+}(_taroQq.Component), _class.$$events = ["handleTouchEnd", "updataScroll", "handleShareMove", "toCreateNeeds"], _class.defaultProps = {}, _class.$$componentPath = "pages/day/day", _temp2);
 exports.default = Day;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(Day, true));

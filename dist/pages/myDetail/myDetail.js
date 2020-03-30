@@ -43,6 +43,10 @@ var _delete2 = _interopRequireDefault(_delete);
 
 __webpack_require__(/*! ./mydetail.scss */ "./src/pages/myDetail/mydetail.scss");
 
+var _fetch = __webpack_require__(/*! ../../service/fetch */ "./src/service/fetch.jsx");
+
+var _fetch2 = _interopRequireDefault(_fetch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -65,12 +69,22 @@ var myDetail = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = myDetail.__proto__ || Object.getPrototypeOf(myDetail)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__19", "show", "Delete", "anonymousState__temp", "title", "time", "content", "tags"], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = myDetail.__proto__ || Object.getPrototypeOf(myDetail)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__20", "show", "loading", "Delete", "content"], _this.state = {
       show: false,
-      title: '标题',
-      time: '2020.2020',
-      content: '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
-      tags: ['学习', '看书', '教学楼', '佑铭体育馆']
+      loading: false,
+      content: {
+        content: '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
+        date: '周一 周三 周日',
+        place: '教学楼',
+        post_time: '2020.02.29',
+        sender_nick_name: 'shi-zhong',
+        sender_portrait: 4,
+        tag: '看书',
+        time_end: 0,
+        time_from: 0,
+        title: '标题',
+        type: '学习'
+      }
     }, _this.customComponents = ["Footer"], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -83,7 +97,39 @@ var myDetail = (_temp2 = _class = function (_BaseComponent) {
     }
   }, {
     key: 'componentWillMount',
-    value: function componentWillMount() {}
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      var requirement_id = parseInt(this.$router.params.req_id);
+      (0, _fetch2.default)("requirement/view/" + requirement_id + "/", {}, 'GET').then(function (data) {
+        if (data.msg === 'success') {
+          _this2.setState({ content: data.content });
+        } else if (data.msg === '不见啦') {
+          _this2.setState({
+            content: {
+              content: '该需求已被删除, 历史列表未刷新',
+              date: '周八',
+              place: '极乐净土',
+              post_time: '2020.4.31',
+              sender_nick_name: 'NOT FOUND',
+              sender_portrait: 0,
+              tag: '修仙',
+              time_end: -24,
+              time_from: -1,
+              title: 'DELETED',
+              type: '修仙'
+            }
+          });
+        } else if (data.msg === 'Fail.') {
+          _taroQq2.default.showToast({
+            title: '服务器错误'
+          });
+          _taroQq2.default.navigateBack({
+            delta: 1
+          });
+        }
+      });
+    }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {}
@@ -104,23 +150,36 @@ var myDetail = (_temp2 = _class = function (_BaseComponent) {
   }, {
     key: 'sure',
     value: function sure() {
+      var _this3 = this;
+
       // delete code
-      _taroQq2.default.navigateBack({
-        delta: 1
-      });
-    }
-  }, {
-    key: '_createTagsExtendsData',
-    value: function _createTagsExtendsData(_$uid) {
-      var _this2 = this;
+      var requirement_id = this.$router.params.req_id;
+      var loading = this.state.loading;
 
-      return function () {
-        var tags = _this2.state.tags;
-
-        return {
-          tags: tags
-        };
-      };
+      if (!loading) {
+        this.setState({ loading: true });
+        (0, _fetch2.default)("requirement/" + requirement_id + "/", {}, 'DELETE').then(function (data) {
+          if (data.msg === 'success') {
+            _this3.setState({ show: false });
+            _taroQq2.default.showToast({
+              title: '删除成功'
+            });
+            _taroQq2.default.setStorage({
+              key: 'delete_if',
+              data: true
+            });
+            _taroQq2.default.navigateBack({
+              delta: 1
+            });
+          } else if (data.msg === 'Fail.') {
+            _this3.setState({ show: false });
+            _taroQq2.default.showToast({
+              title: '服务器错误'
+            });
+          }
+        });
+      }
+      this.setState({ show: false });
     }
   }, {
     key: '_createData',
@@ -131,27 +190,22 @@ var myDetail = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__19"),
+      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__20"),
           _genCompid2 = _slicedToArray(_genCompid, 2),
-          $prevCompid__19 = _genCompid2[0],
-          $compid__19 = _genCompid2[1];
+          $prevCompid__20 = _genCompid2[0],
+          $compid__20 = _genCompid2[1];
 
       var _state = this.__state,
           show = _state.show,
-          title = _state.title,
-          time = _state.time,
-          content = _state.content;
-
-
-      var anonymousState__temp = this._createTagsExtendsData(__prefix + "bfzzzzzzzz")();
+          content = _state.content,
+          loading = _state.loading;
 
       _taroQq.propsManager.set({
-        "mode": "need"
-      }, $compid__19, $prevCompid__19);
+        "mode": "my"
+      }, $compid__20, $prevCompid__20);
       Object.assign(this.__state, {
-        $compid__19: $compid__19,
-        Delete: _delete2.default,
-        anonymousState__temp: anonymousState__temp
+        $compid__20: $compid__20,
+        Delete: _delete2.default
       });
       return this.__state;
     }

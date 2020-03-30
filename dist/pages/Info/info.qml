@@ -5,9 +5,9 @@
         </view>
         <view class="headerSpace"></view>
         <view class="cardContainer">
-            <inofo-card></inofo-card>
+            <inofo-card qq:key="index" qq:for="{{loopArray14}}" qq:for-item="comment" qq:for-index="index" compid="{{comment.$compid__51}}"></inofo-card>
         </view>
         <view class="footerSpace"></view>
-        <footer compid="{{$compid__33}}"></footer>
+        <footer compid="{{$compid__52}}"></footer>
     </view>
 </block>

@@ -54,7 +54,7 @@ var CardHistory = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CardHistory.__proto__ || Object.getPrototypeOf(CardHistory)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__31", "$compid__32", "showDeleteModel", "Delete"], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CardHistory.__proto__ || Object.getPrototypeOf(CardHistory)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__31", "$compid__32", "$compid__33", "showDeleteModel", "Delete"], _this.state = {
       showDeleteModel: false
     }, _this.config = {
       navigationBarTitleText: '孤独星球'
@@ -85,7 +85,7 @@ var CardHistory = (_temp2 = _class = function (_BaseComponent) {
   }, {
     key: 'toSecret',
     value: function toSecret() {
-      _taroQq2.default.redirectTo({
+      _taroQq2.default.reLaunch({
         url: '/pages/nighthome/nighthome'
       });
     }
@@ -108,20 +108,39 @@ var CardHistory = (_temp2 = _class = function (_BaseComponent) {
           $prevCompid__32 = _genCompid4[0],
           $compid__32 = _genCompid4[1];
 
+      var _genCompid5 = (0, _taroQq.genCompid)(__prefix + "$compid__33"),
+          _genCompid6 = _slicedToArray(_genCompid5, 2),
+          $prevCompid__33 = _genCompid6[0],
+          $compid__33 = _genCompid6[1];
+
       var showDeleteModel = this.__state.showDeleteModel;
+      var _$router$params = this.$router.params,
+          color = _$router$params.color,
+          time = _$router$params.time,
+          text = _$router$params.text,
+          Debunkid = _$router$params.Debunkid;
 
       showDeleteModel && _taroQq.propsManager.set({
-        "onCloseDelete": this.CloseDelete.bind(this)
+        "onCloseDelete": this.CloseDelete.bind(this),
+        "Debunkid": Debunkid
       }, $compid__31, $prevCompid__31);
+      _taroQq.propsManager.set({
+        "textValue": text,
+        "showComment": false,
+        "color": color,
+        "time": time,
+        "Debunkid": Debunkid
+      }, $compid__32, $prevCompid__32);
       _taroQq.propsManager.set({
         "colorMine": "rgba(80, 195, 243, 1)",
         "colorSecret": "rgba(194, 198, 206, 1)",
         "showImg": false,
         "onToSecret": this.toSecret.bind(this)
-      }, $compid__32, $prevCompid__32);
+      }, $compid__33, $prevCompid__33);
       Object.assign(this.__state, {
         $compid__31: $compid__31,
         $compid__32: $compid__32,
+        $compid__33: $compid__33,
         Delete: _delete3.default
       });
       return this.__state;

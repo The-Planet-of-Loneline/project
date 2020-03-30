@@ -28,6 +28,10 @@ var _taroQq2 = _interopRequireDefault(_taroQq);
 
 __webpack_require__(/*! ./info.scss */ "./src/pages/Info/info.scss");
 
+var _fetch = __webpack_require__(/*! ../../service/fetch */ "./src/service/fetch.jsx");
+
+var _fetch2 = _interopRequireDefault(_fetch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -50,34 +54,40 @@ var CardHistory = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CardHistory.__proto__ || Object.getPrototypeOf(CardHistory)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__33"], _this.config = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CardHistory.__proto__ || Object.getPrototypeOf(CardHistory)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["loopArray14", "$compid__52"], _this.state = {
+      comment: [{}]
+    }, _this.config = {
       navigationBarTitleText: '孤独星球'
     }, _this.customComponents = ["InofoCard", "Footer"], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(CardHistory, [{
-    key: "_constructor",
+    key: '_constructor',
     value: function _constructor(props) {
-      _get(CardHistory.prototype.__proto__ || Object.getPrototypeOf(CardHistory.prototype), "_constructor", this).call(this, props);
+      _get(CardHistory.prototype.__proto__ || Object.getPrototypeOf(CardHistory.prototype), '_constructor', this).call(this, props);
 
       this.$$refs = new _taroQq2.default.RefsArray();
     }
   }, {
-    key: "toImfo",
-    value: function toImfo() {
-      _taroQq2.default.redirectTo({
-        url: '/pages/Info/info'
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      (0, _fetch2.default)('remind/night/remindbox/view/', {}, 'GET').then(function (res) {
+        _this2.setState({
+          comment: res.commentdata
+        });
       });
     }
   }, {
-    key: "toSecret",
+    key: 'toSecret',
     value: function toSecret() {
-      _taroQq2.default.redirectTo({
+      _taroQq2.default.reLaunch({
         url: '/pages/nighthome/nighthome'
       });
     }
   }, {
-    key: "_createData",
+    key: '_createData',
     value: function _createData() {
       this.__state = arguments[0] || this.state || {};
       this.__props = arguments[1] || this.props || {};
@@ -85,19 +95,42 @@ var CardHistory = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__33"),
+      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__52"),
           _genCompid2 = _slicedToArray(_genCompid, 2),
-          $prevCompid__33 = _genCompid2[0],
-          $compid__33 = _genCompid2[1];
+          $prevCompid__52 = _genCompid2[0],
+          $compid__52 = _genCompid2[1];
+
+      var loopArray14 = this.__state.comment.map(function (comment, index) {
+        comment = {
+          $original: (0, _taroQq.internal_get_original)(comment)
+        };
+
+        var _genCompid3 = (0, _taroQq.genCompid)(__prefix + 'bfzzzzzzzz' + index, true),
+            _genCompid4 = _slicedToArray(_genCompid3, 2),
+            $prevCompid__51 = _genCompid4[0],
+            $compid__51 = _genCompid4[1];
+
+        _taroQq.propsManager.set({
+          "time": comment.$original.CommentTime,
+          "text": comment.$original.Comment,
+          "sid": comment.$original.SecretId,
+          "number": comment.$original.Num
+        }, $compid__51, $prevCompid__51);
+        return {
+          $compid__51: $compid__51,
+          $original: comment.$original
+        };
+      });
 
       _taroQq.propsManager.set({
         "colorMine": "rgba(80, 195, 243, 1)",
         "colorSecret": "rgba(194, 198, 206, 1)",
         "showImg": false,
         "onToSecret": this.toSecret.bind(this)
-      }, $compid__33, $prevCompid__33);
+      }, $compid__52, $prevCompid__52);
       Object.assign(this.__state, {
-        $compid__33: $compid__33
+        loopArray14: loopArray14,
+        $compid__52: $compid__52
       });
       return this.__state;
     }

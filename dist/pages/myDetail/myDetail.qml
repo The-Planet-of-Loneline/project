@@ -1,8 +1,3 @@
-<template name="renderTagsExtends">
-    <block>
-        <view qq:key="index" class="spe-tag" qq:for="{{tags}}" qq:for-item="tag" qq:for-index="index">{{tag}}</view>
-    </block>
-</template>
 <block qq:if="{{$taroCompReady}}">
     <view>
         <block qq:if="{{show}}">
@@ -17,20 +12,27 @@
             </view>
         </block>
         <view class="header">需求详情
+            <block qq:if="{{loading}}">
+                <view class="loading"></view>
+            </block>
             <image src="{{Delete}}" class="delete" bindtap="changeShow" data-e-tap-so="this" data-e-tap-a-a="{{true}}"></image>
         </view>
         <view class="body-container">
             <view class="info">
-                <view class="title">{{title}}</view>
-                <view class="time">{{time}}</view>
+                <view class="title">{{content.title}}</view>
+                <view class="time">{{content.post_time}}</view>
             </view>
             <view class="details">
                 <view class="tag-container">
-                    <template is="renderTagsExtends" data="{{...anonymousState__temp}}"></template>
+                    <view class="spe-tag">{{content.type}}</view>
+                    <block qq:if="{{content.tag !== ''}}">
+                        <view class="spe-tag">{{content.tag}}</view>
+                    </block>
+                    <view class="spe-tag">{{content.place}}</view>
                 </view>
-                <view class="content">{{content}}</view>
+                <view class="content">{{content.content}}</view>
             </view>
         </view>
-        <footer compid="{{$compid__19}}"></footer>
+        <footer compid="{{$compid__20}}"></footer>
     </view>
 </block>

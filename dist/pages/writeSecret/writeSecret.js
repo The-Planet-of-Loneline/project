@@ -58,6 +58,10 @@ var _checked = __webpack_require__(/*! ../img/checked.png */ "./src/pages/img/ch
 
 var _checked2 = _interopRequireDefault(_checked);
 
+var _fetch = __webpack_require__(/*! ../../service/fetch */ "./src/service/fetch.jsx");
+
+var _fetch2 = _interopRequireDefault(_fetch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -80,7 +84,7 @@ var WriteSecret = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WriteSecret.__proto__ || Object.getPrototypeOf(WriteSecret)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "$compid__25", "$compid__26", "Color", "show1", "check", "show2", "show3", "show4", "show5", "show6", "inpuValue", "bgcolor"], _this.config = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WriteSecret.__proto__ || Object.getPrototypeOf(WriteSecret)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "$compid__53", "$compid__54", "Value", "Color", "show1", "check", "show2", "show3", "show4", "show5", "show6", "inpuValue", "bgcolor"], _this.config = {
       navigationBarTitleText: '孤独星球'
     }, _this.customComponents = ["Head", "Footer"], _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -98,6 +102,7 @@ var WriteSecret = (_temp2 = _class = function (_BaseComponent) {
         show4: false,
         show5: false,
         show6: false
+
       };
       this.$$refs = new _taroQq2.default.RefsArray();
     }
@@ -197,13 +202,20 @@ var WriteSecret = (_temp2 = _class = function (_BaseComponent) {
   }, {
     key: 'handleInput',
     value: function handleInput() {
-      var inpuValue = this.state.inpuValue;
-
-      if (inpuValue == '说个秘密吧...') {
+      if (this.state.inpuValue == '说个秘密吧...') {
         this.setState({
           inpuValue: ''
         });
       }
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange() {
+
+      var value = this.state.inpuValue;
+      this.setState({
+        inpuValue: value
+      });
     }
   }, {
     key: 'handleInputChange',
@@ -227,13 +239,34 @@ var WriteSecret = (_temp2 = _class = function (_BaseComponent) {
       });
     }
   }, {
-    key: 'handleSubmit',
-    value: function handleSubmit() {
+    key: 'onhandleSubmit',
+    value: function onhandleSubmit() {
       var text = this.state.inpuValue;
+      var bgcolor = this.state.bgcolor;
 
-      _taroQq2.default.redirectTo({
-        url: "/pages/nighthome/nighthome?text=" + text
-      });
+      if (text && text != '说个秘密吧...') {
+        (0, _fetch2.default)('secret/create/', {
+          colour: bgcolor,
+          content: text
+        }, 'POST').then(function (res) {
+          switch (res.message) {
+            case 'Success':
+              _taroQq2.default.redirectTo({
+                url: "/pages/nighthome/nighthome"
+              });
+              _taroQq2.default.setStorage({
+                key: 'secretId',
+                data: res.secretId
+              });
+              break;
+          }
+        });
+      } else {
+        _taroQq2.default.showToast({
+          icon: 'none',
+          title: '不能发送空白秘密'
+        });
+      }
     }
   }, {
     key: 'handleback',
@@ -248,26 +281,25 @@ var WriteSecret = (_temp2 = _class = function (_BaseComponent) {
   }, {
     key: '_createData',
     value: function _createData() {
-      var _this2 = this;
-
       this.__state = arguments[0] || this.state || {};
       this.__props = arguments[1] || this.props || {};
       var __isRunloopRef = arguments[2];
       var __prefix = this.$prefix;
       ;
 
-      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__25"),
+      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__53"),
           _genCompid2 = _slicedToArray(_genCompid, 2),
-          $prevCompid__25 = _genCompid2[0],
-          $compid__25 = _genCompid2[1];
+          $prevCompid__53 = _genCompid2[0],
+          $compid__53 = _genCompid2[1];
 
-      var _genCompid3 = (0, _taroQq.genCompid)(__prefix + "$compid__26"),
+      var _genCompid3 = (0, _taroQq.genCompid)(__prefix + "$compid__54"),
           _genCompid4 = _slicedToArray(_genCompid3, 2),
-          $prevCompid__26 = _genCompid4[0],
-          $compid__26 = _genCompid4[1];
+          $prevCompid__54 = _genCompid4[0],
+          $compid__54 = _genCompid4[1];
 
       var bgcolor = this.__state.bgcolor;
 
+      var Value = this.__state.inpuValue;
 
       var cardStyle = {
         backgroundColor: bgcolor
@@ -281,38 +313,29 @@ var WriteSecret = (_temp2 = _class = function (_BaseComponent) {
           show6 = _state.show6;
 
       var anonymousState__temp = (0, _taroQq.internal_inline_style)(cardStyle);
-
-      this.anonymousFunc0 = function (inpuValue) {
-        return _this2.handleSubmit(inpuValue);
-      };
-
       _taroQq.propsManager.set({
         "colorTA": "rgba(185, 189, 203, 1)",
         "colorWrite": "rgba(242, 245, 251, 1)",
         "showUnderline": false,
         "onToSecret": this.toSecret.bind(this)
-      }, $compid__25, $prevCompid__25);
+      }, $compid__53, $prevCompid__53);
       _taroQq.propsManager.set({
         "onToMine": this.toMine.bind(this)
-      }, $compid__26, $prevCompid__26);
+      }, $compid__54, $prevCompid__54);
       Object.assign(this.__state, {
         anonymousState__temp: anonymousState__temp,
-        $compid__25: $compid__25,
-        $compid__26: $compid__26,
+        $compid__53: $compid__53,
+        $compid__54: $compid__54,
+        Value: Value,
         Color: _color2.default,
         check: _checked2.default
       });
       return this.__state;
     }
-  }, {
-    key: 'anonymousFunc0',
-    value: function anonymousFunc0(e) {
-      ;
-    }
   }]);
 
   return WriteSecret;
-}(_taroQq.Component), _class.$$events = ["handleInputChange", "handleInput", "handleback", "anonymousFunc0", "colorChangB", "colorChangBlue", "colorChangG", "colorChangGray", "colorChangP", "colorChangPink"], _class.$$componentPath = "pages/writeSecret/writeSecret", _temp2);
+}(_taroQq.Component), _class.$$events = ["handleInputChange", "handleInput", "handleback", "onhandleSubmit", "colorChangB", "colorChangBlue", "colorChangG", "colorChangGray", "colorChangP", "colorChangPink"], _class.$$componentPath = "pages/writeSecret/writeSecret", _temp2);
 exports.default = WriteSecret;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(WriteSecret, true));

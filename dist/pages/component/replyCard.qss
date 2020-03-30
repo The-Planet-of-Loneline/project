@@ -1,6 +1,6 @@
 .replyCard {
   width: 661rpx;
-  height: 132rpx;
+  height: 140rpx;
   background: rgba(224, 227, 233, 0.2);
   border: 1rpx solid rgba(198, 193, 193, 0.2); }
 
@@ -20,7 +20,6 @@
   top: -50rpx; }
 
 .time {
-  width: 66rpx;
   height: 24rpx;
   font-size: 18rpx;
   font-family: Segoe UI;
@@ -30,8 +29,8 @@
   margin-bottom: 10rpx; }
 
 .text {
-  width: 361rpx;
-  height: 41rpx;
+  width: 400rpx;
+  height: 60rpx;
   font-size: 25rpx;
   font-family: Segoe UI;
   font-weight: 400;

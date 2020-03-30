@@ -92,7 +92,7 @@ var Footer = (_temp2 = _class = function (_BaseComponent) {
     key: 'toDay',
     value: function toDay() {
       _taroQq2.default.redirectTo({
-        url: "/pages/day/day"
+        url: "/pages/daySwitch/daySwitch?to=day"
       });
     }
   }, {

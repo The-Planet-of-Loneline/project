@@ -1,1 +1,1 @@
-{"usingComponents":{"sidebar":"../../component/Sidebar/Sidebar","footer":"../../component/Footer/Footer"}}
+{"usingComponents":{"sidebar":"./Sidebar/Sidebar","footer":"../../component/Footer/Footer"}}

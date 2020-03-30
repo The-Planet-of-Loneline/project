@@ -1,28 +1,15 @@
-<template name="renderExplainList">
-    <block>
-        <block qq:if="{{draw.small === '0'}}">
-            <list-item qq:key="$loopState__temp2" qq:for="{{loopArray4}}" qq:for-item="index" qq:for-index="_anonIdx2" compid="{{index.$compid__6}}"></list-item>
-        </block>
-        <block qq:elif="{{draw.small === '1'}}">
-            <list-item qq:key="$loopState__temp4" qq:for="{{loopArray5}}" qq:for-item="index" qq:for-index="_anonIdx4" compid="{{index.$compid__7}}"></list-item>
-        </block>
-        <block qq:elif="{{draw.small === '2'}}">
-            <list-item qq:key="$loopState__temp6" qq:for="{{loopArray6}}" qq:for-item="index" qq:for-index="_anonIdx6" compid="{{index.$compid__8}}"></list-item>
-        </block>
-    </block>
-</template>
 <block qq:if="{{$taroCompReady}}">
     <view>
         <block qq:if="{{draw.show}}">
-            <view class="shadow"></view>
+            <view class="shadow" catchtouchmove="handleTouchMove"></view>
         </block>
-        <view class="stick">
+        <view class="stick" catchtouchmove="handleTouchMove">
             <view class="user-container">
                 <view class="color-part">
                     <view class="user-info">
-                        <image src="{{UserImage}}" class="user-image"></image>
+                        <user-img compid="{{$compid__8}}"></user-img>
                         <view class="user-info-two">
-                            <view class="user-name">{{user.userName}}</view>
+                            <view class="user-name">{{userName}}</view>
                             <view class="stu-number">学号：{{user.stuNumber}}</view>
                         </view>
                         <view class="edit">
@@ -47,11 +34,19 @@
                 </view>
             </block>
         </view>
-        <view class="need-list">
-            <view class="blank-top"></view>
-            <template is="renderExplainList" data="{{...anonymousState__temp7}}"></template>
-            <view class="blank-bottom"></view>
-        </view>
+        <view class="blank-top"></view>
+        <block>
+            <block qq:if="{{anonymousState__temp3}}">
+                <list-item qq:key="$loopState__temp2" qq:for="{{loopArray4}}" qq:for-item="info" qq:for-index="index" compid="{{info.$compid__7}}"></list-item>
+            </block>
+            <block qq:else>
+                <view class="blank">{{blank_msg[draw.small]}}</view>
+            </block>
+        </block>
+        <block qq:if="{{bottom[draw.small]}}">
+            <view class="reach-bottom">----没见过底线啊----</view>
+        </block>
+        <view class="blank-bottom"></view>
         <footer compid="{{$compid__9}}"></footer>
     </view>
 </block>

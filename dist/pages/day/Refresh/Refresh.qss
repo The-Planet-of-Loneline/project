@@ -1,0 +1,243 @@
+* {
+  margin: 0;
+  border: 0; }
+
+.container {
+  position: relative;
+  width: 60rpx;
+  height: 60rpx; }
+
+.u-disable1 {
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  background-color: #99D293;
+  top: 0;
+  left: 0; }
+
+.u-disable2 {
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  background-color: #6FBDDF;
+  top: 0;
+  left: 0; }
+
+.d-disable1 {
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  background-color: #99D293;
+  right: 0;
+  bottom: 0; }
+
+.d-disable2 {
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  background-color: #6FBDDF;
+  right: 0;
+  bottom: 0; }
+
+.box {
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  background-color: #6FBDDF; }
+
+.box:nth-child(1) {
+  -webkit-animation: spawn1 2s infinite linear;
+          animation: spawn1 2s infinite linear; }
+
+.box:nth-child(2) {
+  -webkit-animation: spawn2 2s infinite linear;
+          animation: spawn2 2s infinite linear; }
+
+@-webkit-keyframes spawn1 {
+  0% {
+    top: 0;
+    left: 0;
+    width: 30rpx;
+    height: 30rpx; }
+  12.5% {
+    top: 0;
+    left: 0;
+    width: 60rpx;
+    height: 30rpx; }
+  25% {
+    top: 0;
+    left: 0;
+    width: 60rpx;
+    height: 30rpx; }
+  37.5% {
+    top: 0;
+    left: 30rpx;
+    width: 30rpx;
+    height: 30rpx; }
+  50% {
+    top: 0;
+    left: 30rpx;
+    width: 30rpx;
+    height: 30rpx; }
+  62.5% {
+    top: 0;
+    left: 30rpx;
+    width: 30rpx;
+    height: 60rpx; }
+  75% {
+    top: 0;
+    left: 30rpx;
+    width: 30rpx;
+    height: 60rpx; }
+  87.5% {
+    top: 30rpx;
+    left: 30rpx;
+    width: 30rpx;
+    height: 30rpx; }
+  100% {
+    top: 30rpx;
+    left: 30rpx;
+    width: 30rpx;
+    height: 30rpx; } }
+
+@keyframes spawn1 {
+  0% {
+    top: 0;
+    left: 0;
+    width: 30rpx;
+    height: 30rpx; }
+  12.5% {
+    top: 0;
+    left: 0;
+    width: 60rpx;
+    height: 30rpx; }
+  25% {
+    top: 0;
+    left: 0;
+    width: 60rpx;
+    height: 30rpx; }
+  37.5% {
+    top: 0;
+    left: 30rpx;
+    width: 30rpx;
+    height: 30rpx; }
+  50% {
+    top: 0;
+    left: 30rpx;
+    width: 30rpx;
+    height: 30rpx; }
+  62.5% {
+    top: 0;
+    left: 30rpx;
+    width: 30rpx;
+    height: 60rpx; }
+  75% {
+    top: 0;
+    left: 30rpx;
+    width: 30rpx;
+    height: 60rpx; }
+  87.5% {
+    top: 30rpx;
+    left: 30rpx;
+    width: 30rpx;
+    height: 30rpx; }
+  100% {
+    top: 30rpx;
+    left: 30rpx;
+    width: 30rpx;
+    height: 30rpx; } }
+
+@-webkit-keyframes spawn2 {
+  0% {
+    right: 0;
+    bottom: 0;
+    width: 30rpx;
+    height: 30rpx; }
+  12.5% {
+    right: 0;
+    bottom: 0;
+    width: 30rpx;
+    height: 30rpx; }
+  25% {
+    right: 0;
+    bottom: 0;
+    width: 60rpx;
+    height: 30rpx; }
+  37.5% {
+    right: 0;
+    bottom: 0;
+    width: 60rpx;
+    height: 30rpx; }
+  50% {
+    right: 30rpx;
+    bottom: 0;
+    width: 30rpx;
+    height: 30rpx; }
+  62.5% {
+    right: 30rpx;
+    bottom: 0;
+    width: 30rpx;
+    height: 30rpx; }
+  75% {
+    right: 30rpx;
+    bottom: 0;
+    width: 30rpx;
+    height: 60rpx; }
+  87.5% {
+    right: 30rpx;
+    bottom: 0;
+    width: 30rpx;
+    height: 60rpx; }
+  100% {
+    right: 30rpx;
+    bottom: 30rpx;
+    width: 30rpx;
+    height: 30rpx; } }
+
+@keyframes spawn2 {
+  0% {
+    right: 0;
+    bottom: 0;
+    width: 30rpx;
+    height: 30rpx; }
+  12.5% {
+    right: 0;
+    bottom: 0;
+    width: 30rpx;
+    height: 30rpx; }
+  25% {
+    right: 0;
+    bottom: 0;
+    width: 60rpx;
+    height: 30rpx; }
+  37.5% {
+    right: 0;
+    bottom: 0;
+    width: 60rpx;
+    height: 30rpx; }
+  50% {
+    right: 30rpx;
+    bottom: 0;
+    width: 30rpx;
+    height: 30rpx; }
+  62.5% {
+    right: 30rpx;
+    bottom: 0;
+    width: 30rpx;
+    height: 30rpx; }
+  75% {
+    right: 30rpx;
+    bottom: 0;
+    width: 30rpx;
+    height: 60rpx; }
+  87.5% {
+    right: 30rpx;
+    bottom: 0;
+    width: 30rpx;
+    height: 60rpx; }
+  100% {
+    right: 30rpx;
+    bottom: 30rpx;
+    width: 30rpx;
+    height: 30rpx; } }
+

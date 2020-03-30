@@ -1,1 +1,1 @@
-{"usingComponents":{"list-item":"../../component/ListItem/ListItem","footer":"../../component/Footer/Footer"}}
+{"usingComponents":{"user-img":"../../component/UserImg/UserImg","list-item":"./ListItem/ListItem","footer":"../../component/Footer/Footer"},"onReachBottomDistance":130}

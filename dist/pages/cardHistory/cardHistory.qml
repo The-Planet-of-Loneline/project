@@ -7,7 +7,7 @@
             <delete-card compid="{{$compid__31}}"></delete-card>
         </block>
         <image src="{{Delete}}" class="delete" bindtap="delete" data-e-tap-so="this"></image>
-        <secret-card></secret-card>
-        <footer compid="{{$compid__32}}"></footer>
+        <secret-card compid="{{$compid__32}}"></secret-card>
+        <footer compid="{{$compid__33}}"></footer>
     </view>
 </block>

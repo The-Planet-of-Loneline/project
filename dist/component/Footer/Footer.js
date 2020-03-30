@@ -96,8 +96,8 @@ var Footer = (_temp2 = _class = function (_BaseComponent) {
   }, {
     key: 'toNight',
     value: function toNight() {
-      _taroQq2.default.redirectTo({
-        url: '/pages/nighthome/nighthome'
+      _taroQq2.default.reLaunch({
+        url: '/pages/daySwitch/daySwitch?to=nighthome'
       });
     }
   }, {
@@ -106,7 +106,7 @@ var Footer = (_temp2 = _class = function (_BaseComponent) {
       if (this.props.mode === 'my') {
         return undefined;
       }
-      _taroQq2.default.redirectTo({
+      _taroQq2.default.reLaunch({
         url: '../my/my'
       });
     }
@@ -116,7 +116,7 @@ var Footer = (_temp2 = _class = function (_BaseComponent) {
       if (this.props.mode === 'need') {
         return undefined;
       }
-      _taroQq2.default.redirectTo({
+      _taroQq2.default.reLaunch({
         url: '../day/day'
       });
     }

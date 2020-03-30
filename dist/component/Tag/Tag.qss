@@ -9,7 +9,7 @@
   border-radius: 40rpx;
   text-align: center;
   padding: 0 10rpx;
-  margin: 0 9rpx 30rpx 9rpx; }
+  margin: 0 5rpx 30rpx 5rpx; }
 
 .unlit {
   background: #cfcfcf;

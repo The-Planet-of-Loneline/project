@@ -37,18 +37,20 @@
   margin-top: 100rpx; }
 
 .name {
-  text-decoration: underline;
   display: inline-block;
-  width: 200rpx;
+  width: 330rpx;
   height: 50rpx;
   position: relative;
-  top: 10rpx; }
+  top: 10rpx;
+  border-bottom: 1rpx solid black; }
+
+.edit-label {
+  position: relative;
+  top: 10rpx;
+  left: 20rpx; }
 
 .edit {
   width: 44rpx;
   height: 44rpx;
-  opacity: 1;
-  position: relative;
-  top: 10rpx;
-  left: 20rpx; }
+  opacity: 1; }
 

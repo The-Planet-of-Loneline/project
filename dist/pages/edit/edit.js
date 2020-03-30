@@ -32,6 +32,10 @@ var _edit = __webpack_require__(/*! ../img/edit.png */ "./src/pages/img/edit.png
 
 var _edit2 = _interopRequireDefault(_edit);
 
+var _fetch = __webpack_require__(/*! ../../service/fetch */ "./src/service/fetch.jsx");
+
+var _fetch2 = _interopRequireDefault(_fetch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -54,13 +58,13 @@ var edit = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = edit.__proto__ || Object.getPrototypeOf(edit)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__34", "inputValue", "Edit", "info", "sexC"], _this.state = {
-      inputValue: _this.$router.params.name,
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = edit.__proto__ || Object.getPrototypeOf(edit)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__38", "inputValue", "Edit", "info"], _this.state = {
+      inputValue: '',
       info: {
-        stuid: '2019214***',
-        sex: 0,
-        college: 'xx学院',
-        grade: '19级'
+        stuid: '',
+        sex: '',
+        college: '',
+        grade: ''
       }
     }, _this.customComponents = ["Footer"], _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -71,6 +75,42 @@ var edit = (_temp2 = _class = function (_BaseComponent) {
       _get(edit.prototype.__proto__ || Object.getPrototypeOf(edit.prototype), '_constructor', this).call(this, props);
 
       this.$$refs = new _taroQq2.default.RefsArray();
+    }
+  }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _$router$params = this.$router.params,
+          stuid = _$router$params.stuid,
+          sex = _$router$params.sex,
+          college = _$router$params.college,
+          grade = _$router$params.grade;
+
+      var nickname = _taroQq2.default.getStorageSync('Nickname');
+      this.setState({
+        inputValue: nickname,
+        info: {
+          stuid: stuid,
+          sex: sex,
+          college: college,
+          grade: grade
+        }
+      });
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      var verify_info = this.state.inputValue;
+      var nickname = _taroQq2.default.getStorageSync('Nickname');
+      if (verify_info !== nickname) {
+        (0, _fetch2.default)('user/change_info/', {
+          verify_info: verify_info,
+          verify_item: 'Nickname'
+        }, 'POST');
+        _taroQq2.default.setStorage({
+          key: 'Nickname',
+          data: verify_info
+        });
+      }
     }
   }, {
     key: 'onhandleInputChange',
@@ -88,22 +128,20 @@ var edit = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__34"),
+      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__38"),
           _genCompid2 = _slicedToArray(_genCompid, 2),
-          $prevCompid__34 = _genCompid2[0],
-          $compid__34 = _genCompid2[1];
+          $prevCompid__38 = _genCompid2[0],
+          $compid__38 = _genCompid2[1];
 
       var inputValue = this.__state.inputValue;
       var info = this.__state.info;
 
-      var sexC = ['男', '女'];
       _taroQq.propsManager.set({
-        "mode": "need"
-      }, $compid__34, $prevCompid__34);
+        "mode": "my"
+      }, $compid__38, $prevCompid__38);
       Object.assign(this.__state, {
-        $compid__34: $compid__34,
-        Edit: _edit2.default,
-        sexC: sexC
+        $compid__38: $compid__38,
+        Edit: _edit2.default
       });
       return this.__state;
     }

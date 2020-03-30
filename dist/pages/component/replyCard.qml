@@ -1,9 +1,9 @@
 <block qq:if="{{$taroCompReady}}">
     <view class="replyCard">
-        <view class="avatar"></view>
+        <image src="{{name}}" class="avatar"></image>
         <view class="textContainer">
-            <view class="time">now</view>
-            <view class="text">hello!</view>
+            <view class="time">{{time}}</view>
+            <view class="text">{{text}}</view>
         </view>
     </view>
 </block>

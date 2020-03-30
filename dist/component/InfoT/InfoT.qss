@@ -10,7 +10,7 @@
 .push {
   left: 70rpx;
   top: 275rpx;
-  height: 490rpx;
+  min-height: 490rpx;
   width: 613rpx;
   margin: 275rpx auto auto 70rpx;
   background-color: white;
@@ -36,13 +36,12 @@
   float: right; }
 
 .fake-table {
-  width: 519rpx;
+  width: 580rpx;
   margin: 0 auto;
   text-align: start; }
 
 .fake-cell {
   display: inline-block;
-  width: 46%;
   height: 40rpx;
   border: none;
   font-size: 24rpx;
@@ -50,11 +49,18 @@
   font-weight: 400;
   line-height: 40rpx;
   color: black;
-  opacity: 1; }
+  opacity: 1;
+  overflow: hidden;
+  margin-left: 15rpx; }
+
+.left {
+  width: 270rpx; }
+
+.right {
+  width: 220rpx; }
 
 .sentence {
   width: 522rpx;
-  height: 165rpx;
   background: white;
   border: 1rpx solid #707070;
   opacity: 1;
@@ -66,9 +72,16 @@
   color: #747474;
   text-align: start; }
 
+.type-t {
+  height: 165rpx; }
+
+.type-s {
+  height: 210rpx; }
+
 .sub-con {
   width: 522rpx;
   margin: 0 auto;
+  padding-bottom: 25rpx;
   display: flex;
   justify-content: space-between; }
 

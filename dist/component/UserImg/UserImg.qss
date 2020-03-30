@@ -1,0 +1,12 @@
+.size-my {
+  width: 194rpx;
+  height: 194rpx; }
+
+.size-detail {
+  height: 140rpx;
+  width: 140rpx; }
+
+.size-apply {
+  height: 76rpx;
+  width: 76rpx; }
+

@@ -26,9 +26,45 @@ var _taroQq2 = _interopRequireDefault(_taroQq);
 
 __webpack_require__(/*! ../nighthome/NightCard.scss */ "./src/pages/nighthome/NightCard.scss");
 
-var _avatar = __webpack_require__(/*! ../img/avatar.png */ "./src/pages/img/avatar.png");
+var _img = __webpack_require__(/*! ../../assets/user_img/img0.png */ "./src/assets/user_img/img0.png");
 
-var _avatar2 = _interopRequireDefault(_avatar);
+var _img2 = _interopRequireDefault(_img);
+
+var _img3 = __webpack_require__(/*! ../../assets/user_img/img1.png */ "./src/assets/user_img/img1.png");
+
+var _img4 = _interopRequireDefault(_img3);
+
+var _img5 = __webpack_require__(/*! ../../assets/user_img/img2.png */ "./src/assets/user_img/img2.png");
+
+var _img6 = _interopRequireDefault(_img5);
+
+var _img7 = __webpack_require__(/*! ../../assets/user_img/img3.png */ "./src/assets/user_img/img3.png");
+
+var _img8 = _interopRequireDefault(_img7);
+
+var _img9 = __webpack_require__(/*! ../../assets/user_img/img4.png */ "./src/assets/user_img/img4.png");
+
+var _img10 = _interopRequireDefault(_img9);
+
+var _img11 = __webpack_require__(/*! ../../assets/user_img/img5.png */ "./src/assets/user_img/img5.png");
+
+var _img12 = _interopRequireDefault(_img11);
+
+var _img13 = __webpack_require__(/*! ../../assets/user_img/img6.png */ "./src/assets/user_img/img6.png");
+
+var _img14 = _interopRequireDefault(_img13);
+
+var _img15 = __webpack_require__(/*! ../../assets/user_img/img7.png */ "./src/assets/user_img/img7.png");
+
+var _img16 = _interopRequireDefault(_img15);
+
+var _img17 = __webpack_require__(/*! ../../assets/user_img/img8.png */ "./src/assets/user_img/img8.png");
+
+var _img18 = _interopRequireDefault(_img17);
+
+var _img19 = __webpack_require__(/*! ../../assets/user_img/img9.png */ "./src/assets/user_img/img9.png");
+
+var _img20 = _interopRequireDefault(_img19);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52,7 +88,9 @@ var NightCard = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = NightCard.__proto__ || Object.getPrototypeOf(NightCard)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["avatar", "textValue"], _this.customComponents = [], _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = NightCard.__proto__ || Object.getPrototypeOf(NightCard)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "name", "textValue", "color", "Debunkid", "number", "sendTime"], _this.state = {
+      name: ''
+    }, _this.customComponents = [], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(NightCard, [{
@@ -81,7 +119,7 @@ var NightCard = (_temp2 = _class = function (_BaseComponent) {
     key: 'toComment',
     value: function toComment() {
       _taroQq2.default.navigateTo({
-        url: "/pages/commentNight/comment?text=" + this.props.textValue
+        url: "/pages/commentNight/comment?text=" + this.props.textValue + "&&color=" + this.props.color + "&&Debunkid=" + this.props.Debunkid
       });
     }
   }, {
@@ -92,8 +130,48 @@ var NightCard = (_temp2 = _class = function (_BaseComponent) {
       var __isRunloopRef = arguments[2];
       var __prefix = this.$prefix;
       ;
+
+      var number = this.__props.number;
+
+      var backgroundColorOne = {
+        background: this.__props.color
+      };
+
+      switch (number) {
+        case 0:
+          this.setState({ name: _img2.default });
+          break;
+        case 1:
+          this.setState({ name: _img4.default });
+          break;
+        case 2:
+          this.setState({ name: _img6.default });
+          break;
+        case 3:
+          this.setState({ name: _img8.default });
+          break;
+        case 4:
+          this.setState({ name: _img10.default });
+          break;
+        case 5:
+          this.setState({ name: _img12.default });
+          break;
+        case 6:
+          this.setState({ name: _img14.default });
+          break;
+        case 7:
+          this.setState({ name: _img16.default });
+          break;
+        case 8:
+          this.setState({ name: _img18.default });
+          break;
+        case 9:
+          this.setState({ name: _img20.default });
+          break;
+      }
+      var anonymousState__temp = (0, _taroQq.internal_inline_style)(backgroundColorOne);
       Object.assign(this.__state, {
-        avatar: _avatar2.default
+        anonymousState__temp: anonymousState__temp
       });
       return this.__state;
     }
@@ -101,22 +179,15 @@ var NightCard = (_temp2 = _class = function (_BaseComponent) {
 
   return NightCard;
 }(_taroQq.Component), _class.$$events = ["toComment"], _class.defaultProps = {
-  textValue: '你好呀'
+  textValue: '',
+  number: 0,
+  color: '',
+  sendTime: '',
+  Debunkid: 0
 }, _class.$$componentPath = "pages/component/NightCard", _temp2);
 exports.default = NightCard;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(NightCard));
-
-/***/ }),
-
-/***/ "./src/pages/img/avatar.png":
-/*!**********************************!*\
-  !*** ./src/pages/img/avatar.png ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/images/avatar.png";
 
 /***/ }),
 

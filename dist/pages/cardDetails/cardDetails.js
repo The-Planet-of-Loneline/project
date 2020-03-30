@@ -28,6 +28,10 @@ var _taroQq2 = _interopRequireDefault(_taroQq);
 
 __webpack_require__(/*! ./cardDetails.scss */ "./src/pages/cardDetails/cardDetails.scss");
 
+var _fetch = __webpack_require__(/*! ../../service/fetch */ "./src/service/fetch.jsx");
+
+var _fetch2 = _interopRequireDefault(_fetch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -50,14 +54,21 @@ var CardDetails = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CardDetails.__proto__ || Object.getPrototypeOf(CardDetails)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp2", "$compid__20", "$compid__21", "anonymousState__temp", "show", "userName", "submitTime", "title", "time", "content", "tags"], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CardDetails.__proto__ || Object.getPrototypeOf(CardDetails)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "$compid__21", "$compid__22", "$compid__23", "content", "able", "show"], _this.state = {
       show: false,
-      userName: '用户名',
-      submitTime: '2020.2.8',
-      title: '标题',
-      time: '2020.2020',
-      content: '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
-      tags: ['学习', '看书', '教学楼', '佑铭体育馆']
+      content: {
+        content: '',
+        date: '',
+        place: '',
+        post_time: '',
+        sender_nick_name: '',
+        sender_portrait: 4,
+        tag: '',
+        time_end: 0,
+        time_from: 0,
+        title: '',
+        type: ''
+      }
     }, _this.changeShow = function () {
       var show = _this.state.show;
 
@@ -68,33 +79,66 @@ var CardDetails = (_temp2 = _class = function (_BaseComponent) {
       }
     }, _this.toComfirm = function () {
       console.log('passed successfully');
-    }, _this.customComponents = ["Info", "Footer"], _temp), _possibleConstructorReturn(_this, _ret);
+    }, _this.customComponents = ["UserImg", "Info", "Footer"], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(CardDetails, [{
-    key: "_constructor",
+    key: '_constructor',
     value: function _constructor(props) {
-      _get(CardDetails.prototype.__proto__ || Object.getPrototypeOf(CardDetails.prototype), "_constructor", this).call(this, props);
+      _get(CardDetails.prototype.__proto__ || Object.getPrototypeOf(CardDetails.prototype), '_constructor', this).call(this, props);
 
       this.$$refs = new _taroQq2.default.RefsArray();
     }
   }, {
-    key: "componentWillMount",
-    value: function componentWillMount() {}
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      var requirement_id = parseInt(this.$router.params.req_id);
+      (0, _fetch2.default)("requirement/view/" + requirement_id + "/", {}, 'GET').then(function (data) {
+        if (data.msg === 'success') {
+          _this2.setState({ content: data.content });
+        } else if (data.msg === '不见啦') {
+          _this2.setState({
+            show: false,
+            content: {
+              content: '该需求已被删除',
+              date: '周八',
+              place: '极乐净土',
+              post_time: '2020.4.31',
+              sender_nick_name: 'NOT FOUND',
+              sender_portrait: 0,
+              tag: '修仙',
+              time_end: -24,
+              time_from: -1,
+              title: 'DELETED',
+              type: '修仙'
+            }
+          });
+        } else if (data.msg === 'Fail.') {
+          _taroQq2.default.showToast({
+            title: '服务器错误'
+          });
+          _taroQq2.default.navigateBack({
+            delta: 1
+          });
+        }
+      });
+    }
   }, {
-    key: "componentDidMount",
+    key: 'componentDidMount',
     value: function componentDidMount() {}
   }, {
-    key: "componentWillUnmount",
+    key: 'componentWillUnmount',
     value: function componentWillUnmount() {}
   }, {
-    key: "componentDidShow",
+    key: 'componentDidShow',
     value: function componentDidShow() {}
   }, {
-    key: "componentDidHide",
+    key: 'componentDidHide',
     value: function componentDidHide() {}
   }, {
-    key: "changeColor",
+    key: 'changeColor',
     value: function changeColor() {
       var id = this.$router.params.indexId;
       switch (id) {
@@ -113,20 +157,7 @@ var CardDetails = (_temp2 = _class = function (_BaseComponent) {
       }
     }
   }, {
-    key: "_createTagsExtendsData",
-    value: function _createTagsExtendsData(_$uid) {
-      var _this2 = this;
-
-      return function () {
-        var tags = _this2.state.tags;
-
-        return {
-          tags: tags
-        };
-      };
-    }
-  }, {
-    key: "_createData",
+    key: '_createData',
     value: function _createData() {
       this.__state = arguments[0] || this.state || {};
       this.__props = arguments[1] || this.props || {};
@@ -134,41 +165,47 @@ var CardDetails = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__20"),
+      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__21"),
           _genCompid2 = _slicedToArray(_genCompid, 2),
-          $prevCompid__20 = _genCompid2[0],
-          $compid__20 = _genCompid2[1];
+          $prevCompid__21 = _genCompid2[0],
+          $compid__21 = _genCompid2[1];
 
-      var _genCompid3 = (0, _taroQq.genCompid)(__prefix + "$compid__21"),
+      var _genCompid3 = (0, _taroQq.genCompid)(__prefix + "$compid__22"),
           _genCompid4 = _slicedToArray(_genCompid3, 2),
-          $prevCompid__21 = _genCompid4[0],
-          $compid__21 = _genCompid4[1];
+          $prevCompid__22 = _genCompid4[0],
+          $compid__22 = _genCompid4[1];
+
+      var _genCompid5 = (0, _taroQq.genCompid)(__prefix + "$compid__23"),
+          _genCompid6 = _slicedToArray(_genCompid5, 2),
+          $prevCompid__23 = _genCompid6[0],
+          $compid__23 = _genCompid6[1];
 
       var _state = this.__state,
           show = _state.show,
-          userName = _state.userName,
-          submitTime = _state.submitTime,
-          title = _state.title,
-          time = _state.time,
           content = _state.content;
 
-
-      var anonymousState__temp = this._createTagsExtendsData(__prefix + "bgzzzzzzzz")();
-
-      var anonymousState__temp2 = 'body-container ' + this.changeColor();
+      var able = this.$router.params.able;
+      var passed_id = this.$router.params.req_id;
+      var anonymousState__temp = 'body-container ' + this.changeColor();
+      _taroQq.propsManager.set({
+        "userimg": content.sender_portrait,
+        "size": "size-detail"
+      }, $compid__21, $prevCompid__21);
       show && _taroQq.propsManager.set({
         "onChangeShowCli": this.changeShow,
         "onChangeShowSub": this.changeShow,
-        "passed": "true"
-      }, $compid__20, $prevCompid__20);
+        "passed_id": passed_id,
+        "from": "applicant"
+      }, $compid__22, $prevCompid__22);
       _taroQq.propsManager.set({
-        "mode": "need"
-      }, $compid__21, $prevCompid__21);
+        "mode": able === 'able' ? 'need' : 'my'
+      }, $compid__23, $prevCompid__23);
       Object.assign(this.__state, {
-        anonymousState__temp2: anonymousState__temp2,
-        $compid__20: $compid__20,
+        anonymousState__temp: anonymousState__temp,
         $compid__21: $compid__21,
-        anonymousState__temp: anonymousState__temp
+        $compid__22: $compid__22,
+        $compid__23: $compid__23,
+        able: able
       });
       return this.__state;
     }

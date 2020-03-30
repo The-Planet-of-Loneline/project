@@ -26,9 +26,13 @@ var _taroQq2 = _interopRequireDefault(_taroQq);
 
 __webpack_require__(/*! ./info.scss */ "./src/component/Info/info.scss");
 
-var _close = __webpack_require__(/*! ./imgs/close.png */ "./src/component/Info/imgs/close.png");
+var _close = __webpack_require__(/*! ../../assets/png/close.png */ "./src/assets/png/close.png");
 
 var _close2 = _interopRequireDefault(_close);
+
+var _fetch = __webpack_require__(/*! ../../service/fetch */ "./src/service/fetch.jsx");
+
+var _fetch2 = _interopRequireDefault(_fetch);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52,16 +56,31 @@ var Info = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Info.__proto__ || Object.getPrototypeOf(Info)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "Close", "checked", "qq", "tel", "msg"], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Info.__proto__ || Object.getPrototypeOf(Info)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "Close", "checked", "placeHolder", "qq", "tel", "msg", "loading", "passed_id", "from"], _this.state = {
       checked: [0, 0],
       qq: '',
       tel: '',
-      msg: ''
+      msg: '',
+      placeHolder: ['请输入QQ', '请输入手机号'],
+      loading: false
     }, _this.getInfo = function (kind, event) {
-      var details = _this.state;
+      var _this$state = _this.state,
+          qq = _this$state.qq,
+          tel = _this$state.tel;
+
       var info = event.target.value;
-      details[kind] = info;
-      _this.setState(details);
+      if (!/\D/.test(info) || info === '') {
+        if (kind === 'qq') {
+          _this.setState({ qq: info });
+        } else {
+          _this.setState({ tel: info });
+        }
+      } else {
+        if (kind === 'qq') {
+          return qq;
+        }
+        return tel;
+      }
     }, _this.customComponents = [], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -93,17 +112,110 @@ var Info = (_temp2 = _class = function (_BaseComponent) {
       this.props.onChangeShowCli();
     }
   }, {
+    key: 'proinfo',
+    value: function proinfo() {
+      var _state = this.state,
+          checked = _state.checked,
+          qq = _state.qq,
+          tel = _state.tel,
+          msg = _state.msg;
+
+      var info = {
+        contact_way: [checked[0] ? qq : '无', checked[1] ? tel : '无'],
+        content: msg
+      };
+      return info;
+    }
+  }, {
     key: 'handleSubmit',
     value: function handleSubmit() {
+      var _this2 = this;
+
       // submit content
+      var passed_id = this.props.passed_id;
+      var from = this.props.from;
+      var loading = this.state.loading;
+
+      var info = this.proinfo();
+      this.setState({ loading: true });
+      if (from === 'puter' && !loading) {
+        (0, _fetch2.default)("application/" + passed_id + "/?status=2", info, 'PUT').then(function (data) {
+          if (data.msg === 'success') {
+            _taroQq2.default.showToast({
+              title: '已接受'
+            });
+            // 更新 red point
+            (0, _fetch2.default)("application/done/" + passed_id + "/", {}, 'POST');
+            _this2.setState({ loading: false });
+            _this2.props.onChangeCheck(1);
+          } else if (data.msg === '需求已经被删除了!') {
+            _taroQq2.default.showToast({
+              title: '您已删除'
+            });
+            _this2.setState({ loading: false });
+          } else if (data.msg === '已经处理过了!') {
+            _taroQq2.default.showToast({
+              title: '已处理'
+            });
+            _this2.setState({ loading: false });
+          } else if (data.msg === 'Fail.') {
+            _taroQq2.default.showToast({
+              title: '服务器错误'
+            });
+          }_this2.setState({ loading: false });
+        });
+      } else if (from === 'applicant' && !loading) {
+        (0, _fetch2.default)("requirement/application/" + passed_id + "/", info, 'POST').then(function (data) {
+          if (data.msg === 'success') {
+            _taroQq2.default.showToast({
+              title: '发送成功'
+            });
+            _this2.setState({ loading: false });
+          } else if (data.msg === '不能申请自己的需求') {
+            _taroQq2.default.showToast({
+              title: '我与我'
+            });
+            _this2.setState({ loading: false });
+          } else if (data.msg === '已经申请过了!') {
+            _taroQq2.default.showToast({
+              title: '已处理'
+            });
+            _this2.setState({ loading: false });
+          } else if (data.msg === 'Fail.') {
+            _taroQq2.default.showToast({
+              title: '服务器错误'
+            });
+          }_this2.setState({ loading: false });
+        });
+      }
       this.props.onChangeShowSub();
     }
   }, {
     key: 'enableSubmit',
     value: function enableSubmit() {
-      var msg = this.state.msg;
+      var _state2 = this.state,
+          qq = _state2.qq,
+          tel = _state2.tel,
+          msg = _state2.msg,
+          checked = _state2.checked;
 
-      if (msg !== '') {
+      var flag_qq = false;
+      var flag_tel = false;
+      if (checked[0]) {
+        if (qq !== '' && !/\D/.test(qq)) {
+          flag_qq = true;
+        } else {
+          return false;
+        }
+      }
+      if (checked[1]) {
+        if (tel !== '' && !/\D/.test(tel)) {
+          flag_tel = true;
+        } else {
+          return false;
+        }
+      }
+      if (flag_qq || flag_tel || msg !== '') {
         return true;
       }
       return false;
@@ -130,7 +242,35 @@ var Info = (_temp2 = _class = function (_BaseComponent) {
   }, {
     key: 'errorDate',
     value: function errorDate() {
-      console.log('your date is incorrect');
+      _taroQq2.default.showToast({
+        title: '信息输入有误',
+        icon: 'none'
+      });
+    }
+  }, {
+    key: 'handleTouchMove',
+    value: function handleTouchMove(e) {
+      e.stopPropagation();
+    }
+  }, {
+    key: 'changeHolder',
+    value: function changeHolder(touch, which) {
+      var placeHolder = this.state.placeHolder;
+
+      if (touch) {
+        if (which) {
+          placeHolder[1] = ' ';
+        } else {
+          placeHolder[1] = '请输入手机号';
+        }
+      } else {
+        if (which) {
+          placeHolder[0] = ' ';
+        } else {
+          placeHolder[0] = '请输入QQ';
+        }
+      }
+      this.setState({ placeHolder: placeHolder });
     }
   }, {
     key: '_createData',
@@ -141,14 +281,16 @@ var Info = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var _state = this.__state,
-          checked = _state.checked,
-          qq = _state.qq,
-          tel = _state.tel,
-          msg = _state.msg;
+      var _state3 = this.__state,
+          checked = _state3.checked,
+          qq = _state3.qq,
+          tel = _state3.tel,
+          msg = _state3.msg,
+          placeHolder = _state3.placeHolder,
+          loading = _state3.loading;
 
       var anonymousState__temp = this.enableSubmit() ? 'sub-button able' : 'sub-button disable';
-      this.anonymousFunc0 = this.enableSubmit() ? this.handleSubmit : this.errorDate;
+      this.anonymousFunc0 = this.enableSubmit() && !loading ? this.handleSubmit : this.errorDate;
       Object.assign(this.__state, {
         anonymousState__temp: anonymousState__temp,
         Close: _close2.default
@@ -163,21 +305,13 @@ var Info = (_temp2 = _class = function (_BaseComponent) {
   }]);
 
   return Info;
-}(_taroQq.Component), _class.$$events = ["changeShowCli", "changeCheck", "getInfo", "handleInputChange", "anonymousFunc0"], _class.defaultProps = {}, _class.$$componentPath = "component/Info/Info", _temp2);
+}(_taroQq.Component), _class.$$events = ["handleTouchMove", "changeShowCli", "changeCheck", "getInfo", "changeHolder", "handleInputChange", "anonymousFunc0"], _class.defaultProps = {
+  from: 'puter',
+  passed_id: 0
+}, _class.$$componentPath = "component/Info/Info", _temp2);
 exports.default = Info;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(Info));
-
-/***/ }),
-
-/***/ "./src/component/Info/imgs/close.png":
-/*!*******************************************!*\
-  !*** ./src/component/Info/imgs/close.png ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
 
 /***/ }),
 

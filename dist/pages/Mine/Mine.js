@@ -32,6 +32,10 @@ var _notification2 = _interopRequireDefault(_notification);
 
 __webpack_require__(/*! ./Mine.scss */ "./src/pages/Mine/Mine.scss");
 
+var _fetch = __webpack_require__(/*! ../../service/fetch */ "./src/service/fetch.jsx");
+
+var _fetch2 = _interopRequireDefault(_fetch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -54,7 +58,7 @@ var Index = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Index.__proto__ || Object.getPrototypeOf(Index)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__30", "notification"], _this.config = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Index.__proto__ || Object.getPrototypeOf(Index)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["loopArray9", "$compid__30", "notification", "page"], _this.config = {
       navigationBarTitleText: '孤独星球'
     }, _this.customComponents = ["HistoryCard", "Footer"], _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -63,12 +67,23 @@ var Index = (_temp2 = _class = function (_BaseComponent) {
     key: '_constructor',
     value: function _constructor(props) {
       _get(Index.prototype.__proto__ || Object.getPrototypeOf(Index.prototype), '_constructor', this).call(this, props);
-
+      this.state = {
+        history: [{}],
+        page: 1
+      };
       this.$$refs = new _taroQq2.default.RefsArray();
     }
   }, {
     key: 'componentWillMount',
-    value: function componentWillMount() {}
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      (0, _fetch2.default)("secret/history?page=" + this.state.page, {}, 'GET').then(function (res) {
+        _this2.setState({
+          history: res.history
+        });
+      });
+    }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {}
@@ -96,6 +111,26 @@ var Index = (_temp2 = _class = function (_BaseComponent) {
       });
     }
   }, {
+    key: 'onPullDownRefresh',
+    value: function onPullDownRefresh() {}
+  }, {
+    key: 'onReachBottom',
+    value: function onReachBottom() {
+      var _this3 = this;
+
+      if (this.state.history.length % 5 == 0) {
+        this.setState({
+          page: this.state.page + 1
+        }, function () {
+          (0, _fetch2.default)("secret/history?page=" + _this3.state.page, {}, 'GET').then(function (res) {
+            _this3.setState({
+              history: _this3.state.history.concat(res.history)
+            });
+          });
+        });
+      }
+    }
+  }, {
     key: '_createData',
     value: function _createData() {
       this.__state = arguments[0] || this.state || {};
@@ -109,6 +144,28 @@ var Index = (_temp2 = _class = function (_BaseComponent) {
           $prevCompid__30 = _genCompid2[0],
           $compid__30 = _genCompid2[1];
 
+      var loopArray9 = this.__state.history.map(function (history, _anonIdx) {
+        history = {
+          $original: (0, _taroQq.internal_get_original)(history)
+        };
+
+        var _genCompid3 = (0, _taroQq.genCompid)(__prefix + 'bazzzzzzzz' + _anonIdx, true),
+            _genCompid4 = _slicedToArray(_genCompid3, 2),
+            $prevCompid__29 = _genCompid4[0],
+            $compid__29 = _genCompid4[1];
+
+        _taroQq.propsManager.set({
+          "textValue": history.$original.Content,
+          "sendTime": history.$original.SendTime,
+          "bgcolor": history.$original.Colour,
+          "Debunkid": history.$original.Debunkid
+        }, $compid__29, $prevCompid__29);
+        return {
+          $compid__29: $compid__29,
+          $original: history.$original
+        };
+      });
+
       _taroQq.propsManager.set({
         "colorMine": "rgba(80, 195, 243, 1)",
         "colorSecret": "rgba(194, 198, 206, 1)",
@@ -116,6 +173,7 @@ var Index = (_temp2 = _class = function (_BaseComponent) {
         "onToSecret": this.toSecret.bind(this)
       }, $compid__30, $prevCompid__30);
       Object.assign(this.__state, {
+        loopArray9: loopArray9,
         $compid__30: $compid__30,
         notification: _notification2.default
       });

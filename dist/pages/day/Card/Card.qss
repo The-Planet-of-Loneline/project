@@ -1,0 +1,77 @@
+.b-tag {
+  display: inline-block;
+  width: 315rpx;
+  height: 245rpx;
+  box-shadow: 0 3rpx 6rpx rgba(0, 0, 0, 0.16);
+  opacity: 1;
+  border-radius: 10rpx;
+  padding: 35rpx 17rpx 15rpx 20rpx;
+  margin: 15rpx 7rpx;
+  vertical-align: top; }
+
+.tag-container {
+  display: flex;
+  margin-bottom: 7rpx; }
+
+.spe-tag {
+  height: 34rpx;
+  width: 88rpx;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 20rpx;
+  background-color: white;
+  border-radius: 10rpx;
+  margin-right: 40rpx; }
+
+.title {
+  font-size: 40rpx;
+  color: white;
+  text-align: start;
+  height: 64rpx;
+  line-height: 64rpx;
+  width: 95%;
+  overflow: hidden; }
+
+.time {
+  font-size: 24rpx;
+  color: white;
+  height: 33rpx;
+  width: 280rpx;
+  margin-top: 23rpx;
+  margin-bottom: 20rpx; }
+
+.refresh-img {
+  height: 62rpx;
+  width: 62rpx;
+  float: right; }
+
+.card-a {
+  background-color: #FF9698; }
+  .card-a .spe-tag {
+    color: #FF9698; }
+
+.card-b {
+  background-color: #99D293; }
+  .card-b .spe-tag {
+    color: #99D293; }
+
+.card-c {
+  background-color: #6FBDDF; }
+  .card-c .spe-tag {
+    color: #6FBDDF; }
+
+.card-d {
+  background-color: #F6C17B; }
+  .card-d .spe-tag {
+    color: #F6C17B; }
+
+.card-e {
+  background-color: #FFAD7D; }
+  .card-e .spe-tag {
+    color: #FFAD7D; }
+
+.card-f {
+  background-color: #F1A4DF; }
+  .card-f .spe-tag {
+    color: #F1A4DF; }
+

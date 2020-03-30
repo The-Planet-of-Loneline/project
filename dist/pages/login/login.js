@@ -71,6 +71,10 @@ var _viewOff = __webpack_require__(/*! ../img/viewOff.png */ "./src/pages/img/vi
 
 var _viewOff2 = _interopRequireDefault(_viewOff);
 
+var _fetch = __webpack_require__(/*! ../../service/fetch */ "./src/service/fetch.jsx");
+
+var _fetch2 = _interopRequireDefault(_fetch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -93,10 +97,11 @@ var login = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = login.__proto__ || Object.getPrototypeOf(login)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["bg", "idValue", "showView", "passwordValue", "view", "viewOff"], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = login.__proto__ || Object.getPrototypeOf(login)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["loading", "bg", "id", "showView", "password", "view", "viewOff"], _this.state = {
       showView: true,
-      idValue: '',
-      passwordValue: ''
+      id: '',
+      password: '',
+      loading: false
     }, _this.customComponents = [], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -108,17 +113,40 @@ var login = (_temp2 = _class = function (_BaseComponent) {
       this.$$refs = new _taroQq2.default.RefsArray();
     }
   }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var id = _taroQq2.default.getStorageSync('sid');
+      var password = _taroQq2.default.getStorageSync('pwd');
+      if (id) {
+        this.setState({ id: id });
+      }
+      if (password) {
+        this.setState({ password: password });
+      }
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log("%c	___          ___________    ___     ___     ___________ ", 'color:#39b54a');
+      console.log("%c	\\  \\         \\   _____  \\   \\  \\    \\  \\    \\  ________\\ ", 'color:#39b54a');
+      console.log("%c	 \\  \\         \\  \\    \\  \\   \\  \\\\\\  \\  \\    \\  \\________ ", 'color:#39b54a');
+      console.log("%c 	  \\  \\         \\  \\    \\  \\   \\  \\ \\\\ \\  \\    \\   _______\\ ", 'color:#39b54a');
+      console.log("%c	   \\  \\______	\\  \\____\\  \\   \\  \\  \\\\\\  \\    \\  \\________ ", 'color:#39b54a');
+      console.log("%c	    \\________\\   \\__________\\   \\__\\    \\__\\    \\__________\\ ", 'color:#39b54a');
+      console.log('%c木%c犀%c团%c队%c1%c9%c级%c制%c作', 'color:#e54d42', 'color:#f37b1d', 'color:#fbbd08', 'color:#8dc63f', 'color:#39b54a', 'color:#1cbbb4', 'color:#0081ff', 'color:#6739b6', 'color:#9c26b0');
+    }
+  }, {
     key: 'onHandleId',
     value: function onHandleId(e) {
       this.setState({
-        idValue: e.target.value
+        id: e.target.value
       });
     }
   }, {
     key: 'onHandlePassword',
     value: function onHandlePassword(e) {
       this.setState({
-        passwordValue: e.target.value
+        password: e.target.value
       });
     }
   }, {
@@ -137,6 +165,58 @@ var login = (_temp2 = _class = function (_BaseComponent) {
       }
     }
   }, {
+    key: 'onHandleLogin',
+    value: function onHandleLogin() {
+      var _this2 = this;
+
+      var _state = this.state,
+          id = _state.id,
+          password = _state.password,
+          loading = _state.loading;
+
+      if (id && password && !loading) {
+        this.setState({ loading: true });
+        (0, _fetch2.default)('login/', {
+          sid: id,
+          pwd: password
+        }, 'POST').then(function (res) {
+          if (res.msg == 'success') {
+            _taroQq2.default.setStorage({
+              key: 'sid',
+              data: id
+            });
+            _taroQq2.default.setStorage({
+              key: 'pwd',
+              data: password
+            });
+            _taroQq2.default.setStorage({
+              key: 'token',
+              data: res.token
+            });
+            _taroQq2.default.showToast({
+              icon: 'none',
+              title: '登录成功'
+            });
+            _taroQq2.default.redirectTo({
+              url: "/pages/day/day"
+            });
+          } else {
+            _taroQq2.default.showToast({
+              icon: 'none',
+              title: '账号或密码错误'
+            });
+            _this2.setState({ password: '', loading: false });
+          }
+        });
+      }
+      if (!id || !password) {
+        _taroQq2.default.showToast({
+          icon: 'none',
+          title: '账号或密码不能为空'
+        });
+      }
+    }
+  }, {
     key: '_createData',
     value: function _createData() {
       this.__state = arguments[0] || this.state || {};
@@ -144,6 +224,13 @@ var login = (_temp2 = _class = function (_BaseComponent) {
       var __isRunloopRef = arguments[2];
       var __prefix = this.$prefix;
       ;
+
+      var _state2 = this.__state,
+          id = _state2.id,
+          password = _state2.password,
+          showView = _state2.showView,
+          loading = _state2.loading;
+
       Object.assign(this.__state, {
         bg: _bg2.default,
         view: _view2.default,
@@ -154,7 +241,7 @@ var login = (_temp2 = _class = function (_BaseComponent) {
   }]);
 
   return login;
-}(_taroQq.Component), _class.$$events = ["onHandleId", "onHandlePassword", "onViewPassword"], _class.$$componentPath = "pages/login/login", _temp2);
+}(_taroQq.Component), _class.$$events = ["onHandleId", "onHandlePassword", "onViewPassword", "onHandleLogin"], _class.$$componentPath = "pages/login/login", _temp2);
 exports.default = login;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(login, true));

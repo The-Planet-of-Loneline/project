@@ -54,7 +54,7 @@ var _App = function (_BaseComponent) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = _App.__proto__ || Object.getPrototypeOf(_App)).call.apply(_ref, [this].concat(args))), _this), _this.config = {
-      pages: ['pages/login/login', 'pages/index/index', 'pages/day/day', 'pages/my/my', 'pages/share/share', 'pages/myDetail/myDetail', 'pages/cardDetails/cardDetails', 'pages/nighthome/nighthome', 'pages/writeSecret/writeSecret', 'pages/commentNight/comment', 'pages/Mine/Mine', 'pages/cardHistory/cardHistory', 'pages/Info/info', 'pages/edit/edit'],
+      pages: ['pages/login/login', 'pages/index/index', 'pages/day/day', 'pages/my/my', 'pages/share/share', 'pages/myDetail/myDetail', 'pages/cardDetails/cardDetails', 'pages/nighthome/nighthome', 'pages/writeSecret/writeSecret', 'pages/Mine/Mine', 'pages/cardHistory/cardHistory', 'pages/Info/info', 'pages/edit/edit', 'pages/daySwitch/daySwitch', 'pages/commentNight/comment', 'pages/infoalert/infoalert'],
       window: {
         backgroundTextStyle: 'light',
         navigationBarBackgroundColor: '#fff',

@@ -59,7 +59,7 @@ var HistoryCard = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = HistoryCard.__proto__ || Object.getPrototypeOf(HistoryCard)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = [], _this.customComponents = [], _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = HistoryCard.__proto__ || Object.getPrototypeOf(HistoryCard)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp", "bgcolor", "sendTime", "textValue", "Debunkid"], _this.customComponents = [], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(HistoryCard, [{
@@ -70,10 +70,18 @@ var HistoryCard = (_temp2 = _class = function (_BaseComponent) {
       this.$$refs = new _taroQq2.default.RefsArray();
     }
   }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {}
+  }, {
     key: "toCard",
     value: function toCard() {
+      var _props = this.props,
+          bgcolor = _props.bgcolor,
+          sendTime = _props.sendTime,
+          textValue = _props.textValue;
+
       _taroQq2.default.navigateTo({
-        url: '/pages/cardHistory/cardHistory'
+        url: "/pages/cardHistory/cardHistory?color=" + bgcolor + "&&time=" + sendTime + "&&text=" + textValue + "&&Debunkid=" + this.props.Debunkid
       });
     }
   }, {
@@ -84,13 +92,27 @@ var HistoryCard = (_temp2 = _class = function (_BaseComponent) {
       var __isRunloopRef = arguments[2];
       var __prefix = this.$prefix;
       ;
-      Object.assign(this.__state, {});
+
+      var color = this.__props.bgcolor;
+
+      var backgroundColor = {
+        background: color
+      };
+      var anonymousState__temp = (0, _taroQq.internal_inline_style)(backgroundColor);
+      Object.assign(this.__state, {
+        anonymousState__temp: anonymousState__temp
+      });
       return this.__state;
     }
   }]);
 
   return HistoryCard;
-}(_taroQq.Component), _class.$$events = ["toCard"], _class.$$componentPath = "pages/component/historyCard", _temp2);
+}(_taroQq.Component), _class.$$events = ["toCard"], _class.defaultProps = {
+  textValue: '111',
+  sendTime: '',
+  bgcolor: '',
+  Debunkid: 0
+}, _class.$$componentPath = "pages/component/historyCard", _temp2);
 exports.default = HistoryCard;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(HistoryCard));

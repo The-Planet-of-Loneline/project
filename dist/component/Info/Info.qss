@@ -54,6 +54,26 @@
 .disable {
   color: rgba(0, 0, 0, 0.5); }
 
+.loading {
+  margin: 7rpx auto;
+  border: 7rpx solid #ff9500;
+  border-bottom-color: rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  height: 25rpx;
+  width: 25rpx;
+  animation: span-c 1s linear infinite;
+  -webkit-animation: span-c 1s linear infinite; }
+
+@-webkit-keyframes span-c {
+  100% {
+    -webkit-transform: rotate(1turn);
+            transform: rotate(1turn); } }
+
+@keyframes span-c {
+  100% {
+    -webkit-transform: rotate(1turn);
+            transform: rotate(1turn); } }
+
 .info-container {
   height: 50rpx;
   display: flex;
@@ -105,17 +125,23 @@
 
 .info {
   display: inline-block;
-  text-align: start;
   margin: 0;
   padding: 0;
-  font-size: 30rpx;
-  font-family: PingFang SC;
-  font-weight: 500;
   color: black;
   width: 300rpx;
   height: 30rpx;
   line-height: 30rpx;
-  border-bottom: 2rpx solid black; }
+  border-bottom: 2rpx solid black;
+  text-align: start;
+  font-size: 30rpx;
+  font-family: PingFang SC;
+  font-weight: 500; }
+
+.place-info {
+  text-align: start;
+  font-size: 30rpx;
+  font-family: PingFang SC;
+  font-weight: 500; }
 
 .sentence {
   width: 522rpx;

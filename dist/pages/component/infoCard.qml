@@ -1,9 +1,9 @@
 <block qq:if="{{$taroCompReady}}">
     <view class="Card">
-        <view class="avatar"></view>
-        <view class="textContainer">
-            <view class="time">now</view>
-            <view class="text">hello!</view>
+        <image src="{{name}}" class="avatar"></image>
+        <view class="textContainer" bindtap="Info" data-e-tap-so="this">
+            <view class="time">{{time}}</view>
+            <view class="text">{{text}}</view>
             <image src="{{arrow}}" class="toCard"></image>
         </view>
     </view>

@@ -50,7 +50,7 @@ var Comment = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Comment.__proto__ || Object.getPrototypeOf(Comment)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__27", "$compid__28", "$compid__29"], _this.config = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Comment.__proto__ || Object.getPrototypeOf(Comment)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__39", "$compid__40", "$compid__41"], _this.config = {
       navigationBarTitleText: '孤独星球'
     }, _this.customComponents = ["Head", "SecretCard", "Footer"], _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -64,9 +64,7 @@ var Comment = (_temp2 = _class = function (_BaseComponent) {
     }
   }, {
     key: "componentWillMount",
-    value: function componentWillMount() {
-      console.log(JSON.stringify(this.$router.params.text));
-    }
+    value: function componentWillMount() {}
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {}
@@ -82,14 +80,14 @@ var Comment = (_temp2 = _class = function (_BaseComponent) {
   }, {
     key: "toWrite",
     value: function toWrite() {
-      _taroQq2.default.redirectTo({
+      _taroQq2.default.reLaunch({
         url: '/pages/writeSecret/writeSecret'
       });
     }
   }, {
     key: "toMine",
     value: function toMine() {
-      _taroQq2.default.redirectTo({
+      _taroQq2.default.reLaunch({
         url: '/pages/Mine/Mine'
       });
     }
@@ -102,35 +100,38 @@ var Comment = (_temp2 = _class = function (_BaseComponent) {
       var __prefix = this.$prefix;
       ;
 
-      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__27"),
+      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__39"),
           _genCompid2 = _slicedToArray(_genCompid, 2),
-          $prevCompid__27 = _genCompid2[0],
-          $compid__27 = _genCompid2[1];
+          $prevCompid__39 = _genCompid2[0],
+          $compid__39 = _genCompid2[1];
 
-      var _genCompid3 = (0, _taroQq.genCompid)(__prefix + "$compid__28"),
+      var _genCompid3 = (0, _taroQq.genCompid)(__prefix + "$compid__40"),
           _genCompid4 = _slicedToArray(_genCompid3, 2),
-          $prevCompid__28 = _genCompid4[0],
-          $compid__28 = _genCompid4[1];
+          $prevCompid__40 = _genCompid4[0],
+          $compid__40 = _genCompid4[1];
 
-      var _genCompid5 = (0, _taroQq.genCompid)(__prefix + "$compid__29"),
+      var _genCompid5 = (0, _taroQq.genCompid)(__prefix + "$compid__41"),
           _genCompid6 = _slicedToArray(_genCompid5, 2),
-          $prevCompid__29 = _genCompid6[0],
-          $compid__29 = _genCompid6[1];
+          $prevCompid__41 = _genCompid6[0],
+          $compid__41 = _genCompid6[1];
 
       _taroQq.propsManager.set({
         "colorTA": "rgba(242, 245, 251, 1)",
         "onToWrite": this.toWrite.bind(this)
-      }, $compid__27, $prevCompid__27);
+      }, $compid__39, $prevCompid__39);
       _taroQq.propsManager.set({
-        "textValue": this.$router.params.text
-      }, $compid__28, $prevCompid__28);
+        "textValue": this.$router.params.text,
+        "color": this.$router.params.color,
+        "time": this.$router.params.time,
+        "Debunkid": this.$router.params.Debunkid
+      }, $compid__40, $prevCompid__40);
       _taroQq.propsManager.set({
         "onToMine": this.toMine.bind(this)
-      }, $compid__29, $prevCompid__29);
+      }, $compid__41, $prevCompid__41);
       Object.assign(this.__state, {
-        $compid__27: $compid__27,
-        $compid__28: $compid__28,
-        $compid__29: $compid__29
+        $compid__39: $compid__39,
+        $compid__40: $compid__40,
+        $compid__41: $compid__41
       });
       return this.__state;
     }

@@ -41,6 +41,50 @@ var _arrow_right = __webpack_require__(/*! ../img/arrow_right.png */ "./src/page
 
 var _arrow_right2 = _interopRequireDefault(_arrow_right);
 
+var _img = __webpack_require__(/*! ../../assets/user_img/img0.png */ "./src/assets/user_img/img0.png");
+
+var _img2 = _interopRequireDefault(_img);
+
+var _img3 = __webpack_require__(/*! ../../assets/user_img/img1.png */ "./src/assets/user_img/img1.png");
+
+var _img4 = _interopRequireDefault(_img3);
+
+var _img5 = __webpack_require__(/*! ../../assets/user_img/img2.png */ "./src/assets/user_img/img2.png");
+
+var _img6 = _interopRequireDefault(_img5);
+
+var _img7 = __webpack_require__(/*! ../../assets/user_img/img3.png */ "./src/assets/user_img/img3.png");
+
+var _img8 = _interopRequireDefault(_img7);
+
+var _img9 = __webpack_require__(/*! ../../assets/user_img/img4.png */ "./src/assets/user_img/img4.png");
+
+var _img10 = _interopRequireDefault(_img9);
+
+var _img11 = __webpack_require__(/*! ../../assets/user_img/img5.png */ "./src/assets/user_img/img5.png");
+
+var _img12 = _interopRequireDefault(_img11);
+
+var _img13 = __webpack_require__(/*! ../../assets/user_img/img6.png */ "./src/assets/user_img/img6.png");
+
+var _img14 = _interopRequireDefault(_img13);
+
+var _img15 = __webpack_require__(/*! ../../assets/user_img/img7.png */ "./src/assets/user_img/img7.png");
+
+var _img16 = _interopRequireDefault(_img15);
+
+var _img17 = __webpack_require__(/*! ../../assets/user_img/img8.png */ "./src/assets/user_img/img8.png");
+
+var _img18 = _interopRequireDefault(_img17);
+
+var _img19 = __webpack_require__(/*! ../../assets/user_img/img9.png */ "./src/assets/user_img/img9.png");
+
+var _img20 = _interopRequireDefault(_img19);
+
+var _fetch = __webpack_require__(/*! ../../service/fetch */ "./src/service/fetch.jsx");
+
+var _fetch2 = _interopRequireDefault(_fetch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -63,7 +107,10 @@ var InfoCard = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = InfoCard.__proto__ || Object.getPrototypeOf(InfoCard)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["arrow"], _this.customComponents = [], _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = InfoCard.__proto__ || Object.getPrototypeOf(InfoCard)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["arrow", "name", "history", "sid", "number", "time", "text"], _this.state = {
+      name: '',
+      history: []
+    }, _this.customComponents = [], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(InfoCard, [{
@@ -74,6 +121,22 @@ var InfoCard = (_temp2 = _class = function (_BaseComponent) {
       this.$$refs = new _taroQq2.default.RefsArray();
     }
   }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      (0, _fetch2.default)("secret/view/:secret_id/?secretId=" + this.props.sid, {}, 'GET').then(function (res) {
+        _this2.setState({ history: res.secret });
+      });
+    }
+  }, {
+    key: 'Info',
+    value: function Info() {
+      _taroQq2.default.navigateTo({
+        url: "/pages/infoalert/infoalert?Debunkid=" + this.props.sid + "&&Text=" + this.state.history.Content + "&&color=" + this.state.history.Colour
+      });
+    }
+  }, {
     key: '_createData',
     value: function _createData() {
       this.__state = arguments[0] || this.state || {};
@@ -81,6 +144,38 @@ var InfoCard = (_temp2 = _class = function (_BaseComponent) {
       var __isRunloopRef = arguments[2];
       var __prefix = this.$prefix;
       ;
+
+      switch (this.__props.number) {
+        case 0:
+          this.setState({ name: _img2.default });
+          break;
+        case 1:
+          this.setState({ name: _img4.default });
+          break;
+        case 2:
+          this.setState({ name: _img6.default });
+          break;
+        case 3:
+          this.setState({ name: _img8.default });
+          break;
+        case 4:
+          this.setState({ name: _img10.default });
+          break;
+        case 5:
+          this.setState({ name: _img12.default });
+          break;
+        case 6:
+          this.setState({ name: _img14.default });
+          break;
+        case 7:
+          this.setState({ name: _img16.default });
+          break;
+        case 8:
+          this.setState({ name: _img18.default });
+          break;
+        case 9:
+          this.setState({ name: _img20.default });
+          break;}
       Object.assign(this.__state, {
         arrow: _arrow_right2.default
       });
@@ -89,7 +184,12 @@ var InfoCard = (_temp2 = _class = function (_BaseComponent) {
   }]);
 
   return InfoCard;
-}(_taroQq.Component), _class.$$events = [], _class.$$componentPath = "pages/component/infoCard", _temp2);
+}(_taroQq.Component), _class.$$events = ["Info"], _class.defaultProps = {
+  time: '',
+  text: '',
+  sid: '',
+  number: 0
+}, _class.$$componentPath = "pages/component/infoCard", _temp2);
 exports.default = InfoCard;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(InfoCard));

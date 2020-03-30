@@ -1,3 +1,11 @@
 .all {
   height: 100%; }
 
+.upgrade {
+  width: 70rpx;
+  height: 70rpx;
+  position: absolute;
+  top: 720rpx;
+  right: 80rpx;
+  z-index: 4; }
+

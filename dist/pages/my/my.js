@@ -37,13 +37,13 @@ var _taroQq = __webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs
 
 var _taroQq2 = _interopRequireDefault(_taroQq);
 
-var _userImage = __webpack_require__(/*! ./userImage.png */ "./src/pages/my/userImage.png");
-
-var _userImage2 = _interopRequireDefault(_userImage);
-
 var _icon = __webpack_require__(/*! ./icon.png */ "./src/pages/my/icon.png");
 
 var _icon2 = _interopRequireDefault(_icon);
+
+var _fetch = __webpack_require__(/*! ../../service/fetch */ "./src/service/fetch.jsx");
+
+var _fetch2 = _interopRequireDefault(_fetch);
 
 __webpack_require__(/*! ./my.scss */ "./src/pages/my/my.scss");
 
@@ -69,22 +69,30 @@ var My = (_temp2 = _class = function (_BaseComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = My.__proto__ || Object.getPrototypeOf(My)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["$compid__9", "draw", "UserImage", "Icon", "anonymousState__temp7", "user", "list"], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = My.__proto__ || Object.getPrototypeOf(My)).call.apply(_ref, [this].concat(args))), _this), _this.$usedState = ["anonymousState__temp3", "loopArray4", "$compid__8", "$compid__9", "draw", "Icon", "$anonymousCallee__0", "bottom", "userName", "user", "blank_msg", "history", "apply", "respone", "page"], _this.state = {
+      userName: '这里是昵称',
       user: {
-        userName: '这里是昵称',
-        stuNumber: '2019213XXX'
+        userimg: 0,
+        stuNumber: '2019213XXX',
+        sex: '秀吉',
+        college: '计算机学院',
+        grade: '19'
       },
       draw: {
         big: false,
         show: false,
         small: '0'
       },
-      list: {
-        history: [1, 2, 3],
-        apply: [1, 2, 3],
-        respone: [1, 2, 3]
-      }
-    }, _this.customComponents = ["ListItem", "Footer"], _temp), _possibleConstructorReturn(_this, _ret);
+      history: [],
+      apply: [],
+      respone: [],
+      blank_msg: ['快去发布需求吧！', '看来没人鸟你呢~', '没人关注你呢！'],
+      // history_bottom apply_ bottom reply_bottom
+      bottom: [false, false, false],
+      page: [1, 1, 1]
+    }, _this.config = {
+      onReachBottomDistance: 130
+    }, _this.customComponents = ["UserImg", "ListItem", "Footer"], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(My, [{
@@ -96,7 +104,80 @@ var My = (_temp2 = _class = function (_BaseComponent) {
     }
   }, {
     key: 'componentWillMount',
-    value: function componentWillMount() {}
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      var bottom = [false, false, false];
+      _taroQq2.default.setStorage({
+        key: 'delete_if',
+        data: false
+      });
+      (0, _fetch2.default)('user/info/', {}, 'GET').then(function (data) {
+        _this2.setState({
+          userName: data.nickname,
+          user: {
+            userimg: data.portrait,
+            stuNumber: data.sid,
+            sex: data.gender,
+            college: data.college,
+            grade: data.grade
+          }
+        });
+        _taroQq2.default.setStorage({
+          key: 'Nickname',
+          data: data.nickname
+        });
+      });
+      // 历史发布
+      (0, _fetch2.default)('requirement/history/?limit=6&page=0', {}, 'GET').then(function (data) {
+        if (data.msg === 'success') {
+          if (data.num) {
+            _this2.setState({ history: data.history });
+          }
+          if (data.num < 3 && data.num) {
+            bottom[0] = true;
+          }
+        } else if (data.msg === 'Fail.') {
+          _taroQq2.default.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          });
+        }
+      });
+      // 申请提醒
+      (0, _fetch2.default)('application/todo/?limit=6&page=0', {}, 'GET').then(function (data) {
+        if (data.msg === 'success') {
+          if (data.num) {
+            _this2.setState({ apply: data.applications });
+          }
+          if (data.num < 6 && data.num) {
+            bottom[1] = true;
+          }
+        } else if (data.msg === 'Fail.') {
+          _taroQq2.default.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          });
+        }
+      });
+      // 回复提醒
+      (0, _fetch2.default)('remind/day/remindbox/?limit=6&page=0', {}, 'GET').then(function (data) {
+        if (data.msg === 'success') {
+          if (data.num) {
+            _this2.setState({ respone: data.content });
+          }
+          if (data.num < 6 && data.num) {
+            bottom[2] = true;
+          }
+        } else if (data.msg === 'Fail.') {
+          _taroQq2.default.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          });
+        }
+      });
+      this.setState({ bottom: bottom });
+    }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {}
@@ -105,10 +186,167 @@ var My = (_temp2 = _class = function (_BaseComponent) {
     value: function componentWillUnmount() {}
   }, {
     key: 'componentDidShow',
-    value: function componentDidShow() {}
+    value: function componentDidShow() {
+      var _this3 = this;
+
+      var userName = _taroQq2.default.getStorageSync('Nickname');
+      var delete_if = _taroQq2.default.getStorageSync('delete_if');
+      var bottom = this.state.bottom;
+
+      this.setState({ userName: userName });
+      if (delete_if) {
+        bottom[0] = false;
+        bottom[1] = false;
+        // 重新申请历史记录
+        (0, _fetch2.default)('requirement/history/?limit=6&page=0', {}, 'GET').then(function (data) {
+          if (data.msg === 'success') {
+            if (data.num) {
+              _this3.setState({ history: data.history });
+            }
+            if (data.num < 3 && data.num) {
+              bottom[0] = true;
+            }
+          } else if (data.msg === 'Fail.') {
+            _taroQq2.default.showToast({
+              title: '服务器错误',
+              icon: 'none'
+            });
+          }
+        });
+        // 重新申请   申请提醒
+        (0, _fetch2.default)('application/todo/?limit=6&page=0', {}, 'GET').then(function (data) {
+          if (data.msg === 'success') {
+            if (data.num) {
+              _this3.setState({ apply: data.applications });
+            }
+            if (data.num < 6 && data.num) {
+              bottom[1] = true;
+            }
+          } else if (data.msg === 'Fail.') {
+            _taroQq2.default.showToast({
+              title: '服务器错误',
+              icon: 'none'
+            });
+          }
+        });
+      }
+    }
   }, {
     key: 'componentDidHide',
     value: function componentDidHide() {}
+  }, {
+    key: 'onReachBottom',
+    value: function onReachBottom() {
+      var _state = this.state,
+          bottom = _state.bottom,
+          draw = _state.draw;
+
+
+      switch (draw.small) {
+        case '0':
+          if (!bottom[0]) {
+            this.pullList('requirement/history/', '0');
+          }
+          break;
+        case '1':
+          if (!bottom[1]) {
+            this.pullList('application/todo/', '1');
+          }
+          break;
+        case '2':
+          if (!bottom[2]) {
+            this.pullList('remind/day/remindbox/', '2');
+          }
+          break;
+      }
+    }
+  }, {
+    key: 'pullList',
+    value: function pullList(url, index) {
+      var _this4 = this;
+
+      var _state2 = this.state,
+          history = _state2.history,
+          apply = _state2.apply,
+          respone = _state2.respone;
+      var _state3 = this.state,
+          page = _state3.page,
+          bottom = _state3.bottom;
+
+      (0, _fetch2.default)(url + "?limit=6&page=" + page[index], {}, 'GET').then(function (data) {
+        if (data.msg === 'success') {
+          if (data.num === 3) {
+            page[index]++;
+          } else {
+            bottom[index] = true;
+            _this4.setState({ bottom: bottom });
+          }
+          if (data.num) {
+            switch (index) {
+              case '0':
+                _this4.setState({ history: history.concat(data.history), page: page });
+                break;
+              case '1':
+                _this4.setState({ apply: apply.concat(data.applications), page: page });
+                break;
+              case '2':
+                _this4.setState({ respone: respone.concat(data.content), page: page });
+                break;
+            }
+          }
+        } else if (data.msg === 'Fail.') {
+          _taroQq2.default.showToast({
+            title: '服务器错误',
+            icon: 'none'
+          });
+        }
+      });
+    }
+  }, {
+    key: 'explainList',
+    value: function explainList(mode) {
+      var _state4 = this.state,
+          history = _state4.history,
+          respone = _state4.respone,
+          apply = _state4.apply;
+
+      switch (mode) {
+        case '0':
+          {
+            return history;
+          }
+        case '1':
+          {
+            return apply;
+          }
+        case '2':
+          {
+            return respone;
+          }
+      }
+    }
+  }, {
+    key: 'decideLength',
+    value: function decideLength(mode) {
+      var _state5 = this.state,
+          history = _state5.history,
+          respone = _state5.respone,
+          apply = _state5.apply;
+
+      var length = 0;
+      switch (mode) {
+        case '0':
+          length = history.length;
+          break;
+        case '1':
+          length = apply.length;
+          break;
+        case '2':
+          length = respone.length;
+          break;
+      }
+      return length;
+    }
   }, {
     key: 'handleLeft',
     value: function handleLeft() {
@@ -145,136 +383,91 @@ var My = (_temp2 = _class = function (_BaseComponent) {
       this.setState({ draw: { big: true, show: false, small: index } });
     }
   }, {
-    key: '_createExplainListData',
-    value: function _createExplainListData(_$uid) {
-      var _this2 = this;
-
-      return function () {
-        var loopArray6 = void 0;
-        var loopArray5 = void 0;
-        var loopArray4 = void 0;
-
-        var _state = _this2.state,
-            draw = _state.draw,
-            list = _state.list;
-
-
-        if (draw.small === '0') {
-          loopArray4 = list.history.map(function (index, _anonIdx) {
-            index = {
-              $original: (0, _taroQq.internal_get_original)(index)
-            };
-            var $loopState__temp2 = index.$original + 1;
-
-            var _genCompid = (0, _taroQq.genCompid)(_$uid + 'gzzzzzzzzz' + _anonIdx, true),
-                _genCompid2 = _slicedToArray(_genCompid, 2),
-                $prevCompid__6 = _genCompid2[0],
-                $compid__6 = _genCompid2[1];
-
-            _taroQq.propsManager.set({
-              "mode": "1"
-            }, $compid__6, $prevCompid__6);
-            return {
-              $loopState__temp2: $loopState__temp2,
-              $compid__6: $compid__6,
-              $original: index.$original
-            };
-          });
-        } else if (draw.small === '1') {
-          loopArray5 = list.respone.map(function (index, _anonIdx3) {
-            index = {
-              $original: (0, _taroQq.internal_get_original)(index)
-            };
-            var $loopState__temp4 = index.$original + 1;
-
-            var _genCompid3 = (0, _taroQq.genCompid)(_$uid + 'hzzzzzzzzz' + _anonIdx3, true),
-                _genCompid4 = _slicedToArray(_genCompid3, 2),
-                $prevCompid__7 = _genCompid4[0],
-                $compid__7 = _genCompid4[1];
-
-            _taroQq.propsManager.set({
-              "mode": "3"
-            }, $compid__7, $prevCompid__7);
-            return {
-              $loopState__temp4: $loopState__temp4,
-              $compid__7: $compid__7,
-              $original: index.$original
-            };
-          });
-        } else if (draw.small === '2') {
-          loopArray6 = list.apply.map(function (index, _anonIdx5) {
-            index = {
-              $original: (0, _taroQq.internal_get_original)(index)
-            };
-            var $loopState__temp6 = index.$original + 1;
-
-            var _genCompid5 = (0, _taroQq.genCompid)(_$uid + 'izzzzzzzzz' + _anonIdx5, true),
-                _genCompid6 = _slicedToArray(_genCompid5, 2),
-                $prevCompid__8 = _genCompid6[0],
-                $compid__8 = _genCompid6[1];
-
-            _taroQq.propsManager.set({
-              "mode": "2"
-            }, $compid__8, $prevCompid__8);
-            return {
-              $loopState__temp6: $loopState__temp6,
-              $compid__8: $compid__8,
-              $original: index.$original
-            };
-          });
-        }
-
-        return {
-          list: list,
-          loopArray4: loopArray4,
-          loopArray5: loopArray5,
-          loopArray6: loopArray6,
-          draw: draw
-        };
-      };
-    }
-  }, {
     key: 'toEdit',
     value: function toEdit() {
+      var user = this.state.user;
+
       _taroQq2.default.navigateTo({
-        url: "../edit/edit?name=shizhong"
+        url: "../edit/edit?stuid=" + user.stuNumber + "&sex=" + user.sex + "&college=" + user.college + "&grade=" + user.grade
       });
+    }
+  }, {
+    key: 'handleTouchMove',
+    value: function handleTouchMove(e) {
+      e.stopPropagation();
     }
   }, {
     key: '_createData',
     value: function _createData() {
+      var _this5 = this;
+
       this.__state = arguments[0] || this.state || {};
       this.__props = arguments[1] || this.props || {};
       var __isRunloopRef = arguments[2];
       var __prefix = this.$prefix;
       ;
 
-      var _genCompid7 = (0, _taroQq.genCompid)(__prefix + "$compid__9"),
-          _genCompid8 = _slicedToArray(_genCompid7, 2),
-          $prevCompid__9 = _genCompid8[0],
-          $compid__9 = _genCompid8[1];
+      var _genCompid = (0, _taroQq.genCompid)(__prefix + "$compid__8"),
+          _genCompid2 = _slicedToArray(_genCompid, 2),
+          $prevCompid__8 = _genCompid2[0],
+          $compid__8 = _genCompid2[1];
 
-      var user = this.__state.user;
-      var draw = this.__state.draw;
+      var _genCompid3 = (0, _taroQq.genCompid)(__prefix + "$compid__9"),
+          _genCompid4 = _slicedToArray(_genCompid3, 2),
+          $prevCompid__9 = _genCompid4[0],
+          $compid__9 = _genCompid4[1];
 
+      var _state6 = this.__state,
+          userName = _state6.userName,
+          user = _state6.user,
+          draw = _state6.draw,
+          blank_msg = _state6.blank_msg,
+          bottom = _state6.bottom;
 
-      var anonymousState__temp7 = this._createExplainListData(__prefix + "fzzzzzzzzz")();
+      var $anonymousCallee__0 = this.decideLength(draw.small) ? this.explainList(draw.small) : [];
+      var anonymousState__temp3 = this.decideLength(draw.small);
+      var loopArray4 = anonymousState__temp3 ? this.explainList(draw.small).map(function (info, index) {
+        info = {
+          $original: (0, _taroQq.internal_get_original)(info)
+        };
+        var $loopState__temp2 = _this5.decideLength(draw.small) ? index + 1 : null;
 
+        var _genCompid5 = (0, _taroQq.genCompid)(__prefix + 'fzzzzzzzzz' + index, true),
+            _genCompid6 = _slicedToArray(_genCompid5, 2),
+            $prevCompid__7 = _genCompid6[0],
+            $compid__7 = _genCompid6[1];
+
+        _taroQq.propsManager.set({
+          "mode": draw.small,
+          "info": info.$original
+        }, $compid__7, $prevCompid__7);
+        return {
+          $loopState__temp2: $loopState__temp2,
+          $compid__7: $compid__7,
+          $original: info.$original
+        };
+      }) : [];
+      _taroQq.propsManager.set({
+        "userimg": user.userimg,
+        "size": "size-my"
+      }, $compid__8, $prevCompid__8);
       _taroQq.propsManager.set({
         "mode": "my"
       }, $compid__9, $prevCompid__9);
       Object.assign(this.__state, {
+        anonymousState__temp3: anonymousState__temp3,
+        loopArray4: loopArray4,
+        $compid__8: $compid__8,
         $compid__9: $compid__9,
-        UserImage: _userImage2.default,
         Icon: _icon2.default,
-        anonymousState__temp7: anonymousState__temp7
+        $anonymousCallee__0: $anonymousCallee__0
       });
       return this.__state;
     }
   }]);
 
   return My;
-}(_taroQq.Component), _class.$$events = ["toEdit", "handleLeft", "handleRight", "handleSmall"], _class.$$componentPath = "pages/my/my", _temp2);
+}(_taroQq.Component), _class.$$events = ["handleTouchMove", "toEdit", "handleLeft", "handleRight", "handleSmall"], _class.$$componentPath = "pages/my/my", _temp2);
 exports.default = My;
 
 Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/taro-qq/index.js").default.createComponent(My, true));
@@ -289,17 +482,6 @@ Component(__webpack_require__(/*! @tarojs/taro-qq */ "./node_modules/@tarojs/tar
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./src/pages/my/userImage.png":
-/*!************************************!*\
-  !*** ./src/pages/my/userImage.png ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFkAAABZCAYAAABVC4ivAAALvUlEQVR4nO2ceVCTZx7H3xAQ8Va0rUe3dmdbZ0ULirbWo74ehU2ZREP3twtisllr391qU2t1K171FfAudw52W3vY2oPtYdcDbW3pdmfc7rarO2NptVi1gASE5E22KqjId/9IgoQEkkAgx+Q785lxdCJPPjw8ed73+b4wTDjhhBNOOOGEE5ARMQwjKi/nI+1/9vN4Qi4inucjfjK8OBFm/XfVFfwInucjmLBon0VERGJD5faJMJdcgVkPWPQXTn+57U4iEjNh0T2OiGXZyLof8ibDor8Jsx630V3+4oh6FMuy9uUjHG8Dm+DLlblTYNZfcxRsQ9DXvflmxpDwjO5G7IItVQXTIej/51KwjVZBX33mJD8mLNqL8AwTwbJsZOP3ex6CWd/UleDborWXLp3OuTss2rOIiEhsrMyLg1l/1RPB7fjx+PGVsWHRXUfEsmykoWJnXKvFsxnsPKN1Vf/6YGVs+MPQdSJYlo2sObsz3nkX4SWC3lh+cM3IUBYtYhhGBE8BRIxNcENl/lSYS7xdIjqb0Q2H9j81nGXZSJ7nIwB4PCaGCdCrSTCMqMnAj79Ssy7+Sg2f4DEX+ISGyg1TjZU7k1td7SJMGqAhFzDkAFUbgaoNVqo3A4btQEMeYNJ2Jru6rjJnhnAxc8qVC16MqYZPuFKzOf5q1fNjmECRDUBERGKYsj6CkA3v2QYIuttSa7OBb5YCJ+YC5fHApxO75vMpwD/nA9/+3ipeaCdd0ABCTjfGlI2bDXwuEYltP23+Dc/zEUTUr6Ux66D3bybHKrixADgp90yqO8qnAKeXWL9hZj0gFHdXcj4R9bPdI/FrREQkJqKYFiN/yGvB9buBLxf0XKxL4oD/SIHGfNuM9k5yc92WQpVK1b+0tNTvW0IRz/ORCoVi4M0G/rDHb6JhC3AqtZfkuqBCCRgLvZJ87dLmYiKKCYRdiojjuKgVRIOa6/kjHr2Bqmd8syx4y+dTgLptnkuu3qThOG5AcEk2ZQEVZP0x7mvBdj6bBFSuAEyhKNm0Ffg62X9yO/JNhlvRwSf5xBzg+MTA4pulISLZuBX46lHg44n+45MuON35jA4OyaYsoCIDOBYX2FzMhKsLluCQXLUKOBoXHNTtDELJxmzg02lAWZz/8UTy3x9BxyvDAJe8HTiZDhyZ5CPi+oYzT6P9vY4AlpwDXM4DDk/yDT77RnnAx9MAQQcI2sCUTESDmg05ZRC0wIlFwMFJwcm3K2yiNbh6idcoFIqBfpfMM0yERCKJvnhq50wIumtoyAf+9gDw0eTg5FACYCyy3/i/XF6WOZ6I+jEM4587cWAYUWJiYlT92dz4tlPl/y4DDkwObn7IvH3CYtJWl5fzd/F+ms0ilmUjL57O/iUE/U9tN8nLZgEfPuCCycHDFyloO0Sw1g3Ol5evGdnXp+DWZs/3uxNgbnfo2ZAPfBAPfPBAkBMPGIs7HM7qjCePrO+bShjPMBFEJK47t2cSLPobDgP5dhXw14QgId6R9zpQle3iFFxnKv0zN7RXZzQcZrDO4jSIchlQmhAafL3M9Sm4SVfzj/2Zw3tFtF2w8VzuTJhdnCoLWuDDWcA7CV3zrgvc/XtX9NZrj/2qq8pB9fmTOff4VDRv60WYf8ibBrP+ussvbCwG3kkE3prSe7zdhxyY7aZAo6s587HvSo4ilmUjz5/ZNaHVrHNdXzXrgcsFwP6pwP4pocG7D7ov0Jh1Fz98VTWsp6JFRCSu+27nZFhKuu6mGfYAb0wNHd5M9LipVH6w+9s7Ec/zESbrLqLZ7Res3Q28ngi81oHXg5Q3pnnRvdMJe/c+P7g7/QwREYm/KF0/6pagq4ClpNWt5FenBS+vdeD16Z4JtpS03mzUvbd6NcV050EhEcuykVKpdMDLmifuuSVoK7teLnKBV6YDr0y7zV43vNIF/n7tq+7XZFhKWpvqi46sX6+M7W4JRkREYpVK1V+lUg1TqzPGtZi0VZ1+wYZCYO+DwEvTe4eX+5h9s9wKbq4vKlsuW3BnhkQyRCKRRHdrJts7bgqFYqBcLo/dtJbuvWXUVLvewmmAvTOBv0wPDd5e2PUMris6pFTS2CUpKcOlUukAjuOiultMtPfc+hHRILlcHlu4+w/33TTqzjit0YIOeCsJ0D/onpIg4PBvuhBceOyPShpLyckjFElJA7nExKielhJFRCSWSCTRdtGZz6rG32jUOH8YHlcB2hnBg+6hzjm1trM1+GhycvJou2DbBBT3RHCnojW5T95/y6S74CD67BageEbP0QQAtblOkpsMhYeVShpLRCMUCsVALjExytf3MJxE525/8v6W9mu0SQvo5gBFD/uJGb7hpXmO7X1LSWuzoahs+fKMcb0xg92KXp4hGddiare9e3cxkP9wzyjwM5896bhEGIoOpaam9soS4bHozEzV+Fsm3XlYSlpRsRnInRncVO1qv007kpYmG9ObS4RHoqVS6chd2csmtBg11TDpgOL5wO5ZvcDM2+zpJfYtsp1W63CjoeCr5Rmp1iVCoRhIcXG9PoM7FS2TyQYT0airtVuOQSgC/v0nYNfs4GP3bOCc7RkWoQCWHzfq09PTRxLRoL5YIjoVzbJsJBHFqFSqYU0G/qi1olUI5M4DdswOLvY9bhOcBwjZsFRt0hHRUJZl+/v7UWIREfWTyWSDmw1bytq6ZGe3AjlzfMe2XmbHI0DVnjbBELLxU81GLREN4jguivFX78Iuua1B1LHV+fYSYOtcK1me8oh/OP40IOQ7FQ4DokFkl+yyOtvAAy8mAfzcwGXrXCBPApgcBQdkF67Tpv25dcDWecBmtue8YKOzv/eEjq/bkWR9rDhom/Z2Tj8HvDAP2MgGFlmPAhdygvxxhvZUrAHWzwscNi0AzvFdPgEVfJKFbODMOmDdAuB5d8zvXbIeA6q2h+AjZnYMLwA5KcCaBf7hxceBRtdrcOhIFrIBYxawfxmw5lHguYV9w9ok4Phal7uI0JQsZFt/VM9tBwp/Czw7/zarfcxz84GXfwdU5Trtg0NfchtFQMU2II+AVfMA9VzveKYTVs8DdEuAyp0Ol8pBL9mrX8XgQLFVhKEQOLbaKmjl7A7M8YwNScCJDcDldv3ibggOOMksy0ZyHDfgej3/EUxZ170n+zoEzQ1YSlrttxlRVwic2gK8/xRQ8GtgYxLw7FxHNiUDmjTgkBo4nQ3UF6Ht9bb7wRDyrf9/N8Z1pXZLPhHFBMQvFbH3M4hoqFwuvyNNJhuTKpGMW7Ro0d2eQFLpzzatWjrhRqP2e7dNJU+xlLQ21RaUE0nvJan0Z56OJVUiGSeTycYQ0agMiWSIWq2ODgTJDMMwEVxiYpRUKh2QIZEMIaIRSqUyNj09faQnyOXyO1KTk0dnrl7y8xuN2rO+kNxkKCojorH02GN3EdEoT8eiVCpjU1JShkskkiEcxw1ITEzsdp/C1xERkZjjuCi1Wh1NRDFEFMNx3ABPIKJBixcvHkZEozS5K+9vEXQXejKDr14qPLA8I3WcXC6PJaKhttuVno4lhohi1Gp1dLs+RUBIZhiGEfG250mISMyybKSncBwXpVKp+stkssHWXkfa+BuNbrp3nQi+Vlvw/rK0tDFENIKIBqnV6miO46K8GY/9PSDABLePyFsARPAsG2k/M0xPTx+5PCN13C2T9pJXS0Rd0fHU1NTR9kPPdkdGXo+JCVC5PY3TKXhhtuq+FpP2ggcfhq1NdUWfKO3VqT4+VQ62OInO2/HEL242ap27dw7VqeKjyg7dNH8degZLnOoGG9csuedmo+ask2hLSevV2qIDycnJ1iWij4onoRKnGV2wa9mEWybtRYcPuUuFB1esSLu7rRfhuAaH40GcRPOZaeNbjNaSY3N98dG24kl4BvcoTqK5pamjmwyafQq5/I4lKSnDw2uwb9JWRFcoFANp4cKhKpVqWIbtiiy8i/BdHK4oVSpVf4lEEs1xXI8b7uE4RgRAxPN8RGlpqdj+K9T9PahQTUhfkYUTTjjhhBNOSOT/t4cCeA6itqUAAAAASUVORK5CYII="
 
 /***/ })
 

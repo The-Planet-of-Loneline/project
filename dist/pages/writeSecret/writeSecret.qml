@@ -1,14 +1,14 @@
 <block qq:if="{{$taroCompReady}}">
     <view class="all">
         
-        <head compid="{{$compid__25}}"></head>
+        <head compid="{{$compid__53}}"></head>
         <view class="title">
             <view class="titleText">除了你自己，没人会知道你的身份</view>
         </view>
         <view class="writeContainer" style="{{anonymousState__temp}}">
-            <textarea class="write" value="{{inpuValue}}" bindinput="handleInputChange" bindfocus="handleInput" bindblur="handleback" data-e-input-so="this" data-e-focus-so="this" data-e-blur-so="this"></textarea>
+            <textarea class="write" value="{{Value}}" bindinput="handleInputChange" bindfocus="handleInput" bindblur="handleback" show-confirm-bar="{{false}}" maxlength="{{75}}" auto-focus="{{true}}" data-e-input-so="this" data-e-focus-so="this" data-e-blur-so="this"></textarea>
             <image src="{{Color}}" class="color"></image>
-            <button class="post" bindtap="anonymousFunc0">发表</button>
+            <button class="post" bindtap="onhandleSubmit" data-e-tap-so="this">发表</button>
         </view>
         <view class="colorContainer">
             <view class="colorCir" style="background-color:rgba(30, 30, 40, 1)" bindtap="colorChangB" data-e-tap-so="this">
@@ -42,6 +42,6 @@
                 </block>
             </view>
         </view>
-        <footer compid="{{$compid__26}}"></footer>
+        <footer compid="{{$compid__54}}"></footer>
     </view>
 </block>

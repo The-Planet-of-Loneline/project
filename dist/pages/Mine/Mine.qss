@@ -1,7 +1,7 @@
-.all {
+page {
   background-color: #04040F;
   height: 100%;
-  width: 750rpx; }
+  width: 100%; }
 
 .header {
   width: 750rpx;
@@ -12,6 +12,7 @@
   justify-content: center;
   align-items: center;
   position: fixed;
+  z-index: 4;
   top: 0; }
 
 .head {
@@ -20,13 +21,15 @@
   font-size: 30rpx;
   font-family: PingFang SC;
   font-weight: 400;
-  color: white; }
+  color: white;
+  position: fixed; }
 
 .notification {
   width: 40rpx;
   height: 40rpx;
   position: fixed;
   right: 35rpx;
+  z-index: 4;
   top: 20rpx; }
 
 .headerSpace {
@@ -36,6 +39,14 @@
 
 .footerSpace {
   width: 750rpx;
-  height: 100rpx;
+  height: 120rpx;
   background: #04040F; }
+
+.none {
+  margin-top: 20rpx;
+  text-align: center;
+  font-size: 25rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: whitesmoke; }
 
