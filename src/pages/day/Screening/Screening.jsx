@@ -27,12 +27,13 @@ export default class Screening extends Component {
         }
       ]
     },
+    // type 选中大标签 which 选中二级标签 choice 存储详细事件和地点数组
     chosen:{
       type:1,
       which:0,
       time:[0,0,0,0,0,0,0],
       during:['',''],
-      choices:[0,0]
+      choices:[[0,0,0,0],[0,0,0]]
     },
     tStyle:'container t-out',
     oStyle:'container o-out',
@@ -49,14 +50,30 @@ export default class Screening extends Component {
 
   componentDidHide () { }
 
+  checkEver (choice) {
+    let sum = 0
+    let back = ''
+    for (let i =0;i<choice.length;i++) {
+      if (choice[i]) {
+        back+=i+1
+        sum++
+      }
+    }
+    if (sum) {
+      return back
+    } else {
+      return false
+    }
+  }
+
   // 向外传递 转换好的 chosen
   passScr (from='else') {
     const { chosen } = this.state
     let query = ''
-    query+=`type=${chosen.type}`
+    query+=`type=${chosen.type}`  
     if (from !== 'type') {
-      if (chosen.choices[0]) { query+=`&tag=${chosen.choices[0]}` }
-      if (chosen.choices[1]) { query+=`&place=${chosen.choices[1]}` }
+      if (this.checkEver(chosen.choices[0])) { query+=`&tag=${this.checkEver(chosen.choices[0])}` }
+      if (this.checkEver(chosen.choices[1])) { query+=`&place=${this.checkEver(chosen.choices[1])}` }
       // during 处理
       if (chosen.during[0]){ query+=`&time_from=${chosen.during[0]}` }
       if (chosen.during[1]){ query+=`&time_end=${chosen.during[1]}` }
@@ -74,7 +91,6 @@ export default class Screening extends Component {
         query+=`&date=${date}`
       }
     }
-    console.log(query)
     this.props.onScrInfo(query)
   }
 
@@ -95,12 +111,21 @@ export default class Screening extends Component {
 
   changeDate = (part, index) => {
     let { chosen } = this.state
+    const baseNum = [[4,3],[7,8],[4,3],[0,3]]
+    let detail=[],place=[]
     switch (part) {
       case 'type' : chosen.type=index
                     chosen.which?this.flyin():null
                     this.passScr('type')
+                    // 新建存储数组
+                    for (let i = 0;i<baseNum[index-1][0];i++) {
+                      detail.push(0)
+                    }
+                    for(let j = 0;j<baseNum[index-1][1];j++){
+                      place.push(0)
+                    }
                     setTimeout(()=>{
-                      chosen.choices=[0,0]
+                      chosen.choices=[detail,place]
                       chosen.which=0
                       chosen.time=[0,0,0,0,0,0,0]
                       chosen.during=['','']
@@ -113,16 +138,21 @@ export default class Screening extends Component {
                       this.flyin()
                       this.passScr()
                       setTimeout(()=>{
-                        chosen.choices=[0,0]
+                        for (let i = 0;i<chosen.choices[0].length;i++) {
+                          chosen.choices[0][i] = 0
+                        }
+                        for (let j = 0;j<chosen.choices[1].length;j++) {
+                          chosen.choices[1][j] = 0
+                        }
                         chosen.which=0
                       },300)
                     }
                     break
       case 'time' : chosen.time.splice(index,1,! chosen.time[index])
                     break
-      case 'detail' : chosen.choices[0]=index
+      case 'detail' : chosen.choices[0].splice(index-1,1,!chosen.choices[0][index-1])
                     break
-      case 'place' : chosen.choices[1]=index
+      case 'place' : chosen.choices[1].splice(index-1,1,!chosen.choices[1][index-1])
                     break
     }
     setTimeout(()=>{this.setState({ chosen })},300)
@@ -156,12 +186,18 @@ export default class Screening extends Component {
   reset (detail) {
     let { chosen } = this.state
     switch (detail) {
-      case 'type' : chosen.choices[0]=0
+      case 'type' : 
+      for (let i=0;i<chosen.choices[0].length;i++) {
+        chosen.choices[0][i] = 0
+      }
                     break
       case 'time' : chosen.time=[0,0,0,0,0,0,0]
                     chosen.during=['','']
                     break
-      case 'place' : chosen.choices[1]=0
+      case 'place' : 
+      for (let i=0;i<chosen.choices[1].length;i++) {
+        chosen.choices[1][i] = 0
+      }
                     break
     }
     this.setState({ chosen })
@@ -209,8 +245,8 @@ export default class Screening extends Component {
                 return (
                   <Tag
                     key={index+1} 
-                    indexId={index+1} 
-                    part='detail' 
+                    indexId={index+1}
+                    part='detail'
                     tagName={details} 
                     litDate={chosen.choices[0]}
                     onChangeDate={this.changeDate} 
@@ -231,8 +267,8 @@ export default class Screening extends Component {
                   <Tag
                     key={index+1} 
                     indexId={index} 
-                    part='time'
                     tagName={time} 
+                    part='time'
                     litDate={chosen.time}
                     onChangeDate={this.changeDate} 
                   />
@@ -279,8 +315,8 @@ export default class Screening extends Component {
               return (
                 <Tag
                   key={index+1} 
-                  indexId={index+1} 
-                  part='place' 
+                  indexId={index+1}
+                  part='place'
                   tagName={place} 
                   litDate={chosen.choices[1]}
                   onChangeDate={this.changeDate}
