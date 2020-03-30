@@ -36,13 +36,12 @@
   float: right;
 }
 .fake-table{
-  width: 519px;
+  width: 580px;
   margin: 0 auto;
   text-align: start;
 }
 .fake-cell{
   display: inline-block;
-  width: 46%;
   height:40px;
   border:none;
   font-size:24px;
@@ -51,6 +50,14 @@
   line-height:40px;
   color:rgba(0,0,0,1);
   opacity:1;
+  overflow: hidden;
+  margin-left: 15px;
+}
+.left{
+  width: 270px;
+}
+.right{
+  width: 220px;
 }
 .sentence{
   width:522px;

@@ -85,7 +85,7 @@ export default class edit extends Component{
                             <View className='content'>年级：{info.grade}</View>
                         </View>
                     </View>
-                <Footer mode='need' />
+                <Footer mode='my' />
             </View > 
         )
     }

@@ -74,6 +74,7 @@ export default class Screening extends Component {
         query+=`&date=${date}`
       }
     }
+    console.log(query)
     this.props.onScrInfo(query)
   }
 

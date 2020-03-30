@@ -11,11 +11,6 @@ export default class Tag extends Component {
     litDate:0,
     type:0
   }
-  
-  constructor(props){
-    super(props)
-    
-  }
 
   componentWillMount () { }
 

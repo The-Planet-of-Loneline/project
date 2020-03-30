@@ -93,7 +93,7 @@ export default class ListItem extends Component {
         {/* history */}
         {mode==='0'
         ?<View className='list-item' onClick={this.toMyDetail}>
-          <View className='tag'>{info.tag}</View>
+          <View className='tag'>{info.tag?info.tag:'其他'}</View>
           <View className='title'>{info.title}</View>
           <View className='float-con'><View className='time'>{info.post_time}</View></View>
         </View>

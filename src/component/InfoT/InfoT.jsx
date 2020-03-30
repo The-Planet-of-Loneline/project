@@ -84,12 +84,12 @@ export default class InfoT extends Component {
             <Image src={Close} className='close' onClick={this.changeShow} />
           </View>
           <View className='fake-table'>
-            <View className='fake-cell'>昵称：{name}</View>
-            <View className='fake-cell'>学院：{college}</View>
-            <View className='fake-cell'>性别：{sex}</View>
-            <View className='fake-cell'>QQ：{qq}</View>
-            <View className='fake-cell'>年级：{grade}</View>
-            <View className='fake-cell'>Tel：{tel}</View>
+            <View className='fake-cell left'>昵称：{name}</View>
+            <View className='fake-cell right'>学院：{college}</View>
+            <View className='fake-cell left'>性别：{sex}</View>
+            <View className='fake-cell right'>QQ：{qq}</View>
+            <View className='fake-cell left'>年级：{grade}</View>
+            <View className='fake-cell right'>Tel：{tel}</View>
           </View>
           <View>
             <View className={able?'sentence type-t':'sentence type-s'}>{msg}</View>
