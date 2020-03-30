@@ -29,7 +29,7 @@ export default class HistoryCard extends Component{
                 <View className='card' 
                 onClick={this.toCard}
                 style={backgroundColor}>
-                    <View className='text'>{this.props.textValue}</View>
+                    <View className='text'><Text>{this.props.textValue}</Text></View>
                 </View>
             </View>
         )

@@ -30,8 +30,7 @@ export default class Comment extends Component {
             {
                 comment:this.state.inpuValue
             },
-            'POST').then(res => {
-                console.log(res) 
+            'POST').then(res => { 
                 Fetch(`secret/view/:secret_id?secretId=${this.props.Debunkid}`,
                     {}, 'GET').then(data => {
                             Taro.redirectTo({

@@ -85,7 +85,7 @@ export default class SecretCard extends Component {
         return (
             <View className='cardContainer'>
                <View className='card' style={backgroundColor}>
-        <View className='text'>{this.props.textValue}</View>
+        <View className='text'><Text>{this.props.textValue}</Text></View>
                    <View className='allReplies'>全部回复</View>
                    <View className='commentButton'>
                        {this.props.showComment ? <Image src={commentimg} className='comment' onClick={this.onShowInput.bind(this)} /> : null}

@@ -20,8 +20,7 @@ export default class Index extends Component {
   componentWillMount () {
     Fetch(`secret/square/`,
     {},
-    'GET').then(res => {
-      console.log(res.secret.Content) 
+    'GET').then(res => { 
       this.setState({
         text:res.secret.Content,
         bgcolor:res.secret.Colour,

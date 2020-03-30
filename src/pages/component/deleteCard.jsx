@@ -15,14 +15,13 @@ export default class DeleteCard extends Component {
     handleDelete(){
         Fetch(`secret/delete/:secret_id/?secretId=${this.props.Debunkid}`,
         {},
-        'DELETE').then(res => {
-           console.log(res) 
+        'DELETE').then(res => { 
         Taro.showToast({
             title: '删除成功',
             icon: 'none'
         })
             this.props.onCloseDelete() 
-            Taro.redirectTo({
+            Taro.reLaunch({
                 url:`/pages/Mine/Mine`
             }) 
         })

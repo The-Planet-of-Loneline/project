@@ -13,13 +13,11 @@ export default class CardHistory extends Component {
         Fetch('remind/night/remindbox/view/',
         {},
         'GET').then(res => {
-            console.log(res)
             this.setState({
                 comment:res.commentdata,
             })
         })
-    }
-   
+    } 
     toSecret() {
         Taro.reLaunch({
             url: '/pages/nighthome/nighthome'

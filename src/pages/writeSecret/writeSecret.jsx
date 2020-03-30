@@ -142,7 +142,6 @@ export default class WriteSecret extends Component {
             content:text,
         },
         'POST').then(res => {
-            console.log(res)
             switch(res.message){
                 case 'Success':
                     Taro.redirectTo({
