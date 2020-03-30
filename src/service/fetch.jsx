@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro';
 
 // Fetch(url, data).then((res) => { console.log(res) })
-const preHttp = 'http://47.97.74.180:9090/lonely_planet/v1/';
+const preHttp = 'https://planet.muxixyz.com/lonely_planet/v1/';
 const Fetch = (url, data = {}, method = 'GET') => {
   const header = {
     'content-type': 'application/json',
@@ -27,7 +27,7 @@ const Fetch = (url, data = {}, method = 'GET') => {
         const password = Taro.getStorageSync('pwd')
         if ( id&&password ) {
           Taro.request({
-            url: 'http://47.97.74.180:9090/lonely_planet/v1/login/',
+            url: 'https://planet.muxixyz.com/lonely_planet/v1/login/',
             data: {
               sid:id,
               pwd:password
