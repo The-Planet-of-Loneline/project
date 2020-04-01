@@ -83,24 +83,7 @@
     top: 640px;
     left: 283px;
 }
-
-.super {
-    width: 184px;
-    height: 68px;
-    background: rgba(255, 255, 255, 0.31);
-    border: 1px solid rgba(112, 112, 112, 0.31);
-    border-radius: 15px;
-    font-size: 30px;
-    font-family: PingFang SC;
-    font-weight: 400;
-    line-height: 68px;
-    color: rgba(244, 243, 254, 1);
-    position: absolute;
-    top: 720px;
-    left: 283px;
-}
-
-.QQlogin {
+.super{
     width: 184px;
     height: 68px;
     background: rgba(255, 255, 255, 0.31);
@@ -117,12 +100,13 @@
 }
 
 // loading animate
-.loading {
+
+.loading{
     position: absolute;
     margin: 10px;
     right: 0;
-    border: 7px solid rgb(107, 151, 192);
-    border-bottom-color: rgba(0, 0, 0, 0);
+    border: 7px solid rgb(107, 151, 192); 
+    border-bottom-color: rgba(0,0,0,0);
     border-radius: 50%;
     height: 30px;
     width: 30px;
@@ -130,9 +114,7 @@
     -webkit-animation: span-c 1s linear infinite;
     z-index: 3;
 }
-
+  
 @keyframes span-c {
-    100% {
-        transform: rotate(1turn);
-    }
+100% {transform: rotate(1turn);}
 }
