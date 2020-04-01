@@ -25,15 +25,12 @@ export default class Share extends Component {
     }
   }
 
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
+  componentWillMount () {
+    Taro.showShareMenu({
+      showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+    })
+  }
+  config = {navigationBarTitleText: '孤独星球'}
 
   deal () {
     const { title, content, chosen } = this.state

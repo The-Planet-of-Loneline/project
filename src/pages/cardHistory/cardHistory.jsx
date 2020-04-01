@@ -12,6 +12,11 @@ export default class CardHistory extends Component {
         showDeleteModel: false
     }
 
+    componentWillMount () {
+        Taro.showShareMenu({
+            showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+        })
+    }
 
     config = {
         navigationBarTitleText: '孤独星球'

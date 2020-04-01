@@ -35,6 +35,10 @@ export default class Day extends Component {
   }
 
   componentWillMount () {
+    Taro.showShareMenu({
+      showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+    })
+
     Fetch(
       `requirement/square/?limit=6&page=0&type=1`,
       {},
@@ -63,9 +67,12 @@ export default class Day extends Component {
 
   componentDidShow () { }
 
-  componentDidHide () {this.setState({ scroll_Y: 95 })
-  }
+  componentDidHide () {this.setState({ scroll_Y: 95 })}
 
+  config = {
+    navigationBarTitleText: '孤独星球'
+  }
+  
   scrinfo = (info) => {
     const { chosen } = this.state
     if (chosen!==info) {

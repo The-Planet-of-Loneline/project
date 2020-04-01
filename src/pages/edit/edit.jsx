@@ -17,6 +17,10 @@ export default class edit extends Component{
     }
 
     componentWillMount(){
+        Taro.showShareMenu({
+            showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+        })
+
         const { stuid, sex, college, grade } = this.$router.params
         const nickname = Taro.getStorageSync('Nickname')
         this.setState({
@@ -50,7 +54,11 @@ export default class edit extends Component{
         }
     }
 
-    onhandleInputChange(e){
+    config = {
+        navigationBarTitleText: '孤独星球'
+    }
+
+          onhandleInputChange(e){
         this.setState({
             inputValue:e.target.value
         })

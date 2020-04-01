@@ -18,6 +18,9 @@ export default class Index extends Component {
   }
 
   componentWillMount () {
+    Taro.showShareMenu({
+      showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+    })
     Fetch(`secret/square/`,
     {},
     'GET').then(res => { 

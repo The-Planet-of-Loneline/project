@@ -42,7 +42,7 @@ class App extends Component {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: '孤独星球',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'black',
     }
   }
 

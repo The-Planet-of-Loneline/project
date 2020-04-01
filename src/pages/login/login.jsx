@@ -23,6 +23,9 @@ export default class login extends Component{
         if (password) {
             this.setState({ password })
         }
+        Taro.showShareMenu({
+            showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+        })
     }
 
     componentDidMount () {
@@ -34,6 +37,9 @@ export default class login extends Component{
         console.log("%c	    \\________\\   \\__________\\   \\__\\    \\__\\    \\__________\\ ",'color:#39b54a')
 	    console.log('%c木%c犀%c团%c队%c1%c9%c级%c制%c作','color:#e54d42','color:#f37b1d','color:#fbbd08','color:#8dc63f','color:#39b54a','color:#1cbbb4','color:#0081ff','color:#6739b6','color:#9c26b0')
     }
+
+    
+    config = {navigationBarTitleText: '孤独星球'}
 
     onHandleId(e){
         this.setState({

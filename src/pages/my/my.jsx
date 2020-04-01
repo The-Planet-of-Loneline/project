@@ -33,6 +33,10 @@ export default class My extends Component {
   }
 
   componentWillMount () {
+    Taro.showShareMenu({
+      showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+  })
+
     let bottom = [false,false,false]
     Taro.setStorage({
       key: 'delete_if',
@@ -159,9 +163,9 @@ export default class My extends Component {
   componentDidHide () { }
 
   config = {
-    onReachBottomDistance: 130
+    onReachBottomDistance: 130,
+    navigationBarTitleText: '孤独星球'
   }
-
   onReachBottom(){
     const { bottom, draw } = this.state
 

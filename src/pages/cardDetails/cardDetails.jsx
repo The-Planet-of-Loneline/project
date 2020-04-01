@@ -28,6 +28,9 @@ export default class CardDetails extends Component {
   }
 
   componentWillMount () {
+    Taro.showShareMenu({
+      showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+    })
     const requirement_id = parseInt(this.$router.params.req_id)
     Fetch(
       `requirement/view/${requirement_id}/`,
@@ -64,13 +67,9 @@ export default class CardDetails extends Component {
     })
    }
 
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
+  config = {
+    navigationBarTitleText: '孤独星球'
+  }
 
   changeColor () {
     const id = this.$router.params.indexId

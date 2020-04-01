@@ -4,7 +4,11 @@ import './index.scss'
 
 export default class Index extends Component {
 
-  componentWillMount () { }
+  componentWillMount () {
+    Taro.showShareMenu({
+      showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+    })
+  }
 
   componentDidMount () { }
 
@@ -15,7 +19,7 @@ export default class Index extends Component {
   componentDidHide () { }
 
   config = {
-    navigationBarTitleView: '孤独星球'
+    navigationBarTitleView: '孤独星球',
   }
 
  

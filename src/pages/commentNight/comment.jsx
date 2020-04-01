@@ -10,7 +10,11 @@ export default class Comment extends Component {
         textValue: '你好呀'
     }
 
-    componentWillMount() { }
+    componentWillMount() { 
+        Taro.showShareMenu({
+            showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+        })
+    }
 
     componentDidMount() { }
 

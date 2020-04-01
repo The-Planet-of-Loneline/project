@@ -25,7 +25,11 @@ export default class WriteSecret extends Component {
         }
     }
 
-    componentWillMount() { }
+    componentWillMount() { 
+        Taro.showShareMenu({
+            showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+        })
+    }
     
 
     componentDidMount() { }

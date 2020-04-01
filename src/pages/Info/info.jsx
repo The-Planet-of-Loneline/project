@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Image } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import Footer from '../component/Footer'
 import './info.scss'
 import InofoCard from '../component/infoCard'
@@ -10,6 +10,10 @@ export default class CardHistory extends Component {
         comment:[{}],
     }
     componentWillMount(){
+        Taro.showShareMenu({
+            showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+        })
+
         Fetch('remind/night/remindbox/view/',
         {},
         'GET').then(res => {
@@ -39,11 +43,13 @@ export default class CardHistory extends Component {
                 <View className='headerSpace'></View>  
                 <View className='cardContainer'>
                     {this.state.comment.map((comment,index) => {
-                        return  <InofoCard  time={comment.CommentTime}
-                        text ={comment.Comment}
-                        key={index}
-                        sid={comment.SecretId}
-                        number={comment.Num}  />
+                        return  <InofoCard  
+                          time={comment.CommentTime}
+                          text={comment.Comment}
+                          key={index}
+                          sid={comment.SecretId}
+                          number={comment.Num}  
+                        />
                     })}
                 </View>
                 <View className='footerSpace'></View>  
