@@ -11,10 +11,16 @@ export default class login extends Component{
         showView: true,
         id: '',
         password: '',
-        loading: false
+        loading: false,
+        powered:false
     }
 
     componentWillMount () {
+        Taro.getSetting({
+            success: (res) => {
+                this.setState({ powered: res.authSetting['scope.userInfo']})
+            }
+        })
         const id = Taro.getStorageSync('sid')
         const password = Taro.getStorageSync('pwd')
         if (id) {
@@ -37,7 +43,6 @@ export default class login extends Component{
         console.log("%c	    \\________\\   \\__________\\   \\__\\    \\__\\    \\__________\\ ",'color:#39b54a')
 	    console.log('%c木%c犀%c团%c队%c1%c9%c级%c制%c作','color:#e54d42','color:#f37b1d','color:#fbbd08','color:#8dc63f','color:#39b54a','color:#1cbbb4','color:#0081ff','color:#6739b6','color:#9c26b0')
     }
-
     
     config = {navigationBarTitleText: '孤独星球'}
 
@@ -110,8 +115,19 @@ export default class login extends Component{
         }       
     }
 
+    power () {
+        Taro.getSetting({
+            success: (res) => {
+              this.setState({ powered:res.authSetting['scope.userInfo']})
+              if (res.authSetting['scope.userInfo']) {
+                  this.onHandleLogin()
+              }
+            }
+        })
+    }
+
     render(){ 
-        const { id, password, showView, loading } = this.state
+        const { id, password, showView, loading, powered } = this.state
         return(
             <View className='container'>
                 {loading&&<View className='loading'></View>}
@@ -121,7 +137,9 @@ export default class login extends Component{
                 {showView ? <Input type='password' placeholder='请输入密码' className='password' value={password} onInput={this.onHandlePassword.bind(this)}></Input>
                 :<Input type='text' placeholder='请输入密码' className='password' value={password} onInput={this.onHandlePassword.bind(this)}></Input>}
                 <Image className='view' src={showView ? view : viewOff} onClick={this.onViewPassword.bind(this)} />
-                <Button className='login' onClick={this.onHandleLogin.bind(this)}>登录</Button>
+               {powered
+               ?<Button className='login' onClick={this.onHandleLogin.bind(this)}>登录</Button>
+                :<Button open-type='getUserInfo' className='login' onClick={this.power}>登录</Button>}
             </View>
         )
     }
