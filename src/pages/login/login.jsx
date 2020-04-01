@@ -35,7 +35,7 @@ export default class login extends Component{
         console.log("%c 	  \\  \\         \\  \\    \\  \\   \\  \\ \\\\ \\  \\    \\   _______\\ ",'color:#39b54a')
         console.log("%c	   \\  \\______	\\  \\____\\  \\   \\  \\  \\\\\\  \\    \\  \\________ ",'color:#39b54a')
         console.log("%c	    \\________\\   \\__________\\   \\__\\    \\__\\    \\__________\\ ",'color:#39b54a')
-	    console.log('%c木%c犀%c团%c队%c1%c9%c级%c制%c作','color:#e54d42','color:#f37b1d','color:#fbbd08','color:#8dc63f','color:#39b54a','color:#1cbbb4','color:#0081ff','color:#6739b6','color:#9c26b0')
+        console.log('%c木%c犀%c团%c队%c1%c9%c级%c制%c作','color:#e54d42','color:#f37b1d','color:#fbbd08','color:#8dc63f','color:#39b54a','color:#1cbbb4','color:#0081ff','color:#6739b6','color:#9c26b0')
     }
 
     
@@ -67,41 +67,57 @@ export default class login extends Component{
         const {id,password,loading} = this.state
         if(id && password && !loading){
             this.setState({ loading: true})
-            Fetch('login/',
-            {
-                sid:id,
-                pwd:password
-            },
-            'POST').then(res => {
-                if (res.msg=='success'){
-                    Taro.setStorage({
-                        key:'sid',
-                        data: id
-                    });
-                    Taro.setStorage({
-                        key: 'pwd',
-                        data: password
-                    });
-                    Taro.setStorage({
-                        key: 'token',
-                        data: res.token,
-                    }) 
-                    Taro.showToast({
-                        icon: 'none',
-                        title: '登录成功'
-                   }) 
-                    Taro.redirectTo({
-                        url: `/pages/day/day`
-                    }) 
-                }else{
-                    Taro.showToast({
-                        icon: 'none',
-                        title: '账号或密码错误'
-                    })
-                    this.setState({ password: '', loading: false })
-                }
-            })
-        }
+                    Fetch('login/',
+                        {
+                            sid: id,
+                            pwd: password
+                        },
+                        'POST').then(res => {
+                            if (res.msg == 'success') {
+                                Taro.setStorage({
+                                    key: 'sid',
+                                    data: id
+                                });
+                                Taro.setStorage({
+                                    key: 'pwd',
+                                    data: password
+                                });
+                                Taro.setStorage({
+                                    key: 'token',
+                                    data: res.token,
+                                    success: function(){
+                                        Taro.getSetting({
+                                            success(res){
+                                                if(res.authSetting['scope.userInfo']){
+                                                    Taro.showToast({
+                                                        icon: 'none',
+                                                        title: '登录成功'
+                                                    })
+                                                    Taro.redirectTo({
+                                                        url: `/pages/day/day`
+                                                    }) 
+                                                }else{
+                                                    Taro.showToast({
+                                                        icon: 'none',
+                                                        title: '请授权'
+                                                    })
+                                                    Taro.redirectTo({
+                                                        url:'/pages/login/login'
+                                                    })
+                                                }
+                                            }
+                                        })
+                                    }
+                                })
+                            } else {
+                                Taro.showToast({
+                                    icon: 'none',
+                                    title: '账号或密码错误'
+                                })
+                                this.setState({ password: '', loading: false })
+                            }
+                })    
+          }
         if (!id || !password) {
             Taro.showToast({
                 icon: 'none',
@@ -122,6 +138,7 @@ export default class login extends Component{
                 :<Input type='text' placeholder='请输入密码' className='password' value={password} onInput={this.onHandlePassword.bind(this)}></Input>}
                 <Image className='view' src={showView ? view : viewOff} onClick={this.onViewPassword.bind(this)} />
                 <Button className='login' onClick={this.onHandleLogin.bind(this)}>登录</Button>
+                <Button open-type="getUserInfo" className='QQlogin'>QQ授权登录</Button>
             </View>
         )
     }
