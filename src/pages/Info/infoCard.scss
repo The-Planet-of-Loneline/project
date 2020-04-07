@@ -16,10 +16,10 @@
     .textContainer {
         display: inline-block;
         height: 132px;
-        width: 600px;
+        width: 500px;
         line-height: 132px;
         position: relative;
-        top: -50px;
+        top: -40px;
         z-index: 0;
     }
     
@@ -37,8 +37,9 @@
     }
     
     .text {
-        width: 600px;
-        height: 100px;
+        width: 500px;
+        max-height: 100px;
+        overflow: scroll;
         font-size: 25px;
         font-family: Segoe UI;
         font-weight: 400;
