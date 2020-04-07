@@ -28,8 +28,7 @@ export default class myDetail extends Component {
   componentWillMount () {
     Taro.showShareMenu({
       showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
-  })
-
+    })
     const requirement_id = parseInt(this.$router.params.req_id)
     Fetch(
       `requirement/view/${requirement_id}/`,

@@ -29,18 +29,29 @@ export default class My extends Component {
     blank_msg:['快去发布需求吧！','看来没人鸟你呢~','没人关注你呢！'],
     // history_bottom apply_ bottom reply_bottom
     bottom:[false,false,false],
-    page:[1,1,1]
+    page:[1,1,1],
+    remindBox:false
   }
 
   componentWillMount () {
     Taro.showShareMenu({
       showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
-  })
-
+    })
     let bottom = [false,false,false]
     Taro.setStorage({
       key: 'delete_if',
       data: false
+    })
+    Fetch(
+      'remind/day/remindbox/status/',
+      {},
+      'GET'
+    ).then(data =>{
+      if (data.msg === 'success') {
+        this.setState({ remindBox: data.existence})
+      } else {
+        console.error('existence return bad')
+      }
     })
     Fetch(
       'user/info/',
@@ -69,7 +80,11 @@ export default class My extends Component {
       'GET'
     ).then(data => {
       if (data.msg==='success'){
-        if (data.num) { this.setState({ history: data.history }) }
+        if (data.num) { 
+          this.setState({ history: data.history })
+        } else {
+          this.setState({ history: [] })
+        }
         if (data.num<3&&data.num) { bottom[0] = true }
       } else if (data.msg==='Fail.') {
         Taro.showToast({
@@ -125,6 +140,10 @@ export default class My extends Component {
     if (delete_if) {
       bottom[0]=false
       bottom[1]=false
+      Taro.setStorage({
+        key:'delete_if',
+        data: false
+      })
       // 重新申请历史记录
       Fetch(
         'requirement/history/?limit=6&page=0',
@@ -132,7 +151,11 @@ export default class My extends Component {
         'GET'
       ).then(data => {
         if (data.msg==='success'){
-          if (data.num) { this.setState({ history: data.history }) }
+          if (data.num) { 
+            this.setState({ history: data.history })
+          } else {
+            this.setState({ history: [] })
+          }
           if (data.num<3&&data.num) { bottom[0] = true }
         } else if (data.msg==='Fail.') {
           Taro.showToast({
@@ -269,9 +292,9 @@ export default class My extends Component {
       big=true
     }
     if (show) {
-      this.setState({ draw:{ big, show:false, small } })
+      this.setState({ draw:{ big, show:false, small }, remindBox:false })
     } else {
-      this.setState({ draw:{ big, show:true, small } })
+      this.setState({ draw:{ big, show:true, small }, remindBox: false })
     }
   }
 
@@ -291,7 +314,7 @@ export default class My extends Component {
   }
 
   render () {
-    const { userName, user, draw, blank_msg, bottom } = this.state
+    const { userName, user, draw, blank_msg, bottom, remindBox } = this.state
     return (
       <View>
         {draw.show?<View className='shadow' onTouchMove={this.handleTouchMove}></View>:null}
@@ -318,7 +341,9 @@ export default class My extends Component {
             <View 
               className={draw.big?'right-part chosen-part':'right-part'}
               onClick={this.handleRight}
-            >消息通知<Text className='tri'>▼</Text></View>
+            >消息通知<Text className='tri'>▼</Text>
+            {remindBox&&<View className='red_point' onClick={this.handleRedPoint}></View>}
+            </View>
           </View>
           {draw.show
           ?<View className='notice'>

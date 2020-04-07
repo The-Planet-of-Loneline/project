@@ -29,9 +29,21 @@ export default class Tag extends Component {
   }
 
   wLit () {
+    const part =this.props.part
     const indexId =this.props.indexId
     const litDate = this.props.litDate
-    return (litDate[indexId-1])
+    switch (part) {
+      case 'time' : return (litDate[indexId])
+      case 'type' : return (litDate===indexId)
+      case 'detail' : 
+      case 'place' : {
+        if (typeof(litDate)==='number') {
+          return (litDate===indexId)
+        } else {
+          return (litDate[indexId])
+        }
+      }
+    }
   }
 
   testforBlank (){

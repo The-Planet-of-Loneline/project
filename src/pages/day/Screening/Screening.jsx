@@ -150,9 +150,9 @@ export default class Screening extends Component {
                     break
       case 'time' : chosen.time.splice(index,1,! chosen.time[index])
                     break
-      case 'detail' : chosen.choices[0].splice(index-1,1,!chosen.choices[0][index-1])
+      case 'detail' : chosen.choices[0].splice(index,1,!chosen.choices[0][index])
                     break
-      case 'place' : chosen.choices[1].splice(index-1,1,!chosen.choices[1][index-1])
+      case 'place' : chosen.choices[1].splice(index,1,!chosen.choices[1][index])
                     break
     }
     setTimeout(()=>{this.setState({ chosen })},300)
@@ -245,7 +245,7 @@ export default class Screening extends Component {
                 return (
                   <Tag
                     key={index+1} 
-                    indexId={index+1}
+                    indexId={index}
                     part='detail'
                     tagName={details} 
                     litDate={chosen.choices[0]}
@@ -315,7 +315,7 @@ export default class Screening extends Component {
               return (
                 <Tag
                   key={index+1} 
-                  indexId={index+1}
+                  indexId={index}
                   part='place'
                   tagName={place} 
                   litDate={chosen.choices[1]}

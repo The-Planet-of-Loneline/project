@@ -219,6 +219,7 @@ export default class Info extends Component {
               {checked[0]===0
               ?<View className='unfoucs'>未选定</View>
               :<Input
+                type='number'
                 className='info'
                 placeholder={placeHolder[0]}
                 placeholderClass='place-info'

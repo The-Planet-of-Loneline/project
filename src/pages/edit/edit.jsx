@@ -32,7 +32,6 @@ export default class edit extends Component{
                 grade
             }
         })
-        
     }
 
     componentWillUnmount(){
