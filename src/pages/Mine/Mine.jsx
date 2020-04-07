@@ -5,12 +5,13 @@ import notification from '../img/notification.png'
 import HistoryCard from '../component/historyCard'
 import './Mine.scss'
 import Fetch from '../../service/fetch'
+import Moon from '../img/moon.png'
 
 export default class Index extends Component {
     constructor(props){
         super(props)
         this.state={
-            history: [{}],
+            history: [],
             page: 1, 
         }
     }
@@ -69,6 +70,7 @@ export default class Index extends Component {
         navigationBarTitleText: '孤独星球',
     }
     render() {
+        const {history} = this.state
         return (
             <View className='all'>
                <View className='header'>
@@ -76,15 +78,17 @@ export default class Index extends Component {
                    </View>
                    <View className='headerSpace'></View>
                 <Image src={notification} className='notification' onClick={this.toImfo} />
+                {history.length  ? null : <Image src={Moon} className="back" />}
+                {history.length  ? null : <View className="noneBack">暂无历史记录哦</View>} 
                 <ScrollView className='CardContainer'>
-                   {this.state.history.map((history)=>{
-                       return <HistoryCard textValue={history.Content} 
-                       sendTime={history.SendTime} 
-                       key={history.Debunkid} 
-                       bgcolor={history.Colour} 
-                       Debunkid={history.Debunkid} />
+                   {history.map((his)=>{
+                       return <HistoryCard textValue={his.Content} 
+                       sendTime={his.SendTime} 
+                       key={his.Debunkid} 
+                       bgcolor={his.Colour} 
+                       Debunkid={his.Debunkid} />
                    })}
-                    <View className='none' >--没有更多啦!--</View> 
+                    {history.length  ? <View className='none' >--没有更多啦!--</View>: null} 
                 </ScrollView>
             <View className='footerSpace'></View> 
                 <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false}  onToSecret={this.toSecret.bind(this)} />

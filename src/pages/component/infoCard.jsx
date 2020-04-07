@@ -64,8 +64,7 @@ export default class InfoCard extends Component{
                 <Image src={this.state.name} className='avatar' />
                 <View className='textContainer' onClick={this.Info.bind(this)} >
         <View className='time'>{this.props.time}</View>
-        <View className='text'>{this.props.text}</View>
-                 <Image src={arrow} className='toCard' /> 
+        <View className='text'>{this.props.text}</View> 
                 </View>
             </View>
         )

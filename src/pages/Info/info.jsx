@@ -4,10 +4,12 @@ import Footer from '../component/Footer'
 import './info.scss'
 import InofoCard from '../component/infoCard'
 import Fetch from '../../service/fetch'
+import Moon from '../img/moon.png'
 
 export default class CardHistory extends Component {
     state = {
-        comment:[{}],
+        comment:[],
+        showBackGround: true,
     }
     componentWillMount(){
         Taro.showShareMenu({
@@ -35,6 +37,7 @@ export default class CardHistory extends Component {
     }
 
     render() {
+        const {comment} =this.state
         return (
             <View className='all'>
                 <View className='header'>
@@ -42,15 +45,17 @@ export default class CardHistory extends Component {
                 </View>
                 <View className='headerSpace'></View>  
                 <View className='cardContainer'>
-                    {this.state.comment.map((comment,index) => {
+                    {comment.length ? comment.map((co,index) => {
                         return  <InofoCard  
-                          time={comment.CommentTime}
-                          text={comment.Comment}
+                          time={co.CommentTime}
+                          text={co.Comment}
                           key={index}
-                          sid={comment.SecretId}
-                          number={comment.Num}  
+                          sid={co.SecretId}
+                          number={co.Num}  
                         />
-                    })}
+                    }):null}
+                {comment.length ? null : <Image src={Moon} className="back" /> }
+                 {comment.length ? null : <View className="noneBack">暂无历史记录哦</View>}
                 </View>
                 <View className='footerSpace'></View>  
                 <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false} onToSecret={this.toSecret.bind(this)} />
