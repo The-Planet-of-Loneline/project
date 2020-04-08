@@ -19,7 +19,7 @@
     height: 132px;
     line-height: 132px;
     position: relative;
-    top: -50px
+    top: -40px
 }
 
 .time {
@@ -33,11 +33,12 @@
 }
 
 .text {
-    width: 400px;
+    width: 500px;
     height: 60px;
     font-size: 25px;
     font-family: Segoe UI;
     font-weight: 400;
     line-height: 33px;
     color: rgba(255, 255, 255, 1);
+    overflow: scroll;
 }
