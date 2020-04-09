@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 page {
     background-color: #04040F;
     height: 100%;
@@ -88,4 +89,85 @@ page {
     position: absolute;
     left: 270px;
     top: 805px;
+=======
+page {
+    background-color: #04040F;
+    height: 100%;
+    width: 100%;
+}
+
+.header {
+    width: 750px;
+    height: 85px;
+    background: rgba(17, 23, 36, 1);
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 4;
+    top: 0;
+}
+
+.head {
+    width: 120px;
+    height: 42px;
+    font-size: 30px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    position: fixed;
+}
+
+.notification {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    right: 35px;
+    z-index: 4;
+    top: 20px;
+}
+
+.headerSpace {
+    width: 750px;
+    height: 85px;
+    background: #04040F;
+}
+
+.footerSpace {
+    width: 750px;
+    height: 120px;
+    background: #04040F;
+}
+
+.none {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 25px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(245, 245, 245, 1);
+}
+
+.back {
+    position: absolute;
+    left: 206px;
+    top: 412px;
+    width: 338px;
+    height: 338px;
+    opacity: 0.61;
+}
+
+.noneBack {
+    width: 210px;
+    height: 42px;
+    font-size: 30px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 34px;
+    color: rgba(224, 227, 233, 1);
+    position: absolute;
+    left: 270px;
+    top: 805px;
+>>>>>>> 2049f4b64368c3af15cf9fe914d5b67afa744d13
 }
