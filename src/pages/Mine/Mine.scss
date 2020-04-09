@@ -36,6 +36,17 @@ page {
     top: 20px;
 }
 
+.red {
+    width: 15px;
+    height: 15px;
+    position: fixed;
+    right: 20px;
+    z-index: 4;
+    top: 20px;
+    border-radius: 10px;
+    background-color: red;
+}
+
 .headerSpace {
     width: 750px;
     height: 85px;
@@ -60,7 +71,7 @@ page {
 .back {
     position: absolute;
     left: 206px;
-    bottom: 512px;
+    top: 412px;
     width: 338px;
     height: 338px;
     opacity: 0.61;
@@ -76,5 +87,5 @@ page {
     color: rgba(224, 227, 233, 1);
     position: absolute;
     left: 270px;
-    bottom: 425px;
+    top: 805px;
 }

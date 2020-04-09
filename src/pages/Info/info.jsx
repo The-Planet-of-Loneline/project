@@ -45,17 +45,19 @@ export default class CardHistory extends Component {
                 </View>
                 <View className='headerSpace'></View>  
                 <View className='cardContainer'>
-                    {comment.length ? comment.map((co,index) => {
+                    {comment ? comment.map((co,index) => {
                         return  <InofoCard  
                           time={co.CommentTime}
                           text={co.Comment}
                           key={index}
                           sid={co.SecretId}
-                          number={co.Num}  
+                          number={co.Num} 
+                          status={co.Status}
+                          cid={co.CommentId} 
                         />
-                    }):null}
-                {comment.length ? null : <Image src={Moon} className="back" /> }
-                 {comment.length ? null : <View className="noneBack">暂无历史记录哦</View>}
+                    }) : null}
+                {comment ? null : <Image src={Moon} className="back" /> }
+                {comment ? null : <View className="noneBack">暂无历史记录哦</View>}
                 </View>
                 <View className='footerSpace'></View>  
                 <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false} onToSecret={this.toSecret.bind(this)} />

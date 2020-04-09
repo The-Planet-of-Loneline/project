@@ -82,6 +82,10 @@ export default class SecretCard extends Component {
         const backgroundColor = {
             background: color
         }
+        const {comment} = this.state
+        if (comment) {
+            var { ReceiverSid } = comment 
+        }
         return (
             <View className='cardContainer'>
                <View className='card' style={backgroundColor}>
@@ -91,19 +95,18 @@ export default class SecretCard extends Component {
                        {this.props.showComment ? <Image src={commentimg} className='comment' onClick={this.onShowInput.bind(this)} /> : null}
                    </View>
                     <View className='replyContainer' onTouchMove={this.ReachBottom.bind(this)}>
-                      {this.state.comment ?
-                      this.state.comment.map((comment)=>{
+                      {comment ?
+                      comment.map((co)=>{
                           return <ReplyCard 
-                          time={comment.CommentTime}
-                          text={comment.Comment} 
-                          num = {comment.Num} 
-                          key = {comment.CommentId} /> 
+                          time={co.CommentTime}
+                          text={co.Comment} 
+                          num = {co.Num} 
+                          key = {co.CommentId} /> 
                       }): null}
-                      <View className='none' >--没有更多啦！--</View>
-                      
+                      <View className='none' >--没有更多啦！--</View> 
                    </View>
                </View>
-                {this.state.showInput ? <Comment onCloseInput={this.onCloseInput.bind(this)} Debunkid={this.props.Debunkid} /> : null} 
+                {this.state.showInput ? <Comment onCloseInput={this.onCloseInput.bind(this)} Debunkid={this.props.Debunkid} ReceiverId={ReceiverSid} /> : null} 
             </View>
 
         )

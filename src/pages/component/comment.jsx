@@ -8,6 +8,7 @@ import Fetch from '../../service/fetch'
 export default class Comment extends Component {
     static defaultProps = {
         Debunkid: 0,
+        ReceiverId: ''
     }
     state = {
         inpuValue: '说点什么吧...',
@@ -26,9 +27,9 @@ export default class Comment extends Component {
     handleClose(){
         if (this.state.inpuValue != '' && this.state.inpuValue != '说点什么吧...'){
         this.props.onCloseInput()
-            Fetch(`comment/create/?secretId=${this.props.Debunkid}`,
+            Fetch(`comment/create/?secretId=${this.props.Debunkid}&&receiver_sid=${this.props.ReceiverId}`,
             {
-                comment:this.state.inpuValue
+                comment:this.state.inpuValue,
             },
             'POST').then(res => { 
                 Fetch(`secret/view/:secret_id?secretId=${this.props.Debunkid}`,

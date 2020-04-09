@@ -12,7 +12,8 @@ export default class Index extends Component {
         super(props)
         this.state={
             history: [],
-            page: 1, 
+            page: 1,
+            showRed: true, 
         }
     }
     componentWillMount() {
@@ -25,6 +26,15 @@ export default class Index extends Component {
             this.setState({
                 history:res.history
             })
+        })
+        Fetch('remind/night/remindbox/status/',
+        {},
+        'GET').then(res =>{
+            if(res.status){
+                this.setState({
+                    showRed: false
+                })
+            }
         })
      }
 
@@ -78,6 +88,7 @@ export default class Index extends Component {
                    </View>
                    <View className='headerSpace'></View>
                 <Image src={notification} className='notification' onClick={this.toImfo} />
+                { showRed ? <View className='red'> </View> : null}
                 {history.length  ? null : <Image src={Moon} className="back" />}
                 {history.length  ? null : <View className="noneBack">暂无历史记录哦</View>} 
                 <ScrollView className='CardContainer'>
