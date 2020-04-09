@@ -25,6 +25,7 @@ export default class Comment extends Component {
         })
     }
     handleClose(){
+        console.log(this.props.ReceiverId)
         if (this.state.inpuValue != '' && this.state.inpuValue != '说点什么吧...'){
         this.props.onCloseInput()
             Fetch(`comment/create/?secretId=${this.props.Debunkid}&&receiver_sid=${this.props.ReceiverId}`,

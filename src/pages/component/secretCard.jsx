@@ -14,6 +14,7 @@ export default class SecretCard extends Component {
         color:'',
         showComment: true,
         Debunkid: 0,
+        Sid:''
     }
     state = {
         showInput: false,
@@ -22,7 +23,7 @@ export default class SecretCard extends Component {
     }
 
     componentWillMount() {
-        Fetch(`comment/history/:secret_id?secretId=${this.props.Debunkid}&&page=${this.state.page}`,
+        Fetch(`comment/history/:secret_id/?secretId=${this.props.Debunkid}&&page=${this.state.page}`,
         {},
         'GET').then(res => {
             this.setState({
@@ -53,7 +54,7 @@ export default class SecretCard extends Component {
         })
     }
     onPullDownRefresh() {
-        Fetch(`comment/history/:secret_id?secretId=${this.props.Debunkid}&&page=${1}`,
+        Fetch(`comment/history/:secret_id/?secretId=${this.props.Debunkid}&&page=${1}`,
             {},
             'GET').then(res => {
                 this.setState({
@@ -67,7 +68,7 @@ export default class SecretCard extends Component {
             this.setState({
                 page: page + 1
             }, () => {
-                    Fetch(`comment/history/:secret_id?secretId=${this.props.Debunkid}&&page=${this.state.page}`,
+                    Fetch(`comment/history/:secret_id/?secretId=${this.props.Debunkid}&&page=${this.state.page}`,
                     {},
                     'GET').then(res => {
                         this.setState({
@@ -83,9 +84,7 @@ export default class SecretCard extends Component {
             background: color
         }
         const {comment} = this.state
-        if (comment) {
-            var { ReceiverSid } = comment 
-        }
+        const ReceiverSid = this.props.Sid
         return (
             <View className='cardContainer'>
                <View className='card' style={backgroundColor}>

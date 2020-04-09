@@ -15,6 +15,7 @@ export default class Index extends Component {
     time:'',
     num: 0,
     debunkid: 0,
+    Ssid:''
   }
 
   componentWillMount () {
@@ -29,7 +30,8 @@ export default class Index extends Component {
         bgcolor:res.secret.Colour,
         time:res.secret.SendTime,
         num:res.number,
-        debunkid:res.secret.Debunkid
+        debunkid:res.secret.Debunkid,
+        Ssid:res.secret.SenderSid
       })
     })
   }
@@ -64,17 +66,24 @@ export default class Index extends Component {
          bgcolor: res.secret.Colour,
          time: res.secret.SendTime,
          num:res.number,
-         debunkid: res.secret.Debunkid
+         debunkid: res.secret.Debunkid,
+         Ssid: res.secret.SenderSid
        })
      })
  } 
 
   render () {
-    let {text, bgcolor,time,num,debunkid} = this.state
+    let {text, bgcolor,time,num,debunkid,Ssid} = this.state
     return (
      <View className='all'>
         <Head colorTA='rgba(242, 245, 251, 1)' colorWrite='rgba(185, 189, 203, 1)' onToWrite={this.toWrite.bind(this)} />
-       <NightCard textValue={text} color={bgcolor}  sendTime={time} onupdate={this.update.bind(this)} number={num}  Debunkid={debunkid} />
+       <NightCard 
+       textValue={text} 
+       color={bgcolor}  
+       sendTime={time}
+       onupdate={this.update.bind(this)} 
+       number={num}  Debunkid={debunkid} 
+       Sid={Ssid} />
         <Image src={upgrade} className='upgrade' onClick={this.update.bind(this)} />
        <Footer onToMine={this.toMine.bind(this)} /> 
      </View>

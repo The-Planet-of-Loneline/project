@@ -20,6 +20,7 @@ export default class NightCard extends Component{
         color:'',
         sendTime:'',
         Debunkid: 0,
+        Sid:''
     }
     state={
         name:'',
@@ -37,7 +38,7 @@ export default class NightCard extends Component{
     
     toComment(){
         Taro.navigateTo({
-            url:`/pages/commentNight/comment?text=${this.props.textValue}&&color=${this.props.color}&&Debunkid=${this.props.Debunkid}`
+            url:`/pages/commentNight/comment?text=${this.props.textValue}&&color=${this.props.color}&&Debunkid=${this.props.Debunkid}&&sid=${this.props.Sid}`
         })
     }
 

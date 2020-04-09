@@ -9,7 +9,6 @@ import Moon from '../img/moon.png'
 export default class CardHistory extends Component {
     state = {
         comment:[],
-        showBackGround: true,
     }
     componentWillMount(){
         Taro.showShareMenu({

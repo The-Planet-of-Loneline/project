@@ -20,7 +20,7 @@ export default class Index extends Component {
         Taro.showShareMenu({
             showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
         })
-        Fetch(`secret/history?page=${this.state.page}`,
+        Fetch(`secret/history/?page=${this.state.page}`,
         {},
         'GET').then(res => {
             this.setState({
@@ -31,6 +31,7 @@ export default class Index extends Component {
         {},
         'GET').then(res =>{
             if(res.status){
+                console.log(res)
                 this.setState({
                     showRed: false
                 })
@@ -65,7 +66,7 @@ export default class Index extends Component {
             this.setState({
                 page: this.state.page + 1
             }, () => {
-                Fetch(`secret/history?page=${this.state.page}`,
+                Fetch(`secret/history/?page=${this.state.page}`,
                     {},
                     'GET').then(res => {
                         this.setState({

@@ -7,7 +7,7 @@ import SecretCard from '../component/secretCard'
 
 export default class Comment extends Component {
     static defaultProps = {
-        textValue: '你好呀'
+        textValue: ''
     }
 
     componentWillMount() { 
@@ -42,7 +42,12 @@ export default class Comment extends Component {
         return (
             <View className='all'>
                 <Head colorTA='rgba(242, 245, 251, 1)' onToWrite={this.toWrite.bind(this)}  />
-                <SecretCard textValue={this.$router.params.text} color={this.$router.params.color} time={this.$router.params.time} Debunkid={this.$router.params.Debunkid} />
+                <SecretCard 
+                textValue={this.$router.params.text} 
+                color={this.$router.params.color} 
+                time={this.$router.params.time} 
+                Debunkid={this.$router.params.Debunkid} 
+                Sid={this.$router.params.sid} />
                 <Footer onToMine={this.toMine.bind(this)} />
             </View>
             

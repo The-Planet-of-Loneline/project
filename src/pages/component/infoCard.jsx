@@ -43,7 +43,7 @@ export default class InfoCard extends Component{
         Taro.navigateTo({
             url: `/pages/infoalert/infoalert?Debunkid=${this.props.sid}&&Text=${this.state.history.Content}&&color=${this.state.history.Colour}`
         })
-        Fetch(`remind/night/remindbox/:comment_id/?commentId = ${this.props.cid}`,
+        Fetch(`remind/night/remindbox/status/:comment_id/?commentId = ${this.props.cid}`,
         {},
         'POST').then(()=>{
             this.setState({
