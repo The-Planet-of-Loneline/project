@@ -20,11 +20,9 @@ export default class edit extends Component{
         Taro.showShareMenu({
             showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
         })
-
-        const { stuid, sex, college, grade } = this.$router.params
-        const nickname = Taro.getStorageSync('Nickname')
+        const { stuid, sex, college, grade, username } = this.$router.params
         this.setState({
-            inputValue: nickname,
+            inputValue: username,                                                                            
             info: {
                 stuid,
                 sex,
@@ -35,9 +33,9 @@ export default class edit extends Component{
     }
 
     componentWillUnmount(){
+        const { username } = this.$router.params
         const verify_info = this.state.inputValue
-        const nickname = Taro.getStorageSync('Nickname')
-        if (verify_info !== nickname) {
+        if (verify_info !== username) {
             Fetch(
                 'user/change_info/',
                 {
@@ -45,12 +43,19 @@ export default class edit extends Component{
                     verify_item: 'Nickname'
                 },
                 'POST'
-            )
-            Taro.setStorage({
-                key: 'Nickname',
-                data: verify_info
+            ).then( data => {
+                if (data.msg==='success') {
+                    Taro.showToast({
+                        title: '修改成功!!',
+                        icon: 'none'
+                    })
+                }
             })
         }
+        Taro.setStorage({
+            key: 'Nickname',
+            data: verify_info
+        })
     }
 
     config = {

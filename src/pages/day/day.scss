@@ -14,11 +14,7 @@
   position: absolute;
   height: 122px;
   width: 122px;
-  transform: translate(-50%,-50%);
   border-radius: 50%;
-  transition: all 1ms linear;
-  // right: 85px;
-  // bottom: 123px;
 }
 //--------------------------
 .refresh-con{
@@ -28,10 +24,16 @@
   justify-content: center;
   align-items: center;
 }
-.scroll-contain{
+.scroll-whole{
   width: 100%;
   position: absolute;
   left: 0px;
   top: 134px;
+  margin: 0;
+}
+.scroll-contain{
+  width: 100%;
+  position: absolute;
+  left: 0px;
   margin: 0;
 }

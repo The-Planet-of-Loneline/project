@@ -48,7 +48,7 @@ export default class My extends Component {
       'GET'
     ).then(data =>{
       if (data.msg === 'success') {
-        this.setState({ remindBox: data.existence})
+        this.setState({ remindBox: data.existence })
       } else {
         console.error('existence return bad')
       }
@@ -80,12 +80,8 @@ export default class My extends Component {
       'GET'
     ).then(data => {
       if (data.msg==='success'){
-        if (data.num) { 
-          this.setState({ history: data.history })
-        } else {
-          this.setState({ history: [] })
-        }
-        if (data.num<3&&data.num) { bottom[0] = true }
+        if (data.num) { this.setState({ history: data.history })}
+        if (data.num!==6&&data.num) { bottom[0] = true }
       } else if (data.msg==='Fail.') {
         Taro.showToast({
           title: '服务器错误',
@@ -101,7 +97,7 @@ export default class My extends Component {
     ).then(data => {
       if (data.msg==='success'){
         if (data.num) { this.setState({ apply: data.applications }) }
-        if (data.num<6&&data.num) { bottom[1] = true }
+        if (data.num!==6&&data.num) { bottom[1] = true }
       } else if (data.msg==='Fail.') {
         Taro.showToast({
           title: '服务器错误',
@@ -117,7 +113,7 @@ export default class My extends Component {
     ).then(data => {
       if (data.msg==='success'){
         if (data.num) { this.setState({ respone: data.content}) }
-        if (data.num<6&&data.num) { bottom[2] = true }
+        if (data.num!==6&&data.num) { bottom[2] = true }
       } else if (data.msg==='Fail.') {
         Taro.showToast({
           title: '服务器错误',
@@ -133,13 +129,19 @@ export default class My extends Component {
   componentWillUnmount () { }
 
   componentDidShow(){
-    const userName = Taro.getStorageSync('Nickname')
     const delete_if = Taro.getStorageSync('delete_if')
-    let { bottom } = this.state
-    this.setState({ userName })
+    let { bottom, page } = this.state
+    Taro.getStorage({
+      key: 'Nickname',
+      success: (res) => {
+        this.setState({ userName: res.data })
+      }
+    })
     if (delete_if) {
       bottom[0]=false
       bottom[1]=false
+      page[0] = 1
+      page[1] = 1
       Taro.setStorage({
         key:'delete_if',
         data: false
@@ -156,7 +158,7 @@ export default class My extends Component {
           } else {
             this.setState({ history: [] })
           }
-          if (data.num<3&&data.num) { bottom[0] = true }
+          if (data.num!==6&&data.num) { bottom[0] = true }
         } else if (data.msg==='Fail.') {
           Taro.showToast({
             title: '服务器错误',
@@ -171,8 +173,12 @@ export default class My extends Component {
         'GET'
       ).then(data => {
         if (data.msg==='success'){
-          if (data.num) { this.setState({ apply: data.applications }) }
-          if (data.num<6&&data.num) { bottom[1] = true }
+          if (data.num) {
+            this.setState({ apply: data.applications })
+          } else {
+            this.setState({ apply: [] })
+          }
+          if (data.num!==6&&data.num) { bottom[1] = true }
         } else if (data.msg==='Fail.') {
           Taro.showToast({
             title: '服务器错误',
@@ -180,6 +186,7 @@ export default class My extends Component {
           })
         }
       })
+      this.setState({ page })
     }
   }
 
@@ -217,7 +224,7 @@ export default class My extends Component {
       'GET'
     ).then(data => {
       if (data.msg==='success') {
-        if (data.num===3) { 
+        if (data.num===6) { 
           page[index]++
         } else {
           bottom[index]=true
@@ -303,9 +310,9 @@ export default class My extends Component {
   }
 
   toEdit () {
-    const { user } = this.state
+    const { user, userName } = this.state
     Taro.navigateTo({
-      url:`../edit/edit?stuid=${user.stuNumber}&sex=${user.sex}&college=${user.college}&grade=${user.grade}`
+      url:`../edit/edit?stuid=${user.stuNumber}&sex=${user.sex}&college=${user.college}&grade=${user.grade}&username=${userName}`
     })
   }
 

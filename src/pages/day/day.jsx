@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Image, ScrollView } from '@tarojs/components'
+import { View, Image, ScrollView, MovableArea, MovableView } from '@tarojs/components'
 import './day.scss'
 import Footer from '../../component/Footer/Footer'
 import Card from './Card/Card'
@@ -21,10 +21,6 @@ export default class Day extends Component {
     const res=Taro.getSystemInfoSync()
     this.state={
       heightStyle:`height: ${res.windowHeight-80}px`,
-      sharePosition:{
-        top: '80%',
-        left: '80%'
-      },
       content:[],
       page:0,
       disable:false,
@@ -70,7 +66,8 @@ export default class Day extends Component {
   componentDidHide () {this.setState({ scroll_Y: 95 })}
 
   config = {
-    navigationBarTitleText: '孤独星球'
+    navigationBarTitleText: '孤独星球',
+    enablePullDownRefresh: true
   }
   
   scrinfo = (info) => {
@@ -207,73 +204,62 @@ export default class Day extends Component {
       this.setState({ scroll_Y:100, enrefresh: '0' })
     }
   }
-// 140px,
-  handleShareMove(e){
-    const totalHeight=Taro.getSystemInfoSync().windowHeight
-    const totalWidth=Taro.getSystemInfoSync().windowWidth
-    const { sharePosition } = this.state
-    let left = sharePosition.left
-    let top = sharePosition.top
 
-    if (e.touches[0].pageX>35&&(totalWidth-e.touches[0].pageX)>35) {
-      left = e.touches[0].pageX + 'px'
-    }
-    if (e.touches[0].pageY>105&&(totalHeight-e.touches[0].pageY)>85) {
-      top = e.touches[0].pageY +'px'
-    }
-    this.setState({
-      sharePosition:{
-        top,
-        left
-      }
-    })
-  }
-  
 
   render () {
-    const { content, enrefresh, scroll_Y, heightStyle, sharePosition } =this.state
+    const res=Taro.getSystemInfoSync()
+    const { content, enrefresh, scroll_Y, heightStyle} =this.state
+    
+    const Style = {
+      height: `${res.windowHeight-80}`+'px',
+      width: `${res.windowWidth}`+'px'
+    }
     return (
       <View>
-        <ScrollView
-          className='scroll-contain'
-          onTouchEnd={this.handleTouchEnd}
-          scrollWithAnimation
-          onScroll={this.updataScroll}
-          scrollTop={scroll_Y}
-          scrollY
-          style={heightStyle}
+        <MovableArea
+          className='scroll-whole'
+          style={Style}
         >
-          <View className='refresh-con'>
-            <Refresh enable={enrefresh} />
-          </View>
-          <View className='cards-container' style={heightStyle} >
-          { content.length
-            ?content.map((detail,index) => {
-                    return (
-                      <Card
-                        key={index+1}
-                        index={index}
-                        detail={detail}
-                        onChangeInfo={this.onChangeInfo}
-                      />
-            )})
-            :<Blank />
-          }
-          </View>
-        </ScrollView>
-
-
+          <ScrollView
+            className='scroll-contain'
+            onTouchEnd={this.handleTouchEnd}
+            scrollWithAnimation
+            onScroll={this.updataScroll}
+            scrollTop={scroll_Y}
+            scrollY
+            style={heightStyle}
+            refresherEnabled
+            refresherTThreshold='5'
+          >
+            <View className='refresh-con'>
+              <Refresh enable={enrefresh} />
+            </View>
+            <View className='cards-container' style={heightStyle} >
+            { content.length
+              ?content.map((detail,index) => {
+                      return (
+                        <Card
+                          key={index+1}
+                          index={index}
+                          detail={detail}
+                          onChangeInfo={this.onChangeInfo}
+                        />
+              )})
+              :<Blank />
+            }
+            </View>
+          </ScrollView>
+          <MovableView
+            className='share-container'
+            direction='all'
+            x={res.windowWidth-95}
+            y={res.windowHeight-250}
+          >
+            <Image src={Share} className='share' onClick={this.toCreateNeeds} />
+          </MovableView>
+        </MovableArea>
         {0?null:<Screening onScrInfo={this.scrinfo.bind(this)} />}
-      
-
         <Footer mode='need' />
-        <View 
-          className='share-container'
-          onTouchMove={this.handleShareMove.bind(this)}
-          style={sharePosition}
-        >
-          <Image src={Share} className='share' onClick={this.toCreateNeeds} />
-        </View>
       </View>
     )
   }
