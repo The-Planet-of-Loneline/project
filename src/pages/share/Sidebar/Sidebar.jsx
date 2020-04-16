@@ -211,6 +211,7 @@ export default class Sidebar extends Component {
               </View>
               <View className='downer'>
                 <Input
+                  type='number'
                   className='enter'
                   maxLength='2'
                   value={chosen.during[0]}
@@ -222,6 +223,7 @@ export default class Sidebar extends Component {
                 />
                 <View className='line'></View>
                 <Input
+                  type='number'
                   className='enter'
                   maxLength='2'
                   value={chosen.during[1]}

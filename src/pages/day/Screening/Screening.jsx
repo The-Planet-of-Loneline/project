@@ -289,6 +289,7 @@ export default class Screening extends Component {
                 onChange={this.onDuring.bind(this,0)}
                 onFocus={this.changeHolder.bind(this,false,true)}
                 onBlur={this.changeHolder.bind(this,false,false)}
+                type='number'
               />
               <View className='line'></View>
               <Input
@@ -301,6 +302,7 @@ export default class Screening extends Component {
                 onChange={this.onDuring.bind(this,1)}
                 onFocus={this.changeHolder.bind(this,true,true)}
                 onBlur={this.changeHolder.bind(this,true,false)}
+                type='number'
               />
             </View>
             <View className='reset' onClick={this.reset.bind(this,'time')}>重置</View>

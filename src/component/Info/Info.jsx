@@ -237,6 +237,7 @@ export default class Info extends Component {
               <Text className='numb'>Tel：</Text>
               {checked[1]
               ?<Input
+                type='number'
                 className='info'
                 placeholder={placeHolder[1]}
                 placeholderClass='place-info'
