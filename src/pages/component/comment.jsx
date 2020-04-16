@@ -36,7 +36,7 @@ export default class Comment extends Component {
                 Fetch(`secret/view/:secret_id?secretId=${this.props.Debunkid}`,
                     {}, 'GET').then(data => {
                             Taro.redirectTo({
-                                url: `/pages/commentNight/comment?text=${data.secret.Content}&&color=${data.secret.Colour}&&Debunkid=${data.secret.Debunkid}`
+                                url: `/pages/commentNight/comment?text=${data.secret.Content}&&color=${data.secret.Colour}&&Debunkid=${data.secret.Debunkid}&&sid=${this.props.Sid}`
                             })
                         
                     })   

@@ -63,17 +63,18 @@ export default class SecretCard extends Component {
             })
     }
     ReachBottom() {
-        let { page } = this.state
-        if (this.state.comment.length % 5 == 0) {
+        let { page,comment } = this.state
+        if (!comment.length % 5) {
             this.setState({
                 page: page + 1
             }, () => {
                     Fetch(`comment/history/:secret_id/?secretId=${this.props.Debunkid}&&page=${this.state.page}`,
                     {},
                     'GET').then(res => {
+                        if(res){
                         this.setState({
                             comment: this.state.comment.concat(res.history)
-                        })
+                        })}
                     })
             })
         }
@@ -93,8 +94,8 @@ export default class SecretCard extends Component {
                    <View className='commentButton'>
                        {this.props.showComment ? <Image src={commentimg} className='comment' onClick={this.onShowInput.bind(this)} /> : null}
                    </View>
-                    <View className='replyContainer' onTouchMove={this.ReachBottom.bind(this)}>
-                      {comment ?
+                    <View className='replyContainer' onTouchEnd={this.ReachBottom.bind(this)}>
+                      {comment.length ?
                       comment.map((co)=>{
                           return <ReplyCard 
                           time={co.CommentTime}
