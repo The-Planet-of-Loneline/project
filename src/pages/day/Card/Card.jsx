@@ -15,6 +15,11 @@ export default class Card extends Component {
     }
   }
 
+  state = {
+    spaning: false,
+    Style: {}
+  }
+
   changeColor (index) {
     switch (index) {
       case 0 :return 'card-a'
@@ -28,7 +33,24 @@ export default class Card extends Component {
 
   onChangeInfo (e) {
     const index = this.props.index
-    this.props.onChangeInfo(index)
+    const { spaning } = this.state
+    if (!spaning&&this.props.onChangeInfo(index)) {
+      this.setState({
+        spaning: true,
+        Style:{
+          animation: 'span-c 0.5s linear 0s 1'
+        }
+      }, () => {
+        setTimeout(() => {
+          this.setState({
+            spaning: false,
+            Style:{
+              animation: ''
+            }
+          })
+        }, 600)
+      })
+    }
     e.stopPropagation();
     // e.nativeEvent.stopImmediatePropagation();
   }
@@ -45,6 +67,7 @@ export default class Card extends Component {
   render () {
     const { date, place, title, tag } = this.props.detail;
     const index = this.props.index;
+    const { Style } = this.state
     return (
       <View className={'b-tag '+this.changeColor(index)} onClick={this.toCardDetail}>
         <View className='tag-container'>
@@ -53,7 +76,7 @@ export default class Card extends Component {
         </View>
         <View className='title'>{title}</View>
         <View className='time'>时间:{date}</View>
-        <Image src={Refresh} className='refresh-img' onClick={this.onChangeInfo} />
+        <Image src={Refresh} className='refresh-img' onClick={this.onChangeInfo} style={Style.animation === ''?null:Style} />
       </View>
     )
   }

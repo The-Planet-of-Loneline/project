@@ -41,8 +41,8 @@
   margin-bottom: 20px;
 }
 .refresh-img{
-  height: 62px;
-  width: 62px;
+  height: 50px;
+  width: 50px;
   float: right;
 }
 // color-part
@@ -87,4 +87,8 @@
   .spe-tag{
     color: $colors;
   }
+}
+// ---------------------------------------------------------------------
+@keyframes span-c {
+  100% {transform: rotate(1turn);}
 }

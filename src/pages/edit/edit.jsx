@@ -21,15 +21,33 @@ export default class edit extends Component{
             showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
         })
         const { stuid, sex, college, grade, username } = this.$router.params
-        this.setState({
-            inputValue: username,                                                                            
-            info: {
-                stuid,
-                sex,
-                college,
-                grade
-            }
-        })
+        if (stuid !== '500'&&stuid !== 'undefined' ) {
+            this.setState({
+                inputValue: username,                                                                            
+                info: {
+                    stuid,
+                    sex,
+                    college,
+                    grade
+                }
+            })
+        } else {
+            Fetch(
+                'user/info/',
+                {},
+                'GET'
+              ).then(data => {
+                this.setState({
+                  inputValue: data.nickname,
+                  info: {
+                    stuid: data.sid,
+                    sex: data.gender,
+                    college: data.college,
+                    grade: data.grade
+                  }
+                })
+              })
+        }
     }
 
     componentWillUnmount(){

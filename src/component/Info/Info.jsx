@@ -55,7 +55,7 @@ export default class Info extends Component {
     const { checked, qq, tel, msg } = this.state
     let info = {
       contact_way: [checked[0]?qq:'无',checked[1]?tel:'无'],
-      content: msg
+      content: msg?msg:'无'
     }
     return info
   }

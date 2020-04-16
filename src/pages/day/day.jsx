@@ -124,7 +124,9 @@ export default class Day extends Component {
             }) 
           }
       })
+      return true
     }
+    return false
   }
 
   toCreateNeeds () {

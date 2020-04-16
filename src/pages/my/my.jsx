@@ -13,10 +13,10 @@ export default class My extends Component {
     userName:'这里是昵称',
     user:{
       userimg:0,
-      stuNumber:'2019213XXX',
-      sex: '秀吉',
-      college: '计算机学院',
-      grade: '19'
+      stuNumber:'500',
+      sex: '你卡了哟(ฅω•ฅ)',
+      college: '重进试试φ(>ω<*) ',
+      grade: '尝试刷新(。-`ω´-)'
     },
     draw:{
       big:false,
@@ -130,7 +130,29 @@ export default class My extends Component {
 
   componentDidShow(){
     const delete_if = Taro.getStorageSync('delete_if')
-    let { bottom, page } = this.state
+    let { bottom, page, user } = this.state
+    if (user.stuNumber === '500' || user.stuNumber === 'undefined') {
+      Fetch(
+        'user/info/',
+        {},
+        'GET'
+      ).then(data => {
+        this.setState({
+          userName: data.nickname,
+          user: {
+            userimg: data.portrait,
+            stuNumber: data.sid,
+            sex: data.gender,
+            college: data.college,
+            grade: data.grade
+          }
+        })
+        Taro.setStorage({
+          key: 'Nickname',
+          data: data.nickname
+        })
+      })
+    }
     Taro.getStorage({
       key: 'Nickname',
       success: (res) => {
