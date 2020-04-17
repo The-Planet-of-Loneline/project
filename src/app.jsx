@@ -37,6 +37,7 @@ class App extends Component {
       'pages/daySwitch/daySwitch',
       'pages/commentNight/comment',
       'pages/infoalert/infoalert',
+      'pages/dayReport/dayReport'
     ],
     window: {
       backgroundTextStyle: 'light',

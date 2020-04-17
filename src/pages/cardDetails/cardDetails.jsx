@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
+import { View, Button, Text, Image } from '@tarojs/components'
 import './cardDetails.scss'
+import Report from './imgs/report.png'
 import UserImg from '../../component/UserImg/UserImg'
 import Footer from '../../component/Footer/Footer'
 import Info from '../../component/Info/Info'
@@ -71,6 +72,13 @@ export default class CardDetails extends Component {
     navigationBarTitleText: '孤独星球'
   }
 
+  toReport () {
+    const { req_id } = this.$router.params
+    Taro.navigateTo({
+      url: `../dayReport/dayReport?requirement_id=${req_id}`
+    })
+  }
+
   changeColor () {
     const id = this.$router.params.indexId
     switch (id) {
@@ -96,6 +104,13 @@ export default class CardDetails extends Component {
     console.log('passed successfully')
   }
 
+  toReport () {
+    const requirement_id = this.$router.params.req_id
+    Taro.redirectTo({
+      url: `../dayReport/dayReport?requirement_id=${requirement_id}`
+    })
+  }
+
   render () {
     const { show, content } = this.state
     const able = this.$router.params.able
@@ -104,6 +119,7 @@ export default class CardDetails extends Component {
       <View>
         <View className='header'>
           需求详情
+          <Image src={Report} className='report' onClick={this.toReport}></Image>
         </View>
         <View className={'body-container '+this.changeColor()}>
           <View className='user'>
