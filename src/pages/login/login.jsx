@@ -94,10 +94,17 @@ export default class login extends Component{
                     Taro.showToast({
                         icon: 'none',
                         title: '登录成功'
-                   }) 
+                   })
+                //    if (res.count) {
                     Taro.redirectTo({
-                        url: `/pages/day/day`
-                    }) 
+                        url: `/pages/day/day?reportmsg=${'0'}`
+                    })
+                //    } else {
+                //     Taro.redirectTo({
+                //        url: '../guide/guide'
+                //     })
+                    // }
+                    
                 }else{
                     Taro.showToast({
                         icon: 'none',
