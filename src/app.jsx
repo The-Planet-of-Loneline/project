@@ -38,7 +38,7 @@ class App extends Component {
       'pages/commentNight/comment',
       'pages/infoalert/infoalert',
       'pages/dayReport/dayReport',
-      'pages/nightRport/nightReport',
+      'pages/nightReport/nightReport',
       'pages/guide/guide'
     ],
     window: {
