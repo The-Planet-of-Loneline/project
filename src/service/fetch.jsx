@@ -49,10 +49,9 @@ const Fetch = (url, data = {}, method = 'GET') => {
       case 404:
         throw new Error('not found');
       case 500:
-        if (res.data) {
-          return res.data;
-        } else {
-          return res.code;
+      case 502:
+        return {
+          msg: 'server_wrong'
         }
         // throw new Error('服务器错误');
     }

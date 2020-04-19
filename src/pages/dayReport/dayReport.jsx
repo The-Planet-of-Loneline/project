@@ -20,7 +20,8 @@ export default class dayReport extends Component {
       rule: [0,0,0,0],
       power: [0,0],
       other: [0,0,0]
-    }
+    },
+    did: false
   }
 
   componentDidMount(){ }
@@ -30,9 +31,12 @@ export default class dayReport extends Component {
   }
 
   changeData = (name, index, which) => {
+    const { did } = this.state
     let { bad_msg } = this.state
-    bad_msg[name].splice(index,1,which)
-    this.setState({ bad_msg })
+    if (!did) {
+      bad_msg[name].splice(index,1,which)
+      this.setState({ bad_msg })
+    }
   }
 
   report () {
@@ -48,7 +52,7 @@ export default class dayReport extends Component {
       'POST'
     ).then( data => {
       if (data.msg === 'success') {
-        this.setState({ toast: true })
+        this.setState({ toast: true, did: true })
       } else {
         console.error('report failed')
         Taro.showToast({
@@ -82,20 +86,17 @@ export default class dayReport extends Component {
   enableSubmit () {
     const { msg, bad_msg } = this.state
     if (msg!==''||(this.transiformData(bad_msg) !==''&&this.transiformData(bad_msg) !=='9')) {
-      console.log('1')
       return true
     }
-      console.log('2')
       return false
   }
 
   handleSubmit = (e) => {
-    console.log(e.target.value)
     this.setState({ msg: e.target.value})
   }
 
   render () {
-    const { toast, texts, bad_msg, msg } = this.state
+    const { did, toast, texts, bad_msg, msg } = this.state
     return (
       <View>
         {toast&&<Toast onChangeShow={this.changeShow.bind(this)} />}
@@ -146,7 +147,7 @@ export default class dayReport extends Component {
               })}
             </View>
           </View>
-          {!toast
+          {!did
           ?<Textarea 
             className='addtion'
             onInput={this.handleSubmit}
@@ -156,7 +157,7 @@ export default class dayReport extends Component {
           :<View className='addtion'>{msg}</View>
         }
         </View>
-        <Button className='report-button' onClick={this.report} disabled={!this.enableSubmit()}>提交</Button>
+        {!did&&<Button className='report-button' onClick={this.report} disabled={!this.enableSubmit()}>提交</Button>}
         <Footer mode='need' />
       </View>
     )

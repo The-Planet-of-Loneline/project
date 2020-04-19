@@ -95,16 +95,22 @@ export default class login extends Component{
                         icon: 'none',
                         title: '登录成功'
                    })
-                //    if (res.count) {
+                   if (res.count===1) {
+                        Taro.redirectTo({
+                            url: `/pages/day/day`
+                        })
+                   } else {
                     Taro.redirectTo({
-                        url: `/pages/day/day?reportmsg=${'0'}`
+                       url: '../guide/guide'
                     })
-                //    } else {
-                //     Taro.redirectTo({
-                //        url: '../guide/guide'
-                //     })
-                    // }
+                   }
                     
+                } else if (res.msg==='server_wrong') {
+                    Taro.showToast({
+                        icon: 'none',
+                        title: '服务器错误'
+                    })
+                    this.setState({ loading: false })
                 }else{
                     Taro.showToast({
                         icon: 'none',

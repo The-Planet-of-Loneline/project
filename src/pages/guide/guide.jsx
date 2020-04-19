@@ -60,7 +60,6 @@ export default class Day extends Component {
       left: `${0.5*res.windowWidth}`+'px',
       zIndex: 10
     }
-    console.log(res.height,res.windowHeight)
     const ShareS = {
       zIndex: zShare
     }
