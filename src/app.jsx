@@ -38,7 +38,8 @@ class App extends Component {
       'pages/commentNight/comment',
       'pages/infoalert/infoalert',
       'pages/dayReport/dayReport',
-      'pages/nightReport/nightReport',
+      'pages/nightRport/nightReport',
+      'pages/guide/guide'
     ],
     window: {
       backgroundTextStyle: 'light',

@@ -23,10 +23,7 @@ export default class dayReport extends Component {
     }
   }
 
-  componentDidMount(){
-    const { requirement_id } = this.$router.params
-    console.log(requirement_id)
-  }
+  componentDidMount(){ }
 
   changeShow = () => {
     this.setState({ toast: false })
@@ -48,7 +45,7 @@ export default class dayReport extends Component {
         reason,
         addition: msg
       },
-      'PUT'
+      'POST'
     ).then( data => {
       if (data.msg === 'success') {
         this.setState({ toast: true })
