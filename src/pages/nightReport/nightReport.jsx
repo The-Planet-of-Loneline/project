@@ -54,12 +54,12 @@ export default class nightReport extends Component {
             }
         }
         if(chosen.length){
-        Fetch(`report/night/:secret_id/?secretId=${this.$router.params.id}`,
+        Fetch(`night/:secret_id/?secretId=${this.$router.params.id}`,
                 {
                 reason: chosen.toString(),
                 addition: text
                 }, 'POST')
-        Fetch(`report/night/:comment_id/?commentId=${this.$router.params.id}`,
+        Fetch(`night/:comment_id/?commentId=${this.$router.params.id}`,
                 {
                     reason: chosen.toString(),
                     addition: text
