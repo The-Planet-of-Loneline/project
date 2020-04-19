@@ -3,6 +3,7 @@ import { View, Text, Image, Textarea } from '@tarojs/components'
 import Chosen from './chosen/chosen'
 import Footer from '../component/Footer'
 import Fetch from '../../service/fetch'
+import Toast from './toast/toast'
 import './nightReport.scss'
 
 export default class nightReport extends Component {
@@ -23,7 +24,11 @@ export default class nightReport extends Component {
             { content: '其他', chosen: 0 ,id: 9},
         ],
         chosen:[],
-        text: ''
+        text: '',
+        show: false
+    }
+    componentDidMount(){
+        console.log(this.$router.params)
     }
     handelInput(e){
         this.setState({
@@ -40,7 +45,7 @@ export default class nightReport extends Component {
         }
         for (let a of othersRight) {
             if (a.chosen) {
-                Chosen.push(a.id)
+                chosen.push(a.id)
             }
         }
         for (let a of Else) {
@@ -48,26 +53,29 @@ export default class nightReport extends Component {
                 chosen.push(a.id)
             }
         }
-        switch(this.$router.params.mode){
-       case '1': Fetch(`report/night/:secret_id/?secretId=${this.$router.params.id}`,
-        {
-            reson: JSON.stringify(chosen),
-            addition: text
-        },
-        'POST')
-        break;
-    case '0':
+        if(chosen.length){
+        Fetch(`report/night/:secret_id/?secretId=${this.$router.params.id}`,
+                {
+                reason: chosen.toString(),
+                addition: text
+                }, 'POST')
         Fetch(`report/night/:comment_id/?commentId=${this.$router.params.id}`,
-        {
-            reson: JSON.stringify(chosen),
-            addition: text
-        },
-        'POST'); 
-   break; 
-    }}
+                {
+                    reason: chosen.toString(),
+                    addition: text
+                }, 'POST').then(this.setState({
+                    show: true
+                })) 
+                } 
+        else if (!chosen){
+            Taro.showToast({
+                title: '请选择理由',
+                icon: 'none'
+            })
+        }
+       }
     updateParent(value,i,name){
-        console.log(value,i,name)
-        let {outLaw,othersRight,Else,Chosen} = this.state
+        let {outLaw,othersRight,Else} = this.state
         switch(name){
             case 'outLaw': outLaw[i - 1].chosen = value ;break;
             case 'othersRight': othersRight[i - 5].chosen = value ; break;
@@ -77,7 +85,7 @@ export default class nightReport extends Component {
             outLaw: outLaw,
             othersRight:othersRight ,
             Else: Else,
-        },()=> console.log(outLaw,othersRight,Else))
+        })
     }
 render(){
     let {outLaw,othersRight,Else} = this.state
@@ -138,7 +146,8 @@ render(){
                 value={this.state.text} 
                 onInput={this.handelInput.bind(this)}></Textarea>
             </View>
-            <View className='submit'>提交</View>
+            <View className='submit' onClick={this.handelSubmit.bind(this)}>提交</View>
+            {this.state.show ? <Toast /> :null}
             <Footer onToSecret={() => { return false }} onToMine={()=>{return false}}/>
         </View>
     </View>)

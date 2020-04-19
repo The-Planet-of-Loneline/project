@@ -82,7 +82,7 @@ export default class SecretCard extends Component {
     }
     toReport(){
         Taro.navigateTo({
-            url: `/pages/nightReport/nightReport?id=${this.props.Debunkid}&&mode = ${1}`
+            url: `/pages/nightReport/nightReport?id=${this.props.Debunkid} && mode = ${1}`
         })
     }
     render() {
