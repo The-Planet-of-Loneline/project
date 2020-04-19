@@ -1,0 +1,87 @@
+page {
+    background-color: #04040F;
+}
+
+.header {
+    width: 750px;
+    height: 85px;
+    background: rgba(17, 23, 36, 1);
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.head {
+    width: 120px;
+    height: 42px;
+    font-size: 30px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+}
+
+.outLaw {
+    font-size: 40px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 56px;
+    color: rgba(210, 211, 224, 1);
+    opacity: 1;
+    margin: 20px;
+    margin-left: 40px;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 28px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 40px;
+    color: rgba(210, 211, 224, 1);
+    opacity: 1;
+}
+
+.textContainer {
+    margin: 20px auto;
+}
+
+.input {
+    padding: 20px;
+    margin: 0 auto;
+    width: 574px;
+    height: 251px;
+    background: rgba(228, 228, 228, 1);
+    opacity: 1;
+    border-radius: 10px;
+    font-size: 24px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 33px;
+    color: rgba(138, 138, 138, 1);
+    opacity: 1;
+}
+
+.submit {
+    position: absolute;
+    right: 55px;
+    bottom: 130px;
+    width: 242px;
+    height: 63px;
+    border: 3px solid white;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    line-height: 63px;
+    font-size: 32px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(248, 244, 244, 1);
+    opacity: 1;
+}
+
+.Container {
+    margin: 0 auto;
+}

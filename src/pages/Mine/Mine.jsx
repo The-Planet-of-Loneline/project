@@ -31,7 +31,6 @@ export default class Index extends Component {
         {},
         'GET').then(res =>{
             if(res.status){
-                console.log(res)
                 this.setState({
                     showRed: false
                 })
@@ -43,7 +42,17 @@ export default class Index extends Component {
 
     componentWillUnmount() { }
 
-    componentDidShow() { }
+    componentDidShow() { 
+        Fetch('remind/night/remindbox/status/',
+            {},
+            'GET').then(res => {
+                if (res.status) {
+                    this.setState({
+                        showRed: false
+                    })
+                }
+            })
+    }
 
     componentDidHide() { }
 
@@ -69,9 +78,10 @@ export default class Index extends Component {
                 Fetch(`secret/history/?page=${this.state.page}`,
                     {},
                     'GET').then(res => {
+                        if(res){
                         this.setState({
                             history: this.state.history.concat(res.history)
-                        })
+                        })}
                     })
             })
         }
@@ -103,7 +113,7 @@ export default class Index extends Component {
                     {history.length  ? <View className='none' >--没有更多啦!--</View>: null} 
                 </ScrollView>
             <View className='footerSpace'></View> 
-                <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false}  onToSecret={this.toSecret.bind(this)} />
+                <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false}  onToSecret={this.toSecret.bind(this)} onMine={()=>{return false}} />
             </View>
             //头部结束
         )

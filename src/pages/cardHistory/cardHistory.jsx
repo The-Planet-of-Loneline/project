@@ -51,7 +51,7 @@ export default class CardHistory extends Component {
                 {showDeleteModel ? <DeleteCard onCloseDelete={this.CloseDelete.bind(this)} Debunkid={Debunkid} /> : null}
                 <Image src={Delete} className='delete' onClick={this.delete.bind(this)} />
                 <SecretCard textValue={text} showComment={true} color={color} time={time} Debunkid={Debunkid} /> 
-                <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false} onToSecret={this.toSecret.bind(this)} />
+                <Footer colorMine='rgba(80, 195, 243, 1)' colorSecret='rgba(194, 198, 206, 1)' showImg={false} onToSecret={this.toSecret.bind(this)} onToMine={() => { return false }} />
             </View>
             //头部结束
         )

@@ -48,7 +48,7 @@ export default class Comment extends Component {
                 time={this.$router.params.time} 
                 Debunkid={this.$router.params.Debunkid} 
                 Sid={this.$router.params.sid} />
-                <Footer onToMine={this.toMine.bind(this)} />
+                <Footer onToMine={this.toMine.bind(this)} onToSecret={()=>{return false}} />
             </View>
             
         )

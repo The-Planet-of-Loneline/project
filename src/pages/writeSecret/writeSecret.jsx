@@ -217,7 +217,7 @@ export default class WriteSecret extends Component {
                     <View className='colorCir' style='background-color:rgba(129, 117, 142, 1)' onClick={this.colorChangP.bind(this)}>{show5 ? <Image src={check} className='check' /> : null}</View>
                     <View className='colorCir' style='background-color:rgba(173, 143, 143, 1)' onClick={this.colorChangPink.bind(this)}>{show6 ? <Image src={check} className='check' /> : null}</View>
                 </View>
-                <Footer onToMine={this.toMine.bind(this)} />
+                <Footer onToMine={this.toMine.bind(this)} onToSecret={()=>{return false}} />
             </View>
             //头部结束
         )

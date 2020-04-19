@@ -8,10 +8,11 @@ import Fetch from '../../service/fetch'
 export default class Comment extends Component {
     static defaultProps = {
         Debunkid: 0,
-        ReceiverId: ''
+        ReceiverId: '',
     }
     state = {
         inpuValue: '说点什么吧...',
+        onIn: false 
     } 
     
     handleInputChange(e) {
@@ -21,7 +22,8 @@ export default class Comment extends Component {
     }
     handleInput(){
         this.setState({
-            inpuValue:''
+            inpuValue:'',
+            onIn: true
         })
     }
     handleClose(){
@@ -36,7 +38,7 @@ export default class Comment extends Component {
                 Fetch(`secret/view/:secret_id?secretId=${this.props.Debunkid}`,
                     {}, 'GET').then(data => {
                             Taro.redirectTo({
-                                url: `/pages/commentNight/comment?text=${data.secret.Content}&&color=${data.secret.Colour}&&Debunkid=${data.secret.Debunkid}&&sid=${this.props.Sid}`
+                                url: `/pages/commentNight/comment?text=${data.secret.Content}&&color=${data.secret.Colour}&&Debunkid=${data.secret.Debunkid}&&sid=${this.props.ReceiverId}`
                             })
                         
                     })   
@@ -46,10 +48,18 @@ export default class Comment extends Component {
     handleCloseComment(){
         if (this.state.inpuValue == '' || this.state.inpuValue == '说点什么吧...') {
        this.props.onCloseInput()
+       this.setState({
+           onIn:false
+       })
         }
     }
 
     render() {
+        const {onIn} = this.state
+        const style = {
+            position: 'absolute',
+            bottom: '280px'
+        }
         return (
             <Dialog>
                 <View className='inputContainer'>
@@ -59,8 +69,10 @@ export default class Comment extends Component {
                     onInput={this.handleInputChange.bind(this)}
                     onBlur={this.handleCloseComment.bind(this)} 
                     maxLength={35}
+                    style={onIn ? style : null}
+                    adjustPosition = {false}
                     ></Input>
-                    <Button className='commentButton' onClick={this.handleClose.bind(this)}>确定</Button>
+                    <Button className='commentButton' onClick={this.handleClose.bind(this)} style={onIn ? style :null}>确定</Button>
                 </View>
             </Dialog >
         )

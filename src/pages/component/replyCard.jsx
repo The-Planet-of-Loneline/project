@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import '../commentNight/replyCard.scss'
+import report from '../img/report.png'
 import img0 from '../../assets/user_img/img0.png'
 import img1 from '../../assets/user_img/img1.png'
 import img2 from '../../assets/user_img/img2.png'
@@ -17,10 +18,15 @@ export default class ReplyCard extends Component{
         time:'',
         text:'',
         num: 0,
-
+        i:''
     }
     state={
         name:''
+    }
+    toRport(){
+        Taro.navigateTo({
+            url: `/pages/nightReport/nightReport?id=${this.props.i}&&mode = ${0}`
+        })
     }
     render(){
         switch (this.props.num) {
@@ -51,6 +57,7 @@ export default class ReplyCard extends Component{
                 <View className='textContainer'>
         <View className='time'>{this.props.time}</View>
         <View className='text'>{this.props.text}</View>
+        <Image src={report} className='report' onClick={this.toRport} />
                 </View>
             </View>
         )

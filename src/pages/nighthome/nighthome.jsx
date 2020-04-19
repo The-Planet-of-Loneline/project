@@ -5,7 +5,7 @@ import Footer from '../component/Footer'
 import NightCard from '../component/NightCard'
 import './nighthome.scss'
 import Fetch from '../../service/fetch'
-import upgrade from '../img/upgrade.png'
+import upgrade from '../day/Card/imgs/refresh.png'
 
 
 export default class Index extends Component {
@@ -15,8 +15,14 @@ export default class Index extends Component {
     time:'',
     num: 0,
     debunkid: 0,
+    animationData: {},
     Ssid:''
   }
+    duration = 1000
+    animation = Taro.createAnimation({
+      duration: this.duration,
+      timingFunction: 'ease'
+  })
 
   componentWillMount () {
     Taro.showShareMenu({
@@ -58,22 +64,39 @@ export default class Index extends Component {
     })
   }
  update(){
-   Fetch('secret/square/',
-     {},
-     'GET').then(res => {
-       this.setState({
-         text: res.secret.Content,
-         bgcolor: res.secret.Colour,
-         time: res.secret.SendTime,
-         num:res.number,
-         debunkid: res.secret.Debunkid,
-         Ssid: res.secret.SenderSid
-       })
-     })
+   this.animation.rotate3d(100,100,100,180).step({
+     duration: 500,
+     timingFunction:'ease'
+   })
+   this.animation.rotate3d(50, 50, 50, 0).step({
+     duration: 500,
+     timingFunction: 'ease'
+   }) 
+   this.setState({
+     animationData: this.animation.export()
+   }, () => {
+     setTimeout(() => {
+       Fetch('secret/square/',
+         {},
+         'GET').then(res => {
+           this.setState({
+             text: res.secret.Content,
+             bgcolor: res.secret.Colour,
+             time: res.secret.SendTime,
+             num: res.number,
+             debunkid: res.secret.Debunkid,
+             Ssid: res.secret.SenderSid
+           })
+         })
+         this.setState({
+           animationData:{}
+         })
+     }, this.duration)
+   })
  } 
 
   render () {
-    let {text, bgcolor,time,num,debunkid,Ssid} = this.state
+    let {text, bgcolor,time,num,debunkid,Ssid,animationData} = this.state
     return (
      <View className='all'>
         <Head colorTA='rgba(242, 245, 251, 1)' colorWrite='rgba(185, 189, 203, 1)' onToWrite={this.toWrite.bind(this)} />
@@ -84,8 +107,8 @@ export default class Index extends Component {
        onupdate={this.update.bind(this)} 
        number={num}  Debunkid={debunkid} 
        Sid={Ssid} />
-        <Image src={upgrade} className='upgrade' onClick={this.update.bind(this)} />
-       <Footer onToMine={this.toMine.bind(this)} /> 
+        <Image src={upgrade} className='upgrade' onClick={this.update.bind(this)} animation={animationData} />
+        <Footer onToMine={this.toMine.bind(this)} onToSecret={() => { return false }} /> 
      </View>
      //头部结束
     )

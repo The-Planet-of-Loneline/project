@@ -3,6 +3,7 @@ import { View, Text, Image } from '@tarojs/components'
 import ReplyCard from '../component/replyCard'
 import '../commentNight/secretCard.scss'
 import commentimg from '../img/comment.png'
+import report from '../img/report.png'
 import Comment from './comment'
 import Fetch from '../../service/fetch'
 
@@ -79,6 +80,11 @@ export default class SecretCard extends Component {
             })
         }
     }
+    toReport(){
+        Taro.navigateTo({
+            url: `/pages/nightReport/nightReport?id=${this.props.Debunkid}&&mode = ${1}`
+        })
+    }
     render() {
         let {color} = this.props
         const backgroundColor = {
@@ -89,19 +95,21 @@ export default class SecretCard extends Component {
         return (
             <View className='cardContainer'>
                <View className='card' style={backgroundColor}>
-        <View className='text'><Text>{this.props.textValue}</Text></View>
+                   <Image src={report} className='report' onClick={this.toReport}></Image>
+                    <View className='text'><Text>{this.props.textValue}</Text></View>
                    <View className='allReplies'>全部回复</View>
                    <View className='commentButton'>
                        {this.props.showComment ? <Image src={commentimg} className='comment' onClick={this.onShowInput.bind(this)} /> : null}
                    </View>
                     <View className='replyContainer' onTouchEnd={this.ReachBottom.bind(this)}>
-                      {comment.length ?
+                      {comment ?
                       comment.map((co)=>{
                           return <ReplyCard 
                           time={co.CommentTime}
                           text={co.Comment} 
                           num = {co.Num} 
-                          key = {co.CommentId} /> 
+                          key = {co.CommentId}
+                          i={co.CommentId} /> 
                       }): null}
                       <View className='none' >--没有更多啦！--</View> 
                    </View>

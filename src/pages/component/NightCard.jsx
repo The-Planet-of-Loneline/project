@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image} from '@tarojs/components'
 import '../nighthome/NightCard.scss'
+import report from '../img/report.png'
 import img0 from '../../assets/user_img/img0.png'
 import img1 from '../../assets/user_img/img1.png'
 import img2 from '../../assets/user_img/img2.png'
@@ -41,7 +42,11 @@ export default class NightCard extends Component{
             url:`/pages/commentNight/comment?text=${this.props.textValue}&&color=${this.props.color}&&Debunkid=${this.props.Debunkid}&&sid=${this.props.Sid}`
         })
     }
-
+    toReport(){
+        Taro.navigateTo({
+            url:`/pages/nightReport/nightReport?id=${this.props.Debunkid}&&mode = ${1}`
+        })
+    }
     render(){
       
         let { number } = this.props
@@ -73,20 +78,20 @@ export default class NightCard extends Component{
             }
         return(
             <View className='cardContainer'>
-               <View className='cardOne' onClick={this.toComment} style={backgroundColorOne}>
+               <View className='cardOne'  style={backgroundColorOne}>
                   <View className='avatarTime'>
                     <View className='avatar'>
                         <Image src={this.state.name} className='avatarImg' />
                     </View>
-                    <Text className='time'>{this.props.sendTime}</Text>    
+                    <Text className='time'>{this.props.sendTime}</Text>
+                    <Image src={report} className='report' onClick={this.toReport} />    
                   </View>
                   <View className='textContainer'>
-                    <View className='text'>
+                        <View className='text' onClick={this.toComment}  >
                        <Text> {this.props.textValue}</Text>
                     </View>
                   </View> 
-               </View>
-            
+               </View> 
             </View>
         )
     }
