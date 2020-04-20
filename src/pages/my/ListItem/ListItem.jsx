@@ -59,7 +59,7 @@ export default class ListItem extends Component {
         if (data.msg==='success') {
           this.setState({ checked: 1 })
         } else {
-          console.log('bad request')
+          console.error('bad request')
         }
       })
     }
@@ -119,7 +119,7 @@ export default class ListItem extends Component {
         </View>
         :null}
         {/* response */}
-        {mode==='2'
+        {mode==='2'&&info.status!==5
         ?<View className='list-item' onClick={this.toDetail}>
           {info.red_point&&!checked?<View className='red_point' onClick={this.handleRedPoint}></View>:null}
           <View className='float-con'><View className='time'>{info.confirm_time}</View></View>
@@ -133,6 +133,13 @@ export default class ListItem extends Component {
           </View>
         </View>
         :null}
+        {/* report */}
+        {mode==='2'&&info.status===5&&<View className='list-item' onClick={this.handleRedPoint}>
+          {info.red_point&&!checked?<View className='red_point' onClick={this.handleRedPoint}></View>:null}
+          <View className='float-con'><View className='time'>{info.confirm_time}</View></View>
+          <View className='report-content'>{info.content}</View>
+        </View>
+        }
         {/* 回复提醒 */}
         {(mode==='2'&&showD==='1')
         ?<InfoT
