@@ -29,7 +29,8 @@ export default class Toast extends Component {
         const info = Taro.getSystemInfoSync()
         const Style = {
             height: info.windowHeight + 'px',
-            width: info.windowWidth + 'px'
+            width: info.windowWidth + 'px',
+            backgroundColor: '#04040F' 
         }
         return (
             <View className='shadow' style={Style} onClick={this.close}>
