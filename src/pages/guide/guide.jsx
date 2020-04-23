@@ -72,7 +72,7 @@ export default class Day extends Component {
     return (
       <View>
           {!step&&<View className='goon' style={Style} onClick={this.changetwo}>让我们继续~</View>}
-        {step && <View className='goon' style={Style} onClick={this.toDay}>再让我们换个风格~</View>}
+        {step && <View className='goon' style={Style} onClick={this.toNightReport}>再让我们换个风格~</View>}
         <View className={!step?'divide-con bor':'divide-con'} style={HeaderS}>
           <View className='divide shadow-box'>
             <View className='s-tag chosen'>学习</View>

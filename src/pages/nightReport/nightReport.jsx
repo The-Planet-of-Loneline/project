@@ -54,18 +54,20 @@ export default class nightReport extends Component {
             }
         }
         if(chosen.length){
+        if(this.$router.params.mode === " 1"){
         Fetch(`report/night/secret/:secret_id/?secretId=${this.$router.params.id}`,
                 {
                 reason: chosen.toString(),
                 addition: text
-                }, 'POST')
+                }, 'POST')}
+        else{        
         Fetch(`report/night/comment/:comment_id/?commentId=${this.$router.params.id}`,
                 {
                     reason: chosen.toString(),
                     addition: text
                 }, 'POST').then(this.setState({
                     show: true
-                })) 
+                }))} 
                 } 
         else if (!chosen){
             Taro.showToast({
