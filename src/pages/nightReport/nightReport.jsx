@@ -53,7 +53,7 @@ export default class nightReport extends Component {
                 chosen.push(a.id)
             }
         }
-        if(chosen.length){
+        if(chosen.length && text){
         if(this.$router.params.mode === " 1"){
         Fetch(`report/night/secret/:secret_id/?secretId=${this.$router.params.id}`,
                 {
@@ -74,6 +74,12 @@ export default class nightReport extends Component {
                 title: '请选择理由',
                 icon: 'none'
             })
+        }
+        else if(!text){
+            Taro.showToast({
+                title: '请填写举报详情',
+                icon: 'none'
+            }) 
         }
        }
     updateParent(value,i,name){
