@@ -13,6 +13,11 @@ export default class Night extends Component{
             show: true
         })
     }
+    ontoDay(){
+        Taro.redirectTo({
+            url:'/pages/day/day'
+        })
+    }
     render(){
         const {show} = this.state
         const info = Taro.getSystemInfoSync()
@@ -23,7 +28,7 @@ export default class Night extends Component{
         return(
             <View className='all' >
                 {show?null :<Image src={Guide} className='guide' style={Style} onClick={this.onchange.bind(this)} />}
-                {show?<Image src={Guide2}  className='guide' style={Style} />:null}
+                {show?<Image src={Guide2}  className='guide' style={Style} onClick={this.ontoDay.bind(this)} />:null}
             </View>
         )
     }
