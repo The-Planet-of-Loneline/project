@@ -33,14 +33,13 @@ export default class Day extends Component {
 
   config = {
     navigationBarTitleText: '孤独星球',
-    enablePullDownRefresh: true
   }
 
   changetwo () {
     this.setState({
       step: 1,
-      zShare: 1,
-      zHeader: 1,
+      zShare: 0,
+      zHeader: 0,
       zRefresh: 10
      })
   }
@@ -71,8 +70,8 @@ export default class Day extends Component {
     }
     return (
       <View>
-          {!step&&<View className='goon' style={Style} onClick={this.changetwo}>让我们继续~</View>}
-        {step && <View className='goon' style={Style} onClick={this.toNightReport}>再让我们换个风格~</View>}
+        {!step&&<View className='goon' style={Style} onClick={this.changetwo}>让我们继续~</View>}
+        {step && <View className='goon' style={Style} onClick={this.toNightReport}>再换个风格吧~</View>}
         <View className={!step?'divide-con bor':'divide-con'} style={HeaderS}>
           <View className='divide shadow-box'>
             <View className='s-tag chosen'>学习</View>
@@ -98,10 +97,10 @@ export default class Day extends Component {
         <View className='card-con'>
           <View className='b-tag card-a'>
             <View className='tag-container'>
-              <View className='spe-tag'>学习</View>
-              <View className='spe-tag'>教学楼</View>
+              <View className='spe-tag'>玩耍</View>
+              <View className='spe-tag'>宅在家</View>
             </View>
-            <View className='title'>标题</View>
+            <View className='title'>快乐每一天</View>
             <View className='time'>时间:周一 2: 00-4:00</View>
             <Image src={Refresh} className='refresh-img' style={RefreshS} />
           </View>
@@ -113,7 +112,7 @@ export default class Day extends Component {
         </View> 
         
         <View className='share-container' style={ShareS}><Image src={Share} className='share' /></View>
-        {!step&&<View className='shadowf'><View className='dotsun'></View></View>}
+        {/* {!step&&<View className='shadowf'><View className='dotsun'></View></View>} */}
         {!step&&<Image src={LineShare} className='line-share' />}
         {!step&&<View className='line-share'></View>}
         {!step&&<Image src={LineSun} className='line-sun' />}
@@ -125,7 +124,7 @@ export default class Day extends Component {
             <Image src={SqrOn} className='s-img' />
             <View className='wordl'>需求广场</View>
           </View>
-          <Image src={Switch} className='switch' />
+          <View className={!step?'shadowf':null}><Image src={Switch} className='switch' /></View>
           <View className={step?'shadowm':null}>
             <View className={step?'s-logo dotmy':'s-logo'}>
               <Image src={MyOff} className='s-img' />

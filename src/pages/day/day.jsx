@@ -66,8 +66,7 @@ export default class Day extends Component {
   componentDidHide () {this.setState({ scroll_Y: 95 })}
 
   config = {
-    navigationBarTitleText: '孤独星球',
-    enablePullDownRefresh: true
+    navigationBarTitleText: '孤独星球'
   }
   
   scrinfo = (info) => {

@@ -95,14 +95,14 @@ export default class login extends Component{
                         icon: 'none',
                         title: '登录成功'
                    })
-                   if (res.count===1) {
+                   if (res.count===0) {
                         Taro.redirectTo({
                             url: `/pages/day/day`
                         })
                    } else {
-                    Taro.redirectTo({
-                       url: '../guide/guide'
-                    })
+                        Taro.redirectTo({
+                        url: '../guide/guide'
+                        })
                    }
                     
                 } else if (res.msg==='server_wrong') {
