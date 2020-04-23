@@ -141,13 +141,13 @@ render(){
                 })}
                 </View>
             </View>
-            <View className='textContainer'>
+            {this.state.show? null :<View className='textContainer'>
                 <Textarea 
                 className='input' 
                 placeholder='详细说明你的问题' 
                 value={this.state.text} 
                 onInput={this.handelInput.bind(this)}></Textarea>
-            </View>
+            </View>}
             <View className='submit' onClick={this.handelSubmit.bind(this)}>提交</View>
             {this.state.show ? <Toast /> :null}
             <Footer onToSecret={() => { return false }} onToMine={()=>{return false}}/>
