@@ -1,3 +1,6 @@
+body{
+    overflow: hidden;
+}
 .b-tag {
     display: inline-block;
     width: 315px;
@@ -194,23 +197,19 @@
 }
 
 // ---------------------------------------
-.shadow {
-    position: absolute;
-    z-index: 5;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.383);
-    width: 100%;
+.shadowf{
+    position: relative;
+    width: 170px;
+    height: 170px;
+    border: 4px dotted rgb(247, 194, 89); 
 }
-
-.shadowf {
+.shadowf::after {
+    content: '';
     position: absolute;
-    width: 150px;
-    height: 150px;
+    width: 170px;
+    height: 170px;
     bottom: 0;
-    left: 50%;
-    z-index: 6;
-    transform: translate(-50%, 0);
+    left: -400px;
     border-left: 400px solid rgba(0, 0, 0, 0.38);
     border-right: 400px solid rgba(0, 0, 0, 0.38);
     border-top: 1200px solid rgba(0, 0, 0, 0.38);
@@ -218,6 +217,9 @@
 
 .shadowm {
     position: relative;
+    width: 82px;
+    height: 100px;
+    border: 4px dotted rgb(247, 194, 89);
 }
 
 .shadowm::before {
@@ -229,16 +231,12 @@
     height: 105px;
     border-left: 600px solid rgba(0, 0, 0, 0.38);
     border-right: 200px solid rgba(0, 0, 0, 0.38);
-    border-top: 1200px solid rgba(0, 0, 0, 0.38);
+    border-top: 2000px solid rgba(0, 0, 0, 0.38);
 }
 
 .dotsun {
     height: 142px;
     width: 142px;
-    border: 4px dotted rgb(247, 194, 89);
-}
-
-.dotmy {
     border: 4px dotted rgb(247, 194, 89);
 }
 
@@ -323,7 +321,7 @@
     font-weight: 400;
     color: rgba(255, 255, 255, 1);
     display: block;
-    width: 500px;
+    width: 420px;
     position: absolute;
     left: -176px;
     top: -53px;
