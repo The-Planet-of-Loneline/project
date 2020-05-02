@@ -65,7 +65,7 @@ export default class SecretCard extends Component {
     }
     ReachBottom() {
         let { page,comment } = this.state
-        if (!comment.length % 5) {
+        if (!(comment.length % 5)) {
             this.setState({
                 page: page + 1
             }, () => {
