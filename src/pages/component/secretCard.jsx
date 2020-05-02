@@ -101,7 +101,7 @@ export default class SecretCard extends Component {
                    <View className='commentButton'>
                        {this.props.showComment ? <Image src={commentimg} className='comment' onClick={this.onShowInput.bind(this)} /> : null}
                    </View>
-                    <View className='replyContainer' onTouchEnd={this.ReachBottom.bind(this)}>
+                    <View className='replyContainer' onTouchMove={this.ReachBottom.bind(this)}>
                       {comment ?
                       comment.map((co)=>{
                           return <ReplyCard 
