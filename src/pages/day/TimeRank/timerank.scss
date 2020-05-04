@@ -1,0 +1,74 @@
+.mask{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+}
+.can{
+  pointer-events: all;
+}
+.cannot{
+  pointer-events: none;
+}
+.arrow{
+  position: absolute;
+  left: 3%;
+  top: 80%;
+  height:110px;
+  width:110px;
+  pointer-events: all;
+}
+.op-contain{
+  position: absolute;
+  top: 75%;
+  left: 0;
+  width: 205px;
+  height: 195px;
+  transition: 0.5s;
+  pointer-events: all;
+  background-color: #F9C170;
+  border-radius: 0 20px 20px 0;
+  padding: 13px 0 9px 0;
+  pointer-events: all;
+}
+.hide{
+  transform: translateX(-100%);;
+}
+.show{
+  transform: translateX(0);
+}
+.options{
+  margin: 10px auto;
+  width:145px;
+  height:50px;
+  background:rgba(255,255,255,1);
+  opacity:1;
+  border-radius:20px;
+  font-size:22px;
+  font-family:Segoe UI;
+  font-weight:400;
+  line-height:50px;
+  text-align: left;
+  padding-left: 15px;
+  color:rgba(249,193,112,1);
+  opacity:1;
+}   
+.a{
+  background: #F7F9B8;
+  pointer-events: none;
+}
+.b{
+  background:white;
+}
+@keyframes spanA {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+@keyframes spanB {
+  100% {
+    transform: rotate(-1turn);
+  }
+}

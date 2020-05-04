@@ -1,0 +1,64 @@
+.shadow{
+  background-color: rgba(0,0,0,0.37);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 11;
+}
+.contain{
+  width:472px;
+  height:252px;
+  background:rgba(255,255,255,1);
+  opacity:1;
+  border-radius:20px;
+  margin:0 auto;
+  margin-top:444px;
+}
+.upper{
+  width: 100%;
+  height: 190px;
+  text-align: center;
+  font-size:28px;
+  font-family:PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,1);
+  opacity:1;
+  border-bottom: 1px solid rgba(112,112,112,1);
+}
+.option{
+  width: 100%;
+  height: 100px;
+  display: flex;
+}
+.sure{
+  display: inline-block;
+  border-left: 1px solid rgba(112,112,112,1);
+  height: 61px;
+  width: 50%;
+  line-height: 61px;
+  text-align: center;
+  font-size:30px;
+  font-family:PingFang SC;
+  font-weight:400;
+  color:rgba(246,193,123,1);
+  opacity:1;
+}
+.cancle{
+  display: inline-block;
+  height: 61px;
+  width: 49%;
+  line-height: 61px;
+  text-align: center;
+  font-size:30px;
+  font-family:PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,1);
+  opacity:1;
+}
+.texts{
+  height: 40px;
+  line-height: 40px;
+}
+.c{
+  padding-top: 55px;
+}

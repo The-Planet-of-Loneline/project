@@ -7,6 +7,7 @@ import Blank from './Blank/Blank'
 import Screening from './Screening/Screening'
 import Share from './share.png'
 import Refresh from './Refresh/Refresh'
+import TimeRank from  './TimeRank/TimeRank'
 import Fetch from '../../service/fetch'
 
 
@@ -25,6 +26,7 @@ export default class Day extends Component {
       page:0,
       disable:false,
       chosen:'type=1',
+      timerank: 3,
       enrefresh:'0',
       scroll_Y:100,
     } 
@@ -36,7 +38,7 @@ export default class Day extends Component {
     })
 
     Fetch(
-      `requirement/square/?limit=6&page=0&type=1`,
+      `requirement/square/?limit=6&page=0&type=1&second_time=3`,
       {},
       'GET'
       ).then(data => {
@@ -69,11 +71,20 @@ export default class Day extends Component {
     navigationBarTitleText: '孤独星球'
   }
   
-  scrinfo = (info) => {
+  getRank = (rank) => {
     const { chosen } = this.state
-    if (chosen!==info) {
+    this.setState({ timerank: rank},
+      this.scrinfo(chosen, 1, rank)
+    )
+  }
+
+  scrinfo = (info, force, rank) => {
+    const { chosen } = this.state
+    let { timerank } = this.state
+    if (force) { timerank = rank }
+    if (chosen!==info||force) {
       Fetch(
-        `requirement/square/?limit=6&page=0&${info}`,
+        `requirement/square/?limit=6&page=0&${info}&second_time=${timerank}`,
         {},
         'GET'
       ).then(data => {
@@ -217,6 +228,7 @@ export default class Day extends Component {
     }
     return (
       <View>
+        <TimeRank onPassLight={this.getRank.bind(this)} />
         <MovableArea
           className='scroll-whole'
           style={Style}

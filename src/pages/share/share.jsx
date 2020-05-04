@@ -1,8 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Textarea, Input, Button } from '@tarojs/components'
+import { View, Text, Textarea, Input, Button, Image } from '@tarojs/components'
 import './share.scss'
 import Footer from '../../component/Footer/Footer'
 import Sidebar from './Sidebar/Sidebar'
+import Draft from './imgs/draft.png'
+import DraftMsg from  './DraftMsg/DraftMsg'
 import Fetch from '../../service/fetch'
 
 export default class Share extends Component {
@@ -13,6 +15,7 @@ export default class Share extends Component {
 
   state = {
     show:false,
+    draft_msg: 0,
     title:'',
     content:'',
     tagChosen:false,
@@ -22,17 +25,77 @@ export default class Share extends Component {
       during:['',''],
       type:0,
       choices:[0,0]
-    }
+    },
+    draft: {}
   }
 
   componentWillMount () {
     Taro.showShareMenu({
       showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
     })
+    Fetch(
+      'requirement/draft/',
+      {},
+      'GET'
+    ).then( data => {
+      if (data.msg==='success') {
+        if (data.draft.has_draft===1) {
+          // show toast
+          this.setState({ 
+            draft_msg: 1,
+            draft: data.draft.content
+          },console.log(this.state))
+          console.log(1)
+        }
+      } else {
+        console.error('draft missing')
+      }
+    }
+    )
   }
   config = {navigationBarTitleText: '孤独星球'}
 
-  deal () {
+  explainInfo = () => {
+    const { draft } = this.state
+    let num = draft.date
+    let tagChosen = false
+    let date = [0,0,0,0,0,0,0]
+    for (let i = 0; i<=6; i++) {
+      date[i]=num%10
+      num=Math.floor(num/10)
+    }
+    if (draft.date!=='10000000'
+    && draft.type!== 0
+    && draft.type!== 4
+    && draft.tag!== 0
+    && draft.place!== 0
+    ) {
+      tagChosen = true
+    }
+    if (draft.date!=='10000000'
+      && draft.type=== 4
+      && draft.place!== 0
+    ) { tagChosen = true }
+
+    this.setState({
+      draft_msg:0,
+      title:draft.title,
+      content:draft.content,
+      tagChosen,
+      chosen:{
+        time:date,
+        during:[draft.time_from,draft.time_end],
+        type:draft.type,
+        choices:[draft.tag,draft.place]
+      }
+    })
+  }
+
+  closeDraft = () => {
+    this.setState({ draft_msg: 0})
+  }
+
+  deal (isDraft) {
     const { title, content, chosen } = this.state
     // during 处理
     let time_from=chosen.during[0]
@@ -60,23 +123,80 @@ export default class Share extends Component {
       time_from: parseInt(time_from),
       time_end: parseInt(time_end),
       title: title,
-      type: chosen.type
+      type: chosen.type,
+      is_draft: isDraft
     }
     console.log('share',info)
     return info
+  }
+
+  closeDraft = () => {
+    this.setState({ draft_msg: 0})
+    Fetch(
+      'requirement/draft',
+      {},
+      'PUT'
+    )
+  }
+
+  saveDraft = () => {
+      const info = this.deal(1)
+      if (info==={
+        content: 'content',
+        date: 10000000,
+        place: 0,
+        post_time:'',
+        requirement_id:0,
+        tag: 0,
+        time_from: 0,
+        time_end: 24,
+        title: '',
+        type: 0,
+        is_draft: 1
+      }) {
+        Taro.showToast({
+          title: '未输入有效信息',
+          icon: 'none'
+        })
+        this.setState({ draft_msg: 0})
+      } else {
+        Fetch(
+          'requirement/new/',
+          info,
+          'PUT'
+        ).then(data => {
+          if (data.msg==='success') {
+            Taro.showToast({
+              title: '保存成功'
+            })
+            Taro.navigateBack({
+              delta: 1
+            })
+          } else if (data.msg==='Fail.') {
+            Taro.showToast({
+              title: '服务器错误'
+            })
+          }
+        })
+      }
   }
 
   share () {
     const { loading } = this.state
     if (this.enableShare()&&!loading) {
       this.setState({ loading: true})
-      const info=this.deal()
+      const info=this.deal(2)
       Fetch(
         'requirement/new/',
         info,
         'PUT'
       ).then(data => {
         if (data.msg==='success') {
+          Fetch(
+            'requirement/draft',
+            {},
+            'PUT'
+          )
           Taro.showToast({
             title: '发布成功'
           })
@@ -84,7 +204,12 @@ export default class Share extends Component {
             delta: 1
           })
           this.setState({ loading: false})
-        } else if (data.msg==='requirement already exist') {
+        } else if (data.msg==='requirement already exist.') {
+          Fetch(
+            'requirement/draft',
+            {},
+            'PUT'
+          )
           Taro.showToast({
             title: '需求已存在'
           })
@@ -140,10 +265,14 @@ export default class Share extends Component {
   }
 
   render () {
-    const { show, title, content, loading } = this.state
+    const { show, title, content, loading, draft_msg } = this.state
     const { chosen } = this.state
     return (
       <View>
+        {draft_msg===1&&<DraftMsg 
+          onSureEvent={this.explainInfo.bind(this)}
+          onCancleEvent={this.closeDraft.bind(this)}
+        />}
         <View className='header'>
           {loading&&<View className='loading'></View>}
           <Button 
@@ -181,6 +310,10 @@ export default class Share extends Component {
           </View>
         </View> 
         <View className='add-container'>
+          <View className='save-draft' onClick={this.saveDraft.bind(this)}>
+            <Image className='draftimg' src={Draft} />
+            <Text className='tag-words'>暂存草稿</Text>
+          </View>
           <View className='add-tag' onClick={this.changeShow}>
             <Text className='plus'>+</Text>
             <Text className='tag-words'>添加标签</Text>
