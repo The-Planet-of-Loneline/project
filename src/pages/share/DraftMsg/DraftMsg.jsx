@@ -23,8 +23,8 @@ export default class DraftMsg extends Component {
       <View className='shadow' style={Style}>
         <View className='contain'>
           <View className='upper'>
-            <View className='texts c'>您上次保存的内容,</View>
-            <View className='texts'>是否要恢复</View>
+            <View className='texts c'>{this.props.text1}</View>
+            <View className='texts'>{this.props.text2}</View>
           </View>
           <View className='option'>
             <View className='cancle' onClick={this.cancleEvent.bind(this)}>否</View>
