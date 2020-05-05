@@ -44,14 +44,16 @@ export default class Share extends Component {
           this.setState({ 
             draft_msg: 1,
             draft: data.draft.content
-          },console.log(this.state))
-          console.log(1)
+          })
+          Fetch(
+            'requirement/draft/',
+            {},
+            'PUT'
+          )
         }
       } else {
         console.error('draft missing')
-      }
-    }
-    )
+    }})
   }
   config = {navigationBarTitleText: '孤独星球'}
 
@@ -91,8 +93,8 @@ export default class Share extends Component {
     })
   }
 
-  closeDraft = () => {
-    this.setState({ draft_msg: 0})
+  draftToast = (num) => {
+    this.setState({ draft_msg: num})
   }
 
   deal (isDraft) {
@@ -126,17 +128,7 @@ export default class Share extends Component {
       type: chosen.type,
       is_draft: isDraft
     }
-    console.log('share',info)
     return info
-  }
-
-  closeDraft = () => {
-    this.setState({ draft_msg: 0})
-    Fetch(
-      'requirement/draft',
-      {},
-      'PUT'
-    )
   }
 
   saveDraft = () => {
@@ -160,24 +152,24 @@ export default class Share extends Component {
         })
         this.setState({ draft_msg: 0})
       } else {
-        Fetch(
-          'requirement/new/',
-          info,
-          'PUT'
-        ).then(data => {
-          if (data.msg==='success') {
-            Taro.showToast({
-              title: '保存成功'
-            })
-            Taro.navigateBack({
-              delta: 1
-            })
-          } else if (data.msg==='Fail.') {
-            Taro.showToast({
-              title: '服务器错误'
-            })
-          }
-        })
+          Fetch(
+            'requirement/new/',
+            info,
+            'PUT'
+          ).then(data => {
+            if (data.msg==='success') {
+              Taro.showToast({
+                title: '保存成功!'
+              })
+              Taro.navigateBack({
+                delta: 1
+              })
+            } else if (data.msg==='Fail.') {
+              Taro.showToast({
+                title: '保存失败!'
+              })
+            }
+          })
       }
   }
 
@@ -192,36 +184,26 @@ export default class Share extends Component {
         'PUT'
       ).then(data => {
         if (data.msg==='success') {
-          Fetch(
-            'requirement/draft',
-            {},
-            'PUT'
-          )
           Taro.showToast({
             title: '发布成功'
           })
           Taro.navigateBack({
             delta: 1
           })
-          this.setState({ loading: false})
         } else if (data.msg==='requirement already exist.') {
-          Fetch(
-            'requirement/draft',
-            {},
-            'PUT'
-          )
           Taro.showToast({
             title: '需求已存在'
           })
           Taro.navigateBack({
             delta: 1
           })
-          this.setState({ loading: false})
         } else if (data.msg==='Fail.') {
           Taro.showToast({
             title: '服务器错误'
           })
-          this.setState({ loading: false})
+          setTimeout(() => {
+            this.setState({ loading: false})
+          }, 500);
         }
       },
       )
@@ -270,8 +252,16 @@ export default class Share extends Component {
     return (
       <View>
         {draft_msg===1&&<DraftMsg 
+          text1='您上次保存的内容,'
+          text2='是否要恢复?'
           onSureEvent={this.explainInfo.bind(this)}
-          onCancleEvent={this.closeDraft.bind(this)}
+          onCancleEvent={this.draftToast.bind(this,0)}
+        />}
+        {draft_msg===2&&<DraftMsg 
+          text1='您有未完成的内容,'
+          text2='是否要保存到草稿箱并返回首页'
+          onSureEvent={this.saveDraft.bind(this)}
+          onCancleEvent={this.draftToast.bind(this,0)}
         />}
         <View className='header'>
           {loading&&<View className='loading'></View>}
@@ -310,7 +300,7 @@ export default class Share extends Component {
           </View>
         </View> 
         <View className='add-container'>
-          <View className='save-draft' onClick={this.saveDraft.bind(this)}>
+          <View className='save-draft' onClick={this.draftToast.bind(this,2)}>
             <Image className='draftimg' src={Draft} />
             <Text className='tag-words'>暂存草稿</Text>
           </View>
