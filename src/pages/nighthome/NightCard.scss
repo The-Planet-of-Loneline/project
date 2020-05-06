@@ -14,6 +14,32 @@
     left: 45px;
 }
 
+.cardTwo {
+    width: 593px;
+    height: 584px;
+    background: rgba(199, 175, 148, 1);
+    border: 1px solid rgba(110, 110, 110, 1);
+    opacity: 0.96;
+    border-radius: 15px;
+    position: absolute;
+    z-index: 2;
+    left: 72px;
+    top: 260px;
+}
+
+.cardThree {
+    width: 486px;
+    height: 479px;
+    background: rgba(164, 163, 184, 1);
+    border: 1px solid rgba(114, 110, 110, 1);
+    opacity: 0.97;
+    border-radius: 15px;
+    position: absolute;
+    z-index: 1;
+    left: 122px;
+    top: 390px;
+}
+
 .avatar {
     display: inline-block;
     margin: 20px 10px 10px 45px;

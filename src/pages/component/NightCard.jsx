@@ -25,9 +25,13 @@ export default class NightCard extends Component{
     }
     state={
         name:'',
+        color2:'',
+        color3:''
     }
    
-    componentWillMount() { }
+    componentWillMount() {
+
+    }
 
     componentDidMount() { }
 
@@ -49,11 +53,17 @@ export default class NightCard extends Component{
     }
     render(){
       
-        let { number } = this.props
+        let { number ,color} = this.props
+        const {color2,color3} = this.state
         const backgroundColorOne = {
             background: this.props.color
         }
-      
+        const backgroundColorTwo = {
+            background: color2
+        } 
+        const backgroundColorThree = {
+            background: color3
+        }
         switch (number) {
             case 0:this.setState({name:img0}) 
                 break;
@@ -76,6 +86,13 @@ export default class NightCard extends Component{
             case 9: this.setState({ name:  img9  }) 
                 break; 
             }
+        if (color === 'rgba(30, 30, 40, 1)') this.setState({ color2: '#575B66', color3: '#67716E' });
+        else if (color === 'rgba(129, 117, 142, 1)') this.setState({ color2: '#817C95', color3: '#9093AC' });
+        else if (color === 'rgba(98, 98, 123, 1)') this.setState({ color2: '#7791A3', color3: '#9EA3BD' });
+        else if (color === 'rgba(173, 143, 143, 1)') this.setState({ color2: '#CFBA8A', color3: '#A6AA84' });
+        else if ('rgba(124, 159, 154, 1)') this.setState({ color2: '#959EB2', color3: '#A4B994' });
+        else if (color === 'rgba(92, 124, 138, 1)') this.setState({ color2: '#97BCB1', color3: '#A4A3B8' });
+
         return(
             <View className='cardContainer'>
                <View className='cardOne'  style={backgroundColorOne}>
@@ -91,7 +108,9 @@ export default class NightCard extends Component{
                        <Text> {this.props.textValue}</Text>
                     </View>
                   </View> 
-               </View> 
+               </View>
+               <View className='cardTwo' style={backgroundColorTwo}></View>
+               <View className='cardThree' style={backgroundColorThree}></View> 
             </View>
         )
     }

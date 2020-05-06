@@ -20,7 +20,7 @@ export default class Report extends Component {
     handleSubmit() {
         const {value} = this.state
         if(value)
-        Fetch(`report/feedback/`,
+        Fetch(`feedback/`,
             {content: value},
             'POST').then(res => {
                 Taro.showToast({
