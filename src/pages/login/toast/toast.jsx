@@ -11,13 +11,16 @@ export default class Toast extends Component {
 
     render() {
         return (
-            <Dialog onHandleClose={this.handleClose.bind(this)}>
+            <View>
+            <Dialog onHandleClose={this.handleClose.bind(this)}></Dialog >
                 <View className='cardContainer'>
                     <View className='card'>
                         <View className='cardText'>
                             <Image src={close} className='close' onClick={this.handleClose.bind(this)} />
                         <View className='Text'>
-                        <Text className='strong'>【孤独星球】用户条例和隐私政策</Text><br/>
+                        <Text>
+                        <Text className='strong'>【孤独星球】用户条例和隐私政策</Text>
+                        <br/>
                         亲爱的用户，您好！<br />
                         作为华中师范大学学生自主运营的互联网技术团队，木犀一直高度重视隐私保护、郑重对待相应责任，并已将隐私保护的要求融入日常业务活动流程。<br />
                         本《用户相关条例和说明》（以下简称“本条例”）主要向您说明：<br />
@@ -72,11 +75,12 @@ export default class Toast extends Component {
                         请通过登录页面底部注明的意见反馈或QQ群：293144869与我们联系。<br />
                         您也可以将问题发送至邮箱：<Text className='color'>3243837480@qq.com</Text><br />
                         我们将尽快审核所涉问题，并在验证您的用户身份后的三十天内予以回复。<br />
+                        </Text>
                         </View>
                         </View>
                     </View>
-                </View>
-            </Dialog >
+                </View> 
+            </View>
         )
     }
 }

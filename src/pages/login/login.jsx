@@ -7,6 +7,7 @@ import viewOff from '../img/viewOff.png'
 import Fetch from '../../service/fetch'
 import Toast from './toast/toast'
 import Report from './report/report'
+import logo from '../img/muxi.png'
 
 export default class login extends Component{
     state={
@@ -184,7 +185,7 @@ export default class login extends Component{
         const { id, password, showView, loading, powered ,mask ,li,report} = this.state
         return(
             <View className='container'>
-                {loading&&<View className='loading'></View>}
+                {loading && <Image src={logo} className=' loading' />}
                 <View className='bgcontainer'><Image className='bg' src={bg} /></View>
                 <View className='greeting'>欢迎登陆孤独星球</View>
                 <Input type='number' placeholder='请输入学号' className='id' value={id} onInput={this.onHandleId.bind(this)}></Input>
@@ -196,7 +197,7 @@ export default class login extends Component{
                 :<Button open-type='getUserInfo' className='login' onClick={this.power}>登录</Button>}
                 <View className="content"><View className='cir' onClick={this.onHandleMask.bind(this)}>{mask?<View className='point'></View>:null}</View><View className='text' onClick={this.onHandleLi.bind(this)}>【孤独星球】用户相关条例和隐私政策</View></View>
                 {li?null:<Toast onHandleClose ={this.handleClose.bind(this)} />}
-                <View className='footer'><View className='text1' onClick={this.onHandleRe.bind(this)}>反馈意见</View><View className='text2'>designed by muxi</View></View>
+                <View className='footer'><View className='text1' onClick={this.onHandleRe.bind(this)}>反馈意见</View><View className='text2'>Designed by Muxi Team</View><Image src={logo} className='img' /></View>
                 {report ? <Report onClose={this.handleCloseR.bind(this)} /> : null}
             </View>
         )

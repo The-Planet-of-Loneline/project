@@ -38,7 +38,8 @@ export default class Report extends Component {
 
     render() {
         return (
-            <Dialog onHandleClose={()=>{return false}}>
+            <View>
+            <Dialog onHandleClose={this.cancel.bind(this)}> </Dialog >
                 <View className='cardContainer'>
                     <View className='card'>
                         <View className='cardText'>
@@ -54,7 +55,7 @@ export default class Report extends Component {
                         </View>
                     </View>
                 </View>
-            </Dialog >
+            </View>
         )
     }
 }
