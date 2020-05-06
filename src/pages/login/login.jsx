@@ -6,6 +6,7 @@ import view from '../img/view.png'
 import viewOff from '../img/viewOff.png'
 import Fetch from '../../service/fetch'
 import Toast from './toast/toast'
+import Report from './report/report'
 
 export default class login extends Component{
     state={
@@ -16,6 +17,7 @@ export default class login extends Component{
         powered:false,
         mask:false,
         li: true,
+        report: false
     }
 
     componentWillMount () {
@@ -87,9 +89,18 @@ export default class login extends Component{
         if(li) this.setState({li: false});
         else this.setState({li:true});
     }
+    onHandleRe(){
+        const {report} = this.state
+        if(report) this.setState({report: false});
+        else this.setState({report: true})
+    }
 
     handleClose(){
         this.setState({li:true})
+    }
+
+    handleCloseR(){
+        this.setState({report:false})
     }
 
     onHandleLogin(){
@@ -170,7 +181,7 @@ export default class login extends Component{
     }
 
     render(){ 
-        const { id, password, showView, loading, powered ,mask ,li} = this.state
+        const { id, password, showView, loading, powered ,mask ,li,report} = this.state
         return(
             <View className='container'>
                 {loading&&<View className='loading'></View>}
@@ -185,7 +196,8 @@ export default class login extends Component{
                 :<Button open-type='getUserInfo' className='login' onClick={this.power}>登录</Button>}
                 <View className="content"><View className='cir' onClick={this.onHandleMask.bind(this)}>{mask?<View className='point'></View>:null}</View><View className='text' onClick={this.onHandleLi.bind(this)}>【孤独星球】用户相关条例和隐私政策</View></View>
                 {li?null:<Toast onHandleClose ={this.handleClose.bind(this)} />}
-                <View className='footer'><View className='text1'>反馈意见</View><View className='text2'>designed by muxi</View></View>
+                <View className='footer'><View className='text1' onClick={this.onHandleRe.bind(this)}>反馈意见</View><View className='text2'>designed by muxi</View></View>
+                {report ? <Report onClose={this.handleCloseR.bind(this)} /> : null}
             </View>
         )
     }

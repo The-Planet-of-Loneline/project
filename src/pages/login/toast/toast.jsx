@@ -1,7 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View,Text} from '@tarojs/components'
+import { View,Text,Image} from '@tarojs/components'
 import Dialog from '../../component/Dialog'
 import './toast.scss'
+import close from '../../img/close2.png'
 
 export default class Toast extends Component {
     handleClose(){
@@ -14,8 +15,9 @@ export default class Toast extends Component {
                 <View className='cardContainer'>
                     <View className='card'>
                         <View className='cardText'>
-                        <Text className='cardText'>
-                        【孤独星球】用户条例和隐私政策<br/>
+                            <Image src={close} className='close' onClick={this.handleClose.bind(this)} />
+                        <View className='Text'>
+                        <Text className='strong'>【孤独星球】用户条例和隐私政策</Text><br/>
                         亲爱的用户，您好！<br />
                         作为华中师范大学学生自主运营的互联网技术团队，木犀一直高度重视隐私保护、郑重对待相应责任，并已将隐私保护的要求融入日常业务活动流程。<br />
                         本《用户相关条例和说明》（以下简称“本条例”）主要向您说明：<br />
@@ -29,7 +31,7 @@ export default class Toast extends Component {
                         一、	我们收集的信息<br /> 
                         我们根据合法、正当、必要的原则，仅收集实现产品功能所必要的信息。<br />
                         1.1您在使用我们服务时主动提供的信息<br />
-                        1.1.1您在登录时填写的信息。【孤独星球】采用华中师范大学一站式门户的账号密码进行登录例如，以便获得您的学院、年级等相关资料<br />
+                        1.1.1您在登录时填写的信息。【孤独星球】采用<Text className='color'>华中师范大学一站式门户的账号密码</Text>进行登录例如，以便获得您的学院、年级等相关资料<br />
                         1.1.2您在使用服务时填写的信息（包括但不限于您编辑的用户名，匹配需求时发布的内容、给他人的联系方式、发布的秘密及评论，以及举报时要填写的选项或内容）<br />
                         1.1.3我们的部分服务可能需要您提供特定的个人敏感信息来实现特定功能。若您选择不提供该类信息，则可能无法正常使用服务中的特定功能，但不影响您使用服务中的其他功能。若您主动提供您的个人敏感信息，即表示您同意我们按本条例所述目的和方式来处理您的个人敏感信息。<br />
                         1.2我们在您使用服务时获取的信息<br />
@@ -68,9 +70,9 @@ export default class Toast extends Component {
                         六、联系我们<br />
                         如您对本政策或其他相关事宜有疑问， <br />
                         请通过登录页面底部注明的意见反馈或QQ群：293144869与我们联系。<br />
-                        您也可以将问题发送至邮箱：3243837480@qq.com<br />
+                        您也可以将问题发送至邮箱：<Text className='color'>3243837480@qq.com</Text><br />
                         我们将尽快审核所涉问题，并在验证您的用户身份后的三十天内予以回复。<br />
-                        </Text>
+                        </View>
                         </View>
                     </View>
                 </View>

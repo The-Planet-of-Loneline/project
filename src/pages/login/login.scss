@@ -87,7 +87,7 @@
 .content {
     position: absolute;
     top: 720px;
-    left: 160px;
+    left: 190px;
     text-align: center;
 }
 
@@ -103,9 +103,12 @@
 
 .text {
     display: inline-block;
-    color: white;
     padding-left: 10px;
-    font-size: 25px;
+    font-size: 20px;
+    font-family: Segoe UI;
+    font-weight: 400;
+    line-height: 27px;
+    color: rgba(142, 213, 254, 1);
 }
 
 .point {

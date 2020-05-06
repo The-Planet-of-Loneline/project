@@ -16,7 +16,8 @@ export default class Index extends Component {
     num: 0,
     debunkid: 0,
     animationData: {},
-    Ssid:''
+    Ssid:'',
+    page: 1
   }
     duration = 1000
     animation = Taro.createAnimation({
@@ -28,7 +29,7 @@ export default class Index extends Component {
     Taro.showShareMenu({
       showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
     })
-    Fetch(`secret/square/`,
+    Fetch(`secret/square/?page=${this.state.page}`,
     {},
     'GET').then(res => { 
       this.setState({
@@ -76,7 +77,7 @@ export default class Index extends Component {
      animationData: this.animation.export()
    }, () => {
      setTimeout(() => {
-       Fetch('secret/square/',
+       Fetch(`secret/square/?page=${this.state.page + 1}`,
          {},
          'GET').then(res => {
            this.setState({
@@ -85,7 +86,8 @@ export default class Index extends Component {
              time: res.secret.SendTime,
              num: res.number,
              debunkid: res.secret.Debunkid,
-             Ssid: res.secret.SenderSid
+             Ssid: res.secret.SenderSid,
+             page: this.state.page + 1
            })
          })
          this.setState({

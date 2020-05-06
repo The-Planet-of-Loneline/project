@@ -1,0 +1,67 @@
+    .cardContainer {
+        margin: 0 auto;
+    }
+    
+    .card {
+        width: 511px;
+        height: 320px;
+        background: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(112, 112, 112, 1);
+        opacity: 1;
+        border-radius: 15px;
+        font-size: 28px;
+        font-family: Segoe UI;
+        font-weight: 400;
+        line-height: 37px;
+        color: rgba(5, 5, 16, 1);
+        position: absolute;
+        left: 132px;
+        bottom: 614px;
+    }
+    
+    .Text {
+        width: 450px;
+        height: 133px;
+        background: rgba(240, 240, 241, 1);
+        opacity: 1;
+        border-radius: 5px;
+        margin: 0 auto;
+        margin-top: 52px;
+        padding: 20px
+    }
+    
+    .cancel {
+        margin-top: 15px;
+        width: 170px;
+        height: 52px;
+        background: rgba(124, 194, 254, 1);
+        opacity: 1;
+        border-radius: 5px;
+        font-size: 32px;
+        font-family: Segoe UI;
+        font-weight: 900;
+        line-height: 52px;
+        color: rgba(252, 252, 252, 1);
+        opacity: 1;
+    }
+    
+    .more {
+        margin: 6px auto;
+        font-size: 20px;
+        font-family: Segoe UI;
+        font-weight: 400;
+        line-height: 27px;
+        color: black;
+        opacity: 1;
+        position: relative;
+        left: 100px
+    }
+    
+    .color {
+        font-size: 20px;
+        font-family: Segoe UI;
+        font-weight: 400;
+        line-height: 27px;
+        color: rgba(249, 119, 72, 1);
+        opacity: 1;
+    }
